@@ -6,16 +6,17 @@ import { formatDate } from '@/lib/utils'
 import { renderMarkdown } from '@/lib/markdown'
 
 interface ProjectPageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   const projects = getProjects()
   return projects.map((p) => ({ slug: p.slug }))
 }
 
-export default function ProjectPage({ params }: ProjectPageProps) {
-  const project = getProjectBySlug(params.slug)
+export default async function ProjectPage({ params }: ProjectPageProps) {
+  const resolvedParams = await params
+  const project = getProjectBySlug(resolvedParams.slug)
   if (!project) {
     return (
       <div className="pt-20 min-h-screen flex items-center justify-center">
