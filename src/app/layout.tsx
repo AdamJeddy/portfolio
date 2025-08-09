@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import Navigation from "@/components/layout/Navigation";
+import PageTransition from "@/components/layout/PageTransition";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,7 +29,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="font-sans antialiased">
-        {children}
+        <Navigation />
+        <PageTransition>
+          <main className="pt-16 min-h-screen">{children}</main>
+        </PageTransition>
       </body>
     </html>
   );
