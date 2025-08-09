@@ -1,18 +1,9 @@
-'use client'
-
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import { Project } from '@/lib/content'
+import { getProjects } from '@/lib/content'
 import ProjectCard from '@/components/content/ProjectCard'
 
 export default function ProjectsPage() {
-  const [projects, setProjects] = useState<Project[]>([])
-
-  useEffect(() => {
-    // In a client component, we'll load projects differently
-    // For now, we'll use empty array until we implement client-side data loading
-    setProjects([])
-  }, [])
+  const projects = getProjects()
 
   return (
     <div className="pt-20 min-h-screen bg-gradient-to-br from-neutral-50 to-primary-50/30">

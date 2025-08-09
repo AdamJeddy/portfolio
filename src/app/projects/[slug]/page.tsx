@@ -1,45 +1,21 @@
-'use client'
-
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import { Project } from '@/lib/content'
+import { getProjectBySlug, getProjects } from '@/lib/content'
 import { formatDate } from '@/lib/utils'
+import { renderMarkdown } from '@/lib/markdown'
 
 interface ProjectPageProps {
-  params: Promise<{ slug: string }>
+  params: { slug: string }
+}
+
+export function generateStaticParams() {
+  const projects = getProjects()
+  return projects.map((p) => ({ slug: p.slug }))
 }
 
 export default function ProjectPage({ params }: ProjectPageProps) {
-  const [project, setProject] = useState<Project | null>(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const loadProject = async () => {
-      try {
-        const resolvedParams = await params
-        // For now, we'll simulate loading a project
-        // In a real implementation, you'd fetch from your content system
-        setProject(null)
-        setLoading(false)
-      } catch (error) {
-        setLoading(false)
-      }
-    }
-
-    loadProject()
-  }, [params])
-
-  if (loading) {
-    return (
-      <div className="pt-20 min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
-      </div>
-    )
-  }
-
+  const project = getProjectBySlug(params.slug)
   if (!project) {
     return (
       <div className="pt-20 min-h-screen flex items-center justify-center">
@@ -56,6 +32,8 @@ export default function ProjectPage({ params }: ProjectPageProps) {
       </div>
     )
   }
+
+  const html = renderMarkdown(project.content)
 
   return (
     <div className="pt-20 min-h-screen">
@@ -168,7 +146,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="prose prose-lg max-w-none"
         >
-          <div dangerouslySetInnerHTML={{ __html: project.content }} />
+          <div dangerouslySetInnerHTML={{ __html: html }} />
         </motion.div>
       </div>
 
