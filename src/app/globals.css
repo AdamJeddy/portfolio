@@ -2,24 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .bg-grid-pattern {
-    background-image: 
-      linear-gradient(rgba(148, 163, 184, 0.1) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(148, 163, 184, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
-  }
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
+html, body {
+  height: 100%;
+  background-color: #000000;
+  color: #ffffff;
   font-family: system-ui, -apple-system, sans-serif;
   line-height: 1.6;
-  color: #1a1a1a;
-  background-color: #fafafa;
+  scroll-behavior: smooth;
 }

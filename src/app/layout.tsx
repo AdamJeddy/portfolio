@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Space_Grotesk, Playfair_Display, Oswald, Caveat } from "next/font/google";
 import "./globals.css";
-import Navigation from "@/components/layout/Navigation";
-import PageTransition from "@/components/layout/PageTransition";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,9 +14,27 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  variable: "--font-oswald",
+  display: "swap",
+});
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  variable: "--font-caveat",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Portfolio | Innovation & Technology",
-  description: "A modern portfolio showcasing innovation in AI, data, and technology.",
+  title: "Adam Jeddy | AI Engineer & Data Scientist",
+  description: "Personal portfolio showcasing AI engineering and data science expertise.",
 };
 
 export default function RootLayout({
@@ -27,12 +43,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
-      <body className="font-sans antialiased">
-        <Navigation />
-        <PageTransition>
-          <main className="pt-16 min-h-screen">{children}</main>
-        </PageTransition>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${playfair.variable} ${oswald.variable} ${caveat.variable} dark`}>
+      <body className="font-sans antialiased bg-black text-white">
+        {children}
       </body>
     </html>
   );

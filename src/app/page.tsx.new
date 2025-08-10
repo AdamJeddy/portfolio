@@ -1,0 +1,29 @@
+'use client'
+
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-black text-white flex flex-col justify-center items-center p-8">
+      <div className="text-center space-y-8">
+        {/* Main Title */}
+        <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tight">
+          <span className="bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+            ADAM
+          </span>
+        </h1>
+        
+        {/* Subtitle */}
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-light tracking-widest text-gray-400 uppercase">
+          AI Engineer & Data Scientist
+        </h2>
+        
+        {/* Accent Line */}
+        <div className="w-32 h-px bg-gradient-to-r from-transparent via-white to-transparent mx-auto"></div>
+        
+        {/* Description */}
+        <p className="text-lg md:text-xl text-gray-300 max-w-2xl font-light leading-relaxed">
+          Building the future through artificial intelligence and data-driven innovation
+        </p>
+      </div>
+    </main>
+  )
+}
