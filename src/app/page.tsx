@@ -7,248 +7,215 @@ import AbstractScene from '@/components/3d/AbstractScene'
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollY } = useScroll()
-  const y = useTransform(scrollY, [0, 500], [0, -150])
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX - window.innerWidth / 2) / 50,
-        y: (e.clientY - window.innerHeight / 2) / 50,
-      })
-    }
-    
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
+  const { scrollYProgress } = useScroll({ target: containerRef })
+  const y = useTransform(scrollYProgress, [0, 1], [0, -100])
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
 
   return (
-    <div ref={containerRef} className="relative min-h-screen overflow-hidden bg-gradient-to-br from-neutral-900 via-neutral-800 to-primary-900">
-      {/* 3D Background */}
-      <div className="absolute inset-0 z-0">
-        <AbstractScene />
-      </div>
-      
-      {/* Floating geometric shapes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(6)].map((_, i) => (
+    <div ref={containerRef} className="relative">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+        {/* 3D Background */}
+        <div className="absolute inset-0 opacity-40">
+          <AbstractScene />
+        </div>
+        
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        
+        <motion.div
+          style={{ y, opacity }}
+          className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+        >
+          {/* Main Heading */}
           <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-primary-400/20 rounded-full"
-            style={{
-              left: `${20 + i * 15}%`,
-              top: `${10 + i * 12}%`,
-            }}
-            animate={{
-              x: [0, 30, -20, 0],
-              y: [0, -40, 20, 0],
-              scale: [1, 1.2, 0.8, 1],
-              opacity: [0.3, 0.7, 0.4, 0.3],
-            }}
-            transition={{
-              duration: 8 + i * 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Main Content */}
-      <motion.div 
-        className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 text-center"
-        style={{ y }}
-      >
-        {/* Creative Name Display */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="mb-8"
-          style={{
-            transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
-          }}
-        >
-          <h1 className="text-6xl md:text-8xl font-black text-white mb-4 leading-none">
-            <span className="inline-block transform hover:rotate-12 transition-transform duration-300">A</span>
-            <span className="inline-block transform hover:-rotate-6 transition-transform duration-300 text-primary-400">D</span>
-            <span className="inline-block transform hover:rotate-3 transition-transform duration-300">A</span>
-            <span className="inline-block transform hover:-rotate-12 transition-transform duration-300 text-accent-purple">M</span>
-          </h1>
-        </motion.div>
-
-        {/* Artistic Subtitle */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="mb-12 max-w-4xl"
-        >
-          <div className="relative">
-            <h2 className="text-2xl md:text-4xl font-light text-neutral-200 mb-6 leading-relaxed">
-              Creative{' '}
-              <span className="relative inline-block">
-                <span className="text-primary-400 font-bold">Developer</span>
-                <motion.div
-                  className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary-400 to-accent-coral"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 1, delay: 0.8 }}
-                />
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="mb-8"
+          >
+            <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent">
+                Hey, I'm Adam
               </span>
-              {' '}& Digital{' '}
-              <span className="relative inline-block">
-                <span className="text-accent-coral font-bold">Artist</span>
-                <motion.div
-                  className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-accent-coral to-primary-400"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 1, delay: 1.2 }}
-                />
-              </span>
-            </h2>
-            
-            <motion.p 
-              className="text-lg md:text-xl text-neutral-300 font-light italic"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.5 }}
-            >
-              "Where code meets creativity, magic happens"
-            </motion.p>
-          </div>
-        </motion.div>
+            </h1>
+            <div className="w-32 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto rounded-full"></div>
+          </motion.div>
 
-        {/* Creative CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-6 mb-16"
-        >
-          <Link href="/projects" className="group relative">
-            <motion.div
-              className="relative px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full text-white font-semibold text-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="relative z-10">Explore My Work</span>
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-xl sm:text-2xl lg:text-3xl text-slate-600 mb-8 font-light leading-relaxed max-w-4xl mx-auto"
+          >
+            Creative Developer & Digital Artist crafting beautiful, 
+            <span className="text-blue-600 font-medium"> interactive experiences</span> that blend 
+            code with creativity.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+          >
+            <Link href="/projects" className="group">
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-primary-400 to-accent-coral"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: "0%" }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.div>
-            <motion.div
-              className="absolute -inset-1 bg-gradient-to-r from-primary-400 to-accent-coral rounded-full opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-300"
-              style={{ zIndex: -1 }}
-            />
-          </Link>
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 group-hover:shadow-blue-500/25"
+              >
+                View My Work
+              </motion.div>
+            </Link>
+            
+            <Link href="/content" className="group">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 bg-white/70 backdrop-blur-sm border border-slate-200 text-slate-700 rounded-2xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-white/80"
+              >
+                Read My Thoughts
+              </motion.div>
+            </Link>
+          </motion.div>
 
-          <Link href="/content" className="group relative">
-            <motion.div
-              className="relative px-8 py-4 bg-transparent border-2 border-accent-coral rounded-full text-accent-coral font-semibold text-lg hover:bg-accent-coral hover:text-neutral-900 transition-all duration-300 shadow-lg hover:shadow-2xl"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="relative z-10">Read My Thoughts</span>
-            </motion.div>
-            <motion.div
-              className="absolute -inset-1 bg-gradient-to-r from-accent-coral to-primary-400 rounded-full opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-300"
-              style={{ zIndex: -1 }}
-            />
-          </Link>
+          {/* Stats/Info Cards */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
+          >
+            <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-6 border border-white/20 shadow-lg">
+              <div className="text-3xl font-bold text-blue-600 mb-2">50+</div>
+              <div className="text-slate-600">Projects Completed</div>
+            </div>
+            <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-6 border border-white/20 shadow-lg">
+              <div className="text-3xl font-bold text-indigo-600 mb-2">5+</div>
+              <div className="text-slate-600">Years Experience</div>
+            </div>
+            <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-6 border border-white/20 shadow-lg">
+              <div className="text-3xl font-bold text-purple-600 mb-2">∞</div>
+              <div className="text-slate-600">Creative Ideas</div>
+            </div>
+          </motion.div>
         </motion.div>
 
-        {/* Artistic Scroll Indicator */}
+        {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
+          transition={{ delay: 1.2 }}
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
         >
           <motion.div
-            animate={{ y: [0, 10, 0] }}
+            animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="flex flex-col items-center text-neutral-400"
+            className="flex flex-col items-center text-slate-400"
           >
-            <span className="text-sm mb-2 font-light">Scroll to discover</span>
-            <div className="w-6 h-10 border-2 border-neutral-400 rounded-full flex justify-center">
+            <span className="text-sm mb-3 font-medium">Scroll to explore</span>
+            <div className="w-6 h-10 border-2 border-slate-300 rounded-full flex justify-center">
               <motion.div
-                animate={{ y: [0, 12, 0] }}
+                animate={{ y: [2, 14, 2] }}
                 transition={{ duration: 2, repeat: Infinity }}
-                className="w-1 h-3 bg-neutral-400 rounded-full mt-2"
+                className="w-1 h-3 bg-slate-400 rounded-full mt-2"
               />
             </div>
           </motion.div>
         </motion.div>
-      </motion.div>
+      </section>
 
-      {/* Creative About Section */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-        className="relative z-10 py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent to-neutral-900/50"
-      >
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h2
-            className="text-4xl md:text-6xl font-bold text-white mb-8"
-            style={{
-              background: 'linear-gradient(45deg, #3B82F6, #8B5CF6, #EF4444, #F59E0B)',
-              backgroundSize: '400% 400%',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              animation: 'gradient 8s ease infinite',
-            }}
-          >
-            Crafting Digital Experiences
-          </motion.h2>
-          
-          <motion.p 
-            className="text-xl text-neutral-300 leading-relaxed mb-12"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            viewport={{ once: true }}
-          >
-            I blend technical expertise with artistic vision to create immersive digital experiences. 
-            From interactive web applications to creative coding experiments, 
-            I push the boundaries of what's possible in the digital realm.
-          </motion.p>
-
+      {/* About Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            className="flex flex-wrap justify-center gap-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6 }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            className="text-center mb-16"
           >
-            {['React', 'Next.js', 'Three.js', 'TypeScript', 'Creative Coding', 'UI/UX'].map((skill, index) => (
-              <motion.span
-                key={skill}
-                className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-neutral-200 border border-white/20"
-                whileHover={{ scale: 1.1, backgroundColor: 'rgba(255, 255, 255, 0.2)' }}
-                transition={{ delay: index * 0.1 }}
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+                Crafting Digital Excellence
+              </span>
+            </h2>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+              I specialize in creating innovative web applications, interactive experiences, 
+              and digital solutions that push the boundaries of what's possible on the web.
+            </p>
+          </motion.div>
+
+          {/* Skills Grid */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
+          >
+            {[
+              { name: 'React', color: 'from-cyan-500 to-blue-500' },
+              { name: 'Next.js', color: 'from-slate-700 to-slate-900' },
+              { name: 'TypeScript', color: 'from-blue-600 to-blue-700' },
+              { name: 'Three.js', color: 'from-green-500 to-emerald-600' },
+              { name: 'Tailwind', color: 'from-teal-500 to-cyan-600' },
+              { name: 'Framer Motion', color: 'from-purple-500 to-pink-500' }
+            ].map((skill, index) => (
+              <motion.div
+                key={skill.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                viewport={{ once: true }}
+                className="group cursor-pointer"
               >
-                {skill}
-              </motion.span>
+                <div className={`bg-gradient-to-r ${skill.color} p-0.5 rounded-2xl`}>
+                  <div className="bg-white rounded-2xl px-4 py-3 group-hover:bg-transparent group-hover:text-white transition-all duration-300">
+                    <div className="font-semibold text-center">{skill.name}</div>
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>
-      </motion.section>
+      </section>
 
-      {/* Add CSS for gradient animation */}
-      <style jsx global>{`
-        @keyframes gradient {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-      `}</style>
+      {/* CTA Section */}
+      <section className="py-24 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+              Let's Create Something Amazing Together
+            </h2>
+            <p className="text-xl mb-8 opacity-90 leading-relaxed">
+              Ready to bring your ideas to life? I'm always excited to work on new projects 
+              and collaborate with creative minds.
+            </p>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link
+                href="/content"
+                className="inline-block px-8 py-4 bg-white text-blue-600 rounded-2xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                Get In Touch
+              </Link>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
     </div>
   )
 }
