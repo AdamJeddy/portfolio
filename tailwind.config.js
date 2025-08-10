@@ -11,6 +11,11 @@ module.exports = {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         display: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-space-grotesk)', 'Menlo', 'Monaco', 'monospace'],
+        inter: ['var(--font-inter)', 'sans-serif'],
+        'space-grotesk': ['var(--font-space-grotesk)', 'sans-serif'],
+        playfair: ['var(--font-playfair)', 'serif'],
+        oswald: ['var(--font-oswald)', 'sans-serif'],
+        caveat: ['var(--font-caveat)', 'cursive'],
       },
       colors: {
         primary: {
@@ -87,5 +92,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [],
 }
