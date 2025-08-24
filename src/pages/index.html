@@ -11,8 +11,8 @@
 <body>
   <!--#include file="../partials/header.html" -->
   <main class="site-wrap" role="main">
-    <section class="panel" aria-labelledby="welcome-h">
-      <div class="section-title"><span class="k">✦</span> <h1 id="welcome-h" style="margin:0;font-size:1rem">Welcome to bruh.ae <small class="blink">*LIVE*</small></h1></div>
+    <section class="panel hero-panel" aria-labelledby="welcome-h">
+      <div class="panel-head marquee-title"><span class="icon">✦</span><div class="title h-outline marquee"><span><h1 id="welcome-h" style="margin:0;font-size:1rem;display:inline">Welcome to bruh.ae <small class="blink">*LIVE*</small> • Welcome to bruh.ae <small class="blink">*LIVE*</small> • </h1></span></div></div>
       <div class="tabs" role="tablist" aria-label="Quick links">
         <a class="tab" href="/guestbook.html">guestbook</a>
         <a class="tab" href="/blog/index.html">blog</a>
@@ -24,7 +24,7 @@
     <div class="grid-3">
       <!-- Left sidebar -->
       <aside class="panel" aria-label="Sidebar navigation">
-        <div class="section-title"><span class="k">☰</span> Navigation</div>
+        <div class="panel-head"><span class="icon">☰</span><div class="title">Navigation</div></div>
         <ul class="vnav">
           <li><a href="/index.html">Index</a></li>
           <li><a href="/about.html">About</a></li>
@@ -33,9 +33,9 @@
           <li><a href="/guestbook.html">Guestbook</a></li>
         </ul>
         <div style="height:12px"></div>
-        <div class="section-title"><span class="k">📅</span> Calendar</div>
+        <div class="panel-head"><span class="icon">📅</span><div class="title">Calendar</div></div>
         <div class="calendar" aria-hidden="true">
-          <div class="head"><span>August 2025</span><span class="muted">demo</span></div>
+          <div class="head"><span>August 2025</span></div>
           <div class="days">
             <div class="cell muted">28</div><div class="cell muted">29</div><div class="cell muted">30</div><div class="cell muted">31</div>
             <div class="cell">1</div><div class="cell">2</div><div class="cell">3</div>
@@ -49,7 +49,8 @@
 
       <!-- Main column -->
       <section class="panel" aria-labelledby="intro">
-        <div class="section-title"><span class="k">✎</span> <h2 id="intro" style="margin:0;font-size:1rem">A few things to mention</h2></div>
+        <div class="panel-head"><span class="icon">✎</span><div class="title">A few things to mention</div></div>
+        <div class="panel-body">
         <ul>
           <li>Inspired by early-2000s personal pages, reinterpreted with a male-leaning palette and textures.</li>
           <li>Static-first. Accessible. Vanilla JS for small, era-appropriate niceties.</li>
@@ -57,7 +58,7 @@
         </ul>
 
         <div class="panel" style="margin-top:12px">
-          <div class="section-title"><span class="k">★</span> Featured</div>
+          <div class="panel-head"><span class="icon">★</span><div class="title">Featured</div></div>
           <div class="badge-grid">
             <img src="/assets/2000s/star.gif" alt="pixel star">
             <img src="/assets/2000s/under-construction.gif" alt="under construction">
@@ -65,20 +66,14 @@
             <img src="/assets/2000s/valid-html.gif" alt="valid html">
           </div>
         </div>
+        </div>
       </section>
 
       <!-- Right sidebar -->
       <aside class="panel" aria-label="Webrings and stuff">
-        <div class="section-title"><span class="k">◎</span> Webrings & Stuff</div>
         <div class="panel">
-          <p style="margin:0 0 8px">This site is part of a retro-tech webring.</p>
-          <a class="btn" href="#">Prev</a>
-          <a class="btn" href="#">Random</a>
-          <a class="btn" href="#">Next</a>
-        </div>
-        <div class="panel">
-          <strong>Latest update</strong>
-          <p class="muted" style="margin:6px 0 0">Site tweaks, palette, and layout — 4 days ago.</p>
+          <div class="panel-head"><span class="icon">⏳</span><div class="title">Latest update</div></div>
+          <div class="panel-body"><p class="muted" style="margin:6px 0 0">Site tweaks, palette, and layout — 4 days ago.</p></div>
         </div>
       </aside>
     </div>

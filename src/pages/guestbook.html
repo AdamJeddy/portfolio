@@ -11,7 +11,8 @@
   <!--#include file="../partials/header.html" -->
   <main class="site-wrap" role="main">
     <section class="panel">
-      <h1>Guestbook</h1>
+      <div class="panel-head"><span class="icon">✉️</span><div class="title">Guestbook</div></div>
+      <div class="panel-body">
       <p>Sign the guestbook! This is a static demo; wires for a serverless endpoint can be added later.</p>
       <form class="panel" data-guestbook>
         <label> Name<br><input name="name" required style="width:100%; padding:10px"></label><br><br>
@@ -19,8 +20,9 @@
         <button class="btn" type="submit">Sign</button>
       </form>
       <div id="guestbook-list" class="panel" aria-live="polite" style="margin-top:12px">
-        <strong>Recent entries</strong>
+        <div class="panel-head"><span class="icon">★</span><div class="title">Recent entries</div></div>
         <ul></ul>
+      </div>
       </div>
       <script>
         // progressive-only: store entries locally to simulate
