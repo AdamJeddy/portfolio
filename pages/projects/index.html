@@ -1,0 +1,54 @@
+<!--{ "title": "Projects — bruh.ae" }-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="../../assets/styles/theme.css">
+</head>
+<body>
+  <div class="site-frame">
+  <header class="topbar" role="banner">
+    <div class="site-wrap topbar-inner">
+      <a class="brand" href="/" aria-label="bruh.ae home">
+        <span>bruh.ae</span>
+      </a>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="menu-btn" data-menu-btn aria-expanded="false" aria-controls="primary-nav">☰ Menu</button>
+      </div>
+      <nav class="nav" id="primary-nav" aria-label="Primary" data-nav>
+        <button id="theme-toggle" aria-pressed="false" aria-label="Toggle dark mode">🌞</button>
+        <a href="/index.html">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/projects/index.html">Projects</a>
+        <a href="/blog/index.html">Blog</a>
+        <a href="/guestbook.html">Guestbook</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-wrap" role="main">
+    <section class="panel">
+      <div class="panel-head"><span class="icon">🧰</span><div class="title">Projects</div></div>
+      <div class="panel-body">
+        <ul>
+          <li>Retro CSS kit (coming soon)</li>
+          <li>Guestbook microservice (coming soon)</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <footer role="contentinfo">
+    <div class="site-wrap">
+      <div>© <span id="year"></span> bruh.ae — made with plain Vanilla HTML</div>
+        <img src="/assets/2000s/under-construction.gif" alt="Under Construction">
+        <span>Hits: <strong data-hitcount>—</strong></span>
+      </div>
+    </div>
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  </footer>
+  </div>
+  <script src="../../assets/scripts/main.js" defer></script>
+</body>
+</html>
