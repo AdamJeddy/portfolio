@@ -1,33 +1,15 @@
-
+<!--{ "title": "Home — bruh.ae", "description": "Welcome to a lovingly retro 2000s-style site." }-->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Home — bruh.ae</title>
-  <meta name="description" content="Welcome to a lovingly retro 2000s-style site.">
+  <title>{{title}}</title>
+  <meta name="description" content="{{description}}">
   <link rel="stylesheet" href="/styles/theme.css">
 </head>
 <body>
-  <header class="topbar" role="banner">
-  <div class="site-wrap topbar-inner">
-    <a class="brand" href="/" aria-label="bruh.ae home">
-      <img src="/assets/2000s/star.gif" alt="*"> <span>bruh.ae</span>
-    </a>
-    <div style="display:flex;gap:8px;align-items:center">
-      <button class="menu-btn" data-menu-btn aria-expanded="false" aria-controls="primary-nav">☰ Menu</button>
-      <button id="theme-toggle" aria-pressed="false" aria-label="Toggle dark mode">🌞</button>
-    </div>
-    <nav class="nav" id="primary-nav" aria-label="Primary" data-nav>
-      <a href="/index.html">Home</a>
-      <a href="/about.html">About</a>
-      <a href="/projects/index.html">Projects</a>
-      <a href="/blog/index.html">Blog</a>
-      <a href="/guestbook.html">Guestbook</a>
-    </nav>
-  </div>
-</header>
-
+  <!--#include file="../partials/header.html" -->
   <main class="site-wrap" role="main">
     <section class="panel" aria-labelledby="welcome-h">
       <h1 id="welcome-h">Welcome to bruh.ae <small class="blink">*LIVE*</small></h1>
@@ -65,19 +47,7 @@
       </div>
     </section>
   </main>
-  <footer role="contentinfo">
-  <div class="site-wrap">
-    <div>© <span id="year"></span> bruh.ae — made with plain HTML/CSS/JS</div>
-    <div class="footer-badges" aria-label="Era badges">
-      <img src="/assets/2000s/under-construction.gif" alt="Under Construction">
-      <img src="/assets/2000s/valid-html.gif" alt="Valid HTML badge">
-      <img src="/assets/2000s/counter.gif" alt="Counter">
-      <span>Hits: <strong data-hitcount>—</strong></span>
-    </div>
-  </div>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-</footer>
-
+  <!--#include file="../partials/footer.html" -->
   <script src="/scripts/main.js" defer></script>
 </body>
 </html>
