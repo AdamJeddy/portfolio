@@ -39,11 +39,13 @@ body {
   font-family: "Trebuchet MS", Verdana, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
   color: var(--text-main);
   background-color: var(--color-1);
-  /* layered subtle weave pattern (hero-like) over the small repeating bg tile */
+  /* layered weave pattern (hero-like) over a slightly larger repeating bg tile */
   background-image:
-    repeating-linear-gradient(45deg, rgba(250,237,205,0.12) 0 2px, rgba(250,237,205,0.04) 2px 6px),
+    repeating-linear-gradient(45deg, rgba(250,237,205,0.18) 0 3px, rgba(250,237,205,0.06) 3px 9px),
     var(--bg-tile);
   background-repeat: repeat, repeat;
+  /* make the tile a little more visible without being overpowering */
+  background-size: auto, 48px 48px;
   image-rendering: -webkit-optimize-contrast;
 }
 
@@ -64,8 +66,8 @@ a:hover, a:focus { color: #b97e4e; text-decoration-color: var(--color-4); }
   /* inner dotted stitch */
   content: ""; position: absolute; inset: 6px; border-radius: 10px;
   background:
-    repeating-linear-gradient(90deg, transparent 0 6px, rgba(212,163,115,.6) 6px 7px),
-    repeating-linear-gradient(0deg, transparent 0 6px, rgba(212,163,115,.6) 6px 7px);
+  repeating-linear-gradient(90deg, transparent 0 6px, rgba(212,163,115,.8) 6px 7px),
+  repeating-linear-gradient(0deg, transparent 0 6px, rgba(212,163,115,.8) 6px 7px);
   -webkit-mask:
     linear-gradient(#000 0 0) top/100% 1px no-repeat,
     linear-gradient(#000 0 0) bottom/100% 1px no-repeat,
@@ -89,7 +91,7 @@ a:hover, a:focus { color: #b97e4e; text-decoration-color: var(--color-4); }
 .panel::after {
   /* subtle inner dotted border */
   content: ""; position: absolute; inset: 8px; border-radius: 8px; pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgba(212,163,115,0.45);
+  box-shadow: inset 0 0 0 1px rgba(212,163,115,0.72);
 }
 
 /* Panel head/body pattern */
@@ -208,11 +210,15 @@ footer { text-align: center; font-size: 0.95rem; padding: 18px 0; color: var(--m
 /* Hero panel patterned background */
 .hero-panel { position: relative; overflow: hidden; }
 .hero-panel::before {
-  content: ""; position: absolute; inset: 0; z-index: 0; border-radius: 10px;
-  background:
-    repeating-linear-gradient(45deg, rgba(250,237,205,0.6) 0 2px, rgba(250,237,205,0.2) 2px 6px),
-    linear-gradient(var(--color-3), var(--color-3));
-  mix-blend-mode: multiply;
+  content: ""; position: absolute; inset: 0; z-index: 0; border-radius: 10px; pointer-events: none;
+  /* clearer diagonal weave + repeating tile for a visible textured hero */
+  background-image:
+    repeating-linear-gradient(45deg, rgba(212,163,115,0.16) 0 6px, rgba(212,163,115,0.06) 6px 12px),
+    var(--bg-tile);
+  background-repeat: repeat, repeat;
+  background-size: auto, 40px 40px;
+  opacity: 0.98;
+  mix-blend-mode: multiply; /* multiplies texture into the panel color to keep warmth */
 }
 .hero-panel > * { position: relative; z-index: 1; }
 .marquee-title span { animation-duration: 18s; }
