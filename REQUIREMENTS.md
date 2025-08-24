@@ -1,15 +1,13 @@
-# bruh.ae — Requirements (updated for 2000s static aesthetic)
-
-Edited: 2025-08-23 — this version changes the implementation preference to a 2000s-style static stack (vanilla HTML/CSS/JS) and updates visual/theme direction to a blueish-white patterned background with era-appropriate icons/gifs.
+# bruh.ae — Requirements (updated for 2000s aesthetic)
 
 ## Core vision
 - A modern parody of early-2000s personal/fan-page aesthetics implemented with simple, classic web tech.
 - Clean, polished, and responsive — purposely nostalgic but usable on modern devices.
-- Avoid heavy frameworks where possible; prefer plain HTML/CSS/JS so the site feels like an authentic 2000s static page.
+- Avoid heavy frameworks where possible; prefer plain HTML/CSS/JS so the site feels like an authentic 2000s website.
 
 ## Pages and structure
 - Pages: Home (index.html), About (about.html), Projects (projects/index.html), Blog (blog/index.html), Guestbook (guestbook.html).
-- Content pages may be static HTML files or simple templated includes (SSI, or a trivial build step that outputs static HTML).
+- Content pages may be HTML files or simple templated includes (SSI, or a trivial build step that outputs static HTML).
 - If dynamic previews are required (guestbook sign), implement small, progressive-enhancement JS or a lightweight serverless endpoint — keep progressive enhancement in mind.
 
 ## Navigation & layout
@@ -43,28 +41,20 @@ Edited: 2025-08-23 — this version changes the implementation preference to a 2
 - Degrade gracefully if JS is disabled (content still readable and navigable).
 
 ## Technical guidance
-- Preferred stack: static HTML + CSS + vanilla JS. Optionally a tiny build step that outputs static HTML (npm script that concatenates templates or a basic static site generator used as a build tool, not a full SPA framework).
+- Preferred stack: static HTML + CSS + vanilla JS.
 - Assets: small GIFs/PNGs; avoid heavy images. Prefer inline SVGs for crisp icons where possible.
-- Minimal JS only for progressive enhancement (mobile menu, marquee polyfill, guestbook submission). No React/Next.js-specific code in the user-facing deliverable unless you want a separate modern branch.
+- JS for progressive enhancement (mobile menu, marquee polyfill, guestbook submission). No React/Next.js-specific code in the user-facing deliverable unless you want a separate modern branch.
 
 ## Non-functional
 - Keep it performant: small assets, limited DOM complexity, no heavy runtime.
 - Maintainability: keep templates organized and document where to update site-wide items (nav, footer, theme tokens in a single CSS file).
 
 ## Nice-to-haves / follow-ups
-- Provide two themes (cream and blueish-white) and ship the blueish-white variant by default.
 - Provide a small assets folder `assets/2000s/` with curated GIFs/icons to use.
-- Optionally provide a one-command build (npm run build -> outputs static `dist/`), but the result must be static files.
 
 ## Acceptance criteria (updated)
-- Site is delivered as static HTML/CSS/JS files (or a build that outputs static files).
 - Blueish-white patterned background is present and noticeable but not overpowering.
 - Top nav is sticky, accessible, and shows a subtle sweep/underline on hover/active.
 - Pages load without client-side frameworks; small vanilla JS used only for progressive enhancement (mobile menu, marquee, guestbook form handling).
 - 2000s-era assets (icons/gifs) are used across the site to reinforce the aesthetic.
 - Mobile navigation and tap targets work; content centers with comfortable margins on large screens.
-
----
-If you'd like, I can:
-- Produce a starter static template (index.html + styles + minimal JS + assets folder) that matches this updated requirements and drop it into the repository as `static-starter/`.
-- Or, convert the current Next.js site into a static export that outputs minimalist HTML/CSS/JS files that match the aesthetic — tell me which you prefer.
