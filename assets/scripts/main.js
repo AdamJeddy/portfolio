@@ -14,17 +14,14 @@
   // Highlight current nav link by path
   try {
     var here = location.pathname.replace(/\\+/g,'/');
+    if (here === '/') here = '/index.html'; // Treat root as index.html
     document.querySelectorAll('.nav a').forEach(function(a){
       var href = a.getAttribute('href');
       if (!href) return;
       var target = href.replace(/\\+/g,'/');
-      if (here === '/' && (target.endsWith('/index.html') || target === '/')) {
+      if (here === target) {
         a.setAttribute('aria-current','page');
-      } else if (here.endsWith('/index.html')) {
-        var base = here.replace(/index\.html$/, '');
-        if (target === base + 'index.html' || target === base) a.setAttribute('aria-current','page');
-      } else if (target === here) {
-        a.setAttribute('aria-current','page');
+        return; // Stop further checks
       }
     });
   } catch(_) {}
