@@ -30,40 +30,77 @@
 
   <main class="site-wrap" role="main">
     <section class="panel" aria-labelledby="welcome-h">
-      <h1 id="welcome-h">Welcome to bruh.ae <small class="blink">*LIVE*</small></h1>
-      <p>It’s a blast from the past — 90s-style web with neon text, pixel GIFs, and a boxed layout.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
-        <div style="width:260px" class="panel">
-          <h2>Cool Links</h2>
-          <ul>
-            <li><a href="#">My GeoCities-style page</a></li>
-            <li><a href="#">Animated GIF collection</a></li>
-            <li><a href="#">Guestbook preview</a></li>
-          </ul>
-        </div>
-        <div style="flex:1;min-width:260px" class="panel">
-          <h2>Badges & GIFs</h2>
-          <div style="display:flex;gap:8px;align-items:center">
-            <img src="/assets/2000s/star.gif" alt="star" style="width:48px;height:36px">
-            <img src="/assets/2000s/under-construction.gif" alt="uc" style="width:80px;height:24px">
-            <img src="/assets/2000s/counter.gif" alt="counter" style="width:64px;height:24px">
-          </div>
-        </div>
+      <div class="section-title"><span class="k">✦</span> <h1 id="welcome-h" style="margin:0;font-size:1rem">Welcome to bruh.ae <small class="blink">*LIVE*</small></h1></div>
+      <div class="tabs" role="tablist" aria-label="Quick links">
+        <a class="tab" href="/guestbook.html">guestbook</a>
+        <a class="tab" href="/blog/index.html">blog</a>
+        <a class="tab" href="/projects/index.html">webring</a>
+        <a class="tab" href="/about.html">links</a>
       </div>
-      <div style="margin-top:10px" class="marquee" aria-hidden="true"><span>Welcome! • Add a guestbook message • Trade links? • </span></div>
     </section>
 
-    <section class="panel">
-      <h2>Guestbook (recent)</h2>
-      <div id="gb-preview" class="panel">
-        <ul>
-          <li><strong>Anon</strong>: Cool site! — 1998</li>
-          <li><strong>User123</strong>: I like the GIFs. — 1999</li>
-          <li><strong>Visitor</strong>: Nice neon. — 2000</li>
+    <div class="grid-3">
+      <!-- Left sidebar -->
+      <aside class="panel" aria-label="Sidebar navigation">
+        <div class="section-title"><span class="k">☰</span> Navigation</div>
+        <ul class="vnav">
+          <li><a href="/index.html">Index</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/projects/index.html">Projects</a></li>
+          <li><a href="/blog/index.html">Blog</a></li>
+          <li><a href="/guestbook.html">Guestbook</a></li>
         </ul>
-        <a href="/guestbook.html" class="btn">Sign the guestbook</a>
-      </div>
-    </section>
+        <div style="height:12px"></div>
+        <div class="section-title"><span class="k">📅</span> Calendar</div>
+        <div class="calendar" aria-hidden="true">
+          <div class="head"><span>August 2025</span><span class="muted">demo</span></div>
+          <div class="days">
+            <div class="cell muted">28</div><div class="cell muted">29</div><div class="cell muted">30</div><div class="cell muted">31</div>
+            <div class="cell">1</div><div class="cell">2</div><div class="cell">3</div>
+            <div class="cell">4</div><div class="cell">5</div><div class="cell">6</div><div class="cell">7</div><div class="cell">8</div><div class="cell">9</div><div class="cell">10</div>
+            <div class="cell">11</div><div class="cell">12</div><div class="cell">13</div><div class="cell">14</div><div class="cell">15</div><div class="cell">16</div><div class="cell">17</div>
+            <div class="cell">18</div><div class="cell">19</div><div class="cell">20</div><div class="cell">21</div><div class="cell">22</div><div class="cell">23</div><div class="cell">24</div>
+            <div class="cell">25</div><div class="cell">26</div><div class="cell">27</div><div class="cell">28</div><div class="cell">29</div><div class="cell">30</div><div class="cell">31</div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main column -->
+      <section class="panel" aria-labelledby="intro">
+        <div class="section-title"><span class="k">✎</span> <h2 id="intro" style="margin:0;font-size:1rem">A few things to mention</h2></div>
+        <ul>
+          <li>Inspired by early-2000s personal pages, reinterpreted with a male-leaning palette and textures.</li>
+          <li>Static-first. Accessible. Vanilla JS for small, era-appropriate niceties.</li>
+          <li>Looking to trade links or join a webring? Hit the guestbook.</li>
+        </ul>
+
+        <div class="panel" style="margin-top:12px">
+          <div class="section-title"><span class="k">★</span> Featured</div>
+          <div class="badge-grid">
+            <img src="/assets/2000s/star.gif" alt="pixel star">
+            <img src="/assets/2000s/under-construction.gif" alt="under construction">
+            <img src="/assets/2000s/counter.gif" alt="counter">
+            <img src="/assets/2000s/valid-html.gif" alt="valid html">
+          </div>
+        </div>
+      </section>
+
+      <!-- Right sidebar -->
+      <aside class="panel" aria-label="Webrings and stuff">
+        <div class="section-title"><span class="k">◎</span> Webrings & Stuff</div>
+        <div class="panel">
+          <p style="margin:0 0 8px">This site is part of a retro-tech webring.</p>
+          <a class="btn" href="#">Prev</a>
+          <a class="btn" href="#">Random</a>
+          <a class="btn" href="#">Next</a>
+        </div>
+        <div class="panel">
+          <strong>Latest update</strong>
+          <p class="muted" style="margin:6px 0 0">Site tweaks, palette, and layout — 4 days ago.</p>
+        </div>
+      </aside>
+    </div>
+
   </main>
   <footer role="contentinfo">
   <div class="site-wrap">
