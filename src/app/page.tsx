@@ -1,70 +1,133 @@
-'use client'
+"use client"
 
-import Image from 'next/image'
-import Navigation from '@/components/layout/Navigation'
+import { useEffect, useState } from "react"
+
+// Array of random words used to build the texture
+const randomWords = [
+  "lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit",
+  "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore",
+  "magna", "aliqua", "enim", "ad", "minim", "veniam", "quis", "nostrud",
+  "exercitation", "ullamco", "laboris", "nisi", "aliquip", "ex", "ea", "commodo",
+  "consequat", "duis", "aute", "irure", "in", "reprehenderit", "voluptate",
+  "velit", "esse", "cillum", "fugiat", "nulla", "pariatur", "excepteur", "sint",
+  "occaecat", "cupidatat", "non", "proident", "sunt", "culpa", "qui", "officia",
+  "deserunt", "mollit", "anim", "id", "est", "laborum", "perspiciatis", "unde",
+  "omnis", "iste", "natus", "error", "accusantium", "doloremque", "laudantium",
+  "totam", "rem", "aperiam", "eaque", "ipsa", "quae", "ab", "illo", "inventore",
+  "veritatis", "quasi", "architecto", "beatae", "vitae", "dicta", "explicabo",
+  "nemo", "voluptatem", "quia", "voluptas", "aspernatur", "odit", "aut", "fugit",
+  "consequuntur", "magni", "dolores", "eos", "ratione", "sequi", "nesciunt",
+  "neque", "porro", "quisquam", "dolorem", "adipisci", "numquam", "eius", "modi",
+  "tempora", "magnam", "aliquam", "quaerat", "voluptatem", "harum", "quidem",
+  "rerum", "facilis", "expedita", "distinctio", "nam", "libero", "tempore",
+  "soluta", "nobis", "eligendi", "optio", "cumque", "nihil", "impedit", "quo",
+  "minus", "maxime", "placeat", "facere", "possimus", "omnis", "assumenda",
+]
+
+type LayoutState = {
+  lines: string[]
+  centerIndex: number
+  // Where the highlight starts (character index) inside the center line
+  centerStart: number
+  fontSize: number
+  lineHeight: number
+}
+
+const HIGHLIGHT = " by Adam "
+
+// Build a long filler string of words (with spaces) to at least target length
+function buildFiller(targetChars: number): string {
+  let s = ""
+  while (s.length < targetChars + 16) {
+    const w = randomWords[Math.floor(Math.random() * randomWords.length)]
+    s += (s ? " " : "") + w
+  }
+  return s
+}
 
 export default function Home() {
+  const [state, setState] = useState<LayoutState>({
+    lines: [],
+    centerIndex: 0,
+    centerStart: 0,
+    fontSize: 14,
+    lineHeight: 20,
+  })
+
+  useEffect(() => {
+    let raf = 0
+  const compute = () => {
+      const vw = Math.max(320, window.innerWidth)
+      const vh = Math.max(320, window.innerHeight)
+
+  // Pick a readable font-size that scales with viewport but stays mobile-friendly and a bit larger
+  const fontSize = Math.round(Math.min(22, Math.max(14, vw / 45))) // ~14 on phones, up to 22 on desktop
+  const lineHeight = Math.round(fontSize * 1.3)
+
+      // Monospace character width is ~0.55 of font size for better fit
+      const charWidth = fontSize * 0.55
+  const charsPerLine = Math.ceil(vw / charWidth) * 1.5 // extend beyond screen edges by 50%
+
+  // Overfill vertically by rounding up so no gap remains at the bottom; overflow is hidden
+  const linesCount = Math.max(8, Math.ceil(vh / lineHeight))
+      const centerIndex = Math.floor(linesCount / 2)
+      // Center position should be based on viewport width, not the extended line width
+      const viewportChars = Math.ceil(vw / charWidth)
+      const centerStart = Math.max(0, Math.floor(((charsPerLine - viewportChars) / 9) + (viewportChars - HIGHLIGHT.length) / 2))
+
+      const lines: string[] = []
+      for (let i = 0; i < linesCount; i++) {
+        const base = buildFiller(charsPerLine)
+        if (i === centerIndex) {
+          // Splice the highlight into the middle
+          const left = base.slice(0, centerStart)
+          const right = base.slice(centerStart + HIGHLIGHT.length)
+          lines.push(left + HIGHLIGHT + right)
+        } else {
+          lines.push(base)
+        }
+      }
+
+      setState({ lines, centerIndex, centerStart, fontSize, lineHeight })
+    }
+
+    const onResize = () => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(compute)
+    }
+
+    compute()
+    window.addEventListener("resize", onResize)
+    return () => {
+      window.removeEventListener("resize", onResize)
+      cancelAnimationFrame(raf)
+    }
+  }, [])
+
   return (
-    <main className="relative min-h-screen bg-black overflow-hidden">
-      {/* Side Navigation */}
-      <Navigation />
-
-      {/* Full Background Image */}
-      <div className="absolute inset-0">
-        <Image
-          src="/images/hero/landing_screen_background.png"
-          alt="Adam Jeddy"
-          fill
-          className="object-cover filter grayscale brightness-75 contrast-125"
-          priority
-        />
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/80"></div>
-      </div>
-
-      {/* Centered Content */}
-      <div className="relative z-10 min-h-screen flex flex-col justify-center items-center px-8 text-center">
-        
-        {/* Main Name - Handwritten Style */}
-        <h1 className="font-caveat text-8xl md:text-9xl lg:text-[12rem] xl:text-[15rem] leading-none mb-4">
-          <span className="bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent drop-shadow-2xl">
-            Adam 
-          </span>
-        </h1>
-
-        {/* Tech Enthusiast */}
-        <h2 className="font-space-grotesk text-xl md:text-2xl lg:text-3xl tracking-[0.2em] font-light text-gray-300 uppercase mb-12">
-          Tech Enthusiast
-        </h2>
-
-        {/* Call to Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-8">
-          <a 
-            href="https://github.com/AdamJeddy" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center space-x-3 px-8 py-4 border border-gray-500 rounded-full hover:bg-white hover:text-black transition-all duration-300"
-          >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-            </svg>
-            <span className="font-inter text-sm font-medium tracking-wide">View GitHub</span>
-          </a>
-
-          <a 
-            href="https://www.linkedin.com/in/adam-jeddy/" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center space-x-3 px-8 py-4 border border-gray-500 rounded-full hover:bg-white hover:text-black transition-all duration-300"
-          >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-            <span className="font-inter text-sm font-medium tracking-wide">Connect LinkedIn</span>
-          </a>
-        </div>
-
-      </div>
+    <main
+      className="h-screen w-screen overflow-hidden bg-black font-mono select-none relative"
+      style={{ fontSize: state.fontSize, lineHeight: `${state.lineHeight}px` }}
+    >
+      {state.lines.map((line, i) => {
+        if (i === state.centerIndex) {
+          // Render the center line with a colored highlight without affecting layout
+          const left = line.slice(0, state.centerStart)
+          const right = line.slice(state.centerStart + HIGHLIGHT.length)
+          return (
+            <div key={i} className="whitespace-nowrap">
+              <span className="text-gray-900 opacity-50">{left}</span>
+              <span className="text-red-600 font-bold italic">{HIGHLIGHT}</span>
+              <span className="text-gray-900 opacity-50">{right}</span>
+            </div>
+          )
+        }
+        return (
+          <div key={i} className="whitespace-nowrap text-gray-900 opacity-50">
+            {line}
+          </div>
+        )
+      })}
     </main>
   )
 }
