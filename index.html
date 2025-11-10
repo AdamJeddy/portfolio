@@ -1,18 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Adam's Site</title>
-  <meta name="description" content="Placeholder ownership page" />
-  <style>
-    :root { color-scheme: light dark; }
-    body { margin:0; font-family: system-ui, Arial, sans-serif; display:flex; align-items:center; justify-content:center; min-height:100dvh; background:linear-gradient(135deg,#111,#222); color:#f5f5f5; }
-    h1 { font-size: clamp(2rem,6vw,4rem); font-weight:600; text-align:center; line-height:1.1; }
-  .highlight { background: linear-gradient(90deg,#ffb347,#ffcc33); -webkit-background-clip:text; background-clip:text; color:transparent; }
-  </style>
-</head>
-<body>
-  <h1>Adam owns this :)</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Adam – Portfolio</title>
+    <meta name="description" content="Adam's minimalist text canvas" />
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas,
+          "Liberation Mono", monospace;
+        background: #000;
+        color: #b4b4b4; /* base color intentionally very dark */
+        overflow: hidden;
+        height: 100svh; /* mobile safe viewport */
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      #canvas {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        line-height: 1.25;
+        user-select: none;
+        padding: 0 0; /* no horizontal padding for full bleed */
+        font-size: clamp(12px, 2.4vw, 22px);
+        font-weight: 400;
+        letter-spacing: 0.5px;
+      }
+      .line {
+        white-space: nowrap;
+      }
+      .dim {
+        color: #b4b4b4;
+        opacity: 0.55;
+      }
+      .highlight {
+        color: #ff1d1d;
+        font-weight: 700;
+        font-style: italic;
+      }
+      @media (max-width: 520px) {
+        #canvas {
+          font-size: clamp(12px, 3.4vw, 18px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="canvas" aria-label="Scrolling text canvas"></div>
+    <script>
+      // Configuration
+      const HIGHLIGHT = " by Adam ";
+      const WORDS = ["lorem","ipsum","dolor","sit","amet","consectetur","adipiscing","elit","sed","do","eiusmod","tempor","incididunt","ut","labore","et","dolore","magna","aliqua","enim","ad","minim","veniam","quis","nostrud","exercitation","ullamco","laboris","nisi","aliquip","ex","ea","commodo","consequat","duis","aute","irure","in","reprehenderit","voluptate","velit","esse","cillum","fugiat","nulla","pariatur","excepteur","sint","occaecat","cupidatat","non","proident","sunt","culpa","qui","officia","deserunt","mollit","anim","id","est","laborum","perspiciatis","unde","omnis","iste","natus","error","accusantium","doloremque","laudantium","totam","rem","aperiam","eaque","ipsa","quae","ab","illo","inventore","veritatis","quasi","architecto","beatae","vitae","dicta","explicabo","nemo","voluptatem","quia","voluptas","aspernatur","odit","aut","fugit","consequuntur","magni","dolores","eos","ratione","sequi","nesciunt","neque","porro","quisquam","dolorem","adipisci","numquam","eius","modi","tempora","magnam","aliquam","quaerat","voluptatem","harum","quidem","rerum","facilis","expedita","distinctio","nam","libero","tempore","soluta","nobis","eligendi","optio","cumque","nihil","impedit","quo","minus","maxime","placeat","facere","possimus","omnis","assumenda",];
+
+      const canvas = document.getElementById("canvas");
+
+      function buildFiller(targetChars) {
+        let s = "";
+        while (s.length < targetChars + 32) {
+          const w = WORDS[Math.floor(Math.random() * WORDS.length)];
+          s += (s ? " " : "") + w;
+        }
+        return s;
+      }
+
+      function render() {
+        canvas.innerHTML = "";
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        // Approximate monospace char width (slightly conservative)
+        const fontSize = parseFloat(getComputedStyle(canvas).fontSize);
+        const charWidth = fontSize * 0.55;
+        const charsPerViewport = Math.ceil(vw / charWidth);
+        const extendedChars = Math.ceil(charsPerViewport * 0.9); // extend 50% beyond edges
+        const lineHeight = parseFloat(getComputedStyle(canvas).lineHeight);
+        const linesNeeded = Math.ceil(vh / lineHeight);
+        const centerIndex = Math.floor(linesNeeded / 2);
+        const highlightStartWithinViewport = Math.floor(
+          (charsPerViewport - HIGHLIGHT.length) / 2
+        );
+        // position highlight inside extended line so it appears centered in visible area
+        const highlightStart =
+          Math.floor((extendedChars - charsPerViewport) / 2) +
+          highlightStartWithinViewport;
+
+        for (let i = 0; i < linesNeeded; i++) {
+          const filler = buildFiller(extendedChars);
+          if (i === centerIndex) {
+            const left = filler.slice(0, highlightStart);
+            const right = filler.slice(highlightStart + HIGHLIGHT.length);
+            const div = document.createElement("div");
+            div.className = "line";
+            div.innerHTML = `<span class="dim">${left}</span><span class="highlight">${HIGHLIGHT}</span><span class="dim">${right}</span>`;
+            canvas.appendChild(div);
+          } else {
+            const div = document.createElement("div");
+            div.className = "line dim";
+            div.textContent = filler;
+            canvas.appendChild(div);
+          }
+        }
+      }
+
+      render();
+      window.addEventListener("resize", () => {
+        // Debounce with requestAnimationFrame
+        cancelAnimationFrame(window.__rAF);
+        window.__rAF = requestAnimationFrame(render);
+      });
+    </script>
+  </body>
 </html>
