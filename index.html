@@ -18,9 +18,11 @@
           "Liberation Mono", monospace;
         background: #000;
         color: #b4b4b4; /* base color intentionally very dark */
-        overflow: hidden;
-        height: 100svh; /* mobile safe viewport */
+        position: fixed;
+        inset: 0;
         width: 100vw;
+        height: 100vh;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -83,9 +85,9 @@
         const fontSize = parseFloat(getComputedStyle(canvas).fontSize);
         const charWidth = fontSize * 0.55;
         const charsPerViewport = Math.ceil(vw / charWidth);
-        const extendedChars = Math.ceil(charsPerViewport * 0.9); // extend 50% beyond edges
+        const extendedChars = Math.ceil(charsPerViewport * 1.5); // extend beyond edges
         const lineHeight = parseFloat(getComputedStyle(canvas).lineHeight);
-        const linesNeeded = Math.ceil(vh / lineHeight);
+        const linesNeeded = Math.max(8, Math.floor(vh / lineHeight));
         const centerIndex = Math.floor(linesNeeded / 2);
         const highlightStartWithinViewport = Math.floor(
           (charsPerViewport - HIGHLIGHT.length) / 2
