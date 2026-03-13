@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/* ─── Brutalist Design Tokens ─────────────────────────────── */
+@theme {
+  /* Palette: black / white / red / dim — that's it */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-red:   #ff1d1d;
+  --color-dim:   #b4b4b4;
+
+  /* Fonts — CSS vars are injected by next/font at the html element */
+  --font-sans:         var(--next-font-space-grotesk), 'Space Grotesk', system-ui, sans-serif;
+  --font-oswald:       var(--next-font-oswald),        'Oswald',        sans-serif;
+  --font-mono:         ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+}
+
+/* ─── Base resets ─────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    background: #000;
+    color: #fff;
+    font-family: var(--font-sans);
+    overflow: hidden;
+  }
+}
+
+/* ─── Text canvas core ────────────────────────────────────── */
+.text-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: clamp(12px, 2.4vw, 22px);
+  line-height: 1.25;
+  letter-spacing: 0.5px;
+  user-select: none;
+  overflow: hidden;
+}
+
+@media (max-width: 520px) {
+  .text-canvas {
+    font-size: clamp(10px, 3.4vw, 16px);
+  }
+}
+
+.text-canvas-line {
+  white-space: nowrap;
+}
+
+.text-canvas-dim {
+  color: #b4b4b4;
+  opacity: 0.55;
+}
+
+.text-canvas-highlight {
+  color: #ff1d1d;
+  font-weight: 700;
+  font-style: italic;
+  text-decoration: none;
+}
+
+a.text-canvas-highlight:hover {
+  color: #ffffff;
+}
+
+.text-canvas-transition {
+  animation: scrambleIn 220ms steps(2) both;
+}
+
+@keyframes scrambleIn {
+  0% { opacity: 0; filter: blur(2px); }
+  35% { opacity: 0.55; filter: blur(1px); }
+  100% { opacity: 1; filter: blur(0); }
+}
+
+/* ─── Glitch animation ────────────────────────────────────── */
+@keyframes glitch {
+  0%,  85%  { opacity: 1; transform: translate(0, 0);    color: #ff1d1d; clip-path: none; }
+  87%        { clip-path: inset(10% 0 80% 0); transform: translate(-3px, 1px);  color: #fff; }
+  89%        { clip-path: inset(55% 0 30% 0); transform: translate(3px, -1px);  color: #ff1d1d; }
+  91%        { clip-path: inset(80% 0 5%  0); transform: translate(-2px, 0);    color: #fff; }
+  93%, 100%  { opacity: 1; transform: translate(0, 0);    color: #ff1d1d; clip-path: none; }
+}
+
+.glitch {
+  animation: glitch 4s steps(1) infinite;
+}
