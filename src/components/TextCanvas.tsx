@@ -10,6 +10,7 @@ export interface CanvasHighlight {
   href?: string
   zone?: Zone
   glitch?: boolean
+  centerAligned?: boolean
 }
 
 interface TextCanvasProps {
@@ -77,6 +78,14 @@ export default function TextCanvas({ words, highlights }: TextCanvasProps) {
       const lineCount = Math.max(10, Math.floor(viewportHeight / lineHeight))
 
       const placements: Placement[] = highlights.map((highlight, index) => {
+        // For center-aligned highlights, use exact center positioning
+        if (highlight.centerAligned) {
+          return {
+            lineIndex: Math.floor(lineCount / 2),
+            startColumn: Math.floor((extendedChars - highlight.text.length) / 2),
+          }
+        }
+
         const zone = highlight.zone ?? 'center'
         const zoneRange =
           zone === 'upper'

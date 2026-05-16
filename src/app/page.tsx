@@ -18,10 +18,10 @@ export default function Home() {
       <TextCanvas
         words={homeWords}
         highlights={[
-          { text: ' PROJECTS ', href: '/projects', zone: 'upper' },
-          { text: ' WRITING ', href: '/content', zone: 'upper' },
-          { text: ' THE PERSON ', href: '/the-person', zone: 'upper' },
-          { text: ' by Adam ', zone: 'center', glitch: true },
+          // { text: ' PROJECTS ', href: '/projects', zone: 'upper' },
+          // { text: ' WRITING ', href: '/content', zone: 'upper' },
+          // { text: ' THE PERSON ', href: '/the-person', zone: 'upper' },
+          { text: ' by Adam ', zone: 'center', glitch: true, centerAligned: true },
         ]}
       />
     </main>
