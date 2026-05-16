@@ -1,36 +1,52 @@
-# Adam Portfolio – Static Text Canvas
+# Adam Portfolio
 
-Pure HTML/CSS/JS. No build tooling required. Deploys directly on Cloudflare Pages.
+A Next.js portfolio site with a text-canvas visual style, project and writing sections, and app policy pages.
 
-## Overview
-Generates full-viewport monospace lines. Text extends horizontally beyond the viewport edges. The phrase `by Adam` is centered (bold + italic + red) while surrounding text is dark and subdued.
+## Tech Stack
+- Next.js (App Router)
+- React
+- TypeScript
+- Tailwind CSS v4
 
-## Files
-| File | Purpose |
-|------|---------|
-| `index.html` | Single page with inline script generating text lines |
-| `package.json` | Optional preview + no-op build script (can be removed) |
+## Routes
+- / : Landing page
+- /projects : Projects index
+- /projects/[slug] : Individual project page
+- /content : Writing/content index
+- /content/[slug] : Individual content page
+- /the-person : Personal page
+- /track-my-salah-privacy-policy : Privacy policy page for the Track My Salah app
 
-## Run Locally
-Open `index.html` in a browser, or:
+## Local Development
+Install dependencies:
+
 ```bash
-npm run preview
+npm install
 ```
 
-## Cloudflare Pages Deployment
-Settings:
-- Build command: (leave empty) OR `npm run build`
-- Output directory: `.`
-- No dependencies => skip install step.
+Start the dev server:
 
-## Customize
-Inside `index.html` script:
-- Change `WORDS` array to alter vocabulary.
-- Adjust horizontal overflow by changing `extendedChars` multiplier (currently 1.5× viewport width).
-- Edit `HIGHLIGHT` constant to alter highlighted phrase.
+```bash
+npm run dev
+```
 
-## Minimal Footprint
-All former framework (Next.js, Tailwind, TypeScript) files have been removed for a lean static setup.
+Default local URL:
 
-## License
-Personal use.
+http://localhost:3000
+
+## Scripts
+- npm run dev : Run development server
+- npm run build : Build for production
+- npm run start : Start production server
+- npm run lint : Run lint checks
+
+## Deployment
+This repository is configured for Cloudflare deployment and includes wrangler.jsonc.
+
+Typical production flow:
+- Build with npm run build
+- Deploy with your Cloudflare pipeline or Wrangler configuration
+
+## Notes
+- Global styles currently lock body scrolling for the canvas-style experience.
+- Long-form pages can use a fixed full-viewport container with overflow-y-auto to remain scrollable.
