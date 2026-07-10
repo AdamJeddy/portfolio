@@ -17,7 +17,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: "Adam's Portfolio",
-  description: 'Software engineer · AI · Data',
+  description: 'This is literally my portfolio',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
