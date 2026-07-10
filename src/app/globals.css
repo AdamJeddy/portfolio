@@ -24,10 +24,520 @@
 
   body {
     margin: 0;
-    background: #000;
-    color: #fff;
+    background: var(--black);
+    color: var(--white);
     font-family: var(--font-sans);
-    overflow: hidden;
+  }
+}
+
+/* ─── Grid System (adapted from Aino Agency) ──────────────── */
+/* These variables are computed by GridProvider at runtime.
+   The values below are static fallbacks for SSR / no-JS. */
+:root {
+  --ch: 7.8;
+  --line: 15.6;
+  --font-size: 12.1px;
+  --letter-spacing: 0.12px;
+  --col: 12;
+  --cols: 120;
+  --rows: 40;
+  --screen-height: 1080;
+
+  /* Derived spacing tokens */
+  --char: calc(var(--ch) * 1px);
+  --char2: calc(var(--char) * 2);
+  --line-px: calc(var(--line) * 1px);
+
+  /* Strip widths (computed, fallback values) */
+  --strip-1: 4;  --strip-2: 10;  --strip-3: 16;
+  --strip-4: 22; --strip-5: 28;  --strip-6: 34;
+  --strip-7: 40; --strip-8: 46;  --strip-9: 52;
+  --strip-10: 58; --strip-11: 64; --strip-12: 70;
+
+  /* Column widths derived from strips */
+  --s1: calc(var(--strip-1) * var(--char));
+  --s2: calc(var(--strip-2) * var(--char));
+  --s3: calc(var(--strip-3) * var(--char));
+  --s4: calc(var(--strip-4) * var(--char));
+  --s5: calc(var(--strip-5) * var(--char));
+  --s6: calc(var(--strip-6) * var(--char));
+  --s7: calc(var(--strip-7) * var(--char));
+  --s8: calc(var(--strip-8) * var(--char));
+  --fullcol: calc((var(--col) + 2) * var(--char));
+
+  /* Colors — CSS-variable-based theming */
+  --black-rgb: 0, 0, 0;
+  --white-rgb: 255, 255, 255;
+  --black: rgb(var(--black-rgb));
+  --white: rgb(var(--white-rgb));
+  --accent: #ff1d1d;
+  --dim: #b4b4b4;
+
+  --border-radius: calc(var(--char) * 0.4);
+  --mobile: 768px;
+}
+
+/* ── Light mode ──────────────────────────────────────────── */
+html.light {
+  --black-rgb: 245, 245, 240;
+  --white-rgb: 24, 24, 24;
+}
+
+/* ── Theme transition ────────────────────────────────────── */
+html {
+  transition: background-color 0.1s ease-out, color 0.1s ease-out;
+}
+
+/* ── Mode system ─────────────────────────────────────────── */
+/* Default (image mode): content visible, canvas hidden/translucent */
+html:not(.textmode) .canvas-layer {
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Text mode: content hidden, canvas visible */
+html.textmode .content-layer {
+  display: none;
+}
+html.textmode .canvas-layer {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Overlay mode: both visible, canvas faint */
+html.textmode.overlay-mode .content-layer {
+  display: block;
+}
+html.textmode.overlay-mode .canvas-layer {
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Selection ───────────────────────────────────────────── */
+::selection {
+  background: var(--white);
+  color: var(--black);
+}
+
+/* ── Layout primitives: Section ──────────────────────────── */
+.section {
+  display: flex;
+  gap: var(--char2);
+  padding-bottom: var(--line-px);
+}
+.section.between {
+  justify-content: space-between;
+}
+.section.center {
+  justify-content: center;
+}
+.section.end {
+  justify-content: flex-end;
+}
+.section.first {
+  margin-top: calc(var(--line-px) * 10);
+}
+.section.space {
+  padding: calc(var(--line-px) * 2) 0;
+}
+.section.spacesmall {
+  padding: calc(var(--line-px) * 1) 0;
+}
+
+@media (max-width: 768px) {
+  .section {
+    flex-direction: column;
+    gap: var(--line-px);
+  }
+  .section.first {
+    margin-top: calc(var(--line-px) * 2) !important;
+  }
+}
+
+/* ── Layout primitives: Column ───────────────────────────── */
+.col {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.col.middle { justify-content: center; }
+.col.bottom { justify-content: flex-end; }
+.col.between { justify-content: space-between; }
+
+.col.w1  { width: var(--s1); }
+.col.w2  { width: var(--s2); }
+.col.w3  { width: var(--s3); }
+.col.w4  { width: var(--s4); }
+.col.w5  { width: var(--s5); }
+.col.w6  { width: var(--s6); }
+.col.w7  { width: var(--s7); }
+.col.w8  { width: var(--s8); }
+
+@media (max-width: 768px) {
+  .col { width: 100% !important; }
+  .col:empty { display: none; }
+}
+
+/* ── Navigation base ─────────────────────────────────────── */
+#nav {
+  position: fixed;
+  top: 0;
+  left: var(--char2);
+  z-index: 11;
+  width: calc(100vw - var(--char) * 4);
+  height: calc(var(--line-px) * 3);
+  padding-top: var(--line-px);
+  font-family: var(--font-geist-mono), var(--font-mono);
+  font-variation-settings: "MONO" 1;
+  text-transform: uppercase;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--char2);
+}
+
+#nav > div {
+  display: flex;
+  gap: var(--char2);
+  position: relative;
+}
+
+#nav > div.last { z-index: 5; }
+#nav > div.last a:last-child { margin-left: auto; }
+
+#nav .mobile { display: none; }
+
+.nav-link.active {
+  animation: blink 0.16s steps(1) infinite;
+}
+
+html.js #nav { opacity: 0; }
+html.ready #nav { opacity: 1; transition: opacity 0.6s; }
+
+@media (max-width: 768px) {
+  #nav { display: flex; z-index: 12; }
+  #nav a { display: none; }
+  #nav a.home {
+    display: block;
+    padding: var(--line-px) var(--char2);
+    margin-top: calc(var(--line-px) * -1);
+    margin-left: calc(var(--char2) * -1);
+  }
+  #nav .mobile {
+    display: flex;
+    gap: var(--char2);
+    margin-left: auto;
+  }
+}
+
+/* ── Footer base ─────────────────────────────────────────── */
+#footer {
+  padding: calc(var(--line-px) * 2) var(--char2) 0;
+  cursor: default;
+  font-family: var(--font-geist-mono), var(--font-mono);
+  text-transform: uppercase;
+  position: relative;
+  bottom: calc(var(--line-px) * -1);
+}
+
+/* ── Buttons (extends existing BrutalButton) ─────────────── */
+button, a.button {
+  font-family: var(--font-geist-mono), var(--font-mono);
+  font-size: inherit;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing);
+  cursor: pointer;
+}
+
+button:not(.ghost):not(.small),
+a.button:not(.ghost):not(.small) {
+  height: calc(var(--line-px) * 2);
+  padding: 1px calc(var(--char) * 1.5) 0;
+  background: rgba(var(--white-rgb), 0.1);
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+}
+
+/* ── Line List ───────────────────────────────────────────── */
+.linelist {
+  font-family: var(--font-geist-mono), var(--font-mono);
+  text-transform: uppercase;
+  position: relative;
+  z-index: 2;
+}
+.linelist li .line {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--char2);
+  width: 100vw;
+  margin-left: calc(var(--char) * -2);
+  padding: 0 var(--char2);
+  border-top: 1px solid rgba(var(--white-rgb), 0.1);
+  color: inherit;
+  text-decoration: none;
+}
+.linelist li .line > span:last-child {
+  justify-self: end;
+}
+
+@media (hover: hover) {
+  .linelist li a:hover {
+    background: var(--white);
+    color: var(--black);
+  }
+}
+
+/* ── Mega text ───────────────────────────────────────────── */
+.mega {
+  font-family: var(--font-geist-sans), var(--font-sans);
+  font-size: calc(var(--font-size) * 3);
+  font-weight: 720;
+  line-height: calc(var(--line-px) * 2.4);
+  letter-spacing: -0.03em;
+  text-transform: none;
+}
+
+@media (max-width: 768px) {
+  .mega {
+    font-size: calc(var(--font-size) * 2.2);
+    line-height: calc(var(--line-px) * 1.8);
+  }
+}
+
+/* ── Blink animation ─────────────────────────────────────── */
+@keyframes blink {
+  0%, 49% { opacity: 0; }
+  50%, 100% { opacity: 1; }
+}
+
+.blink {
+  animation: blink 0.4s linear infinite;
+}
+.blink-fast {
+  animation: blink 0.16s steps(1) infinite;
+}
+
+/* ── Image container with ASCII overlay ──────────────────── */
+.image-container {
+  position: relative;
+  overflow: hidden;
+}
+.image-container canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  z-index: 1;
+  white-space: pre;
+}
+html:not(.textmode) .image-container canvas {
+  display: none;
+}
+html.textmode .image-container img {
+  opacity: 0;
+}
+
+/* ── Dialog base ─────────────────────────────────────────── */
+dialog {
+  background: var(--white);
+  color: var(--black);
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+dialog::backdrop {
+  background: rgba(var(--black-rgb), 0.05);
+}
+
+/* ── Settings Dialog ─────────────────────────────────────── */
+#side-dialog {
+  width: calc(var(--s4));
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  padding: calc(var(--line-px) * 4) var(--char2) var(--line-px);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: auto;
+  right: 0;
+  overflow-y: auto;
+  font-family: var(--font-geist-mono), var(--font-mono);
+  text-transform: uppercase;
+}
+#side-dialog::backdrop {
+  background: rgba(var(--black-rgb), 0.05)
+    repeating-conic-gradient(
+      rgba(var(--white-rgb), 0.9) 0% 25%,
+      transparent 0% 50%
+    )
+    0 0 / 4px 4px;
+}
+
+#side-dialog h3 {
+  margin-bottom: calc(var(--line-px) * 0.5);
+  font-size: inherit;
+  font-weight: 500;
+}
+#side-dialog ul {
+  padding: 0;
+  margin: 0 0 calc(var(--line-px) * 1.5) 0;
+  list-style: none;
+}
+#side-dialog ul button {
+  white-space: nowrap;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  text-transform: uppercase;
+}
+#side-dialog ul li.active button {
+  /* active state uses ● from the component */
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--line-px) var(--char2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.dialog-header button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  #side-dialog {
+    width: 100vw;
+    height: 50dvh;
+    padding-top: calc(var(--line-px) * 4);
+    z-index: 13;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+/* ── Mobile Menu Overlay ─────────────────────────────────── */
+.mobile-container {
+  background: var(--white);
+  color: var(--black);
+  z-index: 11;
+  width: 100vw;
+  height: 100dvh;
+  padding: calc(var(--line-px) * 7) var(--char2) var(--line-px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-geist-mono), var(--font-mono);
+  text-transform: uppercase;
+}
+.mobile-container a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  padding: calc(var(--line-px) * 0.5) 0;
+}
+.mobile-container .mobile-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: auto;
+}
+.mobile-container .settings {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  text-transform: uppercase;
+}
+
+/* ── Ghost buttons ───────────────────────────────────────── */
+button.ghost {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing);
+}
+
+/* ── Base link resets ────────────────────────────────────── */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1, h2, h3, h4, h5, h6,
+ul, ol, p, dl, dt, dd, span, button {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  font-weight: 500;
+  list-style: none;
+}
+span { font-weight: inherit; }
+
+/* ── Main content area ───────────────────────────────────── */
+#app {
+  min-height: 100dvh;
+  padding: calc(var(--line-px) * 3) calc(var(--char) * 2);
+}
+
+@media (max-width: 768px) {
+  #app {
+    padding-bottom: 0;
+  }
+}
+
+/* ── Reduced motion ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .glitch,
+  .nav-link.active,
+  .blink,
+  .blink-fast {
+    animation: none;
   }
 }
 

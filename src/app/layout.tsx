@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
-import { Oswald, Space_Grotesk } from 'next/font/google'
+import { Oswald, Space_Grotesk, Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
+import GridProvider from '@/components/grid/GridProvider'
+import Nav from '@/components/layout/Nav'
+import Footer from '@/components/layout/Footer'
 
 const oswald = Oswald({
   subsets: ['latin'],
@@ -15,6 +18,18 @@ const spaceGrotesk = Space_Grotesk({
   display: 'swap',
 })
 
+const geistSans = Geist({
+  subsets: ['latin'],
+  variable: '--font-geist-sans',
+  display: 'swap',
+})
+
+const geistMono = Geist_Mono({
+  subsets: ['latin'],
+  variable: '--font-geist-mono',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
   title: "Adam's Portfolio",
   description: 'This is literally my portfolio',
@@ -22,8 +37,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${oswald.variable} ${spaceGrotesk.variable}`}>
-      <body>{children}</body>
+    <html
+      lang="en"
+      className={`${oswald.variable} ${spaceGrotesk.variable} ${geistSans.variable} ${geistMono.variable}`}
+    >
+      <body>
+        <GridProvider>
+          <Nav />
+          <main id="app">{children}</main>
+          <Footer />
+        </GridProvider>
+      </body>
     </html>
   )
 }
