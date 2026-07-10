@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import TextCanvas from '@/components/TextCanvas'
+import Link from 'next/link'
 import { getProjectBySlug, projects } from '@/lib/projects'
 
 interface ProjectPageProps {
@@ -18,19 +18,162 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound()
   }
 
+  const projectIndex = projects.findIndex((p) => p.slug === slug)
+
   return (
-    <main aria-label="Project detail canvas">
-      <TextCanvas
-        words={project.words}
-        highlights={[
-          { text: ' ← PROJECTS ', href: '/projects', zone: 'upper' },
-          { text: ` ${project.title.toUpperCase()} `, zone: 'center', glitch: true },
-          { text: ` ${project.description.toUpperCase()} `, zone: 'center' },
-          { text: ` TECH: ${project.tech.join(' · ').toUpperCase()} `, zone: 'lower' },
-          { text: ' GITHUB ', href: project.github, zone: 'lower' },
-          ...(project.live ? [{ text: ' LIVE ', href: project.live, zone: 'lower' as const }] : []),
-        ]}
-      />
-    </main>
+    <div className="content-layer">
+      {/* Title section */}
+      <section className="section first">
+        <div className="col w4">
+          <div className="worktitle">
+            <span>A{String(projectIndex + 1).padStart(3, '0')}</span>
+            <h1>{project.title}</h1>
+          </div>
+        </div>
+        <div className="col w4">
+          <div className="meta">
+            <div>
+              <h2>Solutions</h2>
+              <p>
+                {project.tech.slice(0, 3).join(', ')}
+                {project.tech.length > 3 ? '...' : ''}
+              </p>
+            </div>
+            <div>
+              <h2>Year</h2>
+              <p>{project.year ?? '—'}</p>
+            </div>
+            <div>
+              {project.live && (
+                <p>
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: 'underline' }}
+                  >
+                    {project.live.replace(/^https?:\/\//, '')}
+                  </a>
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Hero image */}
+      <section className="section">
+        <div className="col w4">
+          <div className="image-container" style={{ aspectRatio: '4/3' }}>
+            {project.image ? (
+              <img src={project.image} alt={project.title} />
+            ) : (
+              <div className="project-placeholder" style={{ width: '100%', height: '100%' }}>
+                <span>{String(projectIndex + 1).padStart(3, '0')}</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Description */}
+      <section className="section">
+        <div className="col w4">
+          <p style={{
+            fontFamily: 'var(--font-geist-sans), var(--font-sans)',
+            fontSize: 'calc(var(--font-size) * 1.25)',
+            lineHeight: 'calc(var(--line-px) * 1.25)',
+            letterSpacing: '-0.01em',
+          }}>
+            {project.description}
+          </p>
+        </div>
+      </section>
+
+      {/* Body */}
+      {project.body && (
+        <section className="section">
+          <div className="col w4">
+            <p style={{ lineHeight: 'calc(var(--line-px) * 1.08)' }}>
+              {project.body}
+            </p>
+          </div>
+        </section>
+      )}
+
+      {/* Tech stack tags */}
+      <section className="section">
+        <div className="col w8">
+          <h2 style={{
+            fontFamily: 'var(--font-geist-mono), var(--font-mono)',
+            textTransform: 'uppercase',
+            marginBottom: 'var(--line-px)',
+          }}>
+            Tech
+          </h2>
+          <div style={{ display: 'flex', gap: 'var(--char)', flexWrap: 'wrap' }}>
+            {project.tech.map((t) => (
+              <span
+                key={t}
+                style={{
+                  fontFamily: 'var(--font-geist-mono), var(--font-mono)',
+                  background: 'rgba(var(--white-rgb), 0.08)',
+                  padding: 'calc(var(--char) * 0.5) calc(var(--char) * 1)',
+                  borderRadius: 'var(--border-radius)',
+                  textTransform: 'uppercase',
+                  fontSize: 'calc(var(--font-size) * 0.85)',
+                }}
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Links */}
+      <section className="section">
+        <div className="col w8">
+          <div style={{ display: 'flex', gap: 'var(--char)', marginTop: 'var(--line-px)' }}>
+            <a href={project.github} target="_blank" rel="noopener noreferrer" className="button">
+              GitHub
+            </a>
+            {project.live && (
+              <a href={project.live} target="_blank" rel="noopener noreferrer" className="button">
+                Live
+              </a>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Other projects line list */}
+      <section className="section space">
+        <div className="col w8">
+          <h2 style={{
+            fontFamily: 'var(--font-geist-mono), var(--font-mono)',
+            textTransform: 'uppercase',
+            marginBottom: 'var(--line-px)',
+          }}>
+            Other Projects
+          </h2>
+          <ul className="linelist">
+            {projects
+              .filter((p) => p.slug !== slug)
+              .map((p, i) => (
+                <li key={p.slug}>
+                  <Link href={`/projects/${p.slug}`} className="line">
+                    <span>
+                      {String(projects.findIndex((x) => x.slug === p.slug) + 1).padStart(3, '0')}{' '}
+                      {p.title.toUpperCase()}
+                    </span>
+                    <span>{p.year ?? '—'}</span>
+                  </Link>
+                </li>
+              ))}
+          </ul>
+        </div>
+      </section>
+    </div>
   )
 }
