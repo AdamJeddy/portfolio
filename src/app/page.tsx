@@ -51,7 +51,7 @@ export default function Home() {
             }}>
               I curiously build things
             </p>
-            <div style={{ display: 'flex', gap: 'var(--char)', }}>
+            <div style={{ display: 'flex', gap: 'var(--char)', marginTop: '10px'}}>
               <Link href="/projects" className="button large">
                 Work
               </Link>
@@ -66,7 +66,7 @@ export default function Home() {
         </section>
 
         {/* Featured Projects */}
-        <section className="section spacebig" style={{ paddingTop: 'calc(var(--line-px) * 12)' }}>
+        <section className="section" style={{ marginTop: '30px' }}>
           <div className="col w8">
             <h2 style={{
               fontFamily: 'var(--font-geist-mono), var(--font-mono)',
@@ -111,7 +111,7 @@ export default function Home() {
         </section>
 
         {/* Latest Writing */}
-        <section className="section spacebig" style={{ paddingTop: 'calc(var(--line-px) * 10)' }}>
+        <section className="section" style={{ marginTop: '70px' }}>
           <div className="col w5">
             <h2 style={{
               fontFamily: 'var(--font-geist-mono), var(--font-mono)',
@@ -124,7 +124,7 @@ export default function Home() {
               {posts.map((post) => (
                 <li key={post.slug}>
                   <Link href={`/content/${post.slug}`} className="line">
-                    <span className="wide">{post.title}</span>
+                    <span>{post.title}</span>
                     <span>{post.excerpt}</span>
                   </Link>
                 </li>
