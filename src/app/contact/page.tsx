@@ -1,13 +1,18 @@
+import Reveal from '@/components/Reveal'
+
 export default function ContactPage() {
   return (
     <div className="content-layer">
-      <section className="section first">
+      <Reveal type="slide-up">
+        <section className="section first">
         <div className="col w5">
           <p className="mega">Let&apos;s work together.</p>
         </div>
       </section>
+      </Reveal>
 
-      <section className="section space">
+      <Reveal type="slide-up">
+        <section className="section space">
         <div className="col w3">
           <h2>Email</h2>
           <p>
@@ -28,6 +33,7 @@ export default function ContactPage() {
           </p>
         </div>
       </section>
+      </Reveal>
     </div>
   )
 }

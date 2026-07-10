@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Reveal from '@/components/Reveal'
 import { projects } from '@/lib/projects'
 
 const projectIcons: Record<string, string> = {
@@ -10,13 +11,16 @@ const projectIcons: Record<string, string> = {
 export default function Projects() {
   return (
     <div className="content-layer">
-      <section className="section first">
-        <div className="col w8">
-          <p className="mega">Selected Work</p>
-        </div>
-      </section>
+      <Reveal type="slide-up">
+        <section className="section first">
+          <div className="col w8">
+            <p className="mega">Selected Work</p>
+          </div>
+        </section>
+      </Reveal>
 
-      <section className="section">
+      <Reveal type="slide-up">
+        <section className="section">
         <div className="col w8">
           <div className="project-grid">
             {projects.map((project, i) => (
@@ -53,6 +57,7 @@ export default function Projects() {
           </div>
         </div>
       </section>
+      </Reveal>
     </div>
   )
 }

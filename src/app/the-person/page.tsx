@@ -1,3 +1,5 @@
+import Reveal from '@/components/Reveal'
+
 export default function ThePerson() {
   const skills = [
     'TypeScript', 'Python', 'React', 'Next.js', 'Node.js',
@@ -8,7 +10,8 @@ export default function ThePerson() {
 
   return (
     <div className="content-layer">
-      <section className="section first">
+      <Reveal type="slide-up">
+        <section className="section first">
         <div className="col w8" style={{ flexDirection: 'row', gap: 'var(--char2)', alignItems: 'flex-start' }}>
           <div className="col w2">
             <div className="profile-image">
@@ -30,8 +33,10 @@ export default function ThePerson() {
           </div>
         </div>
       </section>
+      </Reveal>
 
-      <section className="section">
+      <Reveal type="slide-up">
+        <section className="section">
         <div className="col w4">
           <p style={{
             fontFamily: 'var(--font-geist-sans), var(--font-sans)',
@@ -71,9 +76,11 @@ export default function ThePerson() {
           </p>
         </div>
       </section>
+      </Reveal>
 
       {/* Skills */}
-      <section className="section space">
+      <Reveal type="slide-up">
+        <section className="section space">
         <div className="col w8">
           <h2 style={{
             fontFamily: 'var(--font-geist-mono), var(--font-mono)',
@@ -101,9 +108,11 @@ export default function ThePerson() {
           </div>
         </div>
       </section>
+      </Reveal>
 
       {/* Contact CTA */}
-      <section className="section space">
+      <Reveal type="slide-up">
+        <section className="section space">
         <div className="col w5">
           <p className="mega" style={{ fontSize: 'calc(var(--font-size) * 1.8)' }}>
             Let&apos;s build something.
@@ -123,6 +132,7 @@ export default function ThePerson() {
           </div>
         </div>
       </section>
+      </Reveal>
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Reveal from '@/components/Reveal'
 import { getProjectBySlug, projects } from '@/lib/projects'
 
 interface ProjectPageProps {
@@ -23,7 +24,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   return (
     <div className="content-layer">
       {/* Title section */}
-      <section className="section first">
+      <Reveal type="slide-up">
+        <section className="section first">
         <div className="col w4">
           <div className="worktitle">
             <span>A{String(projectIndex + 1).padStart(3, '0')}</span>
@@ -60,9 +62,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </div>
       </section>
+      </Reveal>
 
       {/* Hero image */}
-      <section className="section">
+      <Reveal type="fade">
+        <section className="section">
         <div className="col w4">
           <div className="image-container" style={{ aspectRatio: '4/3' }}>
             {project.image ? (
@@ -81,9 +85,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </div>
       </section>
+      </Reveal>
 
       {/* Description */}
-      <section className="section">
+      <Reveal type="fade">
+        <section className="section">
         <div className="col w4">
           <p style={{
             fontFamily: 'var(--font-geist-sans), var(--font-sans)',
@@ -95,20 +101,24 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </p>
         </div>
       </section>
+      </Reveal>
 
       {/* Body */}
       {project.body && (
-        <section className="section">
+        <Reveal type="fade">
+          <section className="section">
           <div className="col w4">
             <p style={{ lineHeight: 'calc(var(--line-px) * 1.08)' }}>
               {project.body}
             </p>
           </div>
         </section>
+        </Reveal>
       )}
 
       {/* Tech stack tags */}
-      <section className="section">
+      <Reveal type="fade">
+        <section className="section">
         <div className="col w8">
           <h2 style={{
             fontFamily: 'var(--font-geist-mono), var(--font-mono)',
@@ -136,9 +146,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </div>
       </section>
+      </Reveal>
 
       {/* Links */}
-      <section className="section">
+      <Reveal type="fade">
+        <section className="section">
         <div className="col w8">
           <div style={{ display: 'flex', gap: 'var(--char)', marginTop: 'var(--line-px)' }}>
             <a href={project.github} target="_blank" rel="noopener noreferrer" className="button">
@@ -152,9 +164,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </div>
       </section>
+      </Reveal>
 
       {/* Other projects line list */}
-      <section className="section space">
+      <Reveal type="fade">
+        <section className="section space">
         <div className="col w8">
           <h2 style={{
             fontFamily: 'var(--font-geist-mono), var(--font-mono)',
@@ -180,6 +194,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </ul>
         </div>
       </section>
+      </Reveal>
     </div>
   )
 }
