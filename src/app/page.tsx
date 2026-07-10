@@ -38,25 +38,27 @@ export default function Home() {
       <div className="content-layer">
         <section className="section first">
           <div className="col w5">
-            <p className="mega">
-              Adam — Software Engineer. I build things with curiosity.
+            <p className="mega" style={{ marginBottom: 'calc(var(--line-px) * 1.5)' }}>
+              Adam
             </p>
             <p style={{
-              fontFamily: 'var(--font-geist-mono), var(--font-mono)',
-              textTransform: 'uppercase',
-              marginTop: 'var(--line-px)',
-              opacity: 0.5,
+              fontFamily: 'var(--font-geist-sans), var(--font-sans)',
+              fontSize: 'calc(var(--font-size) * 1.4)',
+              lineHeight: 'calc(var(--line-px) * 1.6)',
+              letterSpacing: '-0.01em',
+              opacity: 0.6,
+              marginBottom: 'calc(var(--line-px) * 3)',
             }}>
-              AI · Data · Full-Stack · Gothenburg
+              I curiously build things
             </p>
-            <div style={{ display: 'flex', gap: 'var(--char)', marginTop: 'calc(var(--line-px) * 1.5)' }}>
-              <Link href="/projects" className="button">
+            <div style={{ display: 'flex', gap: 'var(--char)', }}>
+              <Link href="/projects" className="button large">
                 Work
               </Link>
-              <Link href="/content" className="button">
+              <Link href="/content" className="button large">
                 Writing
               </Link>
-              <Link href="/the-person" className="button">
+              <Link href="/the-person" className="button large">
                 About
               </Link>
             </div>
@@ -64,12 +66,12 @@ export default function Home() {
         </section>
 
         {/* Featured Projects */}
-        <section className="section space">
+        <section className="section spacebig" style={{ paddingTop: 'calc(var(--line-px) * 12)' }}>
           <div className="col w8">
             <h2 style={{
               fontFamily: 'var(--font-geist-mono), var(--font-mono)',
               textTransform: 'uppercase',
-              marginBottom: 'calc(var(--line-px) * 1.5)',
+              marginBottom: 'calc(var(--line-px) * 2)',
             }}>
               Selected Work
             </h2>
@@ -109,12 +111,12 @@ export default function Home() {
         </section>
 
         {/* Latest Writing */}
-        <section className="section space">
+        <section className="section spacebig" style={{ paddingTop: 'calc(var(--line-px) * 10)' }}>
           <div className="col w5">
             <h2 style={{
               fontFamily: 'var(--font-geist-mono), var(--font-mono)',
               textTransform: 'uppercase',
-              marginBottom: 'calc(var(--line-px) * 1.5)',
+              marginBottom: 'calc(var(--line-px) * 2)',
             }}>
               Latest Writing
             </h2>
@@ -128,7 +130,7 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-            <div style={{ marginTop: 'var(--line-px)' }}>
+            <div style={{ marginTop: 'calc(var(--line-px) * 1.5)' }}>
               <Link href="/content" className="button">
                 All writing
               </Link>

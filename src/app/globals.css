@@ -89,26 +89,25 @@ html {
 }
 
 /* ── Mode system ─────────────────────────────────────────── */
-/* Default (image mode): content visible, canvas hidden/translucent */
-html:not(.textmode) .canvas-layer {
-  pointer-events: none;
-  opacity: 0;
+/* Default (image mode): content visible, canvas hidden */
+.canvas-layer {
+  display: none;
 }
 
-/* Text mode: content hidden, canvas visible */
+/* Text mode: canvas visible, content hidden */
+html.textmode .canvas-layer {
+  display: block;
+}
 html.textmode .content-layer {
   display: none;
 }
-html.textmode .canvas-layer {
-  opacity: 1;
-  pointer-events: auto;
-}
 
 /* Overlay mode: both visible, canvas faint */
-html.textmode.overlay-mode .content-layer {
+html.textmode.overlay .content-layer {
   display: block;
 }
-html.textmode.overlay-mode .canvas-layer {
+html.textmode.overlay .canvas-layer {
+  display: block;
   opacity: 0.12;
   pointer-events: none;
 }
@@ -132,10 +131,10 @@ html::-webkit-scrollbar {
 .section {
   display: flex;
   gap: var(--char2);
-  padding-bottom: calc(var(--line-px) * 3);
+  padding-bottom: calc(var(--line-px) * 5);
 }
 .section + .section {
-  margin-top: calc(var(--line-px) * 1);
+  margin-top: calc(var(--line-px) * 3);
 }
 .section.between {
   justify-content: space-between;
@@ -147,28 +146,40 @@ html::-webkit-scrollbar {
   justify-content: flex-end;
 }
 .section.first {
-  margin-top: calc(var(--line-px) * 12);
-  padding-bottom: calc(var(--line-px) * 4);
+  margin-top: calc(var(--line-px) * 18);
+  padding-bottom: calc(var(--line-px) * 8);
 }
 .section.space {
-  padding: calc(var(--line-px) * 4) 0;
+  padding: calc(var(--line-px) * 6) 0;
 }
 .section.spacesmall {
-  padding: calc(var(--line-px) * 2) 0;
+  padding: calc(var(--line-px) * 3) 0;
+}
+.section.spacebig {
+  padding: calc(var(--line-px) * 8) 0;
+}
+.section.final {
+  padding-bottom: calc(var(--line-px) * 2);
 }
 
 @media (max-width: 768px) {
   .section {
     flex-direction: column;
     gap: var(--line-px);
-    padding-bottom: calc(var(--line-px) * 2);
+    padding-bottom: calc(var(--line-px) * 3);
+  }
+  .section + .section {
+    margin-top: calc(var(--line-px) * 1.5);
   }
   .section.first {
-    margin-top: calc(var(--line-px) * 3) !important;
-    padding-bottom: calc(var(--line-px) * 2);
+    margin-top: calc(var(--line-px) * 4) !important;
+    padding-bottom: calc(var(--line-px) * 3);
   }
   .section.space {
-    padding: calc(var(--line-px) * 2) 0;
+    padding: calc(var(--line-px) * 3) 0;
+  }
+  .section.spacebig {
+    padding: calc(var(--line-px) * 4) 0;
   }
 }
 
@@ -200,17 +211,17 @@ html::-webkit-scrollbar {
 #nav {
   position: fixed;
   top: 0;
-  left: var(--char2);
+  left: 0;
+  right: 0;
   z-index: 11;
-  width: calc(100vw - var(--char) * 4);
-  height: calc(var(--line-px) * 3);
-  padding-top: var(--line-px);
+  height: calc(var(--line-px) * 4.5);
+  padding: calc(var(--line-px) * 1.5) var(--char2) var(--line-px);
   font-family: var(--font-geist-mono), var(--font-mono);
-  font-variation-settings: "MONO" 1;
   text-transform: uppercase;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--char2);
+  background: var(--black);
 }
 
 #nav > div {
@@ -232,7 +243,12 @@ html.js #nav { opacity: 0; }
 html.ready #nav { opacity: 1; transition: opacity 0.6s; }
 
 @media (max-width: 768px) {
-  #nav { display: flex; z-index: 12; }
+  #nav {
+    display: flex;
+    z-index: 12;
+    height: calc(var(--line-px) * 3.5);
+    padding: var(--line-px) var(--char2);
+  }
   #nav a { display: none; }
   #nav a.home {
     display: block;
@@ -278,6 +294,12 @@ a.button:not(.ghost):not(.small) {
   border: none;
   color: inherit;
   font-family: inherit;
+}
+
+a.button.large {
+  height: calc(var(--line-px) * 2.5);
+  padding: 1px calc(var(--char) * 2) 0;
+  font-size: calc(var(--font-size) * 1.15);
 }
 
 /* ── Line List ───────────────────────────────────────────── */
@@ -700,7 +722,7 @@ span { font-weight: inherit; }
 /* ── Main content area ───────────────────────────────────── */
 #app {
   min-height: 100dvh;
-  padding: calc(var(--line-px) * 3) calc(var(--char) * 2);
+  padding: 0 calc(var(--char) * 2);
 }
 
 @media (max-width: 768px) {

@@ -43,11 +43,11 @@ function apply(prefs: SitePreferences) {
   }
 
   // Mode
-  html.classList.remove('textmode', 'pixelmode')
+  html.classList.remove('textmode', 'pixelmode', 'overlay')
   if (prefs.mode === 'text') {
     html.classList.add('textmode')
   } else if (prefs.mode === 'overlay') {
-    html.classList.add('textmode') // reuse textmode for overlay transparency
+    html.classList.add('textmode', 'overlay')
   }
 }
 
