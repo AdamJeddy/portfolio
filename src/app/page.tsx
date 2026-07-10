@@ -15,6 +15,12 @@ const homeWords = [
   'ipsa', 'quae', 'ab', 'illo', 'inventore', 'veritatis', 'quasi', 'architecto', 'beatae',
 ]
 
+const projectIcons: Record<string, string> = {
+  'agentic-research-lab': '◇',
+  'signal-anomaly-dash': '◈',
+  'semantic-notebook': '◉',
+}
+
 export default function Home() {
   return (
     <>
@@ -35,7 +41,15 @@ export default function Home() {
             <p className="mega">
               Adam — Software Engineer. I build things with curiosity.
             </p>
-            <div style={{ display: 'flex', gap: 'var(--char)', marginTop: 'var(--line-px)' }}>
+            <p style={{
+              fontFamily: 'var(--font-geist-mono), var(--font-mono)',
+              textTransform: 'uppercase',
+              marginTop: 'var(--line-px)',
+              opacity: 0.5,
+            }}>
+              AI · Data · Full-Stack · Gothenburg
+            </p>
+            <div style={{ display: 'flex', gap: 'var(--char)', marginTop: 'calc(var(--line-px) * 1.5)' }}>
               <Link href="/projects" className="button">
                 Work
               </Link>
@@ -55,7 +69,7 @@ export default function Home() {
             <h2 style={{
               fontFamily: 'var(--font-geist-mono), var(--font-mono)',
               textTransform: 'uppercase',
-              marginBottom: 'var(--line-px)',
+              marginBottom: 'calc(var(--line-px) * 1.5)',
             }}>
               Selected Work
             </h2>
@@ -70,18 +84,13 @@ export default function Home() {
                     color: 'inherit',
                   }}
                 >
-                  <div style={{
-                    aspectRatio: '4/3',
-                    background: 'rgba(var(--white-rgb), 0.05)',
-                    marginBottom: 'var(--line-px)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontFamily: 'var(--font-geist-mono), var(--font-mono)',
-                    fontSize: 'calc(var(--font-size) * 2)',
-                    opacity: 0.3,
-                  }}>
-                    A{String(i + 1).padStart(3, '0')}
+                  <div className="project-placeholder" style={{ marginBottom: 'var(--line-px)' }}>
+                    <div className="project-placeholder-inner">
+                      <span className="project-placeholder-icon">
+                        {projectIcons[project.slug] ?? '●'}
+                      </span>
+                      <span>A{String(i + 1).padStart(3, '0')}</span>
+                    </div>
                   </div>
                   <p style={{
                     fontFamily: 'var(--font-geist-mono), var(--font-mono)',
@@ -105,7 +114,7 @@ export default function Home() {
             <h2 style={{
               fontFamily: 'var(--font-geist-mono), var(--font-mono)',
               textTransform: 'uppercase',
-              marginBottom: 'var(--line-px)',
+              marginBottom: 'calc(var(--line-px) * 1.5)',
             }}>
               Latest Writing
             </h2>
@@ -113,12 +122,17 @@ export default function Home() {
               {posts.map((post) => (
                 <li key={post.slug}>
                   <Link href={`/content/${post.slug}`} className="line">
-                    <span>{post.title}</span>
+                    <span className="wide">{post.title}</span>
                     <span>{post.excerpt}</span>
                   </Link>
                 </li>
               ))}
             </ul>
+            <div style={{ marginTop: 'var(--line-px)' }}>
+              <Link href="/content" className="button">
+                All writing
+              </Link>
+            </div>
           </div>
         </section>
       </div>

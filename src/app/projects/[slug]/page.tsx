@@ -68,8 +68,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             {project.image ? (
               <img src={project.image} alt={project.title} />
             ) : (
-              <div className="project-placeholder" style={{ width: '100%', height: '100%' }}>
-                <span>{String(projectIndex + 1).padStart(3, '0')}</span>
+              <div className="project-placeholder">
+                <div className="project-placeholder-inner">
+                  <span className="project-placeholder-icon">
+                    {project.slug === 'agentic-research-lab' ? '◇' :
+                     project.slug === 'signal-anomaly-dash' ? '◈' : '◉'}
+                  </span>
+                  <span>A{String(projectIndex + 1).padStart(3, '0')}</span>
+                </div>
               </div>
             )}
           </div>

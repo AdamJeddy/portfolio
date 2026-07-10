@@ -9,10 +9,25 @@ export default function ThePerson() {
   return (
     <div className="content-layer">
       <section className="section first">
-        <div className="col w5">
-          <p className="mega">
-            Adam — Software Engineer. AI + Data.
-          </p>
+        <div className="col w8" style={{ flexDirection: 'row', gap: 'var(--char2)', alignItems: 'flex-start' }}>
+          <div className="col w2">
+            <div className="profile-image">
+              <span>⬡</span>
+            </div>
+          </div>
+          <div className="col w5">
+            <p className="mega">
+              Adam — Software Engineer. AI + Data.
+            </p>
+            <p style={{
+              fontFamily: 'var(--font-geist-mono), var(--font-mono)',
+              textTransform: 'uppercase',
+              marginTop: 'var(--line-px)',
+              opacity: 0.5,
+            }}>
+              Gothenburg, Sweden · Available for projects
+            </p>
+          </div>
         </div>
       </section>
 
@@ -21,30 +36,38 @@ export default function ThePerson() {
           <p style={{
             fontFamily: 'var(--font-geist-sans), var(--font-sans)',
             fontSize: 'calc(var(--font-size) * 1.25)',
-            lineHeight: 'calc(var(--line-px) * 1.25)',
+            lineHeight: 'calc(var(--line-px) * 1.4)',
             letterSpacing: '-0.01em',
           }}>
-            I build software with curiosity and discipline. My work spans AI systems,
-            data pipelines, and full-stack applications — always focused on clarity,
-            reliability, and the people who use what I make.
+            I build software with curiosity and discipline. My work spans AI
+            systems, data pipelines, and full-stack applications — always focused
+            on clarity, reliability, and the people who use what I make.
           </p>
         </div>
       </section>
 
       <section className="section">
         <div className="col w4">
-          <p style={{ lineHeight: 'calc(var(--line-px) * 1.08)' }}>
-            Currently exploring agentic workflows and how language models
-            can reason through complex research tasks. Previously built
-            real-time monitoring systems processing millions of telemetry
-            events, and knowledge management tools that combine semantic
-            search with graph-based navigation.
+          <p style={{ lineHeight: 'calc(var(--line-px) * 1.15)' }}>
+            Currently exploring agentic workflows — how language models can
+            plan, retrieve, and reason through complex research tasks
+            autonomously. Previously built real-time monitoring systems
+            processing millions of telemetry events per second, detecting
+            anomalies across distributed sensor networks.
           </p>
-          <p style={{ lineHeight: 'calc(var(--line-px) * 1.08)', marginTop: 'var(--line-px)' }}>
-            I value simplicity over cleverness, and believe that good
-            software is legible software. When I&apos;m not coding, you&apos;ll
-            find me reading, writing about design constraints, or
-            thinking about what makes tools actually useful.
+          <p style={{ lineHeight: 'calc(var(--line-px) * 1.15)', marginTop: 'var(--line-px)' }}>
+            I also built a personal knowledge management tool that combines
+            traditional note-taking with semantic search and graph-based
+            navigation — because I believe the tools we use to think shape
+            the quality of our thinking.
+          </p>
+          <p style={{ lineHeight: 'calc(var(--line-px) * 1.15)', marginTop: 'var(--line-px)' }}>
+            I value simplicity over cleverness. Good software is legible
+            software — code that tells a clear story, systems that fail
+            gracefully, and interfaces that don&apos;t make you think. When
+            I&apos;m not coding, you&apos;ll find me reading about design
+            constraints, writing about what makes tools useful, or
+            iterating on side projects.
           </p>
         </div>
       </section>
