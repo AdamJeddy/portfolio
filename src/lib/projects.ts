@@ -8,55 +8,25 @@ export interface ProjectItem {
   live?: string
   image?: string
   year?: number
+  icon?: string
   words: string[]
 }
 
 export const projects: ProjectItem[] = [
   {
-    slug: 'agentic-research-lab',
-    title: 'Agentic Research Lab',
-    description: 'Autonomous research workflows with retrieval, planning, and verification loops.',
-    body: 'Built a research automation platform that chains LLM calls with retrieval-augmented generation, planning modules, and verification loops. The system handles document ingestion, semantic chunking, vector embedding, and multi-step reasoning across large corpora. Results are validated through citation tracing and confidence scoring before surfacing to the user.',
-    tech: ['TypeScript', 'Next.js', 'LangChain', 'Vector DB', 'Cloudflare'],
-    github: 'https://github.com/AdamJeddy/agentic-research-lab',
-    live: 'https://example.com/agentic-research-lab',
-    image: 'https://picsum.photos/seed/agentic/800/600',
-    year: 2025,
+    slug: 'qeemat',
+    title: 'Qeemat',
+    description: 'Android-first, local-first price tracker for UAE shopping sites with background checks and notifications.',
+    body: 'Qeemat is a React Native + TypeScript price tracking app built for UAE shoppers. Add a product URL from supported stores — Noon, Nike UAE, Sun & Sand Sports, Level Shoes, Ounass, and more — and Qeemat tracks prices locally on-device with AsyncStorage, Android WorkManager background checks, and local notifications for price drops. No backend, no accounts, no cloud sync. Just a focused tool that respects your data.',
+    tech: ['React Native', 'TypeScript', 'Kotlin', 'AsyncStorage', 'WorkManager', 'Jest'],
+    github: 'https://github.com/AdamJeddy/Qeemat',
+    image: 'https://picsum.photos/seed/qeemat/800/600',
+    year: 2026,
+    icon: '◆',
     words: [
-      'agent', 'plan', 'retrieve', 'rank', 'rerank', 'context', 'reason', 'trace', 'tool', 'chain',
-      'workflow', 'citation', 'validate', 'memory', 'loop', 'inference', 'latency', 'prompt', 'token',
-      'cache', 'session', 'graph', 'query', 'vector', 'embedding', 'index', 'chunk', 'synthesis',
-    ],
-  },
-  {
-    slug: 'signal-anomaly-dash',
-    title: 'Signal Anomaly Dash',
-    description: 'Real-time anomaly detection dashboard for high-volume telemetry streams.',
-    body: 'Designed and implemented a real-time monitoring dashboard that ingests high-frequency telemetry data through Kafka streams. The system applies statistical anomaly detection algorithms against sliding windows, surfaces outliers through a FastAPI backend, and renders interactive visualizations in the browser. Deployed with Docker across a PostgreSQL-backed data layer.',
-    tech: ['Python', 'FastAPI', 'Kafka', 'PostgreSQL', 'Docker'],
-    github: 'https://github.com/AdamJeddy/signal-anomaly-dash',
-    image: 'https://picsum.photos/seed/signal/800/600',
-    year: 2024,
-    words: [
-      'stream', 'window', 'event', 'sensor', 'anomaly', 'threshold', 'outlier', 'baseline', 'metric',
-      'query', 'offset', 'consumer', 'producer', 'partition', 'throughput', 'alert', 'monitor',
-      'runtime', 'incident', 'timeline', 'drilldown', 'payload', 'schema', 'normalize', 'backfill',
-    ],
-  },
-  {
-    slug: 'semantic-notebook',
-    title: 'Semantic Notebook',
-    description: 'Searchable personal knowledge base with semantic tagging and graph links.',
-    body: 'Created a personal knowledge management tool that combines traditional note-taking with semantic search and graph-based navigation. Notes are automatically tagged through embedding similarity, and relationships between topics form a navigable knowledge graph. Built with a lightweight SQLite backend for zero-config deployment and instant search across thousands of entries.',
-    tech: ['React', 'Node.js', 'SQLite', 'Embeddings', 'Tailwind'],
-    github: 'https://github.com/AdamJeddy/semantic-notebook',
-    live: 'https://example.com/semantic-notebook',
-    image: 'https://picsum.photos/seed/semantic/800/600',
-    year: 2024,
-    words: [
-      'note', 'topic', 'edge', 'graph', 'link', 'semantic', 'cluster', 'memory', 'relation', 'tag',
-      'search', 'snippet', 'preview', 'index', 'node', 'context', 'archive', 'journal', 'capture',
-      'iterate', 'refine', 'highlight', 'insight', 'outline', 'draft', 'mapping',
+      'price', 'track', 'scan', 'check', 'notify', 'local', 'offline', 'store', 'product', 'snapshot',
+      'history', 'drop', 'alert', 'background', 'parse', 'fetch', 'currency', 'AED', 'UAE', 'noon',
+      'nike', 'ounass', 'amazon', 'favorite', 'watchlist', 'activity', 'schedule', 'permission',
     ],
   },
 ]
