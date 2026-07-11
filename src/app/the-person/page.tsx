@@ -122,7 +122,7 @@ export default function ThePerson() {
               Get in touch
             </a>
             <a
-              href="https://github.com/yourname"
+              href="https://github.com/AdamJeddy"
               target="_blank"
               rel="noopener noreferrer"
               className="button"

@@ -21,12 +21,12 @@ export default function Footer() {
 
       <div className="section between" style={{ marginTop: 0 }}>
         <div className="col">
-          <Link href="https://github.com/yourname" target="_blank" rel="noopener noreferrer">
+          <Link href="https://github.com/AdamJeddy" target="_blank" rel="noopener noreferrer">
             GitHub
           </Link>
         </div>
         <div className="col">
-          <Link href="https://linkedin.com/in/yourname" target="_blank" rel="noopener noreferrer">
+          <Link href="https://www.linkedin.com/in/adamahsan/" target="_blank" rel="noopener noreferrer">
             LinkedIn
           </Link>
         </div>

@@ -22,12 +22,12 @@ export default function ContactPage() {
         <div className="col w3">
           <h2>Social</h2>
           <p>
-            <a href="https://github.com/yourname" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/AdamJeddy" target="_blank" rel="noopener noreferrer">
               GitHub
             </a>
           </p>
           <p>
-            <a href="https://linkedin.com/in/yourname" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/adamahsan/" target="_blank" rel="noopener noreferrer">
               LinkedIn
             </a>
           </p>
