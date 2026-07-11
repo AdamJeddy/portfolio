@@ -107,10 +107,10 @@ html::-webkit-scrollbar {
 .section {
   display: flex;
   gap: var(--char2);
-  padding-bottom: calc(var(--line-px) * 5);
+  padding-bottom: calc(var(--line-px) * 12);
 }
 .section + .section {
-  margin-top: calc(var(--line-px) * 3);
+  margin-top: calc(var(--line-px) * 12);
 }
 .section.between {
   justify-content: space-between;
@@ -123,39 +123,39 @@ html::-webkit-scrollbar {
 }
 .section.first {
   margin-top: calc(var(--line-px) * 18);
-  padding-bottom: calc(var(--line-px) * 8);
+  padding-bottom: calc(var(--line-px) * 12);
 }
 .section.space {
-  padding: calc(var(--line-px) * 6) 0;
+  padding: calc(var(--line-px) * 12) 0;
 }
 .section.spacesmall {
-  padding: calc(var(--line-px) * 3) 0;
+  padding: calc(var(--line-px) * 6) 0;
 }
 .section.spacebig {
-  padding: calc(var(--line-px) * 8) 0;
+  padding: calc(var(--line-px) * 16) 0;
 }
 .section.final {
-  padding-bottom: calc(var(--line-px) * 2);
+  padding-bottom: calc(var(--line-px) * 4);
 }
 
 @media (max-width: 768px) {
   .section {
     flex-direction: column;
     gap: var(--line-px);
-    padding-bottom: calc(var(--line-px) * 3);
+    padding-bottom: calc(var(--line-px) * 6);
   }
   .section + .section {
-    margin-top: calc(var(--line-px) * 1.5);
+    margin-top: calc(var(--line-px) * 6);
   }
   .section.first {
     margin-top: calc(var(--line-px) * 4) !important;
-    padding-bottom: calc(var(--line-px) * 3);
+    padding-bottom: calc(var(--line-px) * 6);
   }
   .section.space {
-    padding: calc(var(--line-px) * 3) 0;
+    padding: calc(var(--line-px) * 6) 0;
   }
   .section.spacebig {
-    padding: calc(var(--line-px) * 4) 0;
+    padding: calc(var(--line-px) * 8) 0;
   }
 }
 
@@ -183,70 +183,18 @@ html::-webkit-scrollbar {
   .col:empty { display: none; }
 }
 
-/* ── Navigation base ─────────────────────────────────────── */
-#nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 11;
-  height: calc(var(--line-px) * 4.5);
-  padding: calc(var(--line-px) * 1.5) var(--char2) var(--line-px);
-  font-family: var(--font-geist-mono), var(--font-mono);
-  text-transform: uppercase;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--char2);
-  background: var(--black);
-}
-
-#nav > div {
-  display: flex;
-  gap: var(--char2);
-  position: relative;
-}
-
-#nav > div.last { z-index: 5; }
-#nav > div.last a:last-child { margin-left: auto; }
-
-#nav .mobile { display: none; }
-
-.nav-link.active {
-  animation: blink 0.16s steps(1) infinite;
-}
-
-html.js #nav { opacity: 0; }
-html.ready #nav { opacity: 1; transition: opacity 0.6s; }
-
-@media (max-width: 768px) {
-  #nav {
-    display: flex;
-    z-index: 12;
-    height: calc(var(--line-px) * 3.5);
-    padding: var(--line-px) var(--char2);
-  }
-  #nav a { display: none; }
-  #nav a.home {
-    display: block;
-    padding: var(--line-px) var(--char2);
-    margin-top: calc(var(--line-px) * -1);
-    margin-left: calc(var(--char2) * -1);
-  }
-  #nav .mobile {
-    display: flex;
-    gap: var(--char2);
-    margin-left: auto;
-  }
-}
-
 /* ── Footer base ─────────────────────────────────────────── */
 #footer {
-  padding: calc(var(--line-px) * 2) var(--char2) 0;
+  padding: calc(var(--line-px) * 1) var(--char2) 0;
   cursor: default;
   font-family: var(--font-geist-mono), var(--font-mono);
   text-transform: uppercase;
   position: relative;
-  bottom: calc(var(--line-px) * -1);
+}
+
+#footer .section {
+  padding-top: calc(var(--line-px) * 1.5);
+  padding-bottom: calc(var(--line-px) * 1.5);
 }
 
 /* ── Buttons (extends existing BrutalButton) ─────────────── */
@@ -289,8 +237,9 @@ a.button.large {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: var(--char2);
-  padding: calc(var(--line-px) * 0.5) 0;
-  border-top: 1px solid rgba(var(--white-rgb), 0.1);
+  padding: calc(var(--line-px) * 1.5) 0;
+  border-top: 1px solid rgba(var(--white-rgb), 0.12);
+  border-bottom: 1px solid rgba(var(--white-rgb), 0.06);
   color: inherit;
   text-decoration: none;
 }
@@ -541,100 +490,6 @@ a.button.large {
   opacity: 0;
 }
 
-/* ── Dialog base ─────────────────────────────────────────── */
-dialog {
-  background: var(--white);
-  color: var(--black);
-  border: none;
-  padding: 0;
-  margin: 0;
-}
-dialog::backdrop {
-  background: rgba(var(--black-rgb), 0.05);
-}
-
-/* ── Settings Dialog ─────────────────────────────────────── */
-#side-dialog {
-  width: calc(var(--s4));
-  max-width: 100vw;
-  height: 100dvh;
-  max-height: 100dvh;
-  padding: calc(var(--line-px) * 4) var(--char2) var(--line-px);
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: auto;
-  right: 0;
-  overflow-y: auto;
-  font-family: var(--font-geist-mono), var(--font-mono);
-  text-transform: uppercase;
-}
-#side-dialog::backdrop {
-  background: rgba(var(--black-rgb), 0.05)
-    repeating-conic-gradient(
-      rgba(var(--white-rgb), 0.9) 0% 25%,
-      transparent 0% 50%
-    )
-    0 0 / 4px 4px;
-}
-
-#side-dialog h3 {
-  margin-bottom: calc(var(--line-px) * 0.5);
-  font-size: inherit;
-  font-weight: 500;
-}
-#side-dialog ul {
-  padding: 0;
-  margin: 0 0 calc(var(--line-px) * 1.5) 0;
-  list-style: none;
-}
-#side-dialog ul button {
-  white-space: nowrap;
-  background: none;
-  border: none;
-  color: inherit;
-  cursor: pointer;
-  padding: 0;
-  font-family: inherit;
-  font-size: inherit;
-  text-transform: uppercase;
-}
-#side-dialog ul li.active button {
-  /* active state uses ● from the component */
-}
-
-.dialog-header {
-  display: flex;
-  justify-content: space-between;
-  padding: var(--line-px) var(--char2);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-.dialog-header button {
-  background: none;
-  border: none;
-  color: inherit;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
-  text-transform: uppercase;
-}
-
-@media (max-width: 768px) {
-  #side-dialog {
-    width: 100vw;
-    height: 50dvh;
-    padding-top: calc(var(--line-px) * 4);
-    z-index: 13;
-    top: auto;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-}
-
 /* ── Mobile Menu Overlay ─────────────────────────────────── */
 .mobile-container {
   background: var(--white);
@@ -662,15 +517,6 @@ dialog::backdrop {
   justify-content: space-between;
   align-items: flex-end;
   margin-top: auto;
-}
-.mobile-container .settings {
-  background: none;
-  border: none;
-  color: inherit;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
-  text-transform: uppercase;
 }
 
 /* ── Ghost buttons ───────────────────────────────────────── */
@@ -765,7 +611,6 @@ span { font-weight: inherit; }
 /* ── Reduced motion ──────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .glitch,
-  .nav-link.active,
   .blink,
   .blink-fast {
     animation: none;
