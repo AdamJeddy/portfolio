@@ -2,17 +2,13 @@
 
 import { useEffect, useState, useCallback } from 'react'
 
-export type VisualMode = 'image' | 'text' | 'overlay'
-
 interface SitePreferences {
   appearance: 'dark' | 'light'
-  mode: VisualMode
 }
 
 const STORAGE_KEY = 'site'
 const DEFAULT_PREFS: SitePreferences = {
   appearance: 'dark',
-  mode: 'image',
 }
 
 function load(): SitePreferences {
@@ -21,7 +17,7 @@ function load(): SitePreferences {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (raw) {
       const parsed = JSON.parse(raw)
-      return { ...DEFAULT_PREFS, ...parsed }
+      return { appearance: parsed.appearance ?? DEFAULT_PREFS.appearance }
     }
   } catch {
     // corrupted localStorage — fall through to defaults
@@ -33,21 +29,12 @@ function apply(prefs: SitePreferences) {
   const html = document.documentElement
   html.classList.add('js')
 
-  // Appearance
   if (prefs.appearance === 'dark') {
     html.classList.add('dark')
     html.classList.remove('light')
   } else {
     html.classList.add('light')
     html.classList.remove('dark')
-  }
-
-  // Mode
-  html.classList.remove('textmode', 'pixelmode', 'overlay')
-  if (prefs.mode === 'text') {
-    html.classList.add('textmode')
-  } else if (prefs.mode === 'overlay') {
-    html.classList.add('textmode', 'overlay')
   }
 }
 
@@ -62,7 +49,6 @@ function persist(prefs: SitePreferences) {
 export function useTheme() {
   const [preferences, setPreferences] = useState<SitePreferences>(DEFAULT_PREFS)
 
-  // Hydrate from localStorage on mount
   useEffect(() => {
     const saved = load()
     setPreferences(saved)
@@ -78,14 +64,5 @@ export function useTheme() {
     })
   }, [])
 
-  const setMode = useCallback((mode: VisualMode) => {
-    setPreferences((prev) => {
-      const next = { ...prev, mode }
-      apply(next)
-      persist(next)
-      return next
-    })
-  }, [])
-
-  return { preferences, setAppearance, setMode }
+  return { preferences, setAppearance }
 }
