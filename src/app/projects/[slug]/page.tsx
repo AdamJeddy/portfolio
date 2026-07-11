@@ -73,10 +73,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             image={project.image}
             title={project.title}
             projectNumber={`A${String(projectIndex + 1).padStart(3, '0')}`}
-            icon={
-              project.slug === 'agentic-research-lab' ? '◇' :
-              project.slug === 'signal-anomaly-dash' ? '◈' : '◉'
-            }
+            icon={project.icon ?? '◉'}
           />
         </div>
       </section>

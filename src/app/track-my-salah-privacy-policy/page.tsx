@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function TrackMySalahPrivacyPolicyPage() {
     return (
-        <main className="fixed inset-0 overflow-y-auto bg-white text-black" aria-label="Track My Salah privacy policy">
+        <div className="fixed inset-0 overflow-y-auto bg-white text-black" aria-label="Track My Salah privacy policy">
             <article className="mx-auto max-w-4xl px-6 py-10 sm:px-8 sm:py-14 [&_a]:underline [&_a]:decoration-black/60 [&_a:hover]:decoration-black [&_h1]:mb-4 [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:tracking-tight [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:tracking-tight [&_h3]:mt-7 [&_h3]:mb-3 [&_h3]:text-xl [&_h3]:font-semibold [&_h4]:mt-5 [&_h4]:mb-2 [&_h4]:text-lg [&_h4]:font-medium [&_p]:my-3 [&_p]:text-base [&_p]:leading-7 [&_ul]:my-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ul_ul]:my-2 [&_ul_ul]:list-[circle] [&_ul_ul]:pl-5 [&_li]:my-2">
             <h1>Track My Salah Privacy Policy</h1>
             <p>Last updated: May 16, 2026</p>
@@ -177,6 +177,6 @@ export default function TrackMySalahPrivacyPolicyPage() {
                 <li>By email: dev.ajx@proton.me</li>
             </ul>
             </article>
-        </main>
+        </div>
     )
 }

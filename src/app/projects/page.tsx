@@ -2,12 +2,6 @@ import Link from 'next/link'
 import Reveal from '@/components/Reveal'
 import { projects } from '@/lib/projects'
 
-const projectIcons: Record<string, string> = {
-  'agentic-research-lab': '◇',
-  'signal-anomaly-dash': '◈',
-  'semantic-notebook': '◉',
-}
-
 export default function Projects() {
   return (
     <div className="content-layer">
@@ -36,7 +30,7 @@ export default function Projects() {
                     <div className="project-placeholder">
                       <div className="project-placeholder-inner">
                         <span className="project-placeholder-icon">
-                          {projectIcons[project.slug] ?? '●'}
+                          {project.icon ?? '●'}
                         </span>
                         <span>A{String(i + 1).padStart(3, '0')}</span>
                       </div>
