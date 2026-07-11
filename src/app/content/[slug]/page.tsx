@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
-import TextCanvas from '@/components/TextCanvas'
+import Link from 'next/link'
+import Reveal from '@/components/Reveal'
 import { getPostBySlug, posts } from '@/lib/posts'
 
 interface PostPageProps {
@@ -19,15 +20,28 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   return (
-    <main aria-label="Post detail canvas">
-      <TextCanvas
-        words={post.words}
-        highlights={[
-          { text: ' ← WRITING ', href: '/content', zone: 'upper' },
-          { text: ` ${post.title.toUpperCase()} `, zone: 'center', glitch: true },
-          { text: ` ${post.excerpt.toUpperCase()} `, zone: 'lower' },
-        ]}
-      />
-    </main>
+    <div className="content-layer">
+      <Reveal type="slide-up">
+        <section className="section first">
+          <div className="col w5">
+            <p className="mega">{post.title}</p>
+            <p style={{
+              fontFamily: 'var(--font-geist-sans), var(--font-sans)',
+              fontSize: 'calc(var(--font-size) * 1.25)',
+              lineHeight: 'calc(var(--line-px) * 1.4)',
+              letterSpacing: '-0.01em',
+              opacity: 0.6,
+              marginTop: 'calc(var(--line-px) * 2)',
+              marginBottom: 'calc(var(--line-px) * 3)',
+            }}>
+              {post.excerpt}
+            </p>
+            <Link href="/content" className="button">
+              ← All writing
+            </Link>
+          </div>
+        </section>
+      </Reveal>
+    </div>
   )
 }

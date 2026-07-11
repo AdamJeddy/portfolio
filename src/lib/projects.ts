@@ -20,6 +20,7 @@ export const projects: ProjectItem[] = [
     tech: ['TypeScript', 'Next.js', 'LangChain', 'Vector DB', 'Cloudflare'],
     github: 'https://github.com/yourname/agentic-research-lab',
     live: 'https://example.com/agentic-research-lab',
+    image: 'https://picsum.photos/seed/agentic/800/600',
     year: 2025,
     words: [
       'agent', 'plan', 'retrieve', 'rank', 'rerank', 'context', 'reason', 'trace', 'tool', 'chain',
@@ -34,6 +35,7 @@ export const projects: ProjectItem[] = [
     body: 'Designed and implemented a real-time monitoring dashboard that ingests high-frequency telemetry data through Kafka streams. The system applies statistical anomaly detection algorithms against sliding windows, surfaces outliers through a FastAPI backend, and renders interactive visualizations in the browser. Deployed with Docker across a PostgreSQL-backed data layer.',
     tech: ['Python', 'FastAPI', 'Kafka', 'PostgreSQL', 'Docker'],
     github: 'https://github.com/yourname/signal-anomaly-dash',
+    image: 'https://picsum.photos/seed/signal/800/600',
     year: 2024,
     words: [
       'stream', 'window', 'event', 'sensor', 'anomaly', 'threshold', 'outlier', 'baseline', 'metric',
@@ -49,6 +51,7 @@ export const projects: ProjectItem[] = [
     tech: ['React', 'Node.js', 'SQLite', 'Embeddings', 'Tailwind'],
     github: 'https://github.com/yourname/semantic-notebook',
     live: 'https://example.com/semantic-notebook',
+    image: 'https://picsum.photos/seed/semantic/800/600',
     year: 2024,
     words: [
       'note', 'topic', 'edge', 'graph', 'link', 'semantic', 'cluster', 'memory', 'relation', 'tag',

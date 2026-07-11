@@ -1,20 +1,7 @@
-import TextCanvas from '@/components/TextCanvas'
 import Link from 'next/link'
 import Reveal from '@/components/Reveal'
 import { posts } from '@/lib/posts'
 import { projects } from '@/lib/projects'
-
-const homeWords = [
-  'lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit', 'sed', 'do',
-  'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore', 'magna', 'aliqua', 'enim',
-  'ad', 'minim', 'veniam', 'quis', 'nostrud', 'exercitation', 'ullamco', 'laboris', 'nisi',
-  'aliquip', 'ex', 'ea', 'commodo', 'consequat', 'duis', 'aute', 'irure', 'in', 'reprehenderit',
-  'voluptate', 'velit', 'esse', 'cillum', 'fugiat', 'nulla', 'pariatur', 'excepteur', 'sint',
-  'occaecat', 'cupidatat', 'non', 'proident', 'sunt', 'culpa', 'qui', 'officia', 'deserunt',
-  'mollit', 'anim', 'id', 'est', 'laborum', 'perspiciatis', 'unde', 'omnis', 'iste', 'natus',
-  'error', 'accusantium', 'doloremque', 'laudantium', 'totam', 'rem', 'aperiam', 'eaque',
-  'ipsa', 'quae', 'ab', 'illo', 'inventore', 'veritatis', 'quasi', 'architecto', 'beatae',
-]
 
 const projectIcons: Record<string, string> = {
   'agentic-research-lab': '◇',
@@ -25,17 +12,6 @@ const projectIcons: Record<string, string> = {
 export default function Home() {
   return (
     <>
-      {/* Canvas Layer — the TextCanvas as a background */}
-      <div className="canvas-layer">
-        <TextCanvas
-          words={homeWords}
-          highlights={[
-            { text: ' by Adam ', zone: 'center', glitch: true, centerAligned: true },
-          ]}
-        />
-      </div>
-
-      {/* Content Layer — scrollable on top */}
       <div className="content-layer">
         <Reveal type="slide-up">
           <section className="section first">

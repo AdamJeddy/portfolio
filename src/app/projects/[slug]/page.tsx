@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Reveal from '@/components/Reveal'
+import ProjectHero from '@/components/media/ProjectHero'
 import { getProjectBySlug, projects } from '@/lib/projects'
 
 interface ProjectPageProps {
@@ -68,21 +69,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <Reveal type="fade">
         <section className="section">
         <div className="col w4">
-          <div className="image-container" style={{ aspectRatio: '4/3' }}>
-            {project.image ? (
-              <img src={project.image} alt={project.title} />
-            ) : (
-              <div className="project-placeholder">
-                <div className="project-placeholder-inner">
-                  <span className="project-placeholder-icon">
-                    {project.slug === 'agentic-research-lab' ? '◇' :
-                     project.slug === 'signal-anomaly-dash' ? '◈' : '◉'}
-                  </span>
-                  <span>A{String(projectIndex + 1).padStart(3, '0')}</span>
-                </div>
-              </div>
-            )}
-          </div>
+          <ProjectHero
+            image={project.image}
+            title={project.title}
+            projectNumber={`A${String(projectIndex + 1).padStart(3, '0')}`}
+            icon={
+              project.slug === 'agentic-research-lab' ? '◇' :
+              project.slug === 'signal-anomaly-dash' ? '◈' : '◉'
+            }
+          />
         </div>
       </section>
       </Reveal>
