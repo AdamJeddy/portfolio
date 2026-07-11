@@ -15,7 +15,7 @@ export default function Footer() {
           </Link>
         </div>
         <div className="col halfwidth" style={{ alignItems: 'flex-end' }}>
-          <span className="blink-fast loctime">GBG {clock}</span>
+          <span className="blink-fast loctime">DXB {clock}</span>
         </div>
       </div>
 
