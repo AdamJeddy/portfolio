@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Oswald, Space_Grotesk, Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import GridProvider from '@/components/grid/GridProvider'
-import Nav from '@/components/layout/Nav'
 import Footer from '@/components/layout/Footer'
 
 const oswald = Oswald({
@@ -46,7 +45,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body>
         <GridProvider>
-          <Nav />
           <main id="app">{children}</main>
           <Footer />
         </GridProvider>

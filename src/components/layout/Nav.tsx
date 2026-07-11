@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-import SettingsDialog from './SettingsDialog'
 
 interface NavLink {
   href: string
@@ -13,17 +12,15 @@ interface NavLink {
 
 const primaryLinks: NavLink[] = [
   { href: '/projects', label: 'Work' },
-  { href: '/content', label: 'Writing' },
+  { href: '/writing', label: 'Writing' },
 ]
 
 const secondaryLinks: NavLink[] = [
-  { href: '/the-person', label: 'About' },
-  { href: '/play', label: 'Play' },
+  { href: '/about', label: 'About' },
 ]
 
 export default function Nav() {
   const pathname = usePathname()
-  const [settingsOpen, setSettingsOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const isActive = (href: string) => {
@@ -34,90 +31,81 @@ export default function Nav() {
   const closeMobile = () => setMobileOpen(false)
 
   return (
-    <>
-      <header data-component="header">
-        <nav id="nav" className="hoverchar">
-          {/* Column 1: Logo */}
-          <div>
+    <header data-component="header">
+      <nav id="nav" className="hoverchar">
+        {/* Column 1: Logo */}
+        <div>
+          <Link
+            href="/"
+            className={`home ${isActive('/') ? 'active' : ''}`}
+            rel="prefetch"
+            onClick={closeMobile}
+          >
+            Adam
+          </Link>
+        </div>
+
+        {/* Column 2: Primary links */}
+        <div>
+          {primaryLinks.map((link) => (
             <Link
-              href="/"
-              className={`home ${isActive('/') ? 'active' : ''}`}
+              key={link.href}
+              href={link.href}
+              className={`nav-link ${isActive(link.href) ? 'active' : ''}`}
               rel="prefetch"
               onClick={closeMobile}
             >
-              Adam
+              {link.label}
             </Link>
-          </div>
+          ))}
+        </div>
 
-          {/* Column 2: Primary links */}
-          <div>
-            {primaryLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`nav-link ${isActive(link.href) ? 'active' : ''}`}
-                rel="prefetch"
-                onClick={closeMobile}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-
-          {/* Column 3: Secondary links */}
-          <div className="secondary">
-            {secondaryLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`nav-link ${isActive(link.href) ? 'active' : ''}`}
-                rel="prefetch"
-                onClick={closeMobile}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-
-          {/* Column 4: Settings + Contact */}
-          <div className="last">
-            <button
-              className="ghost toggler nav-link"
-              onClick={() => setSettingsOpen(true)}
-              aria-label="Open settings"
-            >
-              Settings
-            </button>
+        {/* Column 3: Secondary links */}
+        <div className="secondary">
+          {secondaryLinks.map((link) => (
             <Link
-              href="/contact"
-              className="nav-link"
+              key={link.href}
+              href={link.href}
+              className={`nav-link ${isActive(link.href) ? 'active' : ''}`}
               rel="prefetch"
               onClick={closeMobile}
             >
-              Contact
+              {link.label}
             </Link>
-          </div>
+          ))}
+        </div>
 
-          {/* Mobile */}
-          <div className="mobile">
-            <Link
-              href="/contact"
-              className="nav-link"
-              rel="prefetch"
-              onClick={closeMobile}
-            >
-              Contact
-            </Link>
-            <button
-              className="ghost"
-              onClick={() => setMobileOpen((prev) => !prev)}
-              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-            >
-              {mobileOpen ? 'Close' : 'Menu'}
-            </button>
-          </div>
-        </nav>
-      </header>
+        {/* Column 4: Contact */}
+        <div className="last">
+          <Link
+            href="/contact"
+            className={`nav-link ${isActive('/contact') ? 'active' : ''}`}
+            rel="prefetch"
+            onClick={closeMobile}
+          >
+            Contact
+          </Link>
+        </div>
+
+        {/* Mobile */}
+        <div className="mobile">
+          <Link
+            href="/contact"
+            className={`nav-link ${isActive('/contact') ? 'active' : ''}`}
+            rel="prefetch"
+            onClick={closeMobile}
+          >
+            Contact
+          </Link>
+          <button
+            className="ghost"
+            onClick={() => setMobileOpen((prev) => !prev)}
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          >
+            {mobileOpen ? 'Close' : 'Menu'}
+          </button>
+        </div>
+      </nav>
 
       {/* Mobile full-screen overlay */}
       {mobileOpen && (
@@ -136,15 +124,6 @@ export default function Nav() {
             </Link>
           ))}
           <div className="mobile-footer">
-            <button
-              className="settings"
-              onClick={() => {
-                setSettingsOpen(true)
-                closeMobile()
-              }}
-            >
-              Settings
-            </button>
             <div className="newbusiness">
               <Link href="/contact" onClick={closeMobile}>
                 Contact
@@ -153,8 +132,6 @@ export default function Nav() {
           </div>
         </div>
       )}
-
-      <SettingsDialog open={settingsOpen} onClose={() => setSettingsOpen(false)} />
-    </>
+    </header>
   )
 }
