@@ -38,7 +38,7 @@ export default function Home() {
       {/* ── Featured Work ───────────────────────────────── */}
       <Reveal type="slide-up">
         <section className="section">
-          <div className="col w8">
+          <div className="col w5">
             <h2 style={{
               fontFamily: 'var(--font-geist-mono), var(--font-mono)',
               textTransform: 'uppercase',
@@ -71,21 +71,22 @@ export default function Home() {
               ))}
             </ul>
 
-            <Spacer height={24} />
-
-            <Link href="/projects" className="button">
-              All projects →
-            </Link>
-          </div>
-        </section>
+        </div>
+      </section>
       </Reveal>
+
+      <div style={{ textAlign: 'right', width: '100%' }}>
+        <Link href="/projects" className="button">
+          All projects →
+        </Link>
+      </div>
 
       <Spacer height={40} />
 
       {/* ── Latest Writing ──────────────────────────────── */}
       <Reveal type="slide-up">
         <section className="section">
-          <div className="col w8">
+          <div className="col w5">
             <h2 style={{
               fontFamily: 'var(--font-geist-mono), var(--font-mono)',
               textTransform: 'uppercase',
@@ -119,15 +120,15 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-
-            <Spacer height={24} />
-
-            <Link href="/writing" className="button">
-              All writing →
-            </Link>
           </div>
         </section>
       </Reveal>
+
+      <div style={{ textAlign: 'right', width: '100%' }}>
+        <Link href="/writing" className="button">
+          All writing →
+        </Link>
+      </div>
 
       <Spacer height={24} />
     </div>
