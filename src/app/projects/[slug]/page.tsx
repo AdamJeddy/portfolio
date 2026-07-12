@@ -27,13 +27,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       {/* Title section */}
       <Reveal type="slide-up">
         <section className="section first">
-        <div className="col w4">
+        <div className="col wfull">
           <div className="worktitle">
             <span>A{String(projectIndex + 1).padStart(3, '0')}</span>
             <h1>{project.title}</h1>
           </div>
         </div>
-        <div className="col w4">
+        <div className="col wfull">
           <div className="meta">
             <div>
               <h2>Solutions</h2>
@@ -68,7 +68,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       {/* Hero image */}
       <Reveal type="fade">
         <section className="section">
-        <div className="col w4">
+        <div className="col wfull">
           <ProjectHero
             image={project.image}
             title={project.title}
@@ -82,7 +82,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       {/* Description */}
       <Reveal type="fade">
         <section className="section">
-        <div className="col w4">
+        <div className="col wfull">
           <p style={{
             fontFamily: 'var(--font-geist-sans), var(--font-sans)',
             fontSize: 'calc(var(--font-size) * 1.25)',
@@ -99,7 +99,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       {project.body && (
         <Reveal type="fade">
           <section className="section">
-          <div className="col w4">
+          <div className="col wfull">
             <p style={{ lineHeight: 'calc(var(--line-px) * 1.08)' }}>
               {project.body}
             </p>
@@ -111,7 +111,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       {/* Tech stack tags */}
       <Reveal type="fade">
         <section className="section">
-        <div className="col w8">
+        <div className="col wfull">
           <h2 style={{
             fontFamily: 'var(--font-geist-mono), var(--font-mono)',
             textTransform: 'uppercase',
@@ -143,7 +143,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       {/* Links */}
       <Reveal type="fade">
         <section className="section">
-        <div className="col w8">
+        <div className="col wfull">
           <div style={{ display: 'flex', gap: 'var(--char)', marginTop: 'var(--line-px)' }}>
             <a href={project.github} target="_blank" rel="noopener noreferrer" className="button">
               GitHub
@@ -161,7 +161,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       {/* Other projects line list */}
       <Reveal type="fade">
         <section className="section space">
-        <div className="col w8">
+        <div className="col wfull">
           <h2 style={{
             fontFamily: 'var(--font-geist-mono), var(--font-mono)',
             textTransform: 'uppercase',

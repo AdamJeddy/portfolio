@@ -566,6 +566,19 @@ span { font-weight: inherit; }
   }
 }
 
+/* ── Content layer (page-level width constraint) ─────────── */
+.content-layer {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Full-width column — fills the available space in a flex section */
+.col.wfull {
+  flex: 1;
+  min-width: 0;
+}
+
 /* ── Scroll reveal animations ────────────────────────────── */
 [data-reveal] {
   opacity: 0;

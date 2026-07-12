@@ -15,7 +15,7 @@ export default function Home() {
       {/* ── Hero ────────────────────────────────────────── */}
       <Reveal type="slide-up">
         <section className="section first">
-          <div className="col w5">
+          <div className="col wfull">
             <p className="mega">
               Adam
             </p>
@@ -38,7 +38,7 @@ export default function Home() {
       {/* ── Featured Work ───────────────────────────────── */}
       <Reveal type="slide-up">
         <section className="section">
-          <div className="col w5">
+          <div className="col wfull">
             <h2 style={{
               fontFamily: 'var(--font-geist-mono), var(--font-mono)',
               textTransform: 'uppercase',
@@ -86,7 +86,7 @@ export default function Home() {
       {/* ── Latest Writing ──────────────────────────────── */}
       <Reveal type="slide-up">
         <section className="section">
-          <div className="col w5">
+          <div className="col wfull">
             <h2 style={{
               fontFamily: 'var(--font-geist-mono), var(--font-mono)',
               textTransform: 'uppercase',

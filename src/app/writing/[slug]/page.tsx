@@ -23,7 +23,7 @@ export default async function PostPage({ params }: PostPageProps) {
     <div className="content-layer">
       <Reveal type="slide-up">
         <section className="section first">
-          <div className="col w5">
+          <div className="col wfull">
             <p className="mega">{post.title}</p>
             <p style={{
               fontFamily: 'var(--font-geist-sans), var(--font-sans)',

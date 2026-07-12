@@ -7,7 +7,7 @@ export default function Content() {
     <div className="content-layer">
       <Reveal type="slide-up">
         <section className="section first">
-          <div className="col w5">
+          <div className="col wfull">
             <p className="mega">Writing</p>
             <p style={{
               fontFamily: 'var(--font-geist-sans), var(--font-sans)',
@@ -25,7 +25,7 @@ export default function Content() {
 
       <Reveal type="slide-up">
         <section className="section">
-          <div className="col w5">
+          <div className="col wfull">
             <ul className="linelist">
               {posts.map((post) => (
                 <li key={post.slug}>

@@ -4,7 +4,7 @@ export default function NotFound() {
   return (
     <div className="content-layer">
       <section className="section first">
-        <div className="col w5">
+        <div className="col wfull">
           <p
             className="mega"
             style={{ fontFamily: 'var(--font-geist-mono), var(--font-mono)', fontSize: 'calc(var(--font-size) * 6)' }}

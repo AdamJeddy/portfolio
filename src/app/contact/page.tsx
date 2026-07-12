@@ -5,7 +5,7 @@ export default function ContactPage() {
     <div className="content-layer">
       <Reveal type="slide-up">
         <section className="section first">
-          <div className="col w5">
+          <div className="col wfull">
             <p className="mega">Let&apos;s work together.</p>
             <p style={{
               fontFamily: 'var(--font-geist-sans), var(--font-sans)',
@@ -25,7 +25,7 @@ export default function ContactPage() {
       <Reveal type="slide-up">
         <section className="section">
           {/* Email Card */}
-          <div className="col w4">
+          <div className="col wfull">
             <div style={{
               border: '1px solid rgba(var(--white-rgb), 0.2)',
               borderRadius: 'var(--border-radius)',
@@ -58,7 +58,7 @@ export default function ContactPage() {
           </div>
 
           {/* Social Card */}
-          <div className="col w4">
+          <div className="col wfull">
             <div style={{
               border: '1px solid rgba(var(--white-rgb), 0.2)',
               borderRadius: 'var(--border-radius)',

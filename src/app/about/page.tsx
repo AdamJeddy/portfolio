@@ -12,13 +12,13 @@ export default function ThePerson() {
     <div className="content-layer">
       <Reveal type="slide-up">
         <section className="section first">
-        <div className="col w8" style={{ flexDirection: 'row', gap: 'var(--char2)', alignItems: 'flex-start' }}>
+        <div className="col wfull" style={{ flexDirection: 'row', gap: 'var(--char2)', alignItems: 'flex-start' }}>
           <div className="col w2">
             <div className="profile-image">
               <span>⬡</span>
             </div>
           </div>
-          <div className="col w5">
+          <div className="col wfull">
             <p className="mega">
               Adam — Software Engineer. AI + Data.
             </p>
@@ -37,7 +37,7 @@ export default function ThePerson() {
 
       <Reveal type="slide-up">
         <section className="section">
-        <div className="col w4">
+        <div className="col wfull">
           <p style={{
             fontFamily: 'var(--font-geist-sans), var(--font-sans)',
             fontSize: 'calc(var(--font-size) * 1.25)',
@@ -53,7 +53,7 @@ export default function ThePerson() {
       </section>
 
       <section className="section">
-        <div className="col w4">
+        <div className="col wfull">
           <p style={{ lineHeight: 'calc(var(--line-px) * 1.15)' }}>
             My side project Qeemat — an Android price tracker for UAE shopping
             sites — reflects how I think about software: local-first, no
@@ -83,7 +83,7 @@ export default function ThePerson() {
       {/* Skills */}
       <Reveal type="slide-up">
         <section className="section space">
-        <div className="col w8">
+        <div className="col wfull">
           <h2 style={{
             fontFamily: 'var(--font-geist-mono), var(--font-mono)',
             textTransform: 'uppercase',
@@ -115,7 +115,7 @@ export default function ThePerson() {
       {/* Contact CTA */}
       <Reveal type="slide-up">
         <section className="section space">
-        <div className="col w5">
+        <div className="col wfull">
           <p className="mega" style={{ fontSize: 'calc(var(--font-size) * 1.8)' }}>
             Let&apos;s build something.
           </p>

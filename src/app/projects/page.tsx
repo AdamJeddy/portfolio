@@ -7,7 +7,7 @@ export default function Projects() {
     <div className="content-layer">
       <Reveal type="slide-up">
         <section className="section first">
-          <div className="col w5">
+          <div className="col wfull">
             <p className="mega">Selected Work</p>
           </div>
         </section>
@@ -15,7 +15,7 @@ export default function Projects() {
 
       <Reveal type="slide-up">
         <section className="section">
-        <div className="col w5">
+        <div className="col wfull">
           <div className="project-grid">
             {projects.map((project, i) => (
               <Link
