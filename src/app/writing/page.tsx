@@ -6,17 +6,11 @@ export default function Content() {
   return (
     <div className="content-layer">
       <Reveal type="slide-up">
-        <section className="section first">
+        <section className="section page-hero">
           <div className="col wfull">
-            <p className="mega">Writing</p>
-            <p style={{
-              fontFamily: 'var(--font-geist-sans), var(--font-sans)',
-              fontSize: 'calc(var(--font-size) * 1.25)',
-              lineHeight: 'calc(var(--line-px) * 1.4)',
-              letterSpacing: '-0.01em',
-              opacity: 0.6,
-              marginTop: 'calc(var(--line-px) * 1.5)',
-            }}>
+            <p className="eyebrow">Writing</p>
+            <h1 className="mega page-title">Notes on useful things</h1>
+            <p className="hero-copy">
               Thoughts on AI, luxury, and what makes tools useful.
             </p>
           </div>
@@ -29,9 +23,9 @@ export default function Content() {
             <ul className="linelist">
               {posts.map((post) => (
                 <li key={post.slug}>
-                  <Link href={`/writing/${post.slug}`} className="line">
-                    <span>{post.title}</span>
-                    <span>{post.excerpt}</span>
+                  <Link href={`/writing/${post.slug}`} className="line writing-row">
+                    <span className="writing-row-title">{post.title}</span>
+                    <span className="writing-row-excerpt">{post.excerpt}</span>
                   </Link>
                 </li>
               ))}

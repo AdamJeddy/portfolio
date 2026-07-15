@@ -6,9 +6,11 @@ export default function Projects() {
   return (
     <div className="content-layer">
       <Reveal type="slide-up">
-        <section className="section first">
+        <section className="section page-hero">
           <div className="col wfull">
-            <p className="mega">Selected Work</p>
+            <p className="eyebrow">Work</p>
+            <h1 className="mega page-title">Selected work</h1>
+            <p className="hero-copy">Practical products built around clarity, reliability, and real-world constraints.</p>
           </div>
         </section>
       </Reveal>
@@ -21,23 +23,18 @@ export default function Projects() {
               <Link
                 key={project.slug}
                 href={`/projects/${project.slug}`}
-                className="project-card"
+                className={`project-card ${project.image ? '' : 'project-card--text'}`.trim()}
               >
-                <div className="project-image">
-                  {project.image ? (
+                {project.image && (
+                  <div className="project-image">
                     <img src={project.image} alt={project.title} />
-                  ) : (
-                    <div className="project-placeholder">
-                      <div className="project-placeholder-inner">
-                        <span className="project-placeholder-icon">
-                          {project.icon ?? '●'}
-                        </span>
-                        <span>A{String(i + 1).padStart(3, '0')}</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
+                  </div>
+                )}
                 <div className="project-info">
+                  <p className="project-description">{project.description}</p>
+                  <p className="project-meta">
+                    {project.role} · {project.tech.slice(0, 3).join(' · ')}
+                  </p>
                   <span className="project-number">
                     A{String(i + 1).padStart(3, '0')}
                   </span>
