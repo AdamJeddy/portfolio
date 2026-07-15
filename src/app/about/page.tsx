@@ -1,139 +1,113 @@
+import Link from 'next/link'
 import Reveal from '@/components/Reveal'
 
-export default function ThePerson() {
-  const skills = [
-    'TypeScript', 'Python', 'React', 'Next.js', 'Node.js',
-    'PostgreSQL', 'SQLite', 'Cloudflare', 'Docker', 'FastAPI',
-    'LangChain', 'Vector DB', 'Kafka', 'Tailwind', 'System Design',
-    'Data Engineering', 'AI/ML', 'API Design',
-  ]
+const skills = [
+  'TypeScript', 'Python', 'React', 'Next.js', 'Node.js',
+  'PostgreSQL', 'SQLite', 'Cloudflare', 'Docker', 'FastAPI',
+  'LangChain', 'Vector DB', 'Kafka', 'Tailwind', 'System Design',
+  'Data Engineering', 'AI/ML', 'API Design',
+]
 
+export default function AboutPage() {
   return (
     <div className="content-layer">
       <Reveal type="slide-up">
-        <section className="section first">
-        <div className="col wfull" style={{ flexDirection: 'row', gap: 'var(--char2)', alignItems: 'flex-start' }}>
-          <div className="col w2">
-            <div className="profile-image">
-              <span>⬡</span>
-            </div>
-          </div>
+        <section className="section page-hero">
           <div className="col wfull">
-            <p className="mega">
-              Adam — Software Engineer. AI + Data.
-            </p>
-            <p style={{
-              fontFamily: 'var(--font-geist-mono), var(--font-mono)',
-              textTransform: 'uppercase',
-              marginTop: 'var(--line-px)',
-              opacity: 0.5,
-            }}>
-              Dubai, UAE · AI Lead at Chalhoub Group
+            <p className="eyebrow">About</p>
+            <h1 className="mega page-title">Adam — Software Engineer. AI + Data.</h1>
+            <p className="hero-copy">
+              I build practical tools and lead AI initiatives at Chalhoub Group,
+              the largest luxury retail operator in the Middle East.
             </p>
           </div>
-        </div>
-      </section>
+        </section>
       </Reveal>
 
       <Reveal type="slide-up">
         <section className="section">
-        <div className="col wfull">
-          <p style={{
-            fontFamily: 'var(--font-geist-sans), var(--font-sans)',
-            fontSize: 'calc(var(--font-size) * 1.25)',
-            lineHeight: 'calc(var(--line-px) * 1.4)',
-            letterSpacing: '-0.01em',
-          }}>
-            I build tools that solve real problems — currently leading AI
-            initiatives at Chalhoub Group, the largest luxury retail operator
-            in the Middle East. I care about craft, clarity, and whether
-            something actually works in the hands of real people.
-          </p>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="col wfull">
-          <p style={{ lineHeight: 'calc(var(--line-px) * 1.15)' }}>
-            My side project Qeemat — an Android price tracker for UAE shopping
-            sites — reflects how I think about software: local-first, no
-            accounts, no cloud. Just a focused tool that does one thing well.
-            Built with React Native, TypeScript, and Kotlin, it tracks prices
-            across Noon, Nike, Ounass, and more with background checks and
-            local notifications.
-          </p>
-          <p style={{ lineHeight: 'calc(var(--line-px) * 1.15)', marginTop: 'var(--line-px)' }}>
-            I write occasionally about the intersection of AI, luxury, and
-            creative production — most recently exploring how brands quietly
-            adopt AI-generated content while the internet debates authenticity.
-            The throughline in everything I do is the same: taste and standards
-            matter more than tools.
-          </p>
-          <p style={{ lineHeight: 'calc(var(--line-px) * 1.15)', marginTop: 'var(--line-px)' }}>
-            I believe good software is legible software — code that tells a
-            clear story, systems that fail gracefully, and interfaces that
-            don&apos;t make you think. When I&apos;m not building, I&apos;m
-            reading about how luxury brands think about craft, or iterating
-            on whatever side project has my attention that week.
-          </p>
-        </div>
-      </section>
+          <div className="col wfull">
+            <p className="section-label">Current focus</p>
+            <ul className="about-list">
+              <li>
+                <span>01</span>
+                <div>
+                  <h2>AI with real-world standards</h2>
+                  <p>
+                    I care about craft, clarity, and whether a system actually works
+                    in the hands of the people it is built for.
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span>02</span>
+                <div>
+                  <h2>Qeemat</h2>
+                  <p>
+                    A local-first Android price tracker for UAE shopping sites—no
+                    accounts, cloud sync, or unnecessary complexity.
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span>03</span>
+                <div>
+                  <h2>Writing on AI and luxury</h2>
+                  <p>
+                    I write about how standards, taste, and brand codes matter more
+                    than the tools used to make something.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
       </Reveal>
 
-      {/* Skills */}
-      <Reveal type="slide-up">
-        <section className="section space">
-        <div className="col wfull">
-          <h2 style={{
-            fontFamily: 'var(--font-geist-mono), var(--font-mono)',
-            textTransform: 'uppercase',
-            marginBottom: 'var(--line-px)',
-          }}>
-            Skills & Technologies
-          </h2>
-          <div style={{ display: 'flex', gap: 'var(--char)', flexWrap: 'wrap' }}>
-            {skills.map((skill) => (
-              <span
-                key={skill}
-                style={{
-                  fontFamily: 'var(--font-geist-mono), var(--font-mono)',
-                  background: 'rgba(var(--white-rgb), 0.08)',
-                  padding: 'calc(var(--char) * 0.5) calc(var(--char) * 1)',
-                  borderRadius: 'var(--border-radius)',
-                  textTransform: 'uppercase',
-                  fontSize: 'calc(var(--font-size) * 0.85)',
-                }}
+      <Reveal type="fade">
+        <section className="section">
+          <div className="col wfull">
+            <p className="section-label">How I work</p>
+            <p className="body-copy">
+              I believe good software is legible software: code that tells a clear
+              story, systems that fail gracefully, and interfaces that do not make
+              people stop and think. I enjoy the detail work—turning a complicated
+              problem into a focused product that feels obvious to use.
+            </p>
+          </div>
+        </section>
+      </Reveal>
+
+      <Reveal type="fade">
+        <section className="section">
+          <div className="col wfull">
+            <p className="section-label">Tools I reach for</p>
+            <div className="skill-list">
+              {skills.map((skill) => (
+                <span key={skill}>{skill}</span>
+              ))}
+            </div>
+          </div>
+        </section>
+      </Reveal>
+
+      <Reveal type="fade">
+        <section className="section section-final">
+          <div className="col wfull">
+            <p className="cta-title">Let&apos;s build something useful.</p>
+            <div className="cta-row">
+              <Link href="/contact" className="button">Get in touch</Link>
+              <a
+                href="https://github.com/AdamJeddy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="button ghost"
               >
-                {skill}
-              </span>
-            ))}
+                GitHub ↗
+              </a>
+            </div>
           </div>
-        </div>
-      </section>
-      </Reveal>
-
-      {/* Contact CTA */}
-      <Reveal type="slide-up">
-        <section className="section space">
-        <div className="col wfull">
-          <p className="mega" style={{ fontSize: 'calc(var(--font-size) * 1.8)' }}>
-            Let&apos;s build something.
-          </p>
-          <div style={{ display: 'flex', gap: 'var(--char)', marginTop: 'var(--line-px)' }}>
-            <a href="/contact" className="button">
-              Get in touch
-            </a>
-            <a
-              href="https://github.com/AdamJeddy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="button"
-            >
-              GitHub
-            </a>
-          </div>
-        </div>
-      </section>
+        </section>
       </Reveal>
     </div>
   )
