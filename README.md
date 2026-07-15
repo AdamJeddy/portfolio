@@ -12,9 +12,10 @@ A Next.js portfolio site with a text-canvas visual style, project and writing se
 - / : Landing page
 - /projects : Projects index
 - /projects/[slug] : Individual project page
-- /content : Writing/content index
-- /content/[slug] : Individual content page
-- /the-person : Personal page
+- /writing : Writing index
+- /writing/[slug] : Individual writing page
+- /about : Personal page
+- /contact : Contact page
 - /track-my-salah-privacy-policy : Privacy policy page for the Track My Salah app
 
 ## Local Development
@@ -48,5 +49,5 @@ Typical production flow:
 - Deploy with your Cloudflare pipeline or Wrangler configuration
 
 ## Notes
-- Global styles currently lock body scrolling for the canvas-style experience.
-- Long-form pages can use a fixed full-viewport container with overflow-y-auto to remain scrollable.
+- The shared navigation provides links to Work, Writing, About, and Contact.
+- The portfolio uses a responsive text-grid system; project cards collapse to a single column on small screens.
