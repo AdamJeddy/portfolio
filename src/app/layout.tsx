@@ -3,6 +3,7 @@ import { Oswald, Space_Grotesk, Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import GridProvider from '@/components/grid/GridProvider'
 import Footer from '@/components/layout/Footer'
+import Nav from '@/components/layout/Nav'
 
 const oswald = Oswald({
   subsets: ['latin'],
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body>
         <GridProvider>
+          <Nav />
           <main id="app">{children}</main>
           <Footer />
         </GridProvider>

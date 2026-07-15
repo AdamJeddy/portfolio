@@ -31,7 +31,7 @@ export default function Nav() {
   const closeMobile = () => setMobileOpen(false)
 
   return (
-    <header data-component="header">
+    <header data-component="header" data-menu-open={mobileOpen || undefined}>
       <nav id="nav" className="hoverchar">
         {/* Column 1: Logo */}
         <div>
@@ -89,6 +89,14 @@ export default function Nav() {
 
         {/* Mobile */}
         <div className="mobile">
+          <Link
+            href="/"
+            className={`home ${isActive('/') ? 'active' : ''}`}
+            rel="prefetch"
+            onClick={closeMobile}
+          >
+            Adam
+          </Link>
           <Link
             href="/contact"
             className={`nav-link ${isActive('/contact') ? 'active' : ''}`}
