@@ -21,12 +21,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
 
   const projectIndex = projects.findIndex((p) => p.slug === slug)
+  const otherProjects = projects.filter((p) => p.slug !== slug)
 
   return (
     <div className="content-layer">
       {/* Title section */}
       <Reveal type="slide-up">
-        <section className="section first">
+        <section className="section page-hero case-hero">
         <div className="col wfull">
           <div className="worktitle">
             <span>A{String(projectIndex + 1).padStart(3, '0')}</span>
@@ -36,12 +37,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="col wfull">
           <div className="meta">
             <div>
-              <h2>Solutions</h2>
+              <h2>Built with</h2>
               <p>
                 {project.tech.slice(0, 3).join(', ')}
                 {project.tech.length > 3 ? '...' : ''}
               </p>
             </div>
+            {project.role && (
+              <div>
+                <h2>Role</h2>
+                <p>{project.role}</p>
+              </div>
+            )}
             <div>
               <h2>Year</h2>
               <p>{project.year ?? '—'}</p>
@@ -65,128 +72,70 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       </section>
       </Reveal>
 
-      {/* Hero image */}
-      <Reveal type="fade">
-        <section className="section">
-        <div className="col wfull">
-          <ProjectHero
-            image={project.image}
-            title={project.title}
-            projectNumber={`A${String(projectIndex + 1).padStart(3, '0')}`}
-            icon={project.icon ?? '◉'}
-          />
-        </div>
-      </section>
-      </Reveal>
-
-      {/* Description */}
-      <Reveal type="fade">
-        <section className="section">
-        <div className="col wfull">
-          <p style={{
-            fontFamily: 'var(--font-geist-sans), var(--font-sans)',
-            fontSize: 'calc(var(--font-size) * 1.25)',
-            lineHeight: 'calc(var(--line-px) * 1.25)',
-            letterSpacing: '-0.01em',
-          }}>
-            {project.description}
-          </p>
-        </div>
-      </section>
-      </Reveal>
-
-      {/* Body */}
-      {project.body && (
+      {project.image && (
         <Reveal type="fade">
           <section className="section">
-          <div className="col wfull">
-            <p style={{ lineHeight: 'calc(var(--line-px) * 1.08)' }}>
-              {project.body}
-            </p>
-          </div>
-        </section>
+            <div className="col wfull">
+              <ProjectHero
+                image={project.image}
+                title={project.title}
+                projectNumber={`A${String(projectIndex + 1).padStart(3, '0')}`}
+                icon={project.icon ?? '◉'}
+              />
+            </div>
+          </section>
         </Reveal>
       )}
 
-      {/* Tech stack tags */}
       <Reveal type="fade">
-        <section className="section">
-        <div className="col wfull">
-          <h2 style={{
-            fontFamily: 'var(--font-geist-mono), var(--font-mono)',
-            textTransform: 'uppercase',
-            marginBottom: 'var(--line-px)',
-          }}>
-            Tech
-          </h2>
-          <div style={{ display: 'flex', gap: 'var(--char)', flexWrap: 'wrap' }}>
-            {project.tech.map((t) => (
-              <span
-                key={t}
-                style={{
-                  fontFamily: 'var(--font-geist-mono), var(--font-mono)',
-                  background: 'rgba(var(--white-rgb), 0.08)',
-                  padding: 'calc(var(--char) * 0.5) calc(var(--char) * 1)',
-                  borderRadius: 'var(--border-radius)',
-                  textTransform: 'uppercase',
-                  fontSize: 'calc(var(--font-size) * 0.85)',
-                }}
-              >
-                {t}
-              </span>
-            ))}
+        <section className="section case-content">
+          <div className="col wfull case-copy">
+            <p className="case-lead">{project.description}</p>
+            {project.body && <p>{project.body}</p>}
           </div>
-        </div>
-      </section>
-      </Reveal>
-
-      {/* Links */}
-      <Reveal type="fade">
-        <section className="section">
-        <div className="col wfull">
-          <div style={{ display: 'flex', gap: 'var(--char)', marginTop: 'var(--line-px)' }}>
-            <a href={project.github} target="_blank" rel="noopener noreferrer" className="button">
-              GitHub
-            </a>
-            {project.live && (
-              <a href={project.live} target="_blank" rel="noopener noreferrer" className="button">
-                Live
+          <div className="col wfull case-details">
+            <h2 className="section-label">Built with</h2>
+            <div className="skill-list">
+              {project.tech.map((technology) => (
+                <span key={technology}>{technology}</span>
+              ))}
+            </div>
+            <div className="case-actions">
+              <a href={project.github} target="_blank" rel="noopener noreferrer" className="button">
+                GitHub ↗
               </a>
-            )}
+              {project.live && (
+                <a href={project.live} target="_blank" rel="noopener noreferrer" className="button">
+                  Live ↗
+                </a>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
       </Reveal>
 
-      {/* Other projects line list */}
-      <Reveal type="fade">
-        <section className="section space">
-        <div className="col wfull">
-          <h2 style={{
-            fontFamily: 'var(--font-geist-mono), var(--font-mono)',
-            textTransform: 'uppercase',
-            marginBottom: 'var(--line-px)',
-          }}>
-            Other Projects
-          </h2>
-          <ul className="linelist">
-            {projects
-              .filter((p) => p.slug !== slug)
-              .map((p, i) => (
-                <li key={p.slug}>
-                  <Link href={`/projects/${p.slug}`} className="line">
+      {otherProjects.length > 0 && (
+        <Reveal type="fade">
+          <section className="section">
+            <div className="col wfull">
+              <h2 className="section-heading">Other projects</h2>
+              <ul className="linelist">
+                {otherProjects.map((otherProject) => (
+                <li key={otherProject.slug}>
+                  <Link href={`/projects/${otherProject.slug}`} className="line">
                     <span>
-                      {String(projects.findIndex((x) => x.slug === p.slug) + 1).padStart(3, '0')}{' '}
-                      {p.title.toUpperCase()}
+                      {String(projects.findIndex((candidate) => candidate.slug === otherProject.slug) + 1).padStart(3, '0')}{' '}
+                      {otherProject.title.toUpperCase()}
                     </span>
-                    <span>{p.year ?? '—'}</span>
+                    <span>{otherProject.year ?? '—'}</span>
                   </Link>
                 </li>
-              ))}
-          </ul>
-        </div>
-      </section>
-      </Reveal>
+                ))}
+              </ul>
+            </div>
+          </section>
+        </Reveal>
+      )}
     </div>
   )
 }

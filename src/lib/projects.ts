@@ -7,6 +7,7 @@ export interface ProjectItem {
   github: string
   live?: string
   image?: string
+  role?: string
   year?: number
   icon?: string
   words: string[]
@@ -20,7 +21,7 @@ export const projects: ProjectItem[] = [
     body: 'Qeemat is a React Native + TypeScript price tracking app built for UAE shoppers. Add a product URL from supported stores — Noon, Nike UAE, Sun & Sand Sports, Level Shoes, Ounass, and more — and Qeemat tracks prices locally on-device with AsyncStorage, Android WorkManager background checks, and local notifications for price drops. No backend, no accounts, no cloud sync. Just a focused tool that respects your data.',
     tech: ['React Native', 'TypeScript', 'Kotlin', 'AsyncStorage', 'WorkManager', 'Jest'],
     github: 'https://github.com/AdamJeddy/Qeemat',
-    image: 'https://picsum.photos/seed/qeemat/800/600',
+    role: 'Independent product',
     year: 2026,
     icon: '◆',
     words: [

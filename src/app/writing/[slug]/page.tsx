@@ -22,25 +22,14 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <div className="content-layer">
       <Reveal type="slide-up">
-        <section className="section first">
+        <article className="section page-hero writing-detail">
           <div className="col wfull">
-            <p className="mega">{post.title}</p>
-            <p style={{
-              fontFamily: 'var(--font-geist-sans), var(--font-sans)',
-              fontSize: 'calc(var(--font-size) * 1.25)',
-              lineHeight: 'calc(var(--line-px) * 1.4)',
-              letterSpacing: '-0.01em',
-              opacity: 0.6,
-              marginTop: 'calc(var(--line-px) * 2)',
-              marginBottom: 'calc(var(--line-px) * 3)',
-            }}>
-              {post.excerpt}
-            </p>
-            <Link href="/writing" className="button">
-              ← All writing
-            </Link>
+            <Link href="/writing" className="back-link">← All writing</Link>
+            <p className="eyebrow">Writing</p>
+            <h1 className="mega page-title">{post.title}</h1>
+            <p className="hero-copy writing-dek">{post.excerpt}</p>
           </div>
-        </section>
+        </article>
       </Reveal>
     </div>
   )
