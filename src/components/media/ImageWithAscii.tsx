@@ -57,6 +57,8 @@ export default function ImageWithAscii({
           {ascii}
         </div>
       )}
+      {/* The canvas-based ASCII effect requires access to the underlying image element. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img ref={imgRef} src={src} alt={alt} crossOrigin="anonymous" />
     </div>
   )

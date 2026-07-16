@@ -51,6 +51,9 @@ export function useTheme() {
 
   useEffect(() => {
     const saved = load()
+    // Preferences come from browser storage after hydration, so this state update
+    // intentionally synchronizes React with that external source.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPreferences(saved)
     apply(saved)
   }, [])
