@@ -1,10 +1,17 @@
 import type { Metadata } from 'next'
 import { Oswald, Space_Grotesk, Geist, Geist_Mono } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import GridProvider from '@/components/grid/GridProvider'
 import Footer from '@/components/layout/Footer'
 import Nav from '@/components/layout/Nav'
-import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, X_HANDLE } from '@/lib/site'
+import {
+  GA_MEASUREMENT_ID,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+  X_HANDLE,
+} from '@/lib/site'
 
 const oswald = Oswald({
   subsets: ['latin'],
@@ -53,6 +60,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${oswald.variable} ${spaceGrotesk.variable} ${geistSans.variable} ${geistMono.variable}`}
     >
       <body>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
         <GridProvider>
           <Nav />
           <main id="app">{children}</main>
