@@ -3,7 +3,7 @@ import { createPageMetadata } from '@/lib/metadata'
 
 export const metadata = createPageMetadata({
   path: '/contact',
-  title: "Contact Adam — Adam's Portfolio",
+  title: "Contact Adam",
   description: 'Get in touch with Adam about AI, product work, or useful things to build.',
 })
 

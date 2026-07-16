@@ -7,7 +7,7 @@ import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site'
 
 export const metadata = createPageMetadata({
   path: '/',
-  title: "Adam's Portfolio — Projects, Writing & Experiments",
+  title: "Adam's Portfolio",
   description: 'A personal collection of projects, writing, and experiments by Adam.',
 })
 
