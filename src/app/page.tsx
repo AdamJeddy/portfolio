@@ -1,11 +1,34 @@
 import Link from 'next/link'
 import Reveal from '@/components/Reveal'
+import { createPageMetadata } from '@/lib/metadata'
 import { posts } from '@/lib/posts'
 import { projects } from '@/lib/projects'
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site'
+
+export const metadata = createPageMetadata({
+  path: '/',
+  title: "Adam's Portfolio — Projects, Writing & Experiments",
+  description: 'A personal collection of projects, writing, and experiments by Adam.',
+})
+
+const websiteJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${SITE_URL}/#website`,
+  url: SITE_URL,
+  name: SITE_NAME,
+  description: SITE_DESCRIPTION,
+  inLanguage: 'en',
+})
 
 export default function Home() {
   return (
     <div className="content-layer">
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: websiteJsonLd }}
+      />
 
       {/* ── Hero ────────────────────────────────────────── */}
       <Reveal type="slide-up">
@@ -64,6 +87,9 @@ export default function Home() {
                   <Link href={`/writing/${post.slug}`} className="line">
                     <span className="home-writing-title">
                       {post.image && (
+                        // Static export uses raw images until a Cloudflare-compatible
+                        // image loader is introduced.
+                        // eslint-disable-next-line @next/next/no-img-element
                         <img
                           src={post.image}
                           alt=""

@@ -1,7 +1,9 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Reveal from '@/components/Reveal'
 import ProjectHero from '@/components/media/ProjectHero'
+import { createPageMetadata } from '@/lib/metadata'
 import { getProjectBySlug, projects } from '@/lib/projects'
 
 interface ProjectPageProps {
@@ -10,6 +12,23 @@ interface ProjectPageProps {
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }))
+}
+
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
+  const { slug } = await params
+  const project = getProjectBySlug(slug)
+
+  if (!project) {
+    return {}
+  }
+
+  return createPageMetadata({
+    path: `/projects/${project.slug}`,
+    title: project.slug === 'qeemat'
+      ? 'Qeemat — UAE Price Tracker for Android'
+      : `${project.title} — Adam's Portfolio`,
+    description: project.description,
+  })
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {

@@ -1,6 +1,13 @@
 import Link from 'next/link'
 import Reveal from '@/components/Reveal'
+import { createPageMetadata } from '@/lib/metadata'
 import { projects } from '@/lib/projects'
+
+export const metadata = createPageMetadata({
+  path: '/projects',
+  title: "Projects — Adam's Portfolio",
+  description: 'Explore practical products by Adam, including local-first tools, AI work, and experiments.',
+})
 
 export default function Projects() {
   return (
@@ -27,6 +34,8 @@ export default function Projects() {
               >
                 {project.image && (
                   <div className="project-image">
+                    {/* Static export uses raw images until a Cloudflare-compatible image loader is introduced. */}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={project.image} alt={project.title} />
                   </div>
                 )}

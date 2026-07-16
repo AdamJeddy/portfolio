@@ -1,6 +1,13 @@
 import Link from 'next/link'
 import Reveal from '@/components/Reveal'
+import { createPageMetadata } from '@/lib/metadata'
 import { posts } from '@/lib/posts'
+
+export const metadata = createPageMetadata({
+  path: '/writing',
+  title: "Writing on AI, Luxury & Useful Things — Adam's Portfolio",
+  description: 'Notes by Adam on AI, luxury, and what makes tools useful.',
+})
 
 export default function Content() {
   return (

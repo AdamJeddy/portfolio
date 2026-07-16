@@ -1,5 +1,12 @@
 import Link from 'next/link'
 import Reveal from '@/components/Reveal'
+import { createPageMetadata } from '@/lib/metadata'
+
+export const metadata = createPageMetadata({
+  path: '/about',
+  title: 'About Adam — Projects, Writing & Experiments',
+  description: 'Learn about Adam, a software engineer building practical tools and leading AI initiatives.',
+})
 
 const skills = [
   'TypeScript', 'Python', 'React', 'Next.js', 'Node.js',

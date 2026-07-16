@@ -4,6 +4,7 @@ import './globals.css'
 import GridProvider from '@/components/grid/GridProvider'
 import Footer from '@/components/layout/Footer'
 import Nav from '@/components/layout/Nav'
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, X_HANDLE } from '@/lib/site'
 
 const oswald = Oswald({
   subsets: ['latin'],
@@ -31,8 +32,15 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Adam's Portfolio",
-  description: 'This is literally my portfolio',
+  metadataBase: new URL(SITE_URL),
+  title: SITE_NAME,
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  creator: 'Adam',
+  publisher: SITE_NAME,
+  twitter: {
+    creator: X_HANDLE,
+  },
   icons: {
     icon: '/favicon.svg',
   },
