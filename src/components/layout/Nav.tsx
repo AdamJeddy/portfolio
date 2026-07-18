@@ -19,6 +19,12 @@ const secondaryLinks: NavLink[] = [
   { href: '/about', label: 'About' },
 ]
 
+const mobileLinks: NavLink[] = [
+  ...primaryLinks,
+  ...secondaryLinks,
+  { href: '/contact', label: 'Contact' },
+]
+
 export default function Nav() {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -97,18 +103,13 @@ export default function Nav() {
           >
             Adam
           </Link>
-          <Link
-            href="/contact"
-            className={`nav-link ${isActive('/contact') ? 'active' : ''}`}
-            rel="prefetch"
-            onClick={closeMobile}
-          >
-            Contact
-          </Link>
           <button
-            className="ghost"
+            type="button"
+            className="ghost mobile-menu-toggle"
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-controls="mobile-menu"
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? 'Close' : 'Menu'}
           </button>
@@ -117,27 +118,20 @@ export default function Nav() {
 
       {/* Mobile full-screen overlay */}
       {mobileOpen && (
-        <div className="mobile-container">
-          <Link href="/" className="home" onClick={closeMobile}>
-            Adam
-          </Link>
-          {[...primaryLinks, ...secondaryLinks].map((link) => (
+        <div id="mobile-menu" className="mobile-container">
+          {mobileLinks.map((link, index) => (
             <Link
               key={link.href}
               href={link.href}
               className={isActive(link.href) ? 'active' : ''}
               onClick={closeMobile}
             >
-              {link.label}
+              <span className="mobile-menu-index" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <span>{link.label}</span>
             </Link>
           ))}
-          <div className="mobile-footer">
-            <div className="newbusiness">
-              <Link href="/contact" onClick={closeMobile}>
-                Contact
-              </Link>
-            </div>
-          </div>
         </div>
       )}
     </header>
