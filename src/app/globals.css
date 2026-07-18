@@ -913,6 +913,61 @@ a.button.large {
   max-width: 720px;
 }
 
+.writing-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--char2);
+  margin-top: var(--space-3);
+  font-family: var(--font-geist-mono), var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+.writing-article {
+  max-width: 760px;
+}
+
+.writing-body {
+  font-family: var(--font-geist-sans), var(--font-sans);
+  font-size: clamp(17px, 2.15vw, 20px);
+  line-height: 1.7;
+}
+
+.writing-body section + section {
+  margin-top: var(--space-6);
+}
+
+.writing-body h2 {
+  margin-bottom: var(--space-2);
+  font-family: var(--font-geist-sans), var(--font-sans);
+  font-size: clamp(24px, 3.4vw, 34px);
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+}
+
+.writing-body p + p {
+  margin-top: var(--space-2);
+}
+
+.writing-source {
+  margin-top: var(--space-6);
+  font-family: var(--font-geist-mono), var(--font-mono);
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.writing-source a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.writing-related {
+  max-width: 820px;
+}
+
 .not-found-content {
   gap: var(--space-2);
 }
