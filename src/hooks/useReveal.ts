@@ -28,7 +28,8 @@ export function useReveal({
     const el = ref.current
     if (!el) return
 
-    // If no JS or already revealed, skip
+    document.documentElement.dataset.revealReady = 'true'
+
     if (revealed) return
 
     const observer = new IntersectionObserver(
