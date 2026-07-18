@@ -357,6 +357,7 @@ a.button.large {
   grid-template-columns: 1fr auto;
   gap: var(--char2);
   padding: var(--space-2) 0;
+  padding-left: 10px;
   border-top: 1px solid rgba(var(--white-rgb), 0.12);
   border-bottom: 1px solid rgba(var(--white-rgb), 0.06);
   color: inherit;
@@ -732,6 +733,11 @@ a.button.large {
 .writing-row {
   grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr) !important;
   align-items: start;
+}
+
+.linelist li .writing-row {
+  padding-inline: var(--char2);
+  padding-left: 10px;
 }
 
 .writing-row-title {
@@ -1143,11 +1149,13 @@ span { font-weight: inherit; }
   .linelist li .line {
     grid-template-columns: minmax(0, 1fr);
     gap: 5.9px;
+    padding-left: 10px;
   }
 
   .linelist li .line > span:last-child {
     justify-self: start;
     text-align: left;
+    padding-left: 10px;
   }
 }
 
