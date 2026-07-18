@@ -8,29 +8,35 @@ export default function Footer() {
 
   return (
     <footer id="footer">
-      <div className="shortcuts section between">
-        <div className="col halfwidth">
-          <Link href="/" className="logo" aria-label="Home">
-            Adam
-          </Link>
+      <div className="footer-status">
+        <div className="footer-identity">
+          <p className="footer-label">Working from</p>
+          <p className="footer-city">Dubai, UAE</p>
         </div>
-        <div className="col halfwidth" style={{ alignItems: 'flex-end' }}>
-          <span className="loctime">DXB {clock}</span>
+        <div className="footer-time">
+          <p className="footer-label">Adam&apos;s local time / DXB</p>
+          <time>{clock || '--:--:--'}</time>
         </div>
       </div>
 
-      <div className="section between" style={{ marginTop: 0 }}>
-        <div className="col">
-          <Link href="https://github.com/AdamJeddy" target="_blank" rel="noopener noreferrer">
-            GitHub
-          </Link>
-        </div>
-        <div className="col">
-          <Link href="https://www.linkedin.com/in/adamahsan/" target="_blank" rel="noopener noreferrer">
-            LinkedIn
-          </Link>
-        </div>
-      </div>
+      <nav className="footer-links" aria-label="Social links">
+        <Link href="https://github.com/AdamJeddy" target="_blank" rel="noopener noreferrer">
+          <span className="footer-link-index" aria-hidden="true">01</span>
+          <span className="footer-link-copy">
+            <span>GitHub</span>
+            <span>Contribute to my work</span>
+          </span>
+          <span aria-hidden="true">&#8599;</span>
+        </Link>
+        <Link href="https://www.linkedin.com/in/adamahsan/" target="_blank" rel="noopener noreferrer">
+          <span className="footer-link-index" aria-hidden="true">02</span>
+          <span className="footer-link-copy">
+            <span>LinkedIn</span>
+            <span>Connect with me</span>
+          </span>
+          <span aria-hidden="true">&#8599;</span>
+        </Link>
+      </nav>
     </footer>
   )
 }
