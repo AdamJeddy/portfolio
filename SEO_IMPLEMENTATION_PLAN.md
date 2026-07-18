@@ -1,8 +1,8 @@
 ﻿# SEO and Link-Sharing Implementation Plan
 
-Last updated: 2026-07-16
-Current phase: Phase 1 â€” crawlability, metadata, and link previews
-Next task: SEO-014 â€” verify Cloudflare Pages redirects and production URL normalization after deployment
+Last updated: 2026-07-18
+Current phase: Phase 2 â€” structured data and content depth
+Next task: SEO-021 â€” expand the Qeemat case study and add SoftwareApplication JSON-LD
 
 ## Purpose
 
@@ -348,7 +348,7 @@ Acceptance criteria:
 
 ## Phase 3 â€” Mobile, accessibility, and performance
 
-### [ ] SEO-030 â€” Make content and navigation resilient and accessible
+### [~] SEO-030 â€” Make content and navigation resilient and accessible
 
 Priority: P1
 Proposed files: `globals.css`, `Reveal.tsx`, `useReveal.ts`, `Nav.tsx`.
@@ -365,6 +365,17 @@ Work:
 - Make repeated animated pseudo-content non-disruptive to accessible names.
 - Respect `prefers-reduced-motion` for reveal transitions as well as blinking.
 - Increase primary touch targets toward 44 Ã— 44 CSS pixels.
+
+Implementation progress (2026-07-18):
+
+- The mobile menu now has `aria-expanded`, `aria-controls`, an accessible modal
+  label, `aria-current="page"` on active links, a 44 px menu control, keyboard
+  focus containment, Escape-to-close with focus restoration, background inerting,
+  and scroll locking.
+- Reveal content now remains visible without JavaScript or when hydration fails,
+  and reduced-motion users receive no reveal transitions.
+- Remaining: manual mobile and keyboard checks on the deployed preview at 320,
+  390, and 768 px, including a screen-reader check.
 
 Acceptance criteria:
 
@@ -442,7 +453,7 @@ Acceptance criteria:
 - [ ] URL Inspection reports the intended canonical and allows indexing.
 - [ ] Indexing, Core Web Vitals, and Enhancement reports have been reviewed.
 
-### [ ] SEO-041 â€” Add Google Analytics 4
+### [~] SEO-041 â€” Add Google Analytics 4
 
 Priority: P2
 Blocked: Requires an approved GA4 property, measurement ID, and privacy decision.
@@ -463,6 +474,10 @@ Acceptance criteria:
 - [ ] Custom events fire once with useful names and parameters.
 - [ ] No duplicate Google tags are loaded.
 - [ ] Search Console reports are available in GA4 after linking.
+
+Implementation note: The GA4 page-view tag is in place. Do not record the
+measurement ID in this plan; verify the deployment in GA4 Realtime and then
+decide which outbound clicks, if any, should become custom events.
 
 ### [ ] SEO-042 â€” Complete the live release verification
 
@@ -551,6 +566,10 @@ Work:
 | 2026-07-16 | SEO-013 | Generated-file inspection | Pass | `out/robots.txt` allows crawling and points to `https://bruh.ae/sitemap.xml`; sitemap contains each indexable public page once and excludes the noindex privacy page |
 | 2026-07-16 | SEO-020 | `npm run lint` and `npm run build` | Pass | WebSite JSON-LD compiles and exports successfully |
 | 2026-07-16 | SEO-020 | Static HTML JSON-LD inspection | Pass | Parsed `WebSite` JSON-LD with the stable `https://bruh.ae/#website` ID, matching name, URL, description, and language |
+| 2026-07-16 | SEO-041 | `npm run lint` and `npm run build` | Pass | The GA4 tag compiles into the static export |
+| 2026-07-16 | SEO-041 | Static HTML inspection | Pass | The generated homepage contains the configured Google tag loader URL and one `gtag('config', ...)` call |
+| 2026-07-16 | Preview validation | `https://dev.portfolio-5s4.pages.dev` | Partial pass | Homepage title, canonical, social image, Twitter large card, and WebSite JSON-LD are live; the GA4 change is still local and undeployed |
+| 2026-07-18 | SEO-030 | `npm run lint` and `npm run build` | Pass | Mobile navigation accessibility and reveal-resilience changes compile and statically export successfully; deployed manual checks remain pending |
 
 ## Implementation log
 
@@ -564,3 +583,5 @@ Work:
 | 2026-07-16 | SEO-012 | In progress | `public/images/social/portfolio-social.png`, `src/lib/site.ts`, `src/lib/metadata.ts` | â€” | Added and wired a default 1200 Ã— 630 social preview image; Qeemat-specific and completed-article-specific images remain pending |
 | 2026-07-16 | SEO-013 | Complete | `src/app/robots.ts`, `src/app/sitemap.ts` | â€” | Added build-time crawl directives and a sitemap sourced from the project and writing data; explicitly configured both metadata routes for static export |
 | 2026-07-16 | SEO-020 | Complete | `src/app/page.tsx` | â€” | Added homepage-only WebSite JSON-LD. Person and ProfilePage schema remain deferred pending the chosen public name |
+| 2026-07-16 | SEO-041 | In progress | `src/app/layout.tsx`, `src/lib/site.ts` | — | Added the approved GA4 page-view tag; Realtime and duplicate-tag checks remain pending deployment |
+| 2026-07-18 | SEO-030 | In progress | `src/components/layout/Nav.tsx`, `src/hooks/useReveal.ts`, `src/app/globals.css` | `44fa46db` | Added keyboard-safe mobile navigation, background isolation, 44 px menu control, no-JavaScript reveal fallback, and reduced-motion support; preview-device and screen-reader checks remain pending |
