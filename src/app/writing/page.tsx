@@ -5,8 +5,8 @@ import { posts } from '@/lib/posts'
 
 export const metadata = createPageMetadata({
   path: '/writing',
-  title: "Writing on AI, Luxury & Useful Things — Adam's Portfolio",
-  description: 'Notes by Adam on AI, luxury, and what makes tools useful.',
+  title: "Commentary — Adam's Portfolio",
+  description: 'Commentary, thoughts, and observations by Adam.',
 })
 
 export default function Content() {
@@ -15,11 +15,8 @@ export default function Content() {
       <Reveal type="slide-up">
         <section className="section page-hero">
           <div className="col wfull">
-            <p className="eyebrow">Writing</p>
-            <h1 className="mega page-title">Notes on useful things</h1>
-            <p className="hero-copy">
-              Thoughts on AI, luxury, and what makes tools useful.
-            </p>
+            <p className="eyebrow">Commentary</p>
+            <h1 className="mega page-title">Yaps, and <strong>Thoughts.</strong></h1>
           </div>
         </section>
       </Reveal>

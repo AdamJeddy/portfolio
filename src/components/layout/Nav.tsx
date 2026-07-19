@@ -10,8 +10,8 @@ interface NavLink {
 }
 
 const primaryLinks: NavLink[] = [
-  { href: '/projects', label: 'Work' },
-  { href: '/writing', label: 'Writing' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/writing', label: 'Commentary' },
 ]
 
 const secondaryLinks: NavLink[] = [

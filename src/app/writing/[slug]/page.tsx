@@ -77,9 +77,9 @@ export default async function PostPage({ params }: PostPageProps) {
         <article className="section page-hero writing-detail">
           <div className="col wfull">
             <Link href="/writing" className="back-link">
-              <span aria-hidden="true">&larr;</span>{' '}All writing
+              <span aria-hidden="true">&larr;</span>{' '}All commentary
             </Link>
-            <p className="eyebrow">Writing</p>
+            <p className="eyebrow">Commentary</p>
             <h1 className="mega page-title">{post.title}</h1>
             <p className="hero-copy writing-dek">{post.excerpt}</p>
             <p className="writing-meta">
