@@ -8,7 +8,7 @@ import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site'
 export const metadata = createPageMetadata({
   path: '/',
   title: "Adam's Portfolio",
-  description: 'A personal collection of projects, writing, and experiments by Adam.',
+  description: 'Projects, commentary, and experiments by Adam.',
 })
 
 const websiteJsonLd = JSON.stringify({
@@ -34,21 +34,20 @@ export default function Home() {
       <Reveal type="slide-up">
         <section className="section home-intro">
           <div className="col wfull">
-            <p className="eyebrow">Software engineering · AI + data</p>
             <h1 className="mega home-name">Adam</h1>
             <p className="home-tagline">
-              I curiously build things
+              Building things, following ideas, and leaving a few notes behind.
             </p>
           </div>
         </section>
       </Reveal>
 
-      {/* ── Featured Work ───────────────────────────────── */}
+      {/* ── Selected Projects ───────────────────────────── */}
       <Reveal type="slide-up">
         <section className="section home-section">
           <div className="col wfull">
             <div className="section-heading-row">
-              <h2 className="section-heading">Selected work</h2>
+              <h2 className="section-heading">Selected projects</h2>
               <Link href="/projects" className="section-link">View all →</Link>
             </div>
 
@@ -72,12 +71,12 @@ export default function Home() {
       </section>
       </Reveal>
 
-      {/* ── Latest Writing ──────────────────────────────── */}
+      {/* ── Selected Commentary ─────────────────────────── */}
       <Reveal type="slide-up">
         <section className="section home-section">
           <div className="col wfull">
             <div className="section-heading-row">
-              <h2 className="section-heading">Latest writing</h2>
+              <h2 className="section-heading">Selected commentary</h2>
               <Link href="/writing" className="section-link">View all →</Link>
             </div>
 
