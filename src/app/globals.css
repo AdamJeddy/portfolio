@@ -852,8 +852,7 @@ a.button.large {
   justify-self: end;
 }
 
-.project-description,
-.project-meta {
+.project-description {
   grid-column: 1 / -1;
 }
 
@@ -866,13 +865,6 @@ a.button.large {
   opacity: 0.72;
   text-transform: none;
   overflow-wrap: anywhere;
-}
-
-.project-meta {
-  order: 3;
-  margin-top: var(--char);
-  font-size: 9.7px;
-  opacity: 0.5;
 }
 
 .project-number,
@@ -937,35 +929,8 @@ a.button.large {
   line-height: 25px;
 }
 
-.meta {
-  display: flex;
-  flex-direction: column;
-  gap: var(--line-px);
-  font-family: var(--font-geist-mono), var(--font-mono);
-  text-transform: uppercase;
-}
-
-.meta h2 {
-  font-size: var(--font-size);
-  font-weight: 500;
-  margin-bottom: var(--space-half);
-  opacity: 0.5;
-}
-
-.meta p {
-  font-size: var(--font-size);
-}
-
 .case-hero {
   align-items: flex-start;
-}
-
-.case-content {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
-  gap: var(--space-5);
-  padding-top: var(--space-3);
-  border-top: 1px solid rgba(var(--white-rgb), 0.12);
 }
 
 .case-copy {
@@ -1091,17 +1056,6 @@ a.button.large {
   .worktitle {
     flex-direction: column;
     gap: var(--char);
-  }
-
-  .meta {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: var(--char2);
-  }
-
-  .case-content {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-4);
   }
 
   .case-copy {

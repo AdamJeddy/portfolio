@@ -47,48 +47,27 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       {/* Title section */}
       <Reveal type="slide-up">
         <section className="section page-hero case-hero">
-        <div className="col wfull">
-          <div className="worktitle">
-            <span>A{String(projectIndex + 1).padStart(3, '0')}</span>
-            <h1>{project.title}</h1>
-          </div>
-        </div>
-        <div className="col wfull">
-          <div className="meta">
-            <div>
-              <h2>Built with</h2>
-              <p>
-                {project.tech.slice(0, 3).join(', ')}
-                {project.tech.length > 3 ? '...' : ''}
-              </p>
+          <div className="col wfull">
+            <div className="worktitle">
+              <span>A{String(projectIndex + 1).padStart(3, '0')}</span>
+              <h1>{project.title}</h1>
             </div>
-            {project.role && (
-              <div>
-                <h2>Role</h2>
-                <p>{project.role}</p>
-              </div>
-            )}
-            <div>
-              <h2>Year</h2>
-              <p>{project.year ?? '—'}</p>
-            </div>
-            <div>
-              {project.live && (
-                <p>
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ textDecoration: 'underline' }}
-                  >
-                    {project.live.replace(/^https?:\/\//, '')}
-                  </a>
-                </p>
-              )}
+            <p className="hero-copy">{project.description}</p>
+            <div className="case-actions">
+              {project.links.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button"
+                >
+                  {link.label} ↗
+                </a>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
       </Reveal>
 
       {project.image && (
@@ -106,32 +85,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </Reveal>
       )}
 
-      <Reveal type="fade">
-        <section className="section case-content">
-          <div className="col wfull case-copy">
-            <p className="case-lead">{project.description}</p>
-            {project.body && <p>{project.body}</p>}
-          </div>
-          <div className="col wfull case-details">
-            <h2 className="section-label">Built with</h2>
-            <div className="skill-list">
-              {project.tech.map((technology) => (
-                <span key={technology}>{technology}</span>
+      {project.details && project.details.length > 0 && (
+        <Reveal type="fade">
+          <section className="section">
+            <div className="col wfull case-copy">
+              {project.details.map((paragraph, index) => (
+                <p key={paragraph} className={index === 0 ? 'case-lead' : undefined}>
+                  {paragraph}
+                </p>
               ))}
             </div>
-            <div className="case-actions">
-              <a href={project.github} target="_blank" rel="noopener noreferrer" className="button">
-                GitHub ↗
-              </a>
-              {project.live && (
-                <a href={project.live} target="_blank" rel="noopener noreferrer" className="button">
-                  Live ↗
-                </a>
-              )}
-            </div>
-          </div>
-        </section>
-      </Reveal>
+          </section>
+        </Reveal>
+      )}
 
       {otherProjects.length > 0 && (
         <Reveal type="fade">

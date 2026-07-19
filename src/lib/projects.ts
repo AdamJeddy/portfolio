@@ -1,13 +1,15 @@
+export interface ProjectLink {
+  label: string
+  href: string
+}
+
 export interface ProjectItem {
   slug: string
   title: string
   description: string
-  body?: string
-  tech: string[]
-  github: string
-  live?: string
+  details?: string[]
+  links: ProjectLink[]
   image?: string
-  role?: string
   year?: number
   icon?: string
   words: string[]
@@ -18,10 +20,13 @@ export const projects: ProjectItem[] = [
     slug: 'qeemat',
     title: 'Qeemat',
     description: 'Android-first, local-first price tracker for UAE shopping sites with background checks and notifications.',
-    body: 'Qeemat is a React Native + TypeScript price tracking app built for UAE shoppers. Add a product URL from supported stores — Noon, Nike UAE, Sun & Sand Sports, Level Shoes, Ounass, and more — and Qeemat tracks prices locally on-device with AsyncStorage, Android WorkManager background checks, and local notifications for price drops. No backend, no accounts, no cloud sync. Just a focused tool that respects your data.',
-    tech: ['React Native', 'TypeScript', 'Kotlin', 'AsyncStorage', 'WorkManager', 'Jest'],
-    github: 'https://github.com/AdamJeddy/Qeemat',
-    role: 'Independent product',
+    details: [
+      'Qeemat is a React Native + TypeScript price tracking app built for UAE shoppers. Add a product URL from supported stores — Noon, Nike UAE, Sun & Sand Sports, Level Shoes, Ounass, and more — and Qeemat tracks prices locally on-device with AsyncStorage, Android WorkManager background checks, and local notifications for price drops.',
+      'There is no backend, account, or cloud sync. It is a focused tool that keeps product and price data on the device.',
+    ],
+    links: [
+      { label: 'View code', href: 'https://github.com/AdamJeddy/Qeemat' },
+    ],
     year: 2026,
     icon: '◆',
     words: [

@@ -6,7 +6,7 @@ import { projects } from '@/lib/projects'
 export const metadata = createPageMetadata({
   path: '/projects',
   title: "Projects — Adam's Portfolio",
-  description: 'Explore practical products by Adam, including local-first tools, AI work, and experiments.',
+  description: 'Things Adam is building, exploring, and learning through.',
 })
 
 export default function Projects() {
@@ -15,9 +15,9 @@ export default function Projects() {
       <Reveal type="slide-up">
         <section className="section page-hero">
           <div className="col wfull">
-            <p className="eyebrow">Work</p>
-            <h1 className="mega page-title">Selected work</h1>
-            <p className="hero-copy">Practical products built around clarity, reliability, and real-world constraints.</p>
+            <p className="eyebrow">Projects</p>
+            <h1 className="mega page-title">Things I&apos;m building.</h1>
+            <p className="hero-copy">Projects, experiments, and ideas I wanted to make real.</p>
           </div>
         </section>
       </Reveal>
@@ -41,9 +41,6 @@ export default function Projects() {
                 )}
                 <div className="project-info">
                   <p className="project-description">{project.description}</p>
-                  <p className="project-meta">
-                    {project.role} · {project.tech.slice(0, 3).join(' · ')}
-                  </p>
                   <span className="project-number">
                     A{String(i + 1).padStart(3, '0')}
                   </span>
