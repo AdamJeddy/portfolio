@@ -1,6 +1,6 @@
 # Adam Portfolio
 
-A Next.js portfolio site with a text-canvas visual style, project and writing sections, and app policy pages.
+A Next.js portfolio site with a text-canvas visual style, project and commentary sections, and app policy pages.
 
 ## Tech Stack
 - Next.js (App Router)
@@ -12,8 +12,8 @@ A Next.js portfolio site with a text-canvas visual style, project and writing se
 - / : Landing page
 - /projects : Projects index
 - /projects/[slug] : Individual project page
-- /writing : Writing index
-- /writing/[slug] : Individual writing page
+- /writing : Commentary index
+- /writing/[slug] : Individual commentary page
 - /about : Personal page
 - /contact : Contact page
 - /track-my-salah-privacy-policy : Privacy policy page for the Track My Salah app
@@ -49,5 +49,5 @@ Typical production flow:
 - Deploy with your Cloudflare pipeline or Wrangler configuration
 
 ## Notes
-- The shared navigation provides links to Work, Writing, About, and Contact.
+- The shared navigation provides links to Projects, Commentary, About, and Contact.
 - The portfolio uses a responsive text-grid system; project cards collapse to a single column on small screens.
