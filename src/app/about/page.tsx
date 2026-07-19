@@ -4,16 +4,9 @@ import { createPageMetadata } from '@/lib/metadata'
 
 export const metadata = createPageMetadata({
   path: '/about',
-  title: 'About Adam — Projects, Writing & Experiments',
-  description: 'Learn about Adam, a software engineer building practical tools and leading AI initiatives.',
+  title: 'About Adam — Projects, Commentary & Experiments',
+  description: 'A little about Adam, the person behind the projects and commentary.',
 })
-
-const skills = [
-  'TypeScript', 'Python', 'React', 'Next.js', 'Node.js',
-  'PostgreSQL', 'SQLite', 'Cloudflare', 'Docker', 'FastAPI',
-  'LangChain', 'Vector DB', 'Kafka', 'Tailwind', 'System Design',
-  'Data Engineering', 'AI/ML', 'API Design',
-]
 
 export default function AboutPage() {
   return (
@@ -22,10 +15,10 @@ export default function AboutPage() {
         <section className="section page-hero">
           <div className="col wfull">
             <p className="eyebrow">About</p>
-            <h1 className="mega page-title">Adam — Software Engineer. AI + Data.</h1>
+            <h1 className="mega page-title">The person behind all of it.</h1>
             <p className="hero-copy">
-              I build practical tools and lead AI initiatives at Chalhoub Group,
-              the largest luxury retail operator in the Middle East.
+              I&apos;m Adam, based in Dubai. I build things, follow ideas, and leave
+              a few notes behind.
             </p>
           </div>
         </section>
@@ -34,7 +27,7 @@ export default function AboutPage() {
       <Reveal type="slide-up">
         <section className="section">
           <div className="col wfull">
-            <p className="section-label">Current focus</p>
+            <p className="section-label">A few things I care about</p>
             <ul className="about-list">
               <li>
                 <span>01</span>
@@ -59,10 +52,10 @@ export default function AboutPage() {
               <li>
                 <span>03</span>
                 <div>
-                  <h2>Writing on AI and luxury</h2>
+                  <h2>Ideas worth sharing</h2>
                   <p>
-                    I write about how standards, taste, and brand codes matter more
-                    than the tools used to make something.
+                    Commentary gives me a place to follow an idea properly, whether
+                    it starts with technology, products, culture, or something else.
                   </p>
                 </div>
               </li>
@@ -74,26 +67,13 @@ export default function AboutPage() {
       <Reveal type="fade">
         <section className="section">
           <div className="col wfull">
-            <p className="section-label">How I work</p>
+            <p className="section-label">Principles</p>
             <p className="body-copy">
               I believe good software is legible software: code that tells a clear
               story, systems that fail gracefully, and interfaces that do not make
               people stop and think. I enjoy the detail work—turning a complicated
               problem into a focused product that feels obvious to use.
             </p>
-          </div>
-        </section>
-      </Reveal>
-
-      <Reveal type="fade">
-        <section className="section">
-          <div className="col wfull">
-            <p className="section-label">Tools I reach for</p>
-            <div className="skill-list">
-              {skills.map((skill) => (
-                <span key={skill}>{skill}</span>
-              ))}
-            </div>
           </div>
         </section>
       </Reveal>
