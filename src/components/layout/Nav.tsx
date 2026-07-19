@@ -100,7 +100,7 @@ export default function Nav() {
             onClick={closeMobile}
             aria-current={isActive('/') ? 'page' : undefined}
           >
-            Adam
+            BRUH
           </Link>
         </div>
 
@@ -154,7 +154,7 @@ export default function Nav() {
             onClick={closeMobile}
             aria-current={isActive('/') ? 'page' : undefined}
           >
-            Adam
+            BRUH
           </Link>
           <button
             ref={mobileToggleRef}
