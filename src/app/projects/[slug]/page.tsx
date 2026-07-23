@@ -94,6 +94,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   {paragraph}
                 </p>
               ))}
+              {project.note && (
+                <aside className="case-note" aria-label="Project update">
+                  <span>Page update</span>
+                  <p>{project.note}</p>
+                </aside>
+              )}
             </div>
           </section>
         </Reveal>

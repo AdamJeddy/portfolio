@@ -1,43 +1,47 @@
-# About page design QA
+# Homepage design QA
 
 ## References and evidence
 
-- Selected desktop source: `C:\Users\Main\.codex\generated_images\019f7579-f734-71a0-b680-bf2207fd7a87\exec-23a6f842-9e80-479c-9c07-bd8216f4fbfe.png`
-- Mobile companion source: `C:\Users\Main\.codex\generated_images\019f7579-f734-71a0-b680-bf2207fd7a87\exec-553d2b7c-e3d6-40b2-beb6-0c9da24cb3db.png`
-- Desktop implementation viewport: `C:\Users\Main\.codex\visualizations\2026\07\18\019f7579-f734-71a0-b680-bf2207fd7a87\about-desktop-final.png`
-- Mobile implementation viewport: `C:\Users\Main\.codex\visualizations\2026\07\18\019f7579-f734-71a0-b680-bf2207fd7a87\about-mobile-final.png`
-- Same-input desktop comparison: `C:\Users\Main\.codex\visualizations\2026\07\18\019f7579-f734-71a0-b680-bf2207fd7a87\about-qa-desktop-comparison.png`
-- Same-input mobile/full-page comparison: `C:\Users\Main\.codex\visualizations\2026\07\18\019f7579-f734-71a0-b680-bf2207fd7a87\about-qa-mobile-comparison.png`
+- Desktop source visual truth: `C:\Users\Main\.codex\generated_images\019f7579-f734-71a0-b680-bf2207fd7a87\call_GJAY3rrhWFdnnQoEJ16UH8Oq.png`
+- Mobile source visual truth: `C:\Users\Main\.codex\generated_images\019f7579-f734-71a0-b680-bf2207fd7a87\call_q47JeMAJsjcRA2UKXlMvrTLs.png`
+- Mobile refinement source: `C:\Users\Main\AppData\Local\Temp\codex-clipboard-a60d42de-da59-49d5-a2cf-7107eadb0eb8.png`
+- Desktop implementation screenshot: `D:\Code\GitHub\portfolio\.audit\home-desktop-refined-1536.png`
+- Mobile implementation screenshot: `D:\Code\GitHub\portfolio\.audit\home-mobile-refined-390.png`
 
-The exact desktop comparison used a 1536 × 1024 viewport. Responsive checks also ran at 320 × 700, 390 × 844, 768 × 900, and 1024 × 900.
+The desktop comparison used a 1536 × 1024 CSS viewport and matching 1536 × 1024 source and implementation pixels at device scale factor 1. The mobile source is a double-density-style 852 × 1846 scroll composition; it was visually normalized against a 390 × 844 CSS viewport and 390 × 843 implementation captures at device scale factor 1.
 
-## Full-view evidence
+State: homepage loaded with the dark theme, no menu open, and reveal transitions completed.
 
-The in-app browser's automatic full-page capture duplicated the sticky navigation while stitching. Full coverage was therefore verified with overlapping viewport captures instead:
+## Full-view and focused comparison evidence
 
-- Desktop: `about-desktop-final.png` and `about-desktop-bottom.png`
-- Mobile: `about-mobile-seg-1.png` through `about-mobile-seg-4.png`
+The desktop source and implementation were opened together in one comparison input. The user-supplied mobile screenshot and refined implementation were also opened together in one comparison input.
 
-The mobile segments are shown together in the same-input mobile comparison listed above.
+The mobile refinement was judged by first-viewport information density: the complete Qeemat summary, its project link, and the Featured Commentary heading now appear by 752px at 390px wide and by 742px at 320px wide.
 
-## Review
+## Findings
 
-- Typography: Geist carries the editorial heading/body hierarchy and Oswald provides the condensed influence display treatment. The desktop and mobile hero both resolve to the intended two-line headline.
-- Spacing and layout: the dossier rail, hero copy, metadata, influence rows, and rules align to the selected composition. No horizontal overflow was present at any tested viewport.
-- Colors and tokens: the implementation uses the existing black/white/dim theme variables and translucent rule tokens, including light-theme compatibility.
-- Image quality and assets: the target contains no imagery or icons requiring implementation; no substitute CSS art, SVG, or placeholder imagery was introduced.
-- Copy and content: approved About copy remains intact. The longer approach and elsewhere sections continue below the shorter reference crop rather than removing approved content.
-- States and interactions: the mobile menu opens as a labelled dialog, makes background content inert, locks scrolling, receives focus, closes with Escape, restores focus, and preserves its 44px target.
-- Accessibility: semantic heading order is H1 → H2 → H3, metadata uses a description list, decorative dossier rails are hidden from assistive technology, visible focus behavior is inherited, and reduced-motion behavior is preserved.
-- Runtime: no browser warnings or errors were reported.
+- Fonts and typography: Geist/Space Grotesk provide the full “Adam Ahsan” hero and readable copy; Oswald provides the condensed project and commentary display type. The desktop headings are slightly reduced, and the mobile hero and Qeemat title are compact enough to improve first-viewport visibility without losing hierarchy.
+- Spacing and layout rhythm: the desktop uses the selected dossier rail, hero/meta split, horizontal transition rule, and 60/40 featured split. Mobile correctly recomposes these into a one-column stack. No horizontal overflow was present at 320, 390, 768, or 1536 pixels.
+- Colors and visual tokens: the implementation uses the existing black, white, dim, and translucent-rule tokens. There are no added gradients, shadows, rounded cards, or decorative surfaces.
+- Image quality and asset fidelity: neither reference contains raster imagery, logos, illustrations, or non-standard icons that require generated assets. No placeholder art or substitute asset was introduced.
+- Copy and content: the name, statement, location, focus, status, Qeemat description/year, and both commentary titles match the approved content and remain sourced from the existing project/post data where applicable.
+- Interactions and accessibility: all project, commentary, and “View all” destinations are real links. The mobile menu opens as a labelled modal dialog, closes correctly, and retains the existing focus/inert behavior. Semantic order is H1 → H2 → H3, metadata uses a description list, and visible focus/reduced-motion behavior is preserved.
+- Runtime: the browser reported no console errors. The production build, TypeScript check, and lint passed.
 
-## Iteration history
+## Comparison history
 
-1. P1 layout: the later shared `.content-layer` rule overrode the intended About width and caused the Innovation title to collide with its description. Fixed with the more specific `.content-layer.about-page` selector and rechecked by bounding-box comparison.
-2. P2 typography: the hero wrapped differently from the selected visual and the mobile title used three lines. Tightened the desktop measure and adjusted the mobile type scale; both now use the intended two-line rhythm.
-3. P2 spacing: aligned the influence title start, hero divider, and desktop row rhythm more closely to the source while retaining the approved additional sections.
-4. P2 accessibility: added a programmatic Elsewhere heading and promoted the final callout to an H3 so the extended page keeps a coherent heading outline.
+1. The first post-build comparison found no actionable P0, P1, or P2 visual differences.
+2. User feedback identified a P2 mobile-density issue: the original hero and Qeemat heading left almost no project detail or commentary visible in the first viewport. The name was changed to “Adam Ahsan,” display sizes were reduced, and mobile spacing was compressed. Post-fix captures show the full project summary, project link, and commentary heading before the fold at both 320px and 390px, with no horizontal overflow.
 
-No P0, P1, or P2 findings remain open.
+The implementation intentionally retains two small pre-existing portfolio signatures not shown in the mock: the blinking underscore on the active BRUH link and the bottom-corner theme control. Both are classified as P3 product-specific differences and do not alter the approved hierarchy.
+
+## Implementation checklist
+
+- [x] Recreate the selected desktop hero and metadata structure.
+- [x] Build the desktop featured project/commentary split.
+- [x] Recompose the design as a single-column mobile page.
+- [x] Verify mobile navigation and real destinations.
+- [x] Check responsive overflow and browser console output.
+- [x] Pass lint, type checking, and static production build.
 
 final result: passed

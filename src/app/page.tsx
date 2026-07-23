@@ -22,95 +22,91 @@ const websiteJsonLd = JSON.stringify({
 })
 
 export default function Home() {
-  return (
-    <div className="content-layer">
+  const featuredProject = projects[0]
+  const featuredPosts = posts.slice(0, 2)
 
+  return (
+    <div className="content-layer home-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: websiteJsonLd }}
       />
 
-      {/* ── Hero ────────────────────────────────────────── */}
       <Reveal type="slide-up">
-        <section className="section home-intro">
-          <div className="col wfull">
-            <h1 className="mega home-name">Adam</h1>
-            <p className="home-tagline">
-              Building things, following ideas, and leaving a few notes behind.
-            </p>
+        <section className="home-hero" aria-labelledby="home-title">
+          <div className="home-index" aria-label="Page index">
+            <span>Home</span>
+            <span>00</span>
+            <span>Selected index</span>
           </div>
+
+          <div className="home-hero-copy">
+            <h1 id="home-title" className="home-name">Adam Ahsan</h1>
+            <p className="home-tagline">Building things, following ideas, and leaving a few notes behind.</p>
+          </div>
+
+          <dl className="home-meta">
+            <div>
+              <dt>Location</dt>
+              <dd>Dubai, UAE</dd>
+            </div>
+            <div>
+              <dt>Focus</dt>
+              <dd>Technology × Creativity</dd>
+            </div>
+            <div>
+              <dt>Status</dt>
+              <dd>Building and writing</dd>
+            </div>
+          </dl>
         </section>
       </Reveal>
 
-      {/* ── Selected Projects ───────────────────────────── */}
       <Reveal type="slide-up">
-        <section className="section home-section">
-          <div className="col wfull">
-            <div className="section-heading-row">
-              <h2 className="section-heading">Selected projects</h2>
-              <Link href="/projects" className="section-link">View all →</Link>
+        <div className="home-feature-grid">
+          {featuredProject && (
+            <section className="home-feature-project" aria-labelledby="featured-project-title">
+              <div className="home-feature-heading">
+                <h2 id="featured-project-title">Featured project</h2>
+                <Link href="/projects">View all →</Link>
+              </div>
+
+              <Link
+                href={`/projects/${featuredProject.slug}`}
+                className="home-project-link"
+              >
+                <div className="home-project-title-row">
+                  <h3>{featuredProject.title}</h3>
+                  <span>{featuredProject.year ?? '—'}</span>
+                </div>
+                <p>{featuredProject.description}</p>
+                <span className="home-project-cta">View project →</span>
+              </Link>
+            </section>
+          )}
+
+          <section className="home-feature-commentary" aria-labelledby="featured-commentary-title">
+            <div className="home-feature-heading">
+              <h2 id="featured-commentary-title">Featured commentary</h2>
+              <Link href="/writing">View all →</Link>
             </div>
 
-            <ul className="linelist">
-              {projects.map((project) => (
-                <li key={project.slug}>
-                  <Link href={`/projects/${project.slug}`} className="line">
-                    <div className="home-item-main">
-                      <span className="home-item-title">{project.title}</span>
-                      <span className="home-item-description">
-                        {project.description}
-                      </span>
-                    </div>
-                    <span>{project.year ?? '—'}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-        </div>
-      </section>
-      </Reveal>
-
-      {/* ── Selected Commentary ─────────────────────────── */}
-      <Reveal type="slide-up">
-        <section className="section home-section">
-          <div className="col wfull">
-            <div className="section-heading-row">
-              <h2 className="section-heading">Selected commentary</h2>
-              <Link href="/writing" className="section-link">View all →</Link>
-            </div>
-
-            <ul className="linelist">
-              {posts.map((post) => (
+            <ol className="home-commentary-list">
+              {featuredPosts.map((post, index) => (
                 <li key={post.slug}>
-                  <Link href={`/writing/${post.slug}`} className="line">
-                    <span className="home-writing-title">
-                      {post.image && (
-                        // Static export uses raw images until a Cloudflare-compatible
-                        // image loader is introduced.
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={post.image}
-                          alt=""
-                          style={{
-                            width: '48px',
-                            height: '32px',
-                            objectFit: 'cover',
-                            borderRadius: '2px',
-                            flexShrink: 0,
-                          }}
-                        />
-                      )}
-                      {post.title}
+                  <Link href={`/writing/${post.slug}`}>
+                    <span className="home-commentary-index">
+                      {String(index + 1).padStart(2, '0')}
                     </span>
+                    <span className="home-commentary-title">{post.title}</span>
+                    <span className="home-commentary-arrow" aria-hidden="true">→</span>
                   </Link>
                 </li>
               ))}
-            </ul>
-          </div>
-        </section>
+            </ol>
+          </section>
+        </div>
       </Reveal>
-
     </div>
   )
 }

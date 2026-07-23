@@ -1,7 +1,3 @@
-'use client'
-
-import ImageWithAscii from './ImageWithAscii'
-
 interface ProjectHeroProps {
   image?: string
   title: string
@@ -10,14 +6,15 @@ interface ProjectHeroProps {
 }
 
 /**
- * Client wrapper for the project detail hero image.
- * Shows ImageWithAscii when an image exists, gradient placeholder otherwise.
+ * Shows a project image when one exists, or a graphic placeholder otherwise.
  */
 export default function ProjectHero({ image, title, projectNumber, icon }: ProjectHeroProps) {
   if (image) {
     return (
-      <div style={{ aspectRatio: '4/3', width: '100%' }}>
-        <ImageWithAscii src={image} alt={title} />
+      <div className="project-hero-image">
+        {/* Static export uses raw images until a Cloudflare-compatible image loader is introduced. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={image} alt={title} />
       </div>
     )
   }
