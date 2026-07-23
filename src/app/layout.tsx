@@ -1,6 +1,17 @@
 import type { Metadata } from 'next'
-import { Oswald, Space_Grotesk } from 'next/font/google'
+import { Oswald, Space_Grotesk, Geist, Geist_Mono } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
+import GridProvider from '@/components/grid/GridProvider'
+import Footer from '@/components/layout/Footer'
+import Nav from '@/components/layout/Nav'
+import {
+  GA_MEASUREMENT_ID,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+  X_HANDLE,
+} from '@/lib/site'
 
 const oswald = Oswald({
   subsets: ['latin'],
@@ -15,15 +26,58 @@ const spaceGrotesk = Space_Grotesk({
   display: 'swap',
 })
 
+const geistSans = Geist({
+  subsets: ['latin'],
+  variable: '--font-geist-sans',
+  display: 'swap',
+})
+
+const geistMono = Geist_Mono({
+  subsets: ['latin'],
+  variable: '--font-geist-mono',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
-  title: "Adam's Portfolio",
-  description: 'Software engineer · AI · Data',
+  metadataBase: new URL(SITE_URL),
+  title: SITE_NAME,
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  creator: 'Adam',
+  publisher: SITE_NAME,
+  twitter: {
+    creator: X_HANDLE,
+  },
+  icons: {
+    icon: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${oswald.variable} ${spaceGrotesk.variable}`}>
-      <body>{children}</body>
+    <html
+      lang="en"
+      className={`${oswald.variable} ${spaceGrotesk.variable} ${geistSans.variable} ${geistMono.variable}`}
+    >
+      <body>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
+        <GridProvider>
+          <Nav />
+          <main id="app">{children}</main>
+          <Footer />
+        </GridProvider>
+      </body>
     </html>
   )
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 type Zone = 'upper' | 'center' | 'lower'
 
@@ -43,10 +43,6 @@ function buildFiller(targetChars: number, words: string[]) {
   return content
 }
 
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
-
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max)
 }
@@ -56,14 +52,11 @@ export default function TextCanvas({ words, highlights }: TextCanvasProps) {
   const [lines, setLines] = useState<LineRender[]>([])
   const [transitioning, setTransitioning] = useState(false)
 
-  const seed = useMemo(
-    () => highlights.map(() => ({ horizontal: Math.random(), vertical: Math.random() })),
-    [highlights],
-  )
-
   useEffect(() => {
     const container = containerRef.current
     if (!container) return
+
+    const seed = highlights.map(() => ({ horizontal: Math.random(), vertical: Math.random() }))
 
     const render = () => {
       const style = getComputedStyle(container)
@@ -169,7 +162,7 @@ export default function TextCanvas({ words, highlights }: TextCanvasProps) {
       window.removeEventListener('resize', onResize)
       cancelAnimationFrame(resizeFrame)
     }
-  }, [highlights, seed, words])
+  }, [highlights, words])
 
   return (
     <div
