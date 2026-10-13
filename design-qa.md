@@ -1,47 +1,57 @@
-# Homepage design QA
+# Notebook portfolio design QA
 
-## References and evidence
+Date: 2026-10-13. Scope: first implementation of the selected light editorial notebook concept, with scroll-driven paper chapters and the portfolio's existing content.
 
-- Desktop source visual truth: `C:\Users\Main\.codex\generated_images\019f7579-f734-71a0-b680-bf2207fd7a87\call_GJAY3rrhWFdnnQoEJ16UH8Oq.png`
-- Mobile source visual truth: `C:\Users\Main\.codex\generated_images\019f7579-f734-71a0-b680-bf2207fd7a87\call_q47JeMAJsjcRA2UKXlMvrTLs.png`
-- Mobile refinement source: `C:\Users\Main\AppData\Local\Temp\codex-clipboard-a60d42de-da59-49d5-a2cf-7107eadb0eb8.png`
-- Desktop implementation screenshot: `D:\Code\GitHub\portfolio\.audit\home-desktop-refined-1536.png`
-- Mobile implementation screenshot: `D:\Code\GitHub\portfolio\.audit\home-mobile-refined-390.png`
+## Visual evidence
 
-The desktop comparison used a 1536 × 1024 CSS viewport and matching 1536 × 1024 source and implementation pixels at device scale factor 1. The mobile source is a double-density-style 852 × 1846 scroll composition; it was visually normalized against a 390 × 844 CSS viewport and 390 × 843 implementation captures at device scale factor 1.
+All paths below are relative to this repository. Reference is on the left and implementation is on the right in each comparison.
 
-State: homepage loaded with the dark theme, no menu open, and reveal transitions completed.
+| View | Source visual truth | Browser implementation | Comparison | CSS viewport |
+| --- | --- | --- | --- | --- |
+| Desktop | `docs/design-research/notebook-v1/desktop-reference.png` | `docs/design-research/notebook-v1/desktop-implementation.png` | `docs/design-research/notebook-v1/desktop-comparison.png` | 1440 x 1024 |
+| Mobile | `docs/design-research/notebook-v1/mobile-reference.png` | `docs/design-research/notebook-v1/mobile-implementation.png` | `docs/design-research/notebook-v1/mobile-comparison.png` | 390 x 844 |
 
-## Full-view and focused comparison evidence
+State: initial homepage, scroll position zero, menu closed. Screenshots show the exported production build served locally, without development overlays.
 
-The desktop source and implementation were opened together in one comparison input. The user-supplied mobile screenshot and refined implementation were also opened together in one comparison input.
+Desktop source is 1487 x 1058 pixels, normalized to 1440 x 1024. Mobile source is 853 x 1844 pixels, normalized to 390 x 844. Implementation captures are at CSS viewport dimensions (density 1). Normalization changes source aspect ratio by less than 0.2%. Comparisons are 2880 x 1024 and 780 x 844 respectively.
 
-The mobile refinement was judged by first-viewport information density: the complete Qeemat summary, its project link, and the Featured Commentary heading now appear by 752px at 390px wide and by 742px at 320px wide.
+Full-view comparisons were opened and inspected together. Separate region crops were unnecessary because both full-view comparisons show the entire first screen, including typography, artwork, navigation, CTA, and chapter rail at readable size.
 
-## Findings
+## Findings and iteration history
 
-- Fonts and typography: Geist/Space Grotesk provide the full “Adam Ahsan” hero and readable copy; Oswald provides the condensed project and commentary display type. The desktop headings are slightly reduced, and the mobile hero and Qeemat title are compact enough to improve first-viewport visibility without losing hierarchy.
-- Spacing and layout rhythm: the desktop uses the selected dossier rail, hero/meta split, horizontal transition rule, and 60/40 featured split. Mobile correctly recomposes these into a one-column stack. No horizontal overflow was present at 320, 390, 768, or 1536 pixels.
-- Colors and visual tokens: the implementation uses the existing black, white, dim, and translucent-rule tokens. There are no added gradients, shadows, rounded cards, or decorative surfaces.
-- Image quality and asset fidelity: neither reference contains raster imagery, logos, illustrations, or non-standard icons that require generated assets. No placeholder art or substitute asset was introduced.
-- Copy and content: the name, statement, location, focus, status, Qeemat description/year, and both commentary titles match the approved content and remain sourced from the existing project/post data where applicable.
-- Interactions and accessibility: all project, commentary, and “View all” destinations are real links. The mobile menu opens as a labelled modal dialog, closes correctly, and retains the existing focus/inert behavior. Semantic order is H1 → H2 → H3, metadata uses a description list, and visible focus/reduced-motion behavior is preserved.
-- Runtime: the browser reported no console errors. The production build, TypeScript check, and lint passed.
+- [P2, resolved] Initial mobile title was too small and the artwork began too far below the CTA. Increased Newsreader title size and weight, tightened the copy spacing, and moved the artwork upward. Earlier evidence: `.audit/notebook/mobile-comparison.png`; post-fix evidence: the mobile comparison above.
+- [P2, resolved] Initial desktop sheets extended behind the chapter rail. Reduced artwork width relative to viewport height and adjusted its position. Earlier evidence: `.audit/notebook/desktop-comparison.png`; post-fix evidence: the desktop comparison above.
+- [P2, resolved] Tablet-size paper artwork could extend below the rail. Capped mobile artwork width at 540px and used a two-line headline at 500-768px. Rechecked at 768 x 1024: controls remain visible and document width equals viewport width.
+- [P2, resolved] Resize measurements could depend on the current sticky offset. The scroll start now uses the stage's computed top inset, keeping chapter positions stable during resize.
+- [P2, resolved] A long story without JavaScript would leave unnecessary empty scrolling. The long scroll region is now enabled only after motion initialization; the server-rendered baseline is a single hero.
 
-## Comparison history
+No actionable P0/P1/P2 issues remain in the tested homepage experience.
 
-1. The first post-build comparison found no actionable P0, P1, or P2 visual differences.
-2. User feedback identified a P2 mobile-density issue: the original hero and Qeemat heading left almost no project detail or commentary visible in the first viewport. The name was changed to “Adam Ahsan,” display sizes were reduced, and mobile spacing was compressed. Post-fix captures show the full project summary, project link, and commentary heading before the fold at both 320px and 390px, with no horizontal overflow.
+## Design evaluation
 
-The implementation intentionally retains two small pre-existing portfolio signatures not shown in the mock: the blinking underscore on the active BRUH link and the bottom-corner theme control. Both are classified as P3 product-specific differences and do not alter the approved hierarchy.
+- Typography: Newsreader provides the selected large serif hierarchy, with Geist Mono for labels and Geist Sans for project descriptions. Mobile headline wraps into three lines; wider layouts use two. Display text is legible and does not overflow at 320px. Native font rendering differs slightly from the generated mockup.
+- Layout: ivory canvas, fine rules, left-aligned editorial copy, paper artwork, underlined CTA, and bottom chapter navigation follow the selected direction. Mobile and tablet layouts retain readable copy and accessible controls.
+- Tokens: warm ivory `#f5f2eb`, ink `#191917`, and red `#d92d19` match the intended palette. Focus and active chapter indicators use the red accent.
+- Assets: three genuine generated transparent paper images, compressed to WebP (about 484 KiB combined), retain textured paper, black print, and a red center sheet. Official Lucide arrow assets are used. No code-drawn substitute illustrations were introduced.
+- Content: existing Layla AI, Qeemat, article titles, descriptions, route links, and metadata remain content-driven. The three animated sheets correspond to Build, Explore, and Write. This first version uses three independently moving sheets; the concept's extra decorative leaves are a possible later refinement.
 
-## Implementation checklist
+## Interaction and implementation verification
 
-- [x] Recreate the selected desktop hero and metadata structure.
-- [x] Build the desktop featured project/commentary split.
-- [x] Recompose the design as a single-column mobile page.
-- [x] Verify mobile navigation and real destinations.
-- [x] Check responsive overflow and browser console output.
-- [x] Pass lint, type checking, and static production build.
+- Production build and lint passed; all four motion tests passed.
+- Tested at 1440 x 1024, 390 x 844, 768 x 1024, and 320 x 568. No horizontal document overflow at tested mobile widths.
+- Chapter links reach Layla AI, Qeemat, and the writing scene; sheet transforms move continuously with scroll progress.
+- The Build project's link navigates to `/projects/layla-ai`; its existing detail layout loads with the original dark palette. Homepage styling is scoped to the homepage.
+- Mobile menu opens, focuses its first link, closes on Escape, and returns focus to the toggle after its animation frame.
+- Reduced-motion emulation produces a 780px static hero rather than the long pinned region. The primary CTA reaches selected work through its native anchor.
+- Screens shorter than 600px receive the same static fallback. At 320 x 568 the full headline and primary CTA remain visible and usable.
+- Checked browser console errors after navigating and scrolling: none observed. Motion/viewport emulation was reset before handoff.
+- Code review covered correctness, readability, content boundaries, security, and performance. No new runtime dependencies or persistent idle animation loop were added.
+
+## Follow-up polish and limits
+
+- [P3] Additional decorative leaves and more refined paper choreography could make the fan closer to the generated concept.
+- [P3] Exact serif shapes and small-label spacing vary from the image mockup; the visual hierarchy is preserved.
+- Browser verification used Chromium in the Codex browser. Physical-device and Safari testing remain outside this local first-version check.
+- Animation uses transforms of curved raster sheets; it does not simulate paper bending in WebGL.
 
 final result: passed
