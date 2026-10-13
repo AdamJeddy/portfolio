@@ -54,4 +54,31 @@ No actionable P0/P1/P2 issues remain in the tested homepage experience.
 - Browser verification used Chromium in the Codex browser. Physical-device and Safari testing remain outside this local first-version check.
 - Animation uses transforms of curved raster sheets; it does not simulate paper bending in WebGL.
 
+## Motion revision after user feedback
+
+The user rejected the first transition flow. The revised motion replaces independently spreading sheets, changing z-index, and timer-based text swaps with a shared scroll timeline.
+
+### Changes and evidence
+
+- The fan gathers into the Build composition. The outgoing sheet then turns around a pivot near its left edge while the next sheet moves into focus. Layer order remains `3, 2, 1` throughout.
+- Four reading holds preserve the intro and each chapter composition. Chapter links land inside these holds.
+- Text fades and moves according to the same scroll position as the sheets. Two readable titles never overlap. There are no independent CSS timers for these transitions.
+- Scroll progress uses 85ms time-based damping, including reverse scrolling. Its animation frame loop stops when the target is reached.
+- Background sheets remain opaque in settled scenes so their print does not ghost through other sheets. Only outgoing pages fade during a handoff.
+- The red chapter rules now fill with actual chapter progress.
+
+New browser evidence is in `docs/design-research/notebook-v2/`: `desktop-intro.png`, `desktop-build.png`, `desktop-handoff.png`, `desktop-explore.png`, `desktop-write.png`, `mobile-intro.png`, `mobile-explore.png`, and `mobile-handoff.png`. Desktop captures are 1440 x 1024 at density 1; mobile captures are 390 x 844 at density 1. The handoff captures are intermediate scroll states, not settled chapters.
+
+`desktop-comparison.png` places the original 1487 x 1058 reference, normalized to 1440 x 1024, beside the revised initial desktop capture. It was opened and inspected together. The initial editorial layout remains within the chosen direction. `desktop-flow.png` places the three browser-rendered reading compositions together, normalized to 720 x 512 each without cropping; it was inspected for consistent alignment, grouped artwork, and visible controls. Individual full-view chapter and mobile captures provide focused transition evidence.
+
+### Verification
+
+- Production build and lint pass. All seven motion tests pass, including reading holds, all timeline boundaries, text exclusivity, reverse movement, and settling at 60Hz/120Hz.
+- Browser checks covered chapter navigation, forward scrolling, reverse scrolling, the three reading compositions, and the mobile handoff. No horizontal overflow at 390px; layer order remains fixed.
+- Reduced-motion emulation gives one 780px hero and copy opacities `1, 0, 0, 0`. Emulation and viewport overrides were reset after testing.
+- Browser console error check: none observed.
+- No new runtime dependencies. Review checked animation-frame cancellation, media-query changes, progressive rendering, and native modifier-click behavior.
+
+No actionable P0/P1/P2 technical or layout issues were observed in this revision. The live preview is the appropriate way to evaluate the revised motion's feel; the user's design acceptance remains separate from these checks.
+
 final result: passed
