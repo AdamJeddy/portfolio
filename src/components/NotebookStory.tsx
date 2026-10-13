@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import { getPaperPose, getScrollProgress } from '@/lib/notebook-motion'
+import { chapterProgress, getActiveScene, getCopyPose, getPaperPose, getScrollProgress, settleProgress } from '@/lib/notebook-motion'
 
 interface StoryEntry {
   title: string
@@ -14,9 +14,9 @@ interface StoryEntry {
 
 const sheets = ['layla', 'qeemat', 'notes']
 const chapters = [
-  { label: 'Build', progress: 1 / 3, fallback: '#selected-work' },
-  { label: 'Explore', progress: 2 / 3, fallback: '#project-qeemat' },
-  { label: 'Write', progress: 1, fallback: '#notebook-writing' },
+  { label: 'Build', progress: chapterProgress[0], fallback: '#selected-work' },
+  { label: 'Explore', progress: chapterProgress[1], fallback: '#project-qeemat' },
+  { label: 'Write', progress: chapterProgress[2], fallback: '#notebook-writing' },
 ]
 
 export default function NotebookStory({ entries }: { entries: StoryEntry[] }) {
@@ -36,20 +36,44 @@ export default function NotebookStory({ entries }: { entries: StoryEntry[] }) {
     let frame = 0
     let start = 0
     let travel = 0
+    let rendered = 0
+    let lastTime = 0
+    let initialized = false
     const papers = artwork.querySelectorAll<HTMLElement>('.notebook-paper')
+    const copies = stage.querySelectorAll<HTMLElement>('.notebook-copy')
+    const chapterLinks = stage.querySelectorAll<HTMLElement>('.notebook-chapters > a:not(.notebook-scroll-cue)')
 
-    const update = () => {
+    const update = (time: number) => {
       frame = 0
-      const progress = motion.matches || compact.matches
+      const disabled = motion.matches || compact.matches
+      const target = disabled
         ? 0
         : getScrollProgress(window.scrollY, start, travel)
-      const active = Math.min(3, Math.floor(progress * 3 + 0.4))
+      rendered = !initialized || disabled ? target : settleProgress(rendered, target, lastTime ? time - lastTime : 16.67)
+      initialized = true
+      lastTime = time
+      const active = getActiveScene(rendered)
       setScene(active)
       papers.forEach((paper, index) => {
-        const pose = getPaperPose(progress, index)
+        const pose = getPaperPose(rendered, index)
         paper.style.transform = `translate(${pose.x}%, ${pose.y}%) rotate(${pose.rotate}deg) rotateY(${pose.tilt}deg) scale(${pose.scale})`
-        paper.style.zIndex = String(active === index + 1 ? 5 : 3 - index)
+        paper.style.opacity = String(pose.opacity)
       })
+      copies.forEach((copy, index) => {
+        const pose = getCopyPose(rendered, index)
+        copy.style.opacity = String(pose.opacity)
+        copy.style.transform = `translateY(${pose.y}px)`
+        copy.style.visibility = pose.opacity > 0.001 ? 'visible' : 'hidden'
+      })
+      chapterLinks.forEach((link, index) => {
+        const starts = [0.205, 0.515, 0.825]
+        const end = starts[index + 1] ?? 1
+        const fill = Math.min(1, Math.max(0, (rendered - starts[index]) / (end - starts[index])))
+        link.style.setProperty('--chapter-fill', `${fill * 100}%`)
+      })
+      // Stop rendering once scroll settles; no perpetual animation loop.
+      if (rendered !== target) frame = requestAnimationFrame(update)
+      else lastTime = 0
     }
     const queue = () => { if (!frame) frame = requestAnimationFrame(update) }
     const measure = () => {
@@ -90,7 +114,7 @@ export default function NotebookStory({ entries }: { entries: StoryEntry[] }) {
             </a>
           </div>
           {entries.map((entry, index) => (
-            <div className="notebook-copy notebook-chapter" key={entry.href} aria-hidden={scene !== index + 1} inert={scene !== index + 1}>
+            <div className="notebook-copy notebook-chapter" key={entry.href} aria-hidden={scene !== index + 1} inert={scene !== index + 1} style={{ opacity: 0, visibility: 'hidden' }}>
               <p className="notebook-eyebrow">{String(index + 1).padStart(2, '0')} / {entry.label}</p>
               <h2>{entry.title}</h2>
               <p className="notebook-chapter-description">{entry.description}</p>
@@ -120,6 +144,7 @@ export default function NotebookStory({ entries }: { entries: StoryEntry[] }) {
               href={chapter.fallback}
               aria-current={(scene < 2 ? 0 : scene - 1) === index ? 'step' : undefined}
               onClick={(event) => {
+                if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
                 const story = storyRef.current
                 const stage = stageRef.current
                 if (!story || !stage || window.matchMedia('(prefers-reduced-motion: reduce), (max-height: 600px)').matches) return
