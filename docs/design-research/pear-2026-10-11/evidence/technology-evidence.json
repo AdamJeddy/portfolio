@@ -1,0 +1,67 @@
+{
+  "captured": "2026-10-11",
+  "source": "https://pear.no/",
+  "assets": [
+    {
+      "file": "app.css",
+      "bytes": 61948,
+      "sha256": "9fac3d914087991498e0455e14f95dbefbdbbd96d864e647bb681930e22bda0f"
+    },
+    {
+      "file": "app.js",
+      "bytes": 323793,
+      "sha256": "5e373dec30e3fc8c3cd1403a61d635be715290241853623e0f6857dd0c81efe2"
+    },
+    {
+      "file": "page.html",
+      "bytes": 53685,
+      "sha256": "0ca68432dbddd587f2c8b8acbd6762724b047eddffe3d5bca20aeb1d9047ca96"
+    }
+  ],
+  "signatures": {
+    "React version": {
+      "offset": 8214,
+      "excerpt": "){return C.H.useTransition()},e.version=`19.2.8`})),n=e(((e,n)=>{n.exports=t()})),r=e((e=>{function t(e,t){var n=e.length;e.push(t);a:for(;0<n;){var r=n-1>>>1,a=e[r];if(0<i(a,t))e[r]=t,e[n]=a,n=r;else break a}}function n(e){retu"
+    },
+    "React mount": {
+      "offset": 323538,
+      "excerpt": "n pa(){return(0,V.jsx)(fa,{})}(0,u.createRoot)(document.getElementById(`root`)).render((0,V.jsx)(l.StrictMode,{children:(0,V.jsx)(pa,{})}));"
+    },
+    "WebGL": {
+      "offset": 255632,
+      "excerpt": "ment.querySelector(`.gl`),n=t.getContext(`webgl`,{alpha:!1,antialias:!1,depth:!1}),r=!!n.getExtension(`OES_standard_derivatives`),i=(e,t)=>{let r=n.createShader(e);return n.shaderSource(r,t),n.compileShader(r),n.getShaderParamet"
+    },
+    "Animation loop": {
+      "offset": 296556,
+      "excerpt": "=0,it=!1,ot=performance.now();function R(t){if(requestAnimationFrame(R),te(t),!e&&L.on&&(L.target=L.current=0),L.on){let e=L.current;L.current+=(L.target-L.current)*.085,Math.abs(L.target-L.current)<.08&&(L.current=L.target"
+    },
+    "Smooth scroll": {
+      "offset": 296659,
+      "excerpt": "rent=0),L.on){let e=L.current;L.current+=(L.target-L.current)*.085,Math.abs(L.target-L.current)<.08&&(L.current=L.target),L.velocity=L.current-e,L.current!==e&&(st(L.current),scrollTo(0,L.current))}else L.velocity=scrollY-L.current,L.target=scrol"
+    },
+    "Reduced motion": {
+      "offset": 190890,
+      "excerpt": ":!1},S={t0:-1},C=matchMedia(`(prefers-reduced-motion: reduce)`).matches,te=matchMedia(`(pointer: coarse)`).matches,w=[{id:`signal`,src:`/films/signal.mp4`,poster:`/films/signal-poster.jpg`,origin:[.707,.926],pos:[.72,.72,1],bridge:`v28`},{i"
+    },
+    "Application endpoint": {
+      "offset": 270413,
+      "excerpt": ").catch(()=>``),n=await(await fetch(`/api/apply`,{method:`POST`,headers:{\"content-type\":`application/json`},body:JSON.stringify({name:a,email:o,message:s,fax:``,turnstileToken:t})})).json().catch(()=>({ok:!1}));if(!n.ok)throw Er"
+    },
+    "Turnstile": {
+      "offset": 269146,
+      "excerpt": "reateElement(`script`);n.src=`https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=__pearTurnstileReady`,n.async=!0,n.onerror=()=>t(Error(`turnstile script`)),document.head.appendChild(n)}),On)}async function jn(){if(En=await An(),Dn===nul"
+    },
+    "Timeline": {
+      "offset": 32188,
+      "excerpt": "ess);margin:0;overflow-x:clip}.stage{height:5350vh;position:relative}@media (width<=720px){.stage{height:7300vh}}.pin{background:var(--press);height:100dvh;position:sticky;top:0;overflow:clip}.pin canvas{width:100%;height:100%;dis"
+    },
+    "Tailwind": {
+      "offset": 4,
+      "excerpt": "/*! tailwindcss v4.3.3 | MIT License | https://tailwindcss.com */\n@layer properties{@supports (((-webkit-hyphens:none)) and (not (margin-trim:inline))) or ((-moz-orient:inline) and (not (color:rgb(from "
+    },
+    "Fonts": {
+      "offset": 31549,
+      "excerpt": "-weight:400;font-display:swap}:root{--press:#0b0a09;--paper:#f2f1ed;--ink:#1d1c19;--title:\"Flecha M\",\"Flecha S\",\"Iowan Old Style\",Georgia,serif;--text:\"GT Standard L\",ui-sans-serif,-apple-system,Arial,sans-serif;--code:\"GT Standard"
+    }
+  }
+}
