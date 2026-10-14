@@ -83,7 +83,6 @@ export default function GridProvider({ children }: { children: React.ReactNode }
     }
 
     compute()
-    window.scrollTo(0, 0)
 
     const eventType = 'ontouchstart' in window ? 'orientationchange' : 'resize'
     const onResize = () => {

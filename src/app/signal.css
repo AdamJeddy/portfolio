@@ -36,7 +36,7 @@ body:has(.signal-page) #footer { width: calc(100% - 7vw); max-width: none; margi
 .signal-project-qeemat { background: var(--blue); color: #fff; }
 .signal-project-label { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid currentColor; }
 .signal-project-brand { width: 142px; height: auto; flex-shrink: 0; }
-.signal-project h2 { font-size: clamp(70px, 10vw, 160px); line-height: .94; margin: 28px 0 20px; }
+.signal-project h2 { font-size: clamp(70px, 10vw, 160px); line-height: .94; margin: 28px 0 20px; scroll-margin-top: 96px; }
 .signal-project-summary { font-size: clamp(24px, 2.7vw, 40px); line-height: 1.15; font-weight: 550; letter-spacing: -.035em; max-width: 21ch; }
 .signal-project-copy .signal-link { margin-top: 32px; }
 .signal-project-visual { min-width: 0; margin: 0; align-self: start; }
@@ -85,7 +85,7 @@ body:has(.signal-page) #footer { width: calc(100% - 7vw); max-width: none; margi
   .signal-intro .signal-link { margin-top: 12px; }
   .signal-work { scroll-margin-top: 52px; }
   .signal-project { grid-template-columns: 1fr; gap: 32px; padding-top: 36px; }
-  .signal-project h2 { font-size: clamp(62px, 20vw, 100px); margin: 24px 0 16px; }
+  .signal-project h2 { font-size: clamp(62px, 20vw, 100px); margin: 24px 0 16px; scroll-margin-top: 76px; }
   .signal-project-brand { width: 114px; }
   .signal-project-summary { font-size: 25px; max-width: 24ch; }
   .signal-project-copy .signal-link { margin-top: 16px; }
