@@ -57,4 +57,19 @@ No actionable P0/P1/P2 correctness, layout, or accessibility issues were observe
 - QA used Chromium in the Codex browser; physical-device and Safari verification remain unperformed.
 - Qeemat imagery is concept artwork approved for the portfolio presentation, not evidence of the current app UI or live prices.
 
+## Layla premium asset revision
+
+The user chose a premium product scene with an angled app screen and beauty-product details. This supersedes the first version's raw portrait screenshot presentation. The prior evidence above describes the initial implementation. The generated source PNGs measure 1448 x 1086 (desktop) and 1086 x 1448 (mobile).
+
+Sources: `source-assets/layla-premium-showcase.png` and `source-assets/layla-premium-mobile.png` under the same evidence folder. Rendered views: `layla-premium-desktop.png` (1440 x 1024), `layla-premium-mobile-top.png`, and `layla-premium-mobile.png` (390 x 844). Density is 1. Normal scrolling is enabled; the scene is fully revealed. The desktop image region is 773 x 580; mobile is 339 x 453. Sources were resized to those regions and flattened onto the section color for side-by-side comparison. `layla-premium-desktop-comparison.png` and `layla-premium-mobile-comparison.png` were opened and inspected, source left and browser region right. An initial comparison capture used document-based clip coordinates incorrectly; the evidence was recaptured from complete viewport screenshots before comparison.
+
+- Typography/copy: live section typography and project description remain consistent with Signal Studio. The image's cream/green interface recreates the screenshot's hierarchy. Small labels and prices are illustrative, not exact app evidence.
+- Layout: wide 4:3 scene fills the desktop visual column without stretching. Portrait composition loads at widths up to 768px and gives the phone more space. The full mobile section spans more than one 844px viewport; both its top and complete scene were inspected.
+- Tokens: transparent imagery blends into the pale section; ivory, sage, and forest-green materials preserve Layla's brand character.
+- Image quality: the angled phone, black trigger bottle, white mist bottle, botanicals, and stone plinth remain in frame. No obvious background box or transparency halo on the section. Browser captures soften small raster text relative to the source; the imagery is a product presentation rather than an interactive app screen. This is a P3 refinement, not a core usability issue.
+- Responsive checks: document width equals viewport at 320, 390, 768, 1024, and 1440px. `currentSrc` confirms portrait media at 320/390/768px and wide media at 1024/1440px. Browser console errors: none observed. Temporary viewport overrides were reset.
+- Build, lint, and the three existing motion tests pass. Review checked picture-source dimensions, fallback image, alt text, lazy loading, alpha-preserving compression, scoped CSS, and content separation. No dependencies or motion logic changed.
+
+No actionable P0/P1/P2 issue was observed in this asset revision. Physical-device and Safari checks remain unperformed. The generated scene is ready for the user's visual review; this does not imply their final aesthetic approval.
+
 final result: passed
