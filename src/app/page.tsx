@@ -1,86 +1,80 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Newsreader } from 'next/font/google'
-import NotebookStory from '@/components/NotebookStory'
+import { Inter_Tight } from 'next/font/google'
+import SignalMotion from '@/components/SignalMotion'
 import { createPageMetadata } from '@/lib/metadata'
+import { homepageProjects } from '@/lib/homepage-projects'
 import { posts } from '@/lib/posts'
-import { projects } from '@/lib/projects'
+import { getProjectBySlug } from '@/lib/projects'
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site'
-import './notebook.css'
+import './signal.css'
 
-const editorial = Newsreader({ subsets: ['latin'], display: 'swap', variable: '--font-editorial' })
+const display = Inter_Tight({ subsets: ['latin'], display: 'swap', variable: '--font-signal' })
 
 export const metadata = createPageMetadata({
   path: '/', title: "Adam's Portfolio",
   description: 'Projects, commentary, and experiments by Adam.',
 })
-
 const websiteJsonLd = JSON.stringify({
   '@context': 'https://schema.org', '@type': 'WebSite',
   '@id': `${SITE_URL}/#website`, url: SITE_URL,
   name: SITE_NAME, description: SITE_DESCRIPTION, inLanguage: 'en',
 })
 
-export default function Home() {
-  const entries = [
-    ...projects.slice(0, 2).map((project, index) => ({
-      title: project.title, description: project.description,
-      href: `/projects/${project.slug}`,
-      label: index === 0 ? 'Build / Selected work' : 'Explore / Personal project',
-    })),
-    { title: 'Thinking out loud.', description: 'A few notes on technology, creativity, and the things in between.', href: '/writing', label: 'Write / Commentary' },
-  ]
+function Arrow({ light = false }: { light?: boolean }) {
+  return <Image className={light ? 'signal-arrow signal-arrow-light' : 'signal-arrow'} src="/icons/arrow-up-right.svg" alt="" width={24} height={24} />
+}
 
+export default function Home() {
   return (
-    <div className={`notebook-page ${editorial.variable}`}>
+    <div className={`signal-page ${display.variable}`}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: websiteJsonLd }} />
-      <a className="notebook-skip" href="#selected-work">Skip to selected work</a>
-      <NotebookStory entries={entries} />
-      <section className="notebook-work notebook-section" id="selected-work" aria-labelledby="work-title">
-        <div className="notebook-section-heading">
-          <p className="notebook-eyebrow">01 / A few things I&apos;ve made</p>
-          <h2 id="work-title">Selected work.</h2>
-          <Link className="notebook-link" href="/projects">All projects <Image src="/icons/arrow-up-right.svg" alt="" width={18} height={18} /></Link>
-        </div>
-        <div className="notebook-projects">
-          {projects.map((project, index) => (
-            <article id={`project-${project.slug}`} className="notebook-project" key={project.slug}>
-              <Link className="notebook-project-art" href={`/projects/${project.slug}`} tabIndex={-1} aria-hidden="true">
-                <Image src={`/images/notebook/${index === 0 ? 'layla' : 'qeemat'}-sheet.webp`} alt="" width={900} height={1350} unoptimized sizes="(max-width: 768px) 90vw, 45vw" />
-              </Link>
-              <div className="notebook-project-caption">
-                <p className="notebook-eyebrow">{String(index + 1).padStart(2, '0')} / {project.year}</p>
-                <h3><Link href={`/projects/${project.slug}`}>{project.title}<Image src="/icons/arrow-up-right.svg" alt="" width={28} height={28} /></Link></h3>
-                <p>{project.description}</p>
-              </div>
-            </article>
-          ))}
+      <SignalMotion />
+      <a className="signal-skip" href="#selected-work">Skip to selected work</a>
+      <section className="signal-hero" aria-labelledby="signal-title">
+        <h1 id="signal-title"><span><span>Good</span> <span>ideas.</span></span><span><span>Useful</span> <span>things.</span></span></h1>
+        <div className="signal-intro">
+          <div className="signal-identity"><p>Adam Ahsan</p><span className="signal-label">Dubai, UAE</span></div>
+          <div className="signal-intro-copy">
+            <p>Technology, creativity,<br />and a habit of making things.</p>
+            <a className="signal-link" href="#selected-work">See what I am building <Arrow /></a>
+          </div>
         </div>
       </section>
-      <section className="notebook-writing notebook-section" id="notebook-writing" aria-labelledby="writing-title">
-        <div className="notebook-section-heading">
-          <p className="notebook-eyebrow">02 / From the notebook</p>
-          <h2 id="writing-title">Thinking out loud.</h2>
-          <Link className="notebook-link" href="/writing">All commentary <Image src="/icons/arrow-up-right.svg" alt="" width={18} height={18} /></Link>
-        </div>
-        <ol className="notebook-posts">
-          {posts.slice(0, 3).map((post, index) => (
-            <li key={post.slug}>
-              <Link href={`/writing/${post.slug}`}>
-                <span className="notebook-eyebrow">{String(index + 1).padStart(2, '0')}</span>
-                <h3>{post.title}</h3>
-                <span className="notebook-post-time">{post.readingTime}</span>
-                <Image src="/icons/arrow-up-right.svg" alt="" width={24} height={24} />
-              </Link>
-            </li>
+      <div id="selected-work" className="signal-work" aria-label="Selected work">
+        {homepageProjects.map((feature, index) => {
+          const project = getProjectBySlug(feature.slug)
+          if (!project) return null
+          return (
+            <section className={`signal-project signal-project-${feature.slug}`} key={feature.slug} aria-labelledby={`title-${feature.slug}`}>
+              <div className="signal-project-copy">
+                <p className="signal-label signal-project-label">{feature.label}</p>
+                <h2 id={`title-${feature.slug}`}><Link href={`/projects/${project.slug}`}>{project.title}</Link></h2>
+                <p className="signal-project-summary">{feature.summary}</p>
+                <Link className="signal-link" href={`/projects/${project.slug}`}>View project <Arrow light={index === 0} /></Link>
+              </div>
+              <figure className="signal-project-visual">
+                <div className="signal-image-frame">
+                  <Image src={feature.src} alt={feature.alt} width={feature.width} height={feature.height} unoptimized priority={index === 0} sizes="(max-width: 768px) 90vw, 58vw" />
+                </div>
+                <figcaption className="signal-label">{feature.caption}</figcaption>
+              </figure>
+            </section>
+          )
+        })}
+      </div>
+      <section className="signal-writing signal-section" aria-labelledby="writing-title">
+        <div className="signal-section-label"><p className="signal-label">Commentary</p><Link className="signal-label" href="/writing">All commentary <Arrow /></Link></div>
+        <h2 id="writing-title">Thinking out loud.</h2>
+        <ol>
+          {posts.slice(0, 3).map(post => (
+            <li key={post.slug}><Link href={`/writing/${post.slug}`}><h3>{post.title}</h3><Arrow /></Link></li>
           ))}
         </ol>
       </section>
-      <section className="notebook-contact notebook-section" aria-labelledby="contact-title">
-        <p className="notebook-eyebrow">Still a work in progress</p>
-        <h2 id="contact-title">On to the<br /><em>next idea.</em></h2>
-        <Link className="notebook-link" href="/contact">Let&apos;s talk <Image src="/icons/arrow-up-right.svg" alt="" width={20} height={20} /></Link>
-        <Link className="notebook-about-link" href="/about">A little more about me</Link>
+      <section className="signal-contact signal-section" aria-labelledby="contact-title">
+        <div className="signal-section-label"><p className="signal-label">Contact</p><Link className="signal-label" href="/about">A little about me <Arrow /></Link></div>
+        <h2 id="contact-title">What&apos;s next?<br /><Link href="/contact">Let&apos;s talk.<Arrow /></Link></h2>
       </section>
     </div>
   )
