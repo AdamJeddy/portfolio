@@ -22,3 +22,11 @@ test('reversing scroll reverses the reveal continuously', () => {
   assert.deepEqual([100, 300, 500, 700, 900].map(top => getRevealProgress(top, 800)), down.toReversed())
   assert.ok(Math.abs(getRevealProgress(500, 800) - getRevealProgress(499.9, 800)) < 0.001)
 })
+
+test('project motion starts and settles gently instead of changing at constant speed', () => {
+  const entering = getRevealProgress(740, 800)
+  const settling = getRevealProgress(260, 800)
+  assert.ok(entering > 0 && entering < 0.05)
+  assert.ok(settling > 0.95 && settling < 1)
+  assert.ok(getRevealProgress(799, 800) < getRevealProgress(798, 800))
+})
