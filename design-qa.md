@@ -72,4 +72,18 @@ Sources: `source-assets/layla-premium-showcase.png` and `source-assets/layla-pre
 
 No actionable P0/P1/P2 issue was observed in this asset revision. Physical-device and Safari checks remain unperformed. The generated scene is ready for the user's visual review; this does not imply their final aesthetic approval.
 
+## FACES brand integration
+
+The official [FACES UAE homepage](https://www.faces.ae/en) was opened and visually inspected. `faces-official-reference.png` records its forest-green/gold logo and retail presentation. The official 589 x 165 SVG is preserved at `public/images/signal/faces-logo.svg`; its source is documented in `faces-brand-reference.md`.
+
+Rendered evidence: `layla-faces-desktop.png` at 1440 x 1024; `layla-faces-mobile-top.png` at 390 x 844; and `layla-faces-mobile.png` at 390 x 1000, which shows the full mobile section. Captures use density 1 and normal scrolling with the scene fully revealed. `faces-before-after.png` combines previous and revised desktop views at the same viewport; the section's top differs by 26px, so this comparison is for brand treatment and hierarchy rather than pixel alignment. `faces-logo-comparison.png` compares the original wordmark normalized to 114 x 32 against the mobile browser region at the same scale. Both combined images were opened and inspected.
+
+- Typography and content: portfolio Inter Tight remains, with forest-green Layla copy. The updated description explicitly identifies the FACES app. Label and logo fit in one row without crowding at 320px.
+- Spacing and layout: the official mark is 142px wide on desktop and 114px on mobile, above the title with a gold divider. The existing project grid and product scene stay balanced.
+- Tokens and image fidelity: warm ivory `#fff8ed`, forest green `#003b32`, and gold `#d4b180` adapt the observed brand identity. The SVG retains its original colors and proportions. No logo was recreated or generated. Transparent product imagery blends into ivory without an obvious box or halo.
+- Responsive verification: no horizontal overflow at 320, 390, 768, 1024, or 1440px. Logo loaded at its expected intrinsic dimensions; no cropped or broken branding observed. Browser console errors: none. Temporary viewport overrides reset.
+- `npm run build` and `npm run lint` pass. Review confirmed scoped styling, meaningful logo alt text, content separation, preserved project navigation, and no added dependencies. Existing motion logic is unchanged, so its previously passing tests were not repeated.
+
+No actionable P0/P1/P2 finding remains. Small raster text in the illustrative phone and Chromium-only verification remain the previously recorded limits.
+
 final result: passed
