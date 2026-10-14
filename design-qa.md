@@ -86,4 +86,18 @@ Rendered evidence: `layla-faces-desktop.png` at 1440 x 1024; `layla-faces-mobile
 
 No actionable P0/P1/P2 finding remains. Small raster text in the illustrative phone and Chromium-only verification remain the previously recorded limits.
 
+## Selected fragrance replacement
+
+The user selected Tom Ford Ombré Leather and Armani Stronger With You Absolutely via their FACES product pages. Both pages and their 800 x 800 catalog photos were opened and inspected. Reference photos are retained in `source-assets/tom-ford-ombre-leather-reference.jpg` and `source-assets/armani-absolutely-reference.jpg`. The built-in Image Gen edited the existing scenes; exact prompts and source links are recorded in `layla-fragrance-prompts.md`.
+
+Generated visual targets: `source-assets/layla-fragrance-showcase.png` (1448 x 1086) and `source-assets/layla-fragrance-mobile.png` (1086 x 1448). Browser evidence: `layla-fragrance-desktop.png` (1440 x 1024), `layla-fragrance-mobile-top.png` (390 x 844), and `layla-fragrance-mobile.png` (390 x 1000 for the complete mobile section). All captures use density 1 and normal scrolling with the imagery fully revealed. Focused comparisons `layla-fragrance-desktop-comparison.png` and `layla-fragrance-mobile-comparison.png` normalize source imagery to browser regions of 773 x 580 and 339 x 453 and flatten alpha onto ivory. Source-left/browser-right comparisons were opened and inspected.
+
+- Image fidelity: both old display products are replaced by the selected matte-black Tom Ford bottle and rounded amber Armani bottle, with reference-based caps, labels, and materials. Both remain completely within the desktop and mobile image frames. The miniature products inside the phone match the external display. Packaging is an illustrative studio recreation rather than a pixel-exact catalog cutout.
+- Content and typography: live section copy, official FACES logo, and display font remain consistent. Product names are added to meaningful image alt text. The phone cards name the chosen products and show View fragrance rather than sample prices. Tiny generated typography remains illustrative and softer in browser captures; the scene is decorative portfolio artwork, not an interactive shopping interface.
+- Layout and tokens: 4:3 desktop and 3:4 mobile presentations preserve the dominant phone and ivory/sage platform. Warm amber supplies color contrast against the matte-black bottle, with the surrounding FACES ivory/green/gold treatment retained. No opaque image background or obvious transparency halo was observed.
+- Responsive checks: new image sources load correctly at 320, 390, 768, 1024, and 1440px. Document width equals the viewport in the tested sizes. Portrait media is selected at widths up to 768px. Browser console errors: none. Viewport overrides reset before handoff.
+- `npm run build`, `npm run lint`, and diff whitespace checks pass. Review confirmed image dimensions, alt text, alpha-preserving compression, local asset references, and focused content-only code changes. Motion and navigation logic are unchanged; their previously passing verification was not repeated.
+
+No actionable P0/P1/P2 finding remains. Previously recorded physical-device/Safari gaps and small raster-text limits remain.
+
 final result: passed
