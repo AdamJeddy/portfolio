@@ -8,8 +8,9 @@ export default function SignalMotion() {
     const page = document.querySelector<HTMLElement>('.signal-page')
     const hero = page?.querySelector<HTMLElement>('.signal-hero')
     if (!page || !hero) return
-    const projects = Array.from(page.querySelectorAll<HTMLElement>('.signal-project'))
+    const visuals = Array.from(page.querySelectorAll<HTMLElement>('.signal-project-visual'))
     const motion = matchMedia('(prefers-reduced-motion: reduce)')
+    const compact = matchMedia('(max-width: 768px)')
     let frame = 0
 
     const update = () => {
@@ -17,13 +18,12 @@ export default function SignalMotion() {
       const heroBox = hero.getBoundingClientRect()
       const headerHeight = document.querySelector('header')?.getBoundingClientRect().height ?? 0
       const heroProgress = motion.matches ? 0 : getHeroProgress(heroBox.top - headerHeight, heroBox.height)
-      hero.style.setProperty('--hero-shift', `${-heroProgress * 40}px`)
-      hero.style.setProperty('--hero-scale', String(1 - heroProgress * 0.06))
-      projects.forEach(project => {
-        const progress = motion.matches ? 1 : getRevealProgress(project.getBoundingClientRect().top, innerHeight)
-        project.style.setProperty('--reveal-shift', `${(1 - progress) * 48}px`)
-        project.style.setProperty('--reveal-scale', String(0.94 + progress * 0.06))
-        project.style.setProperty('--reveal-inset', `${(1 - progress) * 4}%`)
+      hero.style.setProperty('--hero-shift', `${-heroProgress * 16}px`)
+      hero.style.setProperty('--hero-scale', String(1 - heroProgress * 0.02))
+      visuals.forEach(visual => {
+        const progress = motion.matches ? 1 : getRevealProgress(visual.getBoundingClientRect().top, innerHeight)
+        visual.style.setProperty('--reveal-shift', `${(1 - progress) * (compact.matches ? 12 : 24)}px`)
+        visual.style.setProperty('--reveal-scale', String(0.985 + progress * 0.015))
       })
     }
     const queue = () => { if (!frame) frame = requestAnimationFrame(update) }
