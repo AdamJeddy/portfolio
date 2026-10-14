@@ -11,8 +11,9 @@ export const homepageProjects = [
   },
   {
     slug: 'layla-ai',
-    label: 'AI beauty assistant / FACES',
-    summary: 'Personalized advice, product recommendations, and in-chat shopping.',
+    label: 'AI beauty coach',
+    brand: { src: '/images/signal/faces-logo.svg', width: 589, height: 165, alt: 'FACES' },
+    summary: 'Personal beauty advice and in-chat shopping, built into the FACES app.',
     src: '/images/signal/layla-premium-showcase.webp',
     width: 1200, height: 900,
     mobile: { src: '/images/signal/layla-premium-mobile.webp', width: 800, height: 1067 },

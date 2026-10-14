@@ -48,7 +48,10 @@ export default function Home() {
           return (
             <section className={`signal-project signal-project-${feature.slug}`} key={feature.slug} aria-labelledby={`title-${feature.slug}`}>
               <div className="signal-project-copy">
-                <p className="signal-label signal-project-label">{feature.label}</p>
+                <div className="signal-project-label">
+                  <p className="signal-label">{feature.label}</p>
+                  {'brand' in feature && <Image className="signal-project-brand" src={feature.brand.src} alt={feature.brand.alt} width={feature.brand.width} height={feature.brand.height} unoptimized />}
+                </div>
                 <h2 id={`title-${feature.slug}`}><Link href={`/projects/${project.slug}`}>{project.title}</Link></h2>
                 <p className="signal-project-summary">{feature.summary}</p>
                 <Link className="signal-link" href={`/projects/${project.slug}`}>View project <Arrow light={index === 0} /></Link>

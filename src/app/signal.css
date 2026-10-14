@@ -34,7 +34,8 @@ body:has(.signal-page) #footer { width: calc(100% - 7vw); max-width: none; margi
 .signal-work { scroll-margin-top: 72px; }
 .signal-project { display: grid; grid-template-columns: 39% 1fr; gap: 3vw; padding: 36px var(--gutter) 0; overflow: clip; }
 .signal-project-qeemat { background: var(--blue); color: #fff; }
-.signal-project-label { padding-bottom: 16px; border-bottom: 1px solid currentColor; }
+.signal-project-label { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid currentColor; }
+.signal-project-brand { width: 142px; height: auto; flex-shrink: 0; }
 .signal-project h2 { font-size: clamp(70px, 10vw, 160px); line-height: .94; margin: 28px 0 20px; }
 .signal-project-summary { font-size: clamp(24px, 2.7vw, 40px); line-height: 1.15; font-weight: 550; letter-spacing: -.035em; max-width: 21ch; }
 .signal-project-copy .signal-link { margin-top: 32px; }
@@ -43,7 +44,8 @@ body:has(.signal-page) #footer { width: calc(100% - 7vw); max-width: none; margi
 .signal-image-frame picture { display: block; }
 .signal-image-frame img { width: 100%; height: auto; display: block; }
 .signal-project-visual figcaption { padding: 12px 0 20px; font-size: 10px; opacity: .75; }
-.signal-project-layla-ai { background: #f3f1fc; padding-top: 72px; padding-bottom: 48px; }
+.signal-project-layla-ai { --faces-green: #003b32; --faces-ivory: #fff8ed; --faces-gold: #d4b180; background: var(--faces-ivory); color: var(--faces-green); padding-top: 72px; padding-bottom: 48px; }
+.signal-project-layla-ai .signal-project-label { border-color: var(--faces-gold); }
 .signal-project-layla-ai .signal-project-visual { display: flex; flex-direction: column; align-items: center; }
 .signal-project-layla-ai .signal-image-frame { width: 100%; }
 .signal-section { padding: 56px var(--gutter); }
@@ -84,6 +86,7 @@ body:has(.signal-page) #footer { width: calc(100% - 7vw); max-width: none; margi
   .signal-work { scroll-margin-top: 52px; }
   .signal-project { grid-template-columns: 1fr; gap: 32px; padding-top: 36px; }
   .signal-project h2 { font-size: clamp(62px, 20vw, 100px); margin: 24px 0 16px; }
+  .signal-project-brand { width: 114px; }
   .signal-project-summary { font-size: 25px; max-width: 24ch; }
   .signal-project-copy .signal-link { margin-top: 16px; }
   .signal-project-visual { width: 100%; }
