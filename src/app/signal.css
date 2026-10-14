@@ -40,12 +40,12 @@ body:has(.signal-page) #footer { width: calc(100% - 7vw); max-width: none; margi
 .signal-project-copy .signal-link { margin-top: 32px; }
 .signal-project-visual { min-width: 0; margin: 0; align-self: start; }
 .signal-image-frame { transform: translateY(var(--reveal-shift, 0px)) scale(var(--reveal-scale, 1)); clip-path: inset(var(--reveal-inset, 0%) round 0px); transform-origin: center bottom; }
-.signal-image-frame > img { width: 100%; height: auto; display: block; }
+.signal-image-frame picture { display: block; }
+.signal-image-frame img { width: 100%; height: auto; display: block; }
 .signal-project-visual figcaption { padding: 12px 0 20px; font-size: 10px; opacity: .75; }
 .signal-project-layla-ai { background: #f3f1fc; padding-top: 72px; padding-bottom: 48px; }
 .signal-project-layla-ai .signal-project-visual { display: flex; flex-direction: column; align-items: center; }
-.signal-project-layla-ai .signal-image-frame { width: min(76%, 390px); }
-.signal-project-layla-ai .signal-image-frame > img { border-radius: 22px; }
+.signal-project-layla-ai .signal-image-frame { width: 100%; }
 .signal-section { padding: 56px var(--gutter); }
 .signal-section-label { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-bottom: 14px; border-bottom: 1px solid currentColor; }
 .signal-section-label a { display: inline-flex; align-items: center; gap: 16px; min-height: 44px; }
@@ -90,7 +90,6 @@ body:has(.signal-page) #footer { width: calc(100% - 7vw); max-width: none; margi
   .signal-project-visual figcaption { font-size: 9px; }
   .signal-project-layla-ai { padding-bottom: 24px; }
   .signal-project-layla-ai .signal-image-frame { width: min(100%, 380px); }
-  .signal-project-layla-ai .signal-image-frame > img { border-radius: 16px; }
   .signal-section { padding-top: 36px; padding-bottom: 40px; }
   .signal-section-label { gap: 12px; }
   .signal-section-label a { font-size: 9px; gap: 8px; }

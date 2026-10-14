@@ -55,7 +55,10 @@ export default function Home() {
               </div>
               <figure className="signal-project-visual">
                 <div className="signal-image-frame">
-                  <Image src={feature.src} alt={feature.alt} width={feature.width} height={feature.height} unoptimized priority={index === 0} sizes="(max-width: 768px) 90vw, 58vw" />
+                  <picture>
+                    {'mobile' in feature && <source media="(max-width: 768px)" srcSet={feature.mobile.src} width={feature.mobile.width} height={feature.mobile.height} />}
+                    <Image src={feature.src} alt={feature.alt} width={feature.width} height={feature.height} unoptimized priority={index === 0} sizes="(max-width: 768px) 90vw, 58vw" />
+                  </picture>
                 </div>
                 <figcaption className="signal-label">{feature.caption}</figcaption>
               </figure>
