@@ -18,12 +18,12 @@ export default function SignalMotion() {
       const heroBox = hero.getBoundingClientRect()
       const headerHeight = document.querySelector('header')?.getBoundingClientRect().height ?? 0
       const heroProgress = motion.matches ? 0 : getHeroProgress(heroBox.top - headerHeight, heroBox.height)
-      hero.style.setProperty('--hero-shift', `${-heroProgress * 16}px`)
-      hero.style.setProperty('--hero-scale', String(1 - heroProgress * 0.02))
+      hero.style.setProperty('--hero-shift', `${-heroProgress * 10}px`)
+      hero.style.setProperty('--hero-scale', String(1 - heroProgress * 0.01))
       visuals.forEach(visual => {
         const progress = motion.matches ? 1 : getRevealProgress(visual.getBoundingClientRect().top, innerHeight)
-        visual.style.setProperty('--reveal-shift', `${(1 - progress) * (compact.matches ? 12 : 24)}px`)
-        visual.style.setProperty('--reveal-scale', String(0.985 + progress * 0.015))
+        visual.style.setProperty('--reveal-shift', `${(1 - progress) * (compact.matches ? 8 : 18)}px`)
+        visual.style.setProperty('--reveal-scale', String(0.99 + progress * 0.01))
       })
     }
     const queue = () => { if (!frame) frame = requestAnimationFrame(update) }

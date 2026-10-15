@@ -5,6 +5,8 @@ export function getHeroProgress(top: number, height: number) {
 }
 
 export function getRevealProgress(top: number, viewport: number) {
-  const progress = viewport > 0 ? clamp((viewport - top) / (viewport * 0.75)) : 1
+  const start = viewport * 0.9
+  const settle = viewport * 0.15
+  const progress = viewport > 0 ? clamp((start - top) / (start - settle)) : 1
   return progress * progress * (3 - 2 * progress)
 }

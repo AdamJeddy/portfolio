@@ -11,10 +11,16 @@ test('hero compression follows scroll and clamps outside its section', () => {
 
 test('project is fully revealed before it reaches the top of the viewport', () => {
   assert.equal(getRevealProgress(1000, 800), 0)
-  assert.equal(getRevealProgress(500, 800), 0.5)
-  assert.equal(getRevealProgress(200, 800), 1)
+  assert.equal(getRevealProgress(420, 800), 0.5)
+  assert.equal(getRevealProgress(120, 800), 1)
   assert.equal(getRevealProgress(-100, 800), 1)
   assert.equal(getRevealProgress(0, 0), 1)
+})
+
+test('project motion waits until the visual has entered the viewport', () => {
+  assert.equal(getRevealProgress(720, 800), 0)
+  assert.equal(getRevealProgress(420, 800), 0.5)
+  assert.equal(getRevealProgress(120, 800), 1)
 })
 
 test('reversing scroll reverses the reveal continuously', () => {
@@ -24,9 +30,9 @@ test('reversing scroll reverses the reveal continuously', () => {
 })
 
 test('project motion starts and settles gently instead of changing at constant speed', () => {
-  const entering = getRevealProgress(740, 800)
-  const settling = getRevealProgress(260, 800)
+  const entering = getRevealProgress(710, 800)
+  const settling = getRevealProgress(130, 800)
   assert.ok(entering > 0 && entering < 0.05)
   assert.ok(settling > 0.95 && settling < 1)
-  assert.ok(getRevealProgress(799, 800) < getRevealProgress(798, 800))
+  assert.ok(getRevealProgress(710, 800) < getRevealProgress(709, 800))
 })
