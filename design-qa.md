@@ -100,4 +100,14 @@ Generated visual targets: `source-assets/layla-fragrance-showcase.png` (1448 x 1
 
 No actionable P0/P1/P2 finding remains. Previously recorded physical-device/Safari gaps and small raster-text limits remain.
 
+## Scroll polish and project case studies — 14–15 October 2026
+
+The accepted Signal Studio direction now extends to the project index and both project detail pages. The homepage keeps native scrolling, with smaller eased entrances measured from image positions, no image clipping, and less hero movement. Project pages use server-rendered case-study sections, responsive artwork, accessible section links, and explicit contribution statements confirmed by the user: Layla technical integration lead; Qeemat creator and owner.
+
+Evidence and route-impact details are in `docs/design-research/signal-studio-polish/README.md`. New 1440 × 1024 desktop and 390 × 844 mobile screenshots were opened and inspected. Project type, palette, image proportions, and FACES branding match the accepted visual direction. The mobile hero intentionally places its artwork after role and action links; the complete section spans multiple viewports. The existing approved raster assets are reused, with their previously recorded small-text limits.
+
+The homepage, project index, and both case studies have no horizontal overflow at 320, 390, 768, 1024, and 1440px. Writing index, both writing details, About, Contact, and privacy retain their dark presentation and expected headings at 390 and 1440px. Client-side navigation from Projects to Commentary correctly removes the project theme. Mobile menu focus, Tab and Escape behavior, case-study anchors, homepage section navigation, live grid resizing, and reduced-motion rendering were checked. No local application console errors were observed; temporary media and viewport overrides were reset.
+
+Production build, lint, all four motion tests, and whitespace checks pass. Review checked route generation/metadata, image loading and dimensions, semantic headings/links, CSS scope, effect cleanup, and content separation. No dependency was added. No actionable P0/P1/P2 finding remains. Verification is Chromium-only; physical-device/Safari checks and measured performance scoring remain outside this pass.
+
 final result: passed
