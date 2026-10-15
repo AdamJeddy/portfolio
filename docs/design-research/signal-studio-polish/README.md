@@ -16,11 +16,17 @@ Project styles are scoped to `.project-studio` and its presence in the document.
 
 ## Commits
 
-- `ecc1b306`: ease homepage reveals from each image position.
-- `4f1fe294`: preserve section links and resize touch layouts.
-- `e8edef9b`: describe Layla integration and Qeemat ownership.
-- `446eb44a`: extend Signal Studio to the project index.
-- `9bae383f`: add Signal Studio project case studies.
+- `f62f43ef`: ease project reveal timing.
+- `3ed0c39d`: soften image and hero scroll movement.
+- `958712cb`: preserve section anchors under the sticky header.
+- `49144ee6`: recalculate the text grid on touch viewport resize.
+- `338d02d2`: describe Layla integration and Qeemat ownership.
+- `fcc3b7bd`: reuse responsive project showcase artwork.
+- `4cdfee8b`: apply Signal Studio to the project index.
+- `429d26e8`: introduce branded project heroes and next-project links.
+- `e6859234`: add project case-study sections and anchor navigation.
+
+The latest six commits were further split into 15 focused commits on 15 October, including separate evidence commits. See `../history-reorganization-2026-10-15.md` for the full mapping. Their recorded author and committer timestamps are preserved, and the final repository tree was verified identical. The prior head is backed up on `codex/signal-studio-before-fine-split-20261015`.
 
 The earlier 12 design commits were separately split into 35 commits with their recorded author and committer timestamps preserved. See `../history-reorganization-2026-10-14.md`. Exact earlier file-edit times were unavailable and were not fabricated. The original history is preserved on `codex/signal-studio-history-original-20261014`; nothing was pushed.
 
