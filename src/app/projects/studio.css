@@ -45,9 +45,16 @@ body:has(.project-studio) :focus-visible { outline: 3px solid currentColor; outl
 .studio-case-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 24px; }
 .studio-case-links .studio-action { margin: 0; }
 .studio-case--qeemat .studio-case-links img { filter: invert(1); }
+.studio-case-nav { display: flex; flex-wrap: wrap; gap: 8px 32px; padding: 16px var(--studio-gutter); margin: 0; border-bottom: 1px solid #08090726; }
+.studio-case-nav a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 5px; }
 .studio-story { display: grid; grid-template-columns: 39% minmax(0, 1fr); gap: 3vw; padding: 64px var(--studio-gutter); border-bottom: 1px solid #08090726; scroll-margin-top: 88px; }
 .studio-story h2 { font-size: clamp(38px, 4vw, 64px); line-height: 1.05; max-width: 12ch; }
 .studio-story p:not(.studio-label) { font-size: clamp(21px, 2vw, 30px); line-height: 1.4; max-width: 48ch; }
+.studio-tags { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 24px; font-family: var(--font-geist-mono), monospace; font-size: 12px; }
+.studio-tags li { padding: 8px 0; border-bottom: 1px solid #08090740; }
+.studio-decisions { display: grid; gap: 32px; }
+.studio-decisions li { display: grid; grid-template-columns: 32px 1fr; gap: 16px; }
+.studio-decisions h3 { font-size: clamp(24px, 2.3vw, 36px); line-height: 1.2; margin-bottom: 12px; }
 .studio-next { padding: 48px var(--studio-gutter); background: #ddf46a; }
 .studio-next h2 { display: flex; align-items: center; justify-content: space-between; gap: 24px; font-size: clamp(56px, 7vw, 100px); line-height: 1.1; margin: 24px 0; }
 @media (max-width: 768px) {
@@ -72,9 +79,11 @@ body:has(.project-studio) :focus-visible { outline: 3px solid currentColor; outl
   .studio-facts { gap: 16px; margin-top: 24px; }
   .studio-facts dd { font-size: 16px; }
   .studio-case-links { gap: 8px 16px; }
+  .studio-case-nav { gap: 4px 20px; }
   .studio-story { grid-template-columns: 1fr; gap: 24px; padding-top: 40px; padding-bottom: 40px; scroll-margin-top: 68px; }
   .studio-story h2 { font-size: 42px; max-width: none; }
   .studio-story p:not(.studio-label) { font-size: 21px; }
+  .studio-decisions li { grid-template-columns: 24px 1fr; gap: 12px; }
   .studio-next h2 { font-size: 17vw; }
   .studio-next h2 img { width: 32px; height: 32px; }
 }

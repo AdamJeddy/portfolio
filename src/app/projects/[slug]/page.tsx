@@ -60,7 +60,32 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <ProjectShowcase slug={slug} priority />
         </div>
       </section>
-      <section className="studio-story"><h2>Project overview.</h2><div>{project.details?.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div></section>
+      {study ? <>
+        <nav className="studio-case-nav studio-label" aria-label="Case study sections">
+          <a href="#challenge">Challenge</a><a href="#contribution">My role</a><a href="#approach">Approach</a><a href="#outcome">Outcome</a>
+        </nav>
+        <section id="challenge" className="studio-story" aria-labelledby="challenge-title">
+          <div><p className="studio-label">01 / Context</p><h2 id="challenge-title">The challenge.</h2></div>
+          <p>{study.challenge}</p>
+        </section>
+        <section id="contribution" className="studio-story" aria-labelledby="contribution-title">
+          <div><p className="studio-label">02 / Contribution</p><h2 id="contribution-title">My role.</h2></div>
+          <div><p>{study.contribution}</p><ul className="studio-tags" aria-label={slug === 'qeemat' ? 'Technology' : 'Focus areas'}>
+            {study.technologies.map(item => <li key={item}>{item}</li>)}
+          </ul></div>
+        </section>
+        <section id="approach" className="studio-story" aria-labelledby="approach-title">
+          <div><p className="studio-label">03 / Product choices</p><h2 id="approach-title">The approach.</h2></div>
+          <ol className="studio-decisions">{study.decisions.map((decision, index) => <li key={decision.title}>
+            <span className="studio-label">{String(index + 1).padStart(2, '0')}</span>
+            <div><h3>{decision.title}</h3><p>{decision.description}</p></div>
+          </li>)}</ol>
+        </section>
+        <section id="outcome" className="studio-story" aria-labelledby="outcome-title">
+          <div><p className="studio-label">04 / Outcome</p><h2 id="outcome-title">What it enables.</h2></div>
+          <p>{study.outcome}</p>
+        </section>
+      </> : <section className="studio-story"><h2>Project overview.</h2><div>{project.details?.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div></section>}
       <section className="studio-next" aria-label="Other projects">
         <p className="studio-label">Keep exploring</p>
         {otherProjects.map(other => <Link key={other.slug} href={`/projects/${other.slug}`}>
