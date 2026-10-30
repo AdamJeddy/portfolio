@@ -28,7 +28,7 @@ export const projects: ProjectItem[] = [
     links: [
       {
         label: 'View on App Store',
-        href: 'https://apps.apple.com/us/app/faces-beauty-%D9%81%D9%8A%D8%B3%D8%B2/id1531855095',
+        href: 'https://apps.apple.com/ae/app/faces-beauty-%D9%81%D9%8A%D8%B3%D8%B2/id1531855095',
       },
       {
         label: 'View on Google Play',

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
+import LaylaShowcase from '@/components/projects/LaylaShowcase'
 import ProjectShowcase from '@/components/media/ProjectShowcase'
 import { createPageMetadata } from '@/lib/metadata'
 import { homepageProjects } from '@/lib/homepage-projects'
@@ -34,6 +35,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const feature = homepageProjects.find(item => item.slug === slug)
   const study = getProjectStudy(slug)
   const otherProjects = projects.filter(item => item.slug !== slug)
+
+  if (project.slug === 'layla-ai') {
+    return <LaylaShowcase project={project} />
+  }
 
   return (
     <article className={`studio-case studio-case--${slug}`}>
