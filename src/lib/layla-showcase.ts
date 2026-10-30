@@ -11,31 +11,30 @@ export interface LaylaScreen {
 export const laylaProductFlow = [
   {
     number: '01',
-    title: 'Learn the person.',
+    title: 'Context',
     description:
-      'Beauty Passport brings together a shopper’s scent profile, skin score, and the products already on their shelf.',
+      'Layla starts with a customer’s preferences, skin needs, and the products already in their routine.',
   },
   {
     number: '02',
-    title: 'Curate the next move.',
+    title: 'Guidance',
     description:
-      'The conversation and profile shape a feed of products, routines, and ideas that feels relevant to that person.',
+      'The conversation becomes a tailored recommendation, available in chat, search, and product pages.',
   },
   {
     number: '03',
-    title: 'Advise at the decision.',
+    title: 'Action',
     description:
-      'Layla is available where a question appears: in search, on a product page, or in a dedicated chat.',
-  },
-  {
-    number: '04',
-    title: 'Make buying effortless.',
-    description:
-      'Shoppable product cards, offers, samples, and fast checkout keep useful advice connected to a clear action.',
+      'Shoppable cards, offers, samples, and checkout keep useful advice connected to the next step.',
   },
 ] as const
 
-export const laylaProductAreas = ['Skincare', 'Fragrance', 'Makeup', 'Haircare'] as const
+export const laylaEditorialHero = {
+  src: '/images/layla-showcase/layla-editorial-hero-v1.png',
+  width: 1536,
+  height: 1024,
+  alt: 'Editorial Layla visual with a beauty-shopping phone, fragrance vessel, serum bottle, and green foliage.',
+}
 
 export const laylaPassportOverview: LaylaScreen = {
   label: 'Beauty Passport',
@@ -69,29 +68,20 @@ export const laylaPassportFeatures: LaylaScreen[] = [
     height: 2991,
     alt: 'Layla skin score screen showing combination skin, a score, and detailed factors.',
   },
-  {
-    label: 'Beauty Shelf',
-    title: 'Let the routine in on the conversation.',
-    description:
-      'Customers can add what they already own, including by identifying a product from an image, so advice has the right context.',
-    src: '/images/layla-showcase/product-identification.jpg',
-    width: 1440,
-    height: 2991,
-    alt: 'Layla identifying a photographed fragrance product to add to a customer’s beauty shelf.',
-  },
 ]
 
-export const laylaCommerceFeatures: LaylaScreen[] = [
-  {
-    label: 'Personalised discovery',
-    title: 'A feed shaped by the customer, not a campaign calendar.',
-    description:
-      'Dynamic product cards respond to the customer’s conversation and Beauty Passport, helping the next recommendation feel more timely.',
-    src: '/images/layla-showcase/personalised-feed.jpg',
-    width: 1440,
-    height: 2992,
-    alt: 'Layla showing a personalised FACES product feed with beauty preference filters and sunscreen cards.',
-  },
+export const laylaCommerceLead: LaylaScreen = {
+  label: 'Personalised discovery',
+  title: 'A feed shaped by the customer, not a campaign calendar.',
+  description:
+    'Dynamic product cards respond to the customer’s conversation and Beauty Passport, helping the next recommendation feel more timely.',
+  src: '/images/layla-showcase/personalised-feed.jpg',
+  width: 1440,
+  height: 2992,
+  alt: 'Layla showing a personalised FACES product feed with beauty preference filters and sunscreen cards.',
+}
+
+export const laylaCommerceActions: LaylaScreen[] = [
   {
     label: 'Conversational commerce',
     title: 'Explain the recommendation, then make it shoppable.',
