@@ -41,7 +41,7 @@ export default function LaylaShowcase({ project }: LaylaShowcaseProps) {
         <div className={styles.heroGrid}>
           <div className={styles.heroCopy}>
             <p className={styles.eyebrow}>FACES / Layla AI</p>
-            <h1 id="layla-title">Layla is the FACES beauty coach.</h1>
+            <h1 id="layla-title">Personal beauty advice, built into FACES.</h1>
             <p className={styles.lede}>
               It helps customers discover products, build routines, get product-specific guidance,
               and check out from one conversation.

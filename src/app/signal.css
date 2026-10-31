@@ -27,6 +27,7 @@ body:has(.signal-page) #footer { width: calc(100% - 7vw); max-width: none; margi
 .signal-hero { padding: 32px var(--gutter) 32px; }
 .signal-hero h1 { font-size: clamp(76px, 15.5vw, 280px); line-height: .84; margin: 0; letter-spacing: -.05em; word-spacing: .02em; transform: translateY(var(--hero-shift, 0px)) scale(var(--hero-scale, 1)); transform-origin: left top; }
 .signal-hero h1 > span { display: block; white-space: nowrap; }
+.signal-hero .signal-hero-title { font-size: clamp(74px, 10.25vw, 210px); line-height: .86; }
 .signal-intro { display: grid; grid-template-columns: 29% 1fr; gap: 24px; margin-top: 24px; position: relative; }
 .signal-identity > p { font-size: clamp(28px, 2.8vw, 42px); font-weight: 650; letter-spacing: -.05em; line-height: 1.15; margin-bottom: 4px; }
 .signal-intro-copy > p { font-size: clamp(23px, 2.4vw, 36px); line-height: 1.16; font-weight: 550; letter-spacing: -.035em; }
@@ -77,6 +78,8 @@ body:has(.signal-page) #footer { width: calc(100% - 7vw); max-width: none; margi
   .signal-hero { padding-top: 24px; padding-bottom: 32px; }
   .signal-hero h1 { font-size: clamp(76px, 25.3vw, 160px); line-height: .86; letter-spacing: -.06em; }
   .signal-hero h1 > span > span { display: block; }
+  .signal-hero .signal-hero-title { max-width: 100%; font-size: clamp(52px, 14vw, 76px); line-height: .9; }
+  .signal-hero .signal-hero-title > span { white-space: normal; }
   .signal-intro { grid-template-columns: 1fr; gap: 18px; margin-top: 24px; }
   .signal-identity > p { font-size: 28px; }
   .signal-label { font-size: 11px; }

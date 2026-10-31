@@ -37,7 +37,7 @@ test('Layla integrates the Beauty Passport inside one hero scene', async () => {
   assert.match(heroMarkup, /laylaEditorialHero\.src/)
   assert.doesNotMatch(heroMarkup, /laylaPassportOverview\.src/)
   assert.doesNotMatch(heroMarkup, /heroProductScreen/)
-  assert.match(source, /Layla is the FACES beauty coach\./)
+  assert.match(source, /Personal beauty advice, built into FACES\./)
   assert.match(data, /layla-editorial-hero-v2\.png/)
 })
 
