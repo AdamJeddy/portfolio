@@ -59,6 +59,13 @@ test('Layla gives Search and PDP entry points purpose-built visual surfaces', as
   assert.match(styles, /\.entryPoint:nth-child\(-n \+ 2\) \.entryPointScreenshot img\s*\{[^}]*object-fit: cover;/s)
 })
 
+test('Layla reserves enough room for the Search and PDP product surfaces', async () => {
+  const styles = await readFile(showcaseStylesPath, 'utf8')
+
+  assert.match(styles, /\.entryPoint\s*\{[^}]*grid-template-rows: 340px minmax\(0, 1fr\);/s)
+  assert.match(styles, /\.entryPoint:nth-child\(-n \+ 2\)\s*\{[^}]*grid-template-rows: min\(74vw, 320px\) minmax\(0, 1fr\);/s)
+})
+
 test('Layla documents chat, Beauty Shelf, support, and reported impact with product evidence', async () => {
   const [experience, data] = await Promise.all([
     readFile(experiencePath, 'utf8'),
