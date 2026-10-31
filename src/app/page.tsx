@@ -36,7 +36,7 @@ export default function Home() {
         <div className="signal-intro">
           <div className="signal-identity"><p>Adam Ahsan</p><span className="signal-label">Dubai, UAE</span></div>
           <div className="signal-intro-copy">
-            <p>Projects, words, experiments,<br />and whatever I&apos;m learning in public.</p>
+            <p>Pieces of my life,<br />in public.</p>
             <a className="signal-link" href="#selected-work">See what I am building <Arrow /></a>
           </div>
         </div>
