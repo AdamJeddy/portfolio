@@ -170,9 +170,11 @@
 .availability { margin-top: 16px; opacity: .7; }
 
 .heroVisual {
-  align-self: start;
+  position: relative;
+  align-self: stretch;
   min-width: 0;
   margin: 0;
+  min-height: 700px;
   overflow: hidden;
   border: 1px solid var(--gold);
   background: #f1dfc2;
@@ -180,9 +182,12 @@
 
 .editorialHero {
   display: block;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
+  object-position: 76% center;
 }
 
 .sectionNav {
@@ -325,6 +330,8 @@
   .lede { margin-top: 22px; font-size: 23px; }
   .heroActions { margin-top: 28px; }
   .primaryAction, .secondaryAction { width: 100%; min-height: 50px; font-size: 10px; }
+  .heroVisual { min-height: 500px; }
+  .editorialHero { object-position: 76% center; }
   .sectionNav { gap: 2px 20px; padding-top: 8px; padding-bottom: 8px; }
   .sectionNav a { min-height: 34px; }
   .journey { grid-template-columns: 1fr; gap: 16px; padding-top: 40px; padding-bottom: 48px; }

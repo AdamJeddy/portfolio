@@ -5,6 +5,7 @@ import { readFile } from 'node:fs/promises'
 const showcasePath = new URL('../src/components/projects/LaylaShowcase.tsx', import.meta.url)
 const experiencePath = new URL('../src/components/projects/LaylaExperience.tsx', import.meta.url)
 const showcaseDataPath = new URL('../src/lib/layla-showcase.ts', import.meta.url)
+const showcaseStylesPath = new URL('../src/components/projects/LaylaShowcase.module.css', import.meta.url)
 
 test('Layla tells the product story in the shopper journey order', async () => {
   const [showcaseSource, experienceSource] = await Promise.all([
@@ -38,6 +39,13 @@ test('Layla integrates the Beauty Passport inside one hero scene', async () => {
   assert.doesNotMatch(heroMarkup, /heroProductScreen/)
   assert.match(source, /Layla is the FACES beauty coach\./)
   assert.match(data, /layla-editorial-hero-v2\.png/)
+})
+
+test('Layla gives the integrated hero image a full editorial panel', async () => {
+  const styles = await readFile(showcaseStylesPath, 'utf8')
+
+  assert.match(styles, /\.heroVisual\s*\{[^}]*align-self: stretch;[^}]*min-height: 700px;/s)
+  assert.match(styles, /\.editorialHero\s*\{[^}]*position: absolute;[^}]*height: 100%;/s)
 })
 
 test('Layla documents chat, Beauty Shelf, support, and reported impact with product evidence', async () => {
