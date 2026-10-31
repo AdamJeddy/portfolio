@@ -1,47 +1,113 @@
-# Homepage design QA
+# Signal Studio first-version design QA
 
-## References and evidence
+Date: 2026-10-14. Branch: `codex/signal-studio-v1`. Scope: the selected Signal Studio homepage, project presentation assets, and responsive scroll behavior.
 
-- Desktop source visual truth: `C:\Users\Main\.codex\generated_images\019f7579-f734-71a0-b680-bf2207fd7a87\call_GJAY3rrhWFdnnQoEJ16UH8Oq.png`
-- Mobile source visual truth: `C:\Users\Main\.codex\generated_images\019f7579-f734-71a0-b680-bf2207fd7a87\call_q47JeMAJsjcRA2UKXlMvrTLs.png`
-- Mobile refinement source: `C:\Users\Main\AppData\Local\Temp\codex-clipboard-a60d42de-da59-49d5-a2cf-7107eadb0eb8.png`
-- Desktop implementation screenshot: `D:\Code\GitHub\portfolio\.audit\home-desktop-refined-1536.png`
-- Mobile implementation screenshot: `D:\Code\GitHub\portfolio\.audit\home-mobile-refined-390.png`
+## Source and comparison evidence
 
-The desktop comparison used a 1536 × 1024 CSS viewport and matching 1536 × 1024 source and implementation pixels at device scale factor 1. The mobile source is a double-density-style 852 × 1846 scroll composition; it was visually normalized against a 390 × 844 CSS viewport and 390 × 843 implementation captures at device scale factor 1.
+Paths are relative to this repository under `docs/design-research/signal-studio-v1/`.
 
-State: homepage loaded with the dark theme, no menu open, and reveal transitions completed.
+| Surface | Source | Implementation | Comparison |
+| --- | --- | --- | --- |
+| Initial desktop | `desktop-reference.png` | `desktop-layout.png`, `desktop-final.png` | `desktop-comparison.png` |
+| Initial mobile | `mobile-reference.png` | `mobile-final.png` | `mobile-comparison.png` |
+| Whole desktop page | `fullpage-reference.png` | `desktop-full.png` | Full page inspected in addition to viewport comparisons |
+| Project detail regions | User's supplied Layla screenshot and selected Qeemat concept | `mobile-qeemat.png`, `mobile-layla.png` | Full project viewport captures inspected individually |
 
-## Full-view and focused comparison evidence
+Desktop source is 1487 x 1058 pixels, normalized to 1440 x 1024. Browser viewport is 1440 x 1024 at density 1. Desktop comparison is 2880 x 1024, with reference left and implementation right. The static-layout capture uses reduced motion so imagery is fully revealed; `desktop-final.png` records the normal initial scroll state.
 
-The desktop source and implementation were opened together in one comparison input. The user-supplied mobile screenshot and refined implementation were also opened together in one comparison input.
+Mobile source is 805 x 1954 pixels. It was scaled proportionally to 390px wide, then the top 844px was compared with the browser's 390 x 844 capture at density 1. Mobile comparison is 780 x 844, with reference left and implementation right. These combined comparisons were opened and inspected, not inferred from filenames. Focused project captures also show the actual supplied Layla image and the Qeemat showcase at readable presentation scale.
 
-The mobile refinement was judged by first-viewport information density: the complete Qeemat summary, its project link, and the Featured Commentary heading now appear by 752px at 390px wide and by 742px at 320px wide.
+Full desktop capture is 1440 x 3755 in reduced-motion mode. It includes all sections and the existing live-clock/social footer. The page is taller than the generated extended reference because it displays full project visuals, including the newly supplied portrait Layla screenshot, rather than cropping them to the reference's landscape proportions.
 
-## Findings
+## Findings and fixes
 
-- Fonts and typography: Geist/Space Grotesk provide the full “Adam Ahsan” hero and readable copy; Oswald provides the condensed project and commentary display type. The desktop headings are slightly reduced, and the mobile hero and Qeemat title are compact enough to improve first-viewport visibility without losing hierarchy.
-- Spacing and layout rhythm: the desktop uses the selected dossier rail, hero/meta split, horizontal transition rule, and 60/40 featured split. Mobile correctly recomposes these into a one-column stack. No horizontal overflow was present at 320, 390, 768, or 1536 pixels.
-- Colors and visual tokens: the implementation uses the existing black, white, dim, and translucent-rule tokens. There are no added gradients, shadows, rounded cards, or decorative surfaces.
-- Image quality and asset fidelity: neither reference contains raster imagery, logos, illustrations, or non-standard icons that require generated assets. No placeholder art or substitute asset was introduced.
-- Copy and content: the name, statement, location, focus, status, Qeemat description/year, and both commentary titles match the approved content and remain sourced from the existing project/post data where applicable.
-- Interactions and accessibility: all project, commentary, and “View all” destinations are real links. The mobile menu opens as a labelled modal dialog, closes correctly, and retains the existing focus/inert behavior. Semantic order is H1 → H2 → H3, metadata uses a description list, and visible focus/reduced-motion behavior is preserved.
-- Runtime: the browser reported no console errors. The production build, TypeScript check, and lint passed.
+- [P2, resolved] The existing footer's calculated width plus new homepage margins produced horizontal overflow. Homepage-specific footer widths now include the gutters. Post-fix document width equals viewport width at 320, 390, 768, and 1440px.
+- [P2, resolved] Initial headline tracking made word separation too tight. Tracking and word spacing were adjusted; the two-line desktop and four-line narrow-mobile headline remain within their gutters. Evidence: earlier `.audit/signal/desktop-initial.png`, final viewport comparisons above.
+- [P2, resolved] Header-aware hero motion initially assumed the desktop header height. It now measures the actual header inset, so the mobile initial state does not start partially compressed.
 
-## Comparison history
+No actionable P0/P1/P2 correctness, layout, or accessibility issues were observed in the tested homepage.
 
-1. The first post-build comparison found no actionable P0, P1, or P2 visual differences.
-2. User feedback identified a P2 mobile-density issue: the original hero and Qeemat heading left almost no project detail or commentary visible in the first viewport. The name was changed to “Adam Ahsan,” display sizes were reduced, and mobile spacing was compressed. Post-fix captures show the full project summary, project link, and commentary heading before the fold at both 320px and 390px, with no horizontal overflow.
+## Design evaluation and responsive choices
 
-The implementation intentionally retains two small pre-existing portfolio signatures not shown in the mock: the blinking underscore on the active BRUH link and the bottom-corner theme control. Both are classified as P3 product-specific differences and do not alter the approved hierarchy.
+- Typography: Inter Tight supplies the oversized bold display and body text; Geist Mono supplies labels and navigation. The display shapes differ slightly from the generated concept, but the hierarchy and two-line desktop composition are maintained. Article titles wrap naturally.
+- Spacing and layout: lime introduction, full-width blue Qeemat section, pale Layla section, white writing section, and lime contact section follow the selected desktop structure. Thin rules, underlined links, broad gutters, and open sections avoid nested card layouts.
+- Mobile intentionally uses larger readable copy and a single-column project layout instead of the generated source's compressed desktop-style columns. Its hero occupies more of the first viewport, with selected work visible below it. This is a responsive interpretation of the selected visual direction.
+- Tokens: lime `#ddf46a`, ink `#080907`, cobalt `#0047ff`, pale `#f3f1fc`, and white. Focus rings use the section's contrasting foreground. White arrow assets are inverted on cobalt.
+- Images: Layla uses the supplied screenshot, preserving its content and portrait aspect ratio. It is compressed to a 49,248-byte WebP. Qeemat uses a genuine generated transparent showcase matching the approved concept, 1200 x 1100 and 114,496 bytes. It is labelled as a product concept. Source assets are retained under `source-assets/`. No code-drawn replacement product illustrations were used.
+- Content: homepage presentation copy lives in `src/lib/homepage-projects.ts`; existing project titles, detail routes, writing data, metadata, and website JSON-LD remain connected to their existing helpers.
 
-## Implementation checklist
+## Motion and interaction verification
 
-- [x] Recreate the selected desktop hero and metadata structure.
-- [x] Build the desktop featured project/commentary split.
-- [x] Recompose the design as a single-column mobile page.
-- [x] Verify mobile navigation and real destinations.
-- [x] Check responsive overflow and browser console output.
-- [x] Pass lint, type checking, and static production build.
+- Hero text compresses slightly as it leaves the viewport. Project imagery rises, expands, and opens its crop as the section enters. Native scrolling is preserved; there is no long pinned sequence, wheel interception, or continuous idle animation loop.
+- Reduced-motion emulation returns `transform: none` for both project frames. The server-rendered baseline also displays all content without requiring animation to initialize.
+- Primary anchor reaches selected work. Qeemat link navigates to `/projects/qeemat` and the existing page renders correctly.
+- Mobile menu focuses its first link, traps focus in the existing navigation, closes on Escape, and returns focus to its toggle.
+- Browser checks covered 320 x 700, 390 x 844, 768 x 1024, and 1440 x 1024. No horizontal overflow after fixes.
+- Existing detail-page palette is isolated from the homepage's scoped rules. Route navigation confirmed the project page body uses its original black background.
+- Browser console error check: none observed. Viewport and reduced-motion overrides were reset before handoff.
+
+## Code verification and review
+
+`npm run build`, `npm run lint`, and all three `tests/signal-motion.test.mjs` tests pass. Motion tests cover clamping, reveal timing, and continuous reverse scrolling. Review checked event cleanup, resize/media-query updates, image dimensions, semantic headings and links, content separation, and dependency scope. No runtime dependency was added. Retired notebook motion code and its tests were removed from this branch; the prior implementation remains in branch history.
+
+## Follow-up polish and limits
+
+- [P3] Display-font shapes and some microtype spacing differ from the generated design.
+- [P3] Full portrait imagery and the existing footer make this first version longer than the compact generated full-page concept.
+- QA used Chromium in the Codex browser; physical-device and Safari verification remain unperformed.
+- Qeemat imagery is concept artwork approved for the portfolio presentation, not evidence of the current app UI or live prices.
+
+## Layla premium asset revision
+
+The user chose a premium product scene with an angled app screen and beauty-product details. This supersedes the first version's raw portrait screenshot presentation. The prior evidence above describes the initial implementation. The generated source PNGs measure 1448 x 1086 (desktop) and 1086 x 1448 (mobile).
+
+Sources: `source-assets/layla-premium-showcase.png` and `source-assets/layla-premium-mobile.png` under the same evidence folder. Rendered views: `layla-premium-desktop.png` (1440 x 1024), `layla-premium-mobile-top.png`, and `layla-premium-mobile.png` (390 x 844). Density is 1. Normal scrolling is enabled; the scene is fully revealed. The desktop image region is 773 x 580; mobile is 339 x 453. Sources were resized to those regions and flattened onto the section color for side-by-side comparison. `layla-premium-desktop-comparison.png` and `layla-premium-mobile-comparison.png` were opened and inspected, source left and browser region right. An initial comparison capture used document-based clip coordinates incorrectly; the evidence was recaptured from complete viewport screenshots before comparison.
+
+- Typography/copy: live section typography and project description remain consistent with Signal Studio. The image's cream/green interface recreates the screenshot's hierarchy. Small labels and prices are illustrative, not exact app evidence.
+- Layout: wide 4:3 scene fills the desktop visual column without stretching. Portrait composition loads at widths up to 768px and gives the phone more space. The full mobile section spans more than one 844px viewport; both its top and complete scene were inspected.
+- Tokens: transparent imagery blends into the pale section; ivory, sage, and forest-green materials preserve Layla's brand character.
+- Image quality: the angled phone, black trigger bottle, white mist bottle, botanicals, and stone plinth remain in frame. No obvious background box or transparency halo on the section. Browser captures soften small raster text relative to the source; the imagery is a product presentation rather than an interactive app screen. This is a P3 refinement, not a core usability issue.
+- Responsive checks: document width equals viewport at 320, 390, 768, 1024, and 1440px. `currentSrc` confirms portrait media at 320/390/768px and wide media at 1024/1440px. Browser console errors: none observed. Temporary viewport overrides were reset.
+- Build, lint, and the three existing motion tests pass. Review checked picture-source dimensions, fallback image, alt text, lazy loading, alpha-preserving compression, scoped CSS, and content separation. No dependencies or motion logic changed.
+
+No actionable P0/P1/P2 issue was observed in this asset revision. Physical-device and Safari checks remain unperformed. The generated scene is ready for the user's visual review; this does not imply their final aesthetic approval.
+
+## FACES brand integration
+
+The official [FACES UAE homepage](https://www.faces.ae/en) was opened and visually inspected. `faces-official-reference.png` records its forest-green/gold logo and retail presentation. The official 589 x 165 SVG is preserved at `public/images/signal/faces-logo.svg`; its source is documented in `faces-brand-reference.md`.
+
+Rendered evidence: `layla-faces-desktop.png` at 1440 x 1024; `layla-faces-mobile-top.png` at 390 x 844; and `layla-faces-mobile.png` at 390 x 1000, which shows the full mobile section. Captures use density 1 and normal scrolling with the scene fully revealed. `faces-before-after.png` combines previous and revised desktop views at the same viewport; the section's top differs by 26px, so this comparison is for brand treatment and hierarchy rather than pixel alignment. `faces-logo-comparison.png` compares the original wordmark normalized to 114 x 32 against the mobile browser region at the same scale. Both combined images were opened and inspected.
+
+- Typography and content: portfolio Inter Tight remains, with forest-green Layla copy. The updated description explicitly identifies the FACES app. Label and logo fit in one row without crowding at 320px.
+- Spacing and layout: the official mark is 142px wide on desktop and 114px on mobile, above the title with a gold divider. The existing project grid and product scene stay balanced.
+- Tokens and image fidelity: warm ivory `#fff8ed`, forest green `#003b32`, and gold `#d4b180` adapt the observed brand identity. The SVG retains its original colors and proportions. No logo was recreated or generated. Transparent product imagery blends into ivory without an obvious box or halo.
+- Responsive verification: no horizontal overflow at 320, 390, 768, 1024, or 1440px. Logo loaded at its expected intrinsic dimensions; no cropped or broken branding observed. Browser console errors: none. Temporary viewport overrides reset.
+- `npm run build` and `npm run lint` pass. Review confirmed scoped styling, meaningful logo alt text, content separation, preserved project navigation, and no added dependencies. Existing motion logic is unchanged, so its previously passing tests were not repeated.
+
+No actionable P0/P1/P2 finding remains. Small raster text in the illustrative phone and Chromium-only verification remain the previously recorded limits.
+
+## Selected fragrance replacement
+
+The user selected Tom Ford Ombré Leather and Armani Stronger With You Absolutely via their FACES product pages. Both pages and their 800 x 800 catalog photos were opened and inspected. Reference photos are retained in `source-assets/tom-ford-ombre-leather-reference.jpg` and `source-assets/armani-absolutely-reference.jpg`. The built-in Image Gen edited the existing scenes; exact prompts and source links are recorded in `layla-fragrance-prompts.md`.
+
+Generated visual targets: `source-assets/layla-fragrance-showcase.png` (1448 x 1086) and `source-assets/layla-fragrance-mobile.png` (1086 x 1448). Browser evidence: `layla-fragrance-desktop.png` (1440 x 1024), `layla-fragrance-mobile-top.png` (390 x 844), and `layla-fragrance-mobile.png` (390 x 1000 for the complete mobile section). All captures use density 1 and normal scrolling with the imagery fully revealed. Focused comparisons `layla-fragrance-desktop-comparison.png` and `layla-fragrance-mobile-comparison.png` normalize source imagery to browser regions of 773 x 580 and 339 x 453 and flatten alpha onto ivory. Source-left/browser-right comparisons were opened and inspected.
+
+- Image fidelity: both old display products are replaced by the selected matte-black Tom Ford bottle and rounded amber Armani bottle, with reference-based caps, labels, and materials. Both remain completely within the desktop and mobile image frames. The miniature products inside the phone match the external display. Packaging is an illustrative studio recreation rather than a pixel-exact catalog cutout.
+- Content and typography: live section copy, official FACES logo, and display font remain consistent. Product names are added to meaningful image alt text. The phone cards name the chosen products and show View fragrance rather than sample prices. Tiny generated typography remains illustrative and softer in browser captures; the scene is decorative portfolio artwork, not an interactive shopping interface.
+- Layout and tokens: 4:3 desktop and 3:4 mobile presentations preserve the dominant phone and ivory/sage platform. Warm amber supplies color contrast against the matte-black bottle, with the surrounding FACES ivory/green/gold treatment retained. No opaque image background or obvious transparency halo was observed.
+- Responsive checks: new image sources load correctly at 320, 390, 768, 1024, and 1440px. Document width equals the viewport in the tested sizes. Portrait media is selected at widths up to 768px. Browser console errors: none. Viewport overrides reset before handoff.
+- `npm run build`, `npm run lint`, and diff whitespace checks pass. Review confirmed image dimensions, alt text, alpha-preserving compression, local asset references, and focused content-only code changes. Motion and navigation logic are unchanged; their previously passing verification was not repeated.
+
+No actionable P0/P1/P2 finding remains. Previously recorded physical-device/Safari gaps and small raster-text limits remain.
+
+## Scroll polish and project case studies — 14–15 October 2026
+
+The accepted Signal Studio direction now extends to the project index and both project detail pages. The homepage keeps native scrolling, with smaller eased entrances measured from image positions, no image clipping, and less hero movement. Project pages use server-rendered case-study sections, responsive artwork, accessible section links, and explicit contribution statements confirmed by the user: Layla technical integration lead; Qeemat creator and owner.
+
+Evidence and route-impact details are in `docs/design-research/signal-studio-polish/README.md`. New 1440 × 1024 desktop and 390 × 844 mobile screenshots were opened and inspected. Project type, palette, image proportions, and FACES branding match the accepted visual direction. The mobile hero intentionally places its artwork after role and action links; the complete section spans multiple viewports. The existing approved raster assets are reused, with their previously recorded small-text limits.
+
+The homepage, project index, and both case studies have no horizontal overflow at 320, 390, 768, 1024, and 1440px. Writing index, both writing details, About, Contact, and privacy retain their dark presentation and expected headings at 390 and 1440px. Client-side navigation from Projects to Commentary correctly removes the project theme. Mobile menu focus, Tab and Escape behavior, case-study anchors, homepage section navigation, live grid resizing, and reduced-motion rendering were checked. No local application console errors were observed; temporary media and viewport overrides were reset.
+
+Production build, lint, all four motion tests, and whitespace checks pass. Review checked route generation/metadata, image loading and dimensions, semantic headings/links, CSS scope, effect cleanup, and content separation. No dependency was added. No actionable P0/P1/P2 finding remains. Verification is Chromium-only; physical-device/Safari checks and measured performance scoring remain outside this pass.
 
 final result: passed

@@ -1,0 +1,157 @@
+[
+  {
+    "columns": "40",
+    "heading": "Good ideas.Useful things.",
+    "route": "/",
+    "scrollWidth": 320,
+    "width": 320
+  },
+  {
+    "columns": "49",
+    "heading": "Good ideas.Useful things.",
+    "route": "/",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "columns": "96",
+    "heading": "Good ideas.Useful things.",
+    "route": "/",
+    "scrollWidth": 768,
+    "width": 768
+  },
+  {
+    "columns": "137",
+    "heading": "Good ideas.Useful things.",
+    "route": "/",
+    "scrollWidth": 1024,
+    "width": 1024
+  },
+  {
+    "columns": "192",
+    "heading": "Good ideas.Useful things.",
+    "route": "/",
+    "scrollWidth": 1440,
+    "width": 1440
+  },
+  {
+    "columns": "40",
+    "heading": "Things I'm building.",
+    "imageSource": "http://localhost:3000/images/signal/qeemat-showcase.webp",
+    "route": "/projects",
+    "scrollWidth": 320,
+    "width": 320
+  },
+  {
+    "columns": "49",
+    "heading": "Things I'm building.",
+    "imageSource": "http://localhost:3000/images/signal/qeemat-showcase.webp",
+    "route": "/projects",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "columns": "96",
+    "heading": "Things I'm building.",
+    "imageSource": "http://localhost:3000/images/signal/qeemat-showcase.webp",
+    "route": "/projects",
+    "scrollWidth": 768,
+    "width": 768
+  },
+  {
+    "columns": "137",
+    "heading": "Things I'm building.",
+    "imageSource": "http://localhost:3000/images/signal/qeemat-showcase.webp",
+    "route": "/projects",
+    "scrollWidth": 1024,
+    "width": 1024
+  },
+  {
+    "columns": "192",
+    "heading": "Things I'm building.",
+    "imageSource": "http://localhost:3000/images/signal/qeemat-showcase.webp",
+    "route": "/projects",
+    "scrollWidth": 1440,
+    "width": 1440
+  },
+  {
+    "columns": "40",
+    "heading": "Layla AI",
+    "imageSource": "http://localhost:3000/images/signal/layla-fragrance-mobile.webp",
+    "route": "/projects/layla-ai",
+    "scrollWidth": 320,
+    "width": 320
+  },
+  {
+    "columns": "49",
+    "heading": "Layla AI",
+    "imageSource": "http://localhost:3000/images/signal/layla-fragrance-mobile.webp",
+    "route": "/projects/layla-ai",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "columns": "96",
+    "heading": "Layla AI",
+    "imageSource": "http://localhost:3000/images/signal/layla-fragrance-mobile.webp",
+    "route": "/projects/layla-ai",
+    "scrollWidth": 768,
+    "width": 768
+  },
+  {
+    "columns": "137",
+    "heading": "Layla AI",
+    "imageSource": "http://localhost:3000/images/signal/layla-fragrance-showcase.webp",
+    "route": "/projects/layla-ai",
+    "scrollWidth": 1024,
+    "width": 1024
+  },
+  {
+    "columns": "192",
+    "heading": "Layla AI",
+    "imageSource": "http://localhost:3000/images/signal/layla-fragrance-showcase.webp",
+    "route": "/projects/layla-ai",
+    "scrollWidth": 1440,
+    "width": 1440
+  },
+  {
+    "columns": "40",
+    "heading": "Qeemat",
+    "imageSource": "http://localhost:3000/images/signal/qeemat-showcase.webp",
+    "route": "/projects/qeemat",
+    "scrollWidth": 320,
+    "width": 320
+  },
+  {
+    "columns": "49",
+    "heading": "Qeemat",
+    "imageSource": "http://localhost:3000/images/signal/qeemat-showcase.webp",
+    "route": "/projects/qeemat",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "columns": "96",
+    "heading": "Qeemat",
+    "imageSource": "http://localhost:3000/images/signal/qeemat-showcase.webp",
+    "route": "/projects/qeemat",
+    "scrollWidth": 768,
+    "width": 768
+  },
+  {
+    "columns": "137",
+    "heading": "Qeemat",
+    "imageSource": "http://localhost:3000/images/signal/qeemat-showcase.webp",
+    "route": "/projects/qeemat",
+    "scrollWidth": 1024,
+    "width": 1024
+  },
+  {
+    "columns": "192",
+    "heading": "Qeemat",
+    "imageSource": "http://localhost:3000/images/signal/qeemat-showcase.webp",
+    "route": "/projects/qeemat",
+    "scrollWidth": 1440,
+    "width": 1440
+  }
+]

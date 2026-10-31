@@ -1,5 +1,5 @@
-import Reveal from '@/components/Reveal'
 import { createPageMetadata } from '@/lib/metadata'
+import '../studio-pages.css'
 
 export const metadata = createPageMetadata({
   path: '/contact',
@@ -9,57 +9,56 @@ export const metadata = createPageMetadata({
 
 export default function ContactPage() {
   return (
-    <div className="content-layer">
-      <Reveal type="slide-up">
-        <section className="section page-hero">
-          <div className="col wfull">
-            <p className="eyebrow">Contact</p>
-            <h1 className="mega page-title">Let&apos;s make something useful.</h1>
-            <p className="hero-copy">
-              Have a project in mind, a problem worth solving, or simply want to
-              compare notes on AI and product work? Email is the best place to start.
-            </p>
-          </div>
-        </section>
-      </Reveal>
+    <div className="studio-page studio-contact-page">
+      <section className="studio-contact-hero" aria-labelledby="contact-title">
+        <div>
+          <p className="studio-page-label">Contact / Open to useful things</p>
+          <h1 id="contact-title">Let&apos;s make something useful.</h1>
+        </div>
+        <div className="studio-contact-intro">
+          <p>
+            Have a project in mind, a problem worth solving, or simply want to
+            compare notes on AI and product work? Email is the best place to start.
+          </p>
+          <a className="studio-contact-email" href="mailto:dev.ajx@proton.me">
+            dev.ajx@proton.me <span aria-hidden="true">↗</span>
+          </a>
+          <p className="studio-contact-note">The clearest way to reach me directly.</p>
+        </div>
+      </section>
 
-      <Reveal type="slide-up">
-        <section className="section">
-          <div className="col wfull contact-primary">
-            <p className="section-label">Email</p>
-            <a className="contact-email" href="mailto:dev.ajx@proton.me">
-              dev.ajx@proton.me
+      <section className="studio-contact-elsewhere" aria-labelledby="elsewhere-title">
+        <div className="studio-contact-elsewhere-heading">
+          <p className="studio-page-label">Elsewhere</p>
+          <h2 id="elsewhere-title">Keep in touch.</h2>
+        </div>
+        <ul className="studio-contact-links">
+          <li>
+            <a
+              href="https://github.com/AdamJeddy"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="studio-page-label">01</span>
+              <span>GitHub</span>
+              <span>Code and projects</span>
+              <span aria-hidden="true">↗</span>
             </a>
-            <p className="contact-note">The clearest way to reach me directly.</p>
-          </div>
-        </section>
-      </Reveal>
-
-      <Reveal type="fade">
-        <section className="section section-final">
-          <div className="col wfull">
-            <p className="section-label">Elsewhere</p>
-            <div className="contact-links">
-              <a
-                href="https://github.com/AdamJeddy"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>GitHub</span>
-                <span>Code and projects ↗</span>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/adamahsan/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>LinkedIn</span>
-                <span>Professional profile ↗</span>
-              </a>
-            </div>
-          </div>
-        </section>
-      </Reveal>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/adamahsan/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="studio-page-label">02</span>
+              <span>LinkedIn</span>
+              <span>Professional profile</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </li>
+        </ul>
+      </section>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import Reveal from '@/components/Reveal'
 import { createPageMetadata } from '@/lib/metadata'
 import { posts } from '@/lib/posts'
+import '../studio-pages.css'
 
 export const metadata = createPageMetadata({
   path: '/writing',
@@ -11,32 +11,35 @@ export const metadata = createPageMetadata({
 
 export default function Content() {
   return (
-    <div className="content-layer">
-      <Reveal type="slide-up">
-        <section className="section page-hero">
-          <div className="col wfull">
-            <p className="eyebrow">Commentary</p>
-            <h1 className="mega page-title">Yaps, and <strong>Thoughts.</strong></h1>
-          </div>
-        </section>
-      </Reveal>
+    <div className="studio-page studio-writing-page">
+      <section className="studio-page-hero" aria-labelledby="writing-title">
+        <div>
+          <p className="studio-page-label">Commentary / Field notes</p>
+          <h1 id="writing-title">Yaps, and thoughts.</h1>
+        </div>
+        <p className="studio-page-intro">Notes on AI, products, and the choices that shape them.</p>
+      </section>
 
-      <Reveal type="slide-up">
-        <section className="section">
-          <div className="col wfull">
-            <ul className="linelist">
-              {posts.map((post) => (
-                <li key={post.slug}>
-                  <Link href={`/writing/${post.slug}`} className="line writing-row">
-                    <span className="writing-row-title">{post.title}</span>
-                    <span className="writing-row-excerpt">{post.excerpt}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      </Reveal>
+      <section className="studio-writing-list" aria-label="Commentary">
+        <ol>
+          {posts.map((post, index) => (
+            <li key={post.slug}>
+              <Link href={`/writing/${post.slug}`} className="studio-writing-row">
+                <span className="studio-page-label studio-writing-row-index">{String(index + 1).padStart(2, '0')}</span>
+                <div>
+                  <h2>{post.title}</h2>
+                  <p>{post.excerpt}</p>
+                </div>
+                <span className="studio-page-meta studio-writing-row-meta">
+                  <span>{post.publishedAt.slice(0, 4)}</span>
+                  <span>{post.readingTime}</span>
+                </span>
+                <span className="studio-writing-row-arrow" aria-hidden="true">↗</span>
+              </Link>
+            </li>
+          ))}
+        </ol>
+      </section>
     </div>
   )
 }
