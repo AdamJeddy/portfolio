@@ -29,6 +29,13 @@ export const laylaProductFlow = [
   },
 ] as const
 
+export const laylaEditorialHero = {
+  src: '/images/layla-showcase/layla-editorial-hero-v1.png',
+  width: 1536,
+  height: 1024,
+  alt: 'Art-directed beauty-shopping scene with a phone, fragrance vessel, serum bottle, and green foliage.',
+}
+
 export const laylaPassportOverview: LaylaScreen = {
   label: 'Beauty Passport',
   title: 'Skin, scent, and routine context in one place.',

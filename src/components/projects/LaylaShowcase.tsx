@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { ProjectItem } from '@/lib/projects'
 import {
+  laylaEditorialHero,
   laylaPassportOverview,
   laylaProductFlow,
   laylaReportedImpact,
@@ -63,16 +64,28 @@ export default function LaylaShowcase({ project }: LaylaShowcaseProps) {
 
           <figure className={styles.heroVisual}>
             <Image
-              className={styles.heroScreen}
-              src={laylaPassportOverview.src}
-              alt={laylaPassportOverview.alt}
-              width={laylaPassportOverview.width}
-              height={laylaPassportOverview.height}
+              className={styles.editorialHero}
+              src={laylaEditorialHero.src}
+              alt={laylaEditorialHero.alt}
+              width={laylaEditorialHero.width}
+              height={laylaEditorialHero.height}
               priority
               unoptimized
               sizes="(max-width: 768px) 100vw, 52vw"
             />
-            <figcaption>Authentic FACES screen · Beauty Passport</figcaption>
+            <div className={styles.heroProductScreen}>
+              <p>FACES product screen</p>
+              <Image
+                src={laylaPassportOverview.src}
+                alt={laylaPassportOverview.alt}
+                width={laylaPassportOverview.width}
+                height={laylaPassportOverview.height}
+                priority
+                unoptimized
+                sizes="(max-width: 768px) 47vw, 20vw"
+              />
+            </div>
+            <figcaption>Art direction paired with the authentic FACES experience.</figcaption>
           </figure>
         </div>
       </section>
