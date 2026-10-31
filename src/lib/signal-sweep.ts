@@ -37,3 +37,15 @@ export function shouldSignalSweep({
 }: SignalSweepNavigation) {
   return destinationPath !== currentPath && !hasModifier && !target && !download
 }
+
+export function shouldDismissSignalSweep({
+  pendingPath,
+  pathname,
+  pathnameChanged,
+}: {
+  pendingPath: string | null
+  pathname: string
+  pathnameChanged: boolean
+}) {
+  return pathnameChanged && pendingPath !== null && pendingPath !== pathname
+}

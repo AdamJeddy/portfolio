@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { getSignalSweepTheme, shouldSignalSweep } from '../src/lib/signal-sweep.ts'
+import { getSignalSweepTheme, shouldDismissSignalSweep, shouldSignalSweep } from '../src/lib/signal-sweep.ts'
 
 test('uses each project’s established colour for the outgoing sweep', () => {
   assert.deepEqual(getSignalSweepTheme('/projects/layla-ai'), {
@@ -30,4 +30,10 @@ test('sweeps only ordinary navigation to a different route', () => {
   assert.equal(shouldSignalSweep({ destinationPath: '/projects', currentPath: '/', hasModifier: true, target: '', download: false }), false)
   assert.equal(shouldSignalSweep({ destinationPath: '/projects', currentPath: '/', hasModifier: false, target: '_blank', download: false }), false)
   assert.equal(shouldSignalSweep({ destinationPath: '/projects', currentPath: '/', hasModifier: false, target: '', download: true }), false)
+})
+
+test('dismisses a covering sweep when navigation reaches another route', () => {
+  assert.equal(shouldDismissSignalSweep({ pendingPath: '/projects', pathname: '/about', pathnameChanged: true }), true)
+  assert.equal(shouldDismissSignalSweep({ pendingPath: '/projects', pathname: '/projects', pathnameChanged: true }), false)
+  assert.equal(shouldDismissSignalSweep({ pendingPath: '/projects', pathname: '/', pathnameChanged: false }), false)
 })

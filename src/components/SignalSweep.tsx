@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
-import { getSignalSweepTheme, shouldSignalSweep } from '@/lib/signal-sweep'
+import { getSignalSweepTheme, shouldDismissSignalSweep, shouldSignalSweep } from '@/lib/signal-sweep'
 
 interface SweepState {
   background: string
@@ -34,6 +34,7 @@ export default function SignalSweep() {
   const pendingNavigation = useRef<PendingNavigation | null>(null)
   const navigationTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const finishTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const previousPathname = useRef(pathname)
 
   useEffect(() => {
     const clearTimers = () => {
@@ -82,7 +83,23 @@ export default function SignalSweep() {
   }, [pathname, router])
 
   useEffect(() => {
-    if (pendingNavigation.current?.path !== pathname || !sweep) return
+    const pathnameChanged = previousPathname.current !== pathname
+    previousPathname.current = pathname
+    if (!pathnameChanged || !sweep) return
+
+    if (shouldDismissSignalSweep({
+      pendingPath: pendingNavigation.current?.path ?? null,
+      pathname,
+      pathnameChanged,
+    })) {
+      pendingNavigation.current = null
+      if (navigationTimer.current) clearTimeout(navigationTimer.current)
+      if (finishTimer.current) clearTimeout(finishTimer.current)
+      setSweep(null)
+      return
+    }
+
+    if (pendingNavigation.current?.path !== pathname) return
 
     pendingNavigation.current = null
     setSweep((current) => current ? { ...current, phase: 'revealing' } : null)
