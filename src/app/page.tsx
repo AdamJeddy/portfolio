@@ -32,7 +32,7 @@ export default function Home() {
       <SignalMotion />
       <a className="signal-skip" href="#selected-work">Skip to selected work</a>
       <section className="signal-hero" aria-labelledby="signal-title">
-        <h1 id="signal-title"><span><span>A slice</span></span><span><span>of my life.</span></span></h1>
+        <h1 id="signal-title"><span><span>A slice of</span></span><span><span>my life.</span></span></h1>
         <div className="signal-intro">
           <div className="signal-identity"><p>Adam Ahsan</p><span className="signal-label">Dubai, UAE</span></div>
           <div className="signal-intro-copy">
