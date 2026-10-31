@@ -56,14 +56,16 @@ test('Layla gives Search and PDP entry points purpose-built visual surfaces', as
 
   assert.match(data, /layla-search-entry-v2\.png/)
   assert.match(data, /layla-pdp-entry-v2\.png/)
-  assert.match(styles, /\.entryPoint:nth-child\(-n \+ 2\) \.entryPointScreenshot img\s*\{[^}]*object-fit: cover;/s)
+  assert.match(styles, /\.entryPointScreenshot img\s*\{[^}]*object-fit: contain;/s)
+  assert.doesNotMatch(styles, /\.entryPoint:nth-child\(-n \+ 2\) \.entryPointScreenshot img\s*\{[^}]*object-fit: cover;/s)
 })
 
-test('Layla reserves enough room for the Search and PDP product surfaces', async () => {
+test('Layla preserves each entry-point surface without zooming or cropping', async () => {
   const styles = await readFile(showcaseStylesPath, 'utf8')
 
-  assert.match(styles, /\.entryPoint\s*\{[^}]*grid-template-rows: 340px minmax\(0, 1fr\);/s)
-  assert.match(styles, /\.entryPoint:nth-child\(-n \+ 2\)\s*\{[^}]*grid-template-rows: min\(74vw, 320px\) minmax\(0, 1fr\);/s)
+  assert.match(styles, /\.entryPoint\s*\{[^}]*grid-template-rows: auto minmax\(0, 1fr\);/s)
+  assert.match(styles, /\.entryPointScreenshot\s*\{[^}]*aspect-ratio: 4 \/ 3;/s)
+  assert.doesNotMatch(styles, /\.entryPoint:nth-child\(-n \+ 2\)\s*\{[^}]*grid-template-rows:/s)
 })
 
 test('Layla documents chat, Beauty Shelf, support, and reported impact with product evidence', async () => {

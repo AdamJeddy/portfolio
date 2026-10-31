@@ -230,13 +230,9 @@
 .sectionHeading h2 { max-width: 13ch; font-size: clamp(48px, 6.3vw, 106px); line-height: .92; }
 
 .entryPointGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2vw, 32px); align-items: stretch; margin-top: 64px; }
-.entryPoint { display: grid; grid-template-rows: 340px minmax(0, 1fr); min-height: 0; overflow: hidden; border: 1px solid #003b3233; background: var(--ivory); }
-.entryPointScreenshot { display: flex; align-items: center; justify-content: center; min-width: 0; padding: 16px; overflow: hidden; border-bottom: 1px solid #003b3233; background: var(--paper); }
-.entryPointScreenshot img { display: block; width: auto; max-width: 100%; height: 100%; object-fit: contain; border: 1px solid #003b3233; }
-.entryPoint:nth-child(-n + 2) .entryPointScreenshot { padding: 0; }
-.entryPoint:nth-child(-n + 2) .entryPointScreenshot img { width: 100%; max-width: none; height: 100%; border: 0; object-fit: cover; object-position: center; }
-.entryPoint:nth-child(3) .entryPointScreenshot { padding: 0; }
-.entryPoint:nth-child(3) .entryPointScreenshot img { width: 100%; height: 100%; border: 0; object-fit: cover; object-position: center; }
+.entryPoint { display: grid; grid-template-rows: auto minmax(0, 1fr); min-height: 0; overflow: hidden; border: 1px solid #003b3233; background: var(--ivory); }
+.entryPointScreenshot { display: flex; align-items: center; justify-content: center; min-width: 0; aspect-ratio: 4 / 3; overflow: hidden; border-bottom: 1px solid #003b3233; background: var(--ivory); }
+.entryPointScreenshot img { display: block; width: 100%; max-width: 100%; height: 100%; object-fit: contain; object-position: center; }
 .entryPoint > div:last-child { padding: clamp(24px, 2.5vw, 40px); }
 .entryPoint .eyebrow { margin-bottom: 14px; }
 .entryPoint h3 { max-width: 12ch; font-size: clamp(28px, 2.45vw, 38px); font-weight: 800; letter-spacing: -.05em; line-height: .98; overflow-wrap: anywhere; }
@@ -346,9 +342,6 @@
   .sectionHeading { grid-template-columns: 1fr; gap: 16px; }
   .sectionHeading h2 { font-size: clamp(42px, 13.2vw, 70px); }
   .entryPointGrid { grid-template-columns: 1fr; gap: 16px; margin-top: 48px; }
-  .entryPoint { grid-template-rows: 230px minmax(0, 1fr); }
-  .entryPoint:nth-child(-n + 2) { grid-template-rows: min(74vw, 320px) minmax(0, 1fr); }
-  .entryPointScreenshot { padding: 12px; }
   .entryPoint > div:last-child { padding: 22px; }
   .entryPoint h3 { font-size: 29px; }
   .entryPoint > div:last-child > p:last-child { font-size: 15px; }
