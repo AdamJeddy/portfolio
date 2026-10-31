@@ -120,20 +120,20 @@ export const laylaEntryPoints: LaylaScreen[] = [
     title: 'Search can become a conversation.',
     description:
       'The search experience provides a direct way to ask Layla for help when browsing alone is not enough.',
-    src: '/images/layla-showcase/layla-search.png',
-    width: 180,
-    height: 211,
-    alt: 'FACES mobile search screen with a Need help? Ask Layla AI prompt.',
+    src: '/images/layla-showcase/layla-search-entry-v2.png',
+    width: 1448,
+    height: 1086,
+    alt: 'Illustrative FACES search surface with Dior results and a prominent Ask Layla AI entry point.',
   },
   {
     label: 'Product detail pages',
     title: 'A product question does not need a separate search.',
     description:
       'A product page can hand the shopper directly to Layla when they need advice on that item before adding it to the bag.',
-    src: '/images/layla-showcase/layla-pdp.png',
-    width: 180,
-    height: 373,
-    alt: 'FACES product detail page with a Need advice on this item? Ask Layla AI prompt.',
+    src: '/images/layla-showcase/layla-pdp-entry-v2.png',
+    width: 1448,
+    height: 1086,
+    alt: 'Illustrative FACES product-detail surface with fragrance choices and a prominent Ask Layla AI entry point.',
   },
   {
     label: 'Dedicated chat',

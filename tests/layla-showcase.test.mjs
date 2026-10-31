@@ -48,6 +48,17 @@ test('Layla gives the integrated hero image a full editorial panel', async () =>
   assert.match(styles, /\.editorialHero\s*\{[^}]*position: absolute;[^}]*height: 100%;/s)
 })
 
+test('Layla gives Search and PDP entry points purpose-built visual surfaces', async () => {
+  const [data, styles] = await Promise.all([
+    readFile(showcaseDataPath, 'utf8'),
+    readFile(showcaseStylesPath, 'utf8'),
+  ])
+
+  assert.match(data, /layla-search-entry-v2\.png/)
+  assert.match(data, /layla-pdp-entry-v2\.png/)
+  assert.match(styles, /\.entryPoint:nth-child\(-n \+ 2\) \.entryPointScreenshot img\s*\{[^}]*object-fit: cover;/s)
+})
+
 test('Layla documents chat, Beauty Shelf, support, and reported impact with product evidence', async () => {
   const [experience, data] = await Promise.all([
     readFile(experiencePath, 'utf8'),
