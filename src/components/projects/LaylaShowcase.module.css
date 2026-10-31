@@ -84,7 +84,6 @@
 
 .heroCopy,
 .heroVisual,
-.heroProductScreen,
 .passportOverview,
 .passportOverviewCopy,
 .passportFeature,
@@ -171,11 +170,9 @@
 .availability { margin-top: 16px; opacity: .7; }
 
 .heroVisual {
-  position: relative;
-  align-self: stretch;
+  align-self: start;
   min-width: 0;
   margin: 0;
-  min-height: 700px;
   overflow: hidden;
   border: 1px solid var(--gold);
   background: #f1dfc2;
@@ -183,58 +180,9 @@
 
 .editorialHero {
   display: block;
-  position: absolute;
-  inset: 0;
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
-  object-position: 72% center;
-}
-
-.heroProductScreen {
-  position: absolute;
-  bottom: clamp(20px, 3vw, 40px);
-  left: clamp(20px, 3vw, 48px);
-  z-index: 1;
-  width: clamp(190px, 19vw, 270px);
-  padding: 10px;
-  border: 1px solid #003b3233;
-  background: var(--ivory);
-  box-shadow: 0 16px 32px #003b3229;
-}
-
-.heroProductScreen p {
-  margin: 2px 0 8px;
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 8px;
-  letter-spacing: .015em;
-  line-height: 1.4;
-  text-transform: uppercase;
-}
-
-.heroProductScreen img {
-  display: block;
-  width: 100%;
-  height: clamp(280px, 30vw, 395px);
-  object-fit: cover;
-  object-position: center top;
-}
-
-.heroVisual figcaption {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  z-index: 1;
-  max-width: 20ch;
-  margin: 0;
-  padding: 8px 10px;
-  background: #fff8edeb;
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 10px;
-  letter-spacing: .015em;
-  line-height: 1.4;
-  text-align: right;
-  text-transform: uppercase;
 }
 
 .sectionNav {
@@ -377,12 +325,6 @@
   .lede { margin-top: 22px; font-size: 23px; }
   .heroActions { margin-top: 28px; }
   .primaryAction, .secondaryAction { width: 100%; min-height: 50px; font-size: 10px; }
-  .heroVisual { min-height: 500px; }
-  .editorialHero { object-position: 72% center; }
-  .heroProductScreen { bottom: 18px; left: 14px; width: min(47vw, 190px); padding: 7px; }
-  .heroProductScreen p { margin: 1px 0 6px; font-size: 7px; }
-  .heroProductScreen img { height: 280px; }
-  .heroVisual figcaption { top: 12px; right: 12px; max-width: 16ch; padding: 6px 8px; font-size: 7px; }
   .sectionNav { gap: 2px 20px; padding-top: 8px; padding-bottom: 8px; }
   .sectionNav a { min-height: 34px; }
   .journey { grid-template-columns: 1fr; gap: 16px; padding-top: 40px; padding-bottom: 48px; }

@@ -25,17 +25,19 @@ test('Layla tells the product story in the shopper journey order', async () => {
   assert.ok(showcaseSource.indexOf('<LaylaExperience />') < showcaseSource.indexOf('id="my-role"'))
 })
 
-test('Layla pairs art direction with an authentic FACES product screen in the hero', async () => {
+test('Layla integrates the Beauty Passport inside one hero scene', async () => {
   const [source, data] = await Promise.all([
     readFile(showcasePath, 'utf8'),
     readFile(showcaseDataPath, 'utf8'),
   ])
+  const heroStart = source.indexOf('<figure className={styles.heroVisual}>')
+  const heroMarkup = source.slice(heroStart, source.indexOf('</figure>', heroStart))
 
-  assert.match(source, /laylaEditorialHero/)
-  assert.match(source, /laylaPassportOverview\.src/)
+  assert.match(heroMarkup, /laylaEditorialHero\.src/)
+  assert.doesNotMatch(heroMarkup, /laylaPassportOverview\.src/)
+  assert.doesNotMatch(heroMarkup, /heroProductScreen/)
   assert.match(source, /Layla is the FACES beauty coach\./)
-  assert.match(source, /FACES product screen/)
-  assert.match(data, /layla-editorial-hero-v1\.png/)
+  assert.match(data, /layla-editorial-hero-v2\.png/)
 })
 
 test('Layla documents chat, Beauty Shelf, support, and reported impact with product evidence', async () => {
