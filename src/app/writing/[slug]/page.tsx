@@ -49,6 +49,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
   const relatedPosts = posts.filter((item) => item.slug !== post.slug)
   const postNumber = String(posts.findIndex((item) => item.slug === post.slug) + 1).padStart(2, '0')
+  const sourceLinks = post.sourceLinks ?? [{ label: 'Medium', href: post.sourceUrl }]
   const articleJsonLd = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -104,10 +105,13 @@ export default async function PostPage({ params }: PostPageProps) {
             ))}
 
             <p className="studio-article-source">
-              First published on{' '}
-              <a href={post.sourceUrl} target="_blank" rel="noopener noreferrer">
-                Medium
-              </a>.
+              Also published on{' '}
+              {sourceLinks.map((source, index) => (
+                <span key={source.href}>
+                  {index > 0 && ' and '}
+                  <a href={source.href} target="_blank" rel="noopener noreferrer">{source.label}</a>
+                </span>
+              ))}.
             </p>
           </div>
         </div>
