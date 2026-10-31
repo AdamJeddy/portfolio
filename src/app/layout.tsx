@@ -5,6 +5,7 @@ import './globals.css'
 import GridProvider from '@/components/grid/GridProvider'
 import Footer from '@/components/layout/Footer'
 import Nav from '@/components/layout/Nav'
+import SignalSweep from '@/components/SignalSweep'
 import {
   GA_MEASUREMENT_ID,
   SITE_DESCRIPTION,
@@ -80,6 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
         <GridProvider>
           <Nav />
+          <SignalSweep />
           <main id="app">{children}</main>
           <Footer />
         </GridProvider>
