@@ -104,15 +104,17 @@ export default async function PostPage({ params }: PostPageProps) {
               </section>
             ))}
 
-            <p className="studio-article-source">
-              Also published on{' '}
-              {sourceLinks.map((source, index) => (
-                <span key={source.href}>
-                  {index > 0 && ' and '}
-                  <a href={source.href} target="_blank" rel="noopener noreferrer">{source.label}</a>
-                </span>
-              ))}.
-            </p>
+            <aside className="studio-article-publications" aria-label="Original publications">
+              <p className="studio-page-label">Read the original</p>
+              <div>
+                {sourceLinks.map((source) => (
+                  <a key={source.href} href={source.href} target="_blank" rel="noopener noreferrer">
+                    <span>{source.label}</span>
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                ))}
+              </div>
+            </aside>
           </div>
         </div>
       </article>

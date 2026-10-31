@@ -26,5 +26,7 @@ test('includes the essay in internal routes and exposes its publication links', 
   assert.match(writingIndex, /href=\{`\/writing\/\$\{post\.slug\}`\}/)
   assert.match(writingPage, /posts\.map\(\(post\) => \(\{ slug: post\.slug \}\)\)/)
   assert.match(writingPage, /post\.sourceLinks/)
+  assert.match(writingPage, /studio-article-publications/)
+  assert.match(writingPage, /Read the original/)
   assert.match(sitemap, /posts\.map\(\(post\) => \(\{/)
 })
