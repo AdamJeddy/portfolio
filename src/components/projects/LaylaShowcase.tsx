@@ -2,9 +2,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { ProjectItem } from '@/lib/projects'
 import {
-  laylaEditorialHero,
   laylaPassportOverview,
   laylaProductFlow,
+  laylaReportedImpact,
 } from '@/lib/layla-showcase'
 import LaylaExperience from './LaylaExperience'
 import styles from './LaylaShowcase.module.css'
@@ -40,11 +40,11 @@ export default function LaylaShowcase({ project }: LaylaShowcaseProps) {
 
         <div className={styles.heroGrid}>
           <div className={styles.heroCopy}>
-            <p className={styles.eyebrow}>Meet Layla</p>
-            <h1 id="layla-title">Beauty advice that leads somewhere.</h1>
+            <p className={styles.eyebrow}>FACES / Layla AI</p>
+            <h1 id="layla-title">Layla is the FACES beauty coach.</h1>
             <p className={styles.lede}>
-              Layla is an AI beauty coach inside the FACES app. It learns a shopper&apos;s context,
-              advises at the point of consideration, and keeps the next action close.
+              It helps customers discover products, build routines, get product-specific guidance,
+              and check out from one conversation.
             </p>
             <div className={styles.heroActions}>
               {appStoreLink && (
@@ -63,28 +63,16 @@ export default function LaylaShowcase({ project }: LaylaShowcaseProps) {
 
           <figure className={styles.heroVisual}>
             <Image
-              className={styles.editorialHero}
-              src={laylaEditorialHero.src}
-              alt={laylaEditorialHero.alt}
-              width={laylaEditorialHero.width}
-              height={laylaEditorialHero.height}
+              className={styles.heroScreen}
+              src={laylaPassportOverview.src}
+              alt={laylaPassportOverview.alt}
+              width={laylaPassportOverview.width}
+              height={laylaPassportOverview.height}
               priority
               unoptimized
               sizes="(max-width: 768px) 100vw, 52vw"
             />
-            <div className={styles.heroEvidence}>
-              <p>Authentic FACES experience</p>
-              <Image
-                src={laylaPassportOverview.src}
-                alt={laylaPassportOverview.alt}
-                width={laylaPassportOverview.width}
-                height={laylaPassportOverview.height}
-                unoptimized
-                priority
-                sizes="(max-width: 768px) 34vw, 13vw"
-              />
-            </div>
-            <figcaption>Art-directed product visual with an authentic Layla screen.</figcaption>
+            <figcaption>Authentic FACES screen · Beauty Passport</figcaption>
           </figure>
         </div>
       </section>
@@ -94,19 +82,10 @@ export default function LaylaShowcase({ project }: LaylaShowcaseProps) {
         <a href="#beauty-passport">Beauty Passport</a>
         <a href="#shop-with-layla">Advice to bag</a>
         <a href="#after-purchase">After purchase</a>
+        <a href="#reported-impact">Reported impact</a>
         <a href="#my-role">My role</a>
         <a href="#try-layla">Try Layla</a>
       </nav>
-
-      <section className={styles.introduction} aria-labelledby="introduction-title">
-        <p className={styles.eyebrow}>More than product search</p>
-        <h2 id="introduction-title">A personal beauty layer, built into FACES.</h2>
-        <p>
-          Beauty shopping becomes useful when an answer reflects someone&apos;s tastes, needs,
-          and routine. Layla connects that context to discovery and shopping without forcing
-          customers into a separate experience.
-        </p>
-      </section>
 
       <section className={styles.journey} aria-labelledby="journey-title">
         <h2 id="journey-title" className={styles.journeyLabel}>The product loop</h2>
@@ -122,6 +101,32 @@ export default function LaylaShowcase({ project }: LaylaShowcaseProps) {
       </section>
 
       <LaylaExperience />
+
+      <section id="reported-impact" className={styles.outcome} aria-labelledby="outcome-title">
+        <div>
+          <p className={styles.eyebrow}>Reported launch impact</p>
+          <h2 id="outcome-title">What the launch reported.</h2>
+        </div>
+        <div className={styles.outcomeCopy}>
+          <p>
+            Chalhoub Group reports stronger engagement and conversion for Layla sessions than
+            non-AI sessions after launch.
+          </p>
+          <dl>
+            {laylaReportedImpact.map((impact) => (
+              <div key={impact.value}>
+                <dt>{impact.value}</dt>
+                <dd>{impact.description}</dd>
+              </div>
+            ))}
+          </dl>
+          {launchStoryLink && (
+            <a href={launchStoryLink.href} target="_blank" rel="noopener noreferrer" className={styles.outcomeLink}>
+              Read the official launch story <ExternalArrow />
+            </a>
+          )}
+        </div>
+      </section>
 
       <section id="my-role" className={styles.role} aria-labelledby="role-title">
         <div>

@@ -3,6 +3,7 @@ import {
   laylaCommerceActions,
   laylaCommerceLead,
   laylaEntryPoints,
+  laylaOrderSupport,
   laylaPassportFeatures,
   laylaPassportOverview,
 } from '@/lib/layla-showcase'
@@ -36,14 +37,6 @@ export default function LaylaExperience() {
               </div>
             </article>
           ))}
-          <aside className={styles.conversationNote} aria-labelledby="conversation-title">
-            <p className={styles.eyebrow}>Dedicated chat</p>
-            <h3 id="conversation-title">The conversation can start without restarting the journey.</h3>
-            <p>
-              Search and product pages open the door; Layla carries the deeper coaching,
-              comparison, and recommendation in one familiar place.
-            </p>
-          </aside>
         </div>
       </section>
 
@@ -145,6 +138,9 @@ export default function LaylaExperience() {
             </li>
           ))}
         </ol>
+        <p className={styles.platformNote}>
+          <span>iOS checkout</span> Apple Pay can keep eligible purchases inside the conversation.
+        </p>
       </section>
 
       <section id="after-purchase" className={styles.support} aria-labelledby="support-title">
@@ -153,16 +149,24 @@ export default function LaylaExperience() {
           <h2 id="support-title">Helpful after the purchase, not just before it.</h2>
         </div>
         <div className={styles.supportCopy}>
-          <p>
-            Layla can stay useful after a purchase with order help, delivery updates,
-            and the next beauty question a customer has.
-          </p>
+          <p>{laylaOrderSupport.description}</p>
           <ul>
             <li>Order support</li>
             <li>Delivery status</li>
             <li>Routine follow-up</li>
           </ul>
         </div>
+        <figure className={styles.supportVisual}>
+          <Image
+            src={laylaOrderSupport.src}
+            alt={laylaOrderSupport.alt}
+            width={laylaOrderSupport.width}
+            height={laylaOrderSupport.height}
+            unoptimized
+            sizes="(max-width: 768px) 82vw, 25vw"
+          />
+          <figcaption>Illustrative support state, derived from the FACES Layla experience.</figcaption>
+        </figure>
       </section>
     </>
   )

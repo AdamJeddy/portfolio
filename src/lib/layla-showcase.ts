@@ -29,18 +29,11 @@ export const laylaProductFlow = [
   },
 ] as const
 
-export const laylaEditorialHero = {
-  src: '/images/layla-showcase/layla-editorial-hero-v1.png',
-  width: 1536,
-  height: 1024,
-  alt: 'Editorial Layla visual with a beauty-shopping phone, fragrance vessel, serum bottle, and green foliage.',
-}
-
 export const laylaPassportOverview: LaylaScreen = {
   label: 'Beauty Passport',
-  title: 'A better starting point than a blank search field.',
+  title: 'Skin, scent, and routine context in one place.',
   description:
-    'The profile gives Layla a practical view of someone’s skin, scent preferences, and beauty shelf before the next recommendation begins.',
+    'Customers build a profile from the beauty information they choose to share, giving each next recommendation a more useful starting point.',
   src: '/images/layla-showcase/beauty-passport.jpg',
   width: 1440,
   height: 3013,
@@ -50,7 +43,7 @@ export const laylaPassportOverview: LaylaScreen = {
 export const laylaPassportFeatures: LaylaScreen[] = [
   {
     label: 'Scent Profile',
-    title: 'Turn taste into a fragrance language.',
+    title: 'A quiz creates a fragrance profile.',
     description:
       'A short quiz gives the assistant a shared vocabulary for notes, families, and the styles a customer is likely to enjoy.',
     src: '/images/layla-showcase/scent-profile.jpg',
@@ -60,13 +53,23 @@ export const laylaPassportFeatures: LaylaScreen[] = [
   },
   {
     label: 'Skin Score',
-    title: 'Make skincare recommendations more considered.',
+    title: 'A selfie-led check creates a trackable skin score.',
     description:
       'A selfie-led assessment and follow-up inputs create a score that can be tracked over time, with a clearer basis for product guidance.',
     src: '/images/layla-showcase/skin-score.jpg',
     width: 1440,
     height: 2991,
     alt: 'Layla skin score screen showing combination skin, a score, and detailed factors.',
+  },
+  {
+    label: 'Beauty Shelf',
+    title: 'What a customer already owns is part of the guidance.',
+    description:
+      'Customers can add products they use—or identify an item from a photo—so Layla can account for the routine that is already in place.',
+    src: '/images/layla-showcase/product-identification.jpg',
+    width: 1440,
+    height: 2991,
+    alt: 'Layla identifying a fragrance bottle from a customer-provided photo.',
   },
 ]
 
@@ -107,7 +110,7 @@ export const laylaCommerceActions: LaylaScreen[] = [
 export const laylaEntryPoints: LaylaScreen[] = [
   {
     label: 'Search',
-    title: 'A question can start in search.',
+    title: 'Search can become a conversation.',
     description:
       'The search experience provides a direct way to ask Layla for help when browsing alone is not enough.',
     src: '/images/layla-showcase/layla-search.png',
@@ -117,7 +120,7 @@ export const laylaEntryPoints: LaylaScreen[] = [
   },
   {
     label: 'Product detail pages',
-    title: 'Guidance can meet a specific product.',
+    title: 'A product question does not need a separate search.',
     description:
       'A product page can hand the shopper directly to Layla when they need advice on that item before adding it to the bag.',
     src: '/images/layla-showcase/layla-pdp.png',
@@ -125,4 +128,40 @@ export const laylaEntryPoints: LaylaScreen[] = [
     height: 373,
     alt: 'FACES product detail page with a Need advice on this item? Ask Layla AI prompt.',
   },
+  {
+    label: 'Dedicated chat',
+    title: 'One place for deeper advice and follow-up.',
+    description:
+      'Layla carries comparison, routine building, order support, and the next beauty question in a persistent conversation.',
+    src: '/images/layla-showcase/layla-chat-entry.jpg',
+    width: 1440,
+    height: 901,
+    alt: 'Layla AI chat composer in the FACES app.',
+  },
 ]
+
+export const laylaOrderSupport: LaylaScreen = {
+  label: 'Order support',
+  title: 'Order questions stay in the conversation.',
+  description:
+    'After checkout, Layla can surface order status and give a customer a direct route to delivery help without making them start over.',
+  src: '/images/layla-showcase/layla-order-support-v1.png',
+  width: 878,
+  height: 1794,
+  alt: 'Illustrative Layla order-support screen with an order-status timeline and support action.',
+}
+
+export const laylaReportedImpact = [
+  {
+    value: '2.5×',
+    description: 'higher conversion than non-AI sessions',
+  },
+  {
+    value: '+7.4 min',
+    description: 'longer browsing sessions on average',
+  },
+  {
+    value: '+27%',
+    description: 'more products explored',
+  },
+] as const

@@ -25,13 +25,29 @@ test('Layla tells the product story in the shopper journey order', async () => {
   assert.ok(showcaseSource.indexOf('<LaylaExperience />') < showcaseSource.indexOf('id="my-role"'))
 })
 
-test('Layla pairs an editorial hero asset with authentic product evidence', async () => {
+test('Layla puts an authentic FACES screen ahead of the case-study story', async () => {
   const [source, data] = await Promise.all([
     readFile(showcasePath, 'utf8'),
     readFile(showcaseDataPath, 'utf8'),
   ])
 
-  assert.match(source, /laylaEditorialHero/)
-  assert.match(data, /layla-editorial-hero-v1\.png/)
+  assert.doesNotMatch(source, /laylaEditorialHero/)
   assert.match(source, /laylaPassportOverview\.src/)
+  assert.match(source, /Layla is the FACES beauty coach\./)
+  assert.match(source, /Authentic FACES screen/)
+  assert.doesNotMatch(data, /layla-editorial-hero-v1\.png/)
+})
+
+test('Layla documents chat, Beauty Shelf, support, and reported impact with product evidence', async () => {
+  const [experience, data] = await Promise.all([
+    readFile(experiencePath, 'utf8'),
+    readFile(showcaseDataPath, 'utf8'),
+  ])
+
+  assert.match(data, /layla-chat-entry\.jpg/)
+  assert.match(data, /product-identification\.jpg/)
+  assert.match(data, /layla-order-support-v1\.png/)
+  assert.match(data, /2\.5×/)
+  assert.match(experience, /iOS checkout/)
+  assert.match(experience, /Illustrative support state/)
 })
