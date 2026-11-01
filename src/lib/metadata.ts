@@ -5,7 +5,6 @@ import {
   PERSON_NAME,
   SITE_NAME,
   SITE_URL,
-  X_HANDLE,
 } from './site'
 
 interface PageMetadataOptions {
@@ -68,7 +67,6 @@ export function createPageMetadata({
       card: 'summary_large_image',
       title: resolvedTitle,
       description,
-      creator: X_HANDLE,
       images: [
         {
           url: socialImage,

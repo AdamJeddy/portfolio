@@ -186,6 +186,9 @@ const staleRemaining = []
 for (const stalePath of stalePaths) {
   try { await stat(join(repoRoot, stalePath)); staleRemaining.push(stalePath) } catch { /* removed */ }
 }
+const builtCorpus = allHtml.join('\n') + llms + llmsFull + JSON.stringify(siteDescription)
+ok('no X handle in built output', !/A7damn|x\.com\/A7damn/.test(builtCorpus))
+ok('no twitter:creator meta tag', !allHtml.some(html => /name="twitter:creator"/.test(html)))
 ok('dead configs/components/assets removed', staleRemaining.length === 0, staleRemaining.join(','))
 
 // Report.

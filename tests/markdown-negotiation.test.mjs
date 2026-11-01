@@ -22,8 +22,7 @@ const homepageGraph = {
       sameAs: [
         'https://github.com/AdamJeddy',
         'https://www.linkedin.com/in/adamahsan/',
-        'https://x.com/A7damn',
-        'https://medium.com/@uhdam',
+            'https://medium.com/@uhdam',
         'https://uhwriter.substack.com/',
       ],
     },

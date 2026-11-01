@@ -4,7 +4,6 @@ export const SITE_DESCRIPTION =
   'Portfolio and commentary by Adam Ahsan: AI products, local-first apps, and selected work.'
 export const PERSON_NAME = 'Adam Ahsan'
 export const PERSON_TITLE = 'AI product engineer'
-export const X_HANDLE = '@A7damn'
 export const DEFAULT_SOCIAL_IMAGE = '/images/social/portfolio-social.png'
 export const DEFAULT_SOCIAL_IMAGE_ALT =
   'Adam Ahsan — bruh.ae social card with name, role, and site brand.'

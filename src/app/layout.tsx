@@ -12,7 +12,6 @@ import {
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
-  X_HANDLE,
 } from '@/lib/site'
 
 const spaceGrotesk = Space_Grotesk({
@@ -50,9 +49,6 @@ export const metadata: Metadata = {
   authors: [{ name: PERSON_NAME, url: `${SITE_URL}/about` }],
   creator: PERSON_NAME,
   publisher: SITE_NAME,
-  twitter: {
-    creator: X_HANDLE,
-  },
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },
