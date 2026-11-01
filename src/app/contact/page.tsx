@@ -4,7 +4,8 @@ import '../studio-pages.css'
 
 export const metadata = createPageMetadata({
   path: '/contact',
-  title: 'Contact',
+  title: 'Contact Adam Ahsan — bruh.ae',
+  absoluteTitle: true,
   description:
     'Get in touch with Adam Ahsan about AI, product work, or useful things to build.',
 })
@@ -39,7 +40,7 @@ export default function ContactPage() {
         <ul className="studio-contact-links">
           <li>
             <a href={github} target="_blank" rel="noopener noreferrer me">
-              <span className="studio-page-label">01</span>
+              <span className="studio-page-label" aria-hidden="true">01</span>
               <span>GitHub</span>
               <span>Code and projects</span>
               <span aria-hidden="true">↗</span>
@@ -47,7 +48,7 @@ export default function ContactPage() {
           </li>
           <li>
             <a href={linkedin} target="_blank" rel="noopener noreferrer me">
-              <span className="studio-page-label">02</span>
+              <span className="studio-page-label" aria-hidden="true">02</span>
               <span>LinkedIn</span>
               <span>Professional profile</span>
               <span aria-hidden="true">↗</span>
@@ -55,7 +56,7 @@ export default function ContactPage() {
           </li>
           <li>
             <a href={x} target="_blank" rel="noopener noreferrer me">
-              <span className="studio-page-label">03</span>
+              <span className="studio-page-label" aria-hidden="true">03</span>
               <span>X</span>
               <span>Notes and links</span>
               <span aria-hidden="true">↗</span>
@@ -63,7 +64,7 @@ export default function ContactPage() {
           </li>
           <li>
             <a href={medium} target="_blank" rel="noopener noreferrer me">
-              <span className="studio-page-label">04</span>
+              <span className="studio-page-label" aria-hidden="true">04</span>
               <span>Medium</span>
               <span>Original publications</span>
               <span aria-hidden="true">↗</span>

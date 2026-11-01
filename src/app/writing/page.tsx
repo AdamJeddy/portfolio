@@ -5,7 +5,8 @@ import '../studio-pages.css'
 
 export const metadata = createPageMetadata({
   path: '/writing',
-  title: 'Commentary',
+  title: 'Commentary by Adam Ahsan — AI, Product & Luxury',
+  absoluteTitle: true,
   description:
     'Essays and commentary by Adam Ahsan on AI, products, luxury, and the choices that shape them.',
 })

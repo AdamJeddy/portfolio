@@ -59,6 +59,14 @@ export function htmlToMarkdown(html, url) {
     while (link.firstChild) container.appendChild(link.firstChild)
     link.replaceWith(container)
   }
+  // Adjacent inline elements (e.g. CTA link rows) would otherwise render as
+  // `[a](u)[b](u)`; insert a space so the Markdown stays readable.
+  for (const parent of [main, ...main.querySelectorAll('*')]) {
+    for (let node = parent.firstChild; node; node = node.nextSibling) {
+      const next = node.nextSibling
+      if (isAdjacentInline(node, next)) parent.insertBefore(document.createTextNode(' '), next)
+    }
+  }
   const converter = new TurndownService({ headingStyle: 'atx', bulletListMarker: '-', codeBlockStyle: 'fenced' })
   converter.addRule('definitionLists', {
     filter: ['dt', 'dd'],
@@ -132,7 +140,7 @@ export async function generateMarkdown(outputDirectory) {
     entries,
     origin,
   }))
-  const llmsFull = buildLlmsFullText(entries)
+  const llmsFull = buildLlmsFullText(entries, homepageData)
   await writeFile(join(outputDirectory, 'llms-full.txt'), llmsFull)
   if (Buffer.byteLength(llmsFull) > MAX_LLMS_FULL_BYTES) {
     console.warn(`[generate-markdown] llms-full.txt is ${(Buffer.byteLength(llmsFull) / 1024).toFixed(1)} KB, above the ${MAX_LLMS_FULL_BYTES / 1024} KB target.`)
@@ -204,12 +212,22 @@ function pageListLine(entry, origin) {
   return `- [${label}](${origin}${entry.assetPath})${description}`
 }
 
-function buildLlmsFullText(entries) {
-  const sections = entries.map(entry => {
+function buildLlmsFullText(entries, homepageData) {
+  const included = entries.filter(entry => !isOptionalRoute(entry.route))
+  const title = stringValue(homepageData?.person?.name) ?? stringValue(homepageData?.website?.name) ?? 'Site content'
+  const sections = included.map(entry => {
     const body = stripFrontmatter(entry.markdown).trim()
-    return `# ${entry.title || entry.route}\n\n${entry.canonical}\n\n${body}`
+    return `## ${entry.title || entry.route}\n\n${entry.canonical}\n\n${stripLeadingHeading(body)}`
   })
-  return `${sections.join('\n\n---\n\n')}\n`
+  return `# ${title}\n\n${sections.join('\n\n---\n\n')}\n`
+}
+
+function stripLeadingHeading(markdown) {
+  // Remove the first ATX H1 wherever it appears, keeping any preamble. Nested
+  // pages do not always start with their heading after layout nodes are stripped.
+  const heading = /^# [^\n]+\n+/m.exec(markdown)
+  if (!heading) return markdown
+  return (markdown.slice(0, heading.index) + markdown.slice(heading.index + heading[0].length)).trim()
 }
 
 function stripFrontmatter(markdown) {
@@ -387,6 +405,19 @@ function ensureSentence(text) {
 
 function escapeLinkText(text) {
   return toOneLine(text).replace(/[[\]]/g, match => `\\${match}`)
+}
+
+const INLINE_TAGS = new Set(['A', 'IMG', 'SPAN', 'STRONG', 'EM', 'CODE', 'TIME', 'B', 'I', 'SMALL'])
+
+function isAdjacentInline(node, next) {
+  return Boolean(
+    node &&
+      next &&
+      node.nodeType === 1 &&
+      next.nodeType === 1 &&
+      INLINE_TAGS.has(node.tagName) &&
+      INLINE_TAGS.has(next.tagName),
+  )
 }
 
 function toOneLine(value) {

@@ -5,11 +5,11 @@ import Link from 'next/link'
 import LaylaShowcase from '@/components/projects/LaylaShowcase'
 import ProjectShowcase from '@/components/media/ProjectShowcase'
 import { createPageMetadata } from '@/lib/metadata'
-import { personReference, PERSON_ID, serializeJsonLd, WEBSITE_ID } from '@/lib/schema'
+import { createProjectGraph, serializeJsonLd, type ProjectSlug } from '@/lib/schema'
 import { homepageProjects } from '@/lib/homepage-projects'
 import { getProjectStudy } from '@/lib/project-studies'
 import { getProjectBySlug, projects } from '@/lib/projects'
-import { PERSON_NAME, SITE_URL } from '@/lib/site'
+import { PERSON_NAME } from '@/lib/site'
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>
@@ -30,36 +30,6 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   })
 }
 
-function projectJsonLd(slug: 'qeemat' | 'layla-ai', description: string) {
-  const url = `${SITE_URL}/projects/${slug}`
-  if (slug === 'qeemat') {
-    return serializeJsonLd({
-      '@context': 'https://schema.org',
-      '@type': 'SoftwareApplication',
-      '@id': `${url}#software`,
-      name: 'Qeemat',
-      description,
-      applicationCategory: 'UtilitiesApplication',
-      operatingSystem: 'Android',
-      url,
-      author: personReference,
-      codeRepository: 'https://github.com/AdamJeddy/Qeemat',
-      isPartOf: { '@id': WEBSITE_ID },
-    })
-  }
-  return serializeJsonLd({
-    '@context': 'https://schema.org',
-    '@type': 'CreativeWork',
-    '@id': `${url}#work`,
-    name: 'Layla AI',
-    description,
-    url,
-    creator: { '@type': 'Person', '@id': PERSON_ID, name: PERSON_NAME, url: `${SITE_URL}/about` },
-    contributor: personReference,
-    isPartOf: { '@id': WEBSITE_ID },
-  })
-}
-
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params
   const project = getProjectBySlug(slug)
@@ -67,7 +37,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const feature = homepageProjects.find(item => item.slug === slug)
   const study = getProjectStudy(slug)
   const otherProjects = projects.filter(item => item.slug !== slug)
-  const structuredData = projectJsonLd(project.slug as 'qeemat' | 'layla-ai', project.description)
+  const structuredData = serializeJsonLd(createProjectGraph(project.slug as ProjectSlug, project.description))
 
   if (project.slug === 'layla-ai') {
     return (

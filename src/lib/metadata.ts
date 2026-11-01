@@ -60,7 +60,7 @@ export function createPageMetadata({
         ? {
             publishedTime,
             modifiedTime,
-            authors: [SITE_NAME],
+            authors: [{ name: PERSON_NAME, url: `${SITE_URL}/about` }],
           }
         : {}),
     },

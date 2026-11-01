@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { createPageMetadata } from '@/lib/metadata'
 import { getPostBySlug, posts } from '@/lib/posts'
-import { createArticleNode, serializeJsonLd } from '@/lib/schema'
+import { createArticleGraph, serializeJsonLd } from '@/lib/schema'
 import '../../studio-pages.css'
 
 interface PostPageProps {
@@ -52,7 +52,7 @@ export default async function PostPage({ params }: PostPageProps) {
   const relatedPosts = posts.filter((item) => item.slug !== post.slug)
   const postNumber = String(posts.findIndex((item) => item.slug === post.slug) + 1).padStart(2, '0')
   const sourceLinks = post.sourceLinks ?? [{ label: 'Medium', href: post.sourceUrl }]
-  const articleJsonLd = serializeJsonLd(createArticleNode({
+  const articleJsonLd = serializeJsonLd(createArticleGraph({
     slug: post.slug,
     title: post.title,
     description: post.excerpt,

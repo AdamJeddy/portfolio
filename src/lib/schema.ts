@@ -1,15 +1,24 @@
-import { PERSON_NAME, PERSON_TITLE, SITE_DESCRIPTION, SITE_URL } from './site'
+import {
+  CONTENT_UPDATED,
+  DEFAULT_SOCIAL_IMAGE,
+  PERSON_NAME,
+  PERSON_TITLE,
+  SITE_DESCRIPTION,
+  SITE_URL,
+} from './site'
 
 export const PERSON_ID = `${SITE_URL}/#person`
 export const WEBSITE_ID = `${SITE_URL}/#website`
 
-export const PROFILE_URLS = [
-  'https://github.com/AdamJeddy',
-  'https://www.linkedin.com/in/adamahsan/',
-  'https://x.com/A7damn',
-  'https://medium.com/@uhdam',
-  'https://uhwriter.substack.com/',
-]
+export const PROFILE_LINKS = {
+  github: 'https://github.com/AdamJeddy',
+  linkedin: 'https://www.linkedin.com/in/adamahsan/',
+  x: 'https://x.com/A7damn',
+  medium: 'https://medium.com/@uhdam',
+  substack: 'https://uhwriter.substack.com/',
+}
+
+export const PROFILE_URLS = Object.values(PROFILE_LINKS)
 
 export const personNode = {
   '@type': 'Person',
@@ -17,6 +26,7 @@ export const personNode = {
   name: PERSON_NAME,
   alternateName: ['Adam'],
   url: `${SITE_URL}/about`,
+  image: `${SITE_URL}${DEFAULT_SOCIAL_IMAGE}`,
   description: 'Adam Ahsan is a Dubai-based builder working on AI products and local-first software.',
   jobTitle: PERSON_TITLE,
   address: {
@@ -78,7 +88,6 @@ export function createArticleNode({
 }: ArticleNodeInput) {
   const url = `${SITE_URL}/writing/${slug}`
   return {
-    '@context': 'https://schema.org',
     '@type': 'Article',
     '@id': `${url}#article`,
     headline: title,
@@ -93,21 +102,67 @@ export function createArticleNode({
   }
 }
 
+export function createArticleGraph(input: ArticleNodeInput) {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [createArticleNode(input), personNode, websiteNode],
+  }
+}
+
 export function createAboutPageGraph() {
   return {
     '@context': 'https://schema.org',
     '@graph': [
       personNode,
+      websiteNode,
       {
         '@type': 'ProfilePage',
         '@id': `${SITE_URL}/about#profilepage`,
         url: `${SITE_URL}/about`,
         name: 'About Adam Ahsan',
-        dateModified: '2026-11-01',
+        dateModified: CONTENT_UPDATED,
         isPartOf: { '@id': WEBSITE_ID },
         mainEntity: { '@id': PERSON_ID },
       },
     ],
+  }
+}
+
+export type ProjectSlug = 'qeemat' | 'layla-ai'
+
+/**
+ * Project entities. Layla AI is an employer product that Adam Ahsan contributed
+ * to (technical integration), so it is modelled as a CreativeWork with a
+ * contributor, never as a work he created.
+ */
+export function createProjectGraph(slug: ProjectSlug, description: string) {
+  const url = `${SITE_URL}/projects/${slug}`
+  const entity =
+    slug === 'qeemat'
+      ? {
+          '@type': 'SoftwareApplication',
+          '@id': `${url}#software`,
+          name: 'Qeemat',
+          description,
+          applicationCategory: 'UtilitiesApplication',
+          operatingSystem: 'Android',
+          url,
+          author: personReference,
+          codeRepository: 'https://github.com/AdamJeddy/Qeemat',
+          isPartOf: { '@id': WEBSITE_ID },
+        }
+      : {
+          '@type': 'CreativeWork',
+          '@id': `${url}#work`,
+          name: 'Layla AI',
+          description,
+          url,
+          contributor: personReference,
+          isPartOf: { '@id': WEBSITE_ID },
+        }
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [entity, personNode, websiteNode],
   }
 }
 

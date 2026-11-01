@@ -320,11 +320,12 @@ test('generates llms.txt, llms-full.txt, the full homepage graph, and clean rout
     assert.doesNotMatch(llms.split('## Optional')[0], /track-my-salah-privacy-policy/, 'the privacy policy stays out of the primary Pages list')
 
     const llmsFull = await readFile(join(output, 'llms-full.txt'), 'utf8')
-    assert.match(llmsFull, /^# Adam Ahsan — Portfolio\n\nhttps:\/\/bruh\.ae\/\n\n/)
-    assert.match(llmsFull, /# About Adam Ahsan\n\nhttps:\/\/bruh\.ae\/about\n\n/)
-    assert.match(llmsFull, /# A Post\n\nhttps:\/\/bruh\.ae\/writing\/post\n\n/)
-    assert.match(llmsFull, /# Track My Salah Privacy Policy\n\nhttps:\/\/bruh\.ae\/track-my-salah-privacy-policy\n\n/)
-    assert.equal(llmsFull.split('\n\n---\n\n').length, 4)
+    assert.match(llmsFull, /^# Adam Ahsan\n\n## Adam Ahsan — Portfolio\n\nhttps:\/\/bruh\.ae\/\n\n/)
+    assert.match(llmsFull, /## About Adam Ahsan\n\nhttps:\/\/bruh\.ae\/about\n\n/)
+    assert.match(llmsFull, /## A Post\n\nhttps:\/\/bruh\.ae\/writing\/post\n\n/)
+    assert.doesNotMatch(llmsFull, /Track My Salah Privacy Policy/, 'the noindex privacy page is excluded from llms-full.txt')
+    assert.equal(llmsFull.split('\n\n---\n\n').length, 3)
+    assert.equal((llmsFull.match(/^# /gm) || []).length, 1, 'llms-full.txt has exactly one top-level heading')
     assert.doesNotMatch(llmsFull, /^title: "/m, 'llms-full.txt does not repeat page frontmatter')
 
     const routes = JSON.parse(await readFile(join(output, '_routes.json'), 'utf8'))
@@ -338,6 +339,26 @@ test('generates llms.txt, llms-full.txt, the full homepage graph, and clean rout
   } finally {
     await rm(output, { recursive: true, force: true })
   }
+})
+
+test('separates adjacent inline links so Markdown does not concatenate them', () => {
+  const markdown = htmlToMarkdown(pageHtml({
+    title: 'Links',
+    canonical: 'https://bruh.ae/links',
+    main: '<main><p><a href="/one">One</a><a href="/two">Two</a></p></main>'.replace('<main>', '').replace('</main>', ''),
+  }), 'https://bruh.ae/links')
+  assert.match(markdown, /\[One\]\(https:\/\/bruh\.ae\/one\) \[Two\]\(https:\/\/bruh\.ae\/two\)/)
+})
+
+test('marks negotiated Markdown private and states the content signal', async () => {
+  const worker = createMarkdownWorker(pages)
+  const markdown = await worker.fetch(new Request('https://bruh.ae/about', { headers: { Accept: 'text/markdown' } }), { ASSETS: assets() })
+  assert.equal(markdown.headers.get('Content-Signal'), 'search=yes, ai-train=no, use=reference')
+  assert.equal(markdown.headers.get('Cache-Control'), 'private, max-age=0, must-revalidate')
+  assert.equal(markdown.headers.get('Content-Location'), 'https://bruh.ae/_markdown/about.md')
+  const html = await worker.fetch(new Request('https://bruh.ae/about', { headers: { Accept: 'text/html' } }), { ASSETS: assets() })
+  assert.equal(html.headers.get('Content-Signal'), 'search=yes, ai-train=no, use=reference')
+  assert.equal(html.headers.get('Cache-Control'), null, 'HTML keeps the asset cache policy')
 })
 
 test('falls back to site metadata and warns when the homepage has no Person node', async (t) => {

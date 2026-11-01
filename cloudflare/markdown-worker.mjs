@@ -11,6 +11,12 @@ function prefersMarkdown(accept = '') {
   return markdown > 0 && markdown >= html
 }
 
+function contentSignal() {
+  // Keep in sync with the Cloudflare-managed production robots.txt policy
+  // (see README section "Production robots.txt") until that decision is owned in code.
+  return 'search=yes, ai-train=no, use=reference'
+}
+
 function securityHeaders() {
   return {
     'X-Content-Type-Options': 'nosniff',
@@ -48,7 +54,13 @@ export function createMarkdownWorker(pages) {
         }
         // Cloudflare does not apply public/_headers to Pages Functions responses,
         // so page responses get their security headers here.
+        response.headers.set('Content-Signal', contentSignal())
         for (const [name, value] of Object.entries(securityHeaders())) response.headers.set(name, value)
+      }
+      if (markdown && (response.ok || response.status === 304)) {
+        // Never let a shared cache store the negotiated variant under the page URL.
+        response.headers.set('Cache-Control', 'private, max-age=0, must-revalidate')
+        response.headers.set('Content-Location', new URL(assetPath, url.origin).href)
       }
       const vary = response.headers.get('Vary')?.split(',').map(value => value.trim()) ?? []
       if (!vary.some(value => ['accept', '*'].includes(value.toLowerCase()))) vary.push('Accept')

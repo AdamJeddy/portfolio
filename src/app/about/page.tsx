@@ -5,7 +5,8 @@ import '../studio-pages.css'
 
 export const metadata = createPageMetadata({
   path: '/about',
-  title: 'About',
+  title: 'About Adam Ahsan — Dubai Product & AI Builder',
+  absoluteTitle: true,
   description:
     'Meet Adam Ahsan, a Dubai-based product and AI builder shaped by technology, creativity, and faith.',
 })
@@ -157,7 +158,7 @@ export default function AboutPage() {
           <h2 id="influences-title" className="sr-only">Three influences</h2>
           {influences.map((influence, index) => (
             <article className="studio-about-influence" key={influence.title}>
-              <span className="studio-about-item-index">0{index + 1}</span>
+              <span className="studio-about-item-index" aria-hidden="true">0{index + 1}</span>
               <h3>{influence.title}</h3>
               <p>{influence.description}</p>
             </article>
@@ -171,7 +172,7 @@ export default function AboutPage() {
           <h2 id="approach-title" className="sr-only">How I approach things</h2>
           {approaches.map((approach, index) => (
             <article className="studio-about-approach" key={approach.title}>
-              <span className="studio-about-item-index">0{index + 1}</span>
+              <span className="studio-about-item-index" aria-hidden="true">0{index + 1}</span>
               <h3>{approach.title}</h3>
               <p>{approach.description}</p>
             </article>

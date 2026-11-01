@@ -7,7 +7,8 @@ import { getProjectBySlug } from '@/lib/projects'
 
 export const metadata = createPageMetadata({
   path: '/projects',
-  title: 'Projects',
+  title: 'Projects by Adam Ahsan — Layla AI & Qeemat',
+  absoluteTitle: true,
   description:
     'Selected work by Adam Ahsan: Layla AI inside the FACES app, Qeemat, and other projects and experiments.',
 })
