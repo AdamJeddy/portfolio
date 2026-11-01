@@ -8,13 +8,14 @@ This repository is a personal portfolio site built with Next.js App Router, Reac
 - Start local dev server: npm run dev
 - Build for production: npm run build
 - Run lint checks: npm run lint
+- Run regression tests: npm test
 
 ## Important project structure
 - src/app: route pages and layout
   - src/app/page.tsx: homepage
   - src/app/projects/page.tsx and src/app/projects/[slug]/page.tsx: project index/detail
-  - src/app/content/page.tsx and src/app/content/[slug]/page.tsx: writing index/detail
-  - src/app/the-person/page.tsx: about page
+  - src/app/writing/page.tsx and src/app/writing/[slug]/page.tsx: writing index/detail
+  - src/app/about/page.tsx: about page
 - src/components: reusable UI pieces
 - src/lib: content and project data helpers
 - public/images: static assets
@@ -25,10 +26,19 @@ This repository is a personal portfolio site built with Next.js App Router, Reac
 - Use TypeScript and keep components simple and readable.
 - When changing routes or page structure, ensure navigation and metadata remain consistent.
 
+## Git and pull requests
+- Start each feature or fix from an up-to-date `dev` on a dedicated branch named `feature/<short-description>`. Never use `codex` in branch names.
+- Open feature and fix pull requests against `dev`; do not commit directly to `dev` or `main`.
+- Keep unrelated changes separate, preserve existing uncommitted work, and review the diff before committing.
+- Use focused commits with descriptive messages. Do not merge, deploy, or force-push unless the user explicitly requests it.
+- Follow a different branch or target only when the user explicitly requests it.
+
 ## Verification expectations
 After meaningful changes, verify with:
 - npm run build
 - npm run lint if the change touches UI or component logic
+- npm test when behavior or tests change
+- For documentation-only edits, inspect the diff and verify referenced paths and commands.
 
 ## Notes for future agents
 - This project is intentionally lightweight and content-focused.
