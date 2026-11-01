@@ -9,11 +9,7 @@ export interface ProjectItem {
   description: string
   details?: string[]
   links: ProjectLink[]
-  image?: string
-  note?: string
   year?: number
-  icon?: string
-  words: string[]
 }
 
 export const projects: ProjectItem[] = [
@@ -39,14 +35,7 @@ export const projects: ProjectItem[] = [
         href: 'https://www.chalhoubgroup.com/en/media/330/chalhoub-group-debuts-a-proprietary-generative-ai-engine-that-drives-25x-higher-conversions-and-reshapes-digital-beauty-retail-in-the-middle-east',
       },
     ],
-    image: '/images/layla-ai/layla-ai-experience.webp',
-    note: 'Work in progress — Layla recently received a UI facelift and a broader product update. I’ll be updating this page with the new experience soon.',
     year: 2025,
-    words: [
-      'beauty', 'assistant', 'chat', 'advice', 'recommendation', 'product', 'shopping',
-      'personalized', 'fragrance', 'skincare', 'routine', 'discovery', 'catalog', 'bag',
-      'commerce', 'customer', 'integration', 'mobile', 'FACES', 'AI',
-    ],
   },
   {
     slug: 'qeemat',
@@ -60,12 +49,6 @@ export const projects: ProjectItem[] = [
       { label: 'View code', href: 'https://github.com/AdamJeddy/Qeemat' },
     ],
     year: 2026,
-    icon: '◆',
-    words: [
-      'price', 'track', 'scan', 'check', 'notify', 'local', 'offline', 'store', 'product', 'snapshot',
-      'history', 'drop', 'alert', 'background', 'parse', 'fetch', 'currency', 'AED', 'UAE', 'noon',
-      'nike', 'ounass', 'amazon', 'favorite', 'watchlist', 'activity', 'schedule', 'permission',
-    ],
   },
 ]
 
