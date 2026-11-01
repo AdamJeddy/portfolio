@@ -31,7 +31,6 @@ body:has(.signal-page) #footer { width: calc(100% - 7vw); max-width: none; margi
 .signal-intro { display: grid; grid-template-columns: 29% 1fr; gap: 24px; margin-top: 24px; position: relative; }
 .signal-identity > p { font-size: clamp(28px, 2.8vw, 42px); font-weight: 650; letter-spacing: -.05em; line-height: 1.15; margin-bottom: 4px; }
 .signal-intro-copy > p { font-size: clamp(23px, 2.4vw, 36px); line-height: 1.16; font-weight: 550; letter-spacing: -.035em; }
-.signal-intro-copy > .signal-intro-note { max-width: 44ch; margin-top: 16px; font-family: var(--font-geist-mono), monospace; font-size: 13px; font-weight: 400; line-height: 1.5; letter-spacing: .01em; opacity: .8; }
 .signal-identity > p a { color: inherit; }
 .signal-identity > p a:hover { color: var(--blue); }
 .signal-intro .signal-link { margin-top: 16px; }
@@ -87,7 +86,6 @@ body:has(.signal-page) #footer { width: calc(100% - 7vw); max-width: none; margi
   .signal-identity > p { font-size: 28px; }
   .signal-label { font-size: 11px; }
   .signal-intro-copy > p { font-size: 22px; }
-  .signal-intro-copy > .signal-intro-note { margin-top: 12px; font-size: 11px; }
   .signal-link { font-size: 11px; gap: 16px; }
   .signal-intro .signal-link { margin-top: 12px; }
   .signal-work { scroll-margin-top: 52px; }

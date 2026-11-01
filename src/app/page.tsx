@@ -36,10 +36,7 @@ export default function Home() {
             <span className="signal-label">Dubai, UAE</span>
           </div>
           <div className="signal-intro-copy">
-            <p>Pieces of my life,<br />in public.</p>
-            <p className="signal-intro-note">
-              This is bruh.ae — the portfolio of {PERSON_NAME}: AI products, local-first apps, and commentary.
-            </p>
+            <p>Pieces of my life, in public.</p>
             <a className="signal-link" href="#selected-work">See what I am building <Arrow /></a>
           </div>
         </div>
