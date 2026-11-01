@@ -1,0 +1,250 @@
+{
+  "out": {
+    "files": 185,
+    "bytes": 3677162
+  },
+  "outImages": {
+    "files": 18,
+    "bytes": 1218819
+  },
+  "publicImages": {
+    "files": 18,
+    "bytes": 1218819
+  },
+  "pages": 11,
+  "pageTable": [
+    {
+      "page": "about.html",
+      "title": "About Adam Ahsan - Dubai Product Builder",
+      "titleLength": 45,
+      "descriptionLength": 98,
+      "nameInTitle": true,
+      "nameInDescription": true,
+      "nameInOgTitle": true,
+      "ogTitleMatchesTitle": true,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "Person+WebSite+ProfilePage",
+      "imageCount": 0,
+      "imageBytes": 0
+    },
+    {
+      "page": "contact.html",
+      "title": "Contact Adam Ahsan - bruh.ae",
+      "titleLength": 28,
+      "descriptionLength": 79,
+      "nameInTitle": true,
+      "nameInDescription": true,
+      "nameInOgTitle": true,
+      "ogTitleMatchesTitle": true,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "",
+      "imageCount": 0,
+      "imageBytes": 0
+    },
+    {
+      "page": "index.html",
+      "title": "Adam Ahsan - bruh.ae",
+      "titleLength": 20,
+      "descriptionLength": 89,
+      "nameInTitle": true,
+      "nameInDescription": true,
+      "nameInOgTitle": true,
+      "ogTitleMatchesTitle": true,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "Person+WebSite",
+      "imageCount": 5,
+      "imageBytes": 266863
+    },
+    {
+      "page": "projects/layla-ai.html",
+      "title": "Layla AI - Adam Ahsan",
+      "titleLength": 21,
+      "descriptionLength": 148,
+      "nameInTitle": true,
+      "nameInDescription": false,
+      "nameInOgTitle": true,
+      "ogTitleMatchesTitle": true,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "CreativeWork+Person+WebSite",
+      "imageCount": 14,
+      "imageBytes": 918045
+    },
+    {
+      "page": "projects/qeemat.html",
+      "title": "Qeemat: UAE Price Tracker for Android - Adam Ahsan",
+      "titleLength": 50,
+      "descriptionLength": 105,
+      "nameInTitle": true,
+      "nameInDescription": false,
+      "nameInOgTitle": true,
+      "ogTitleMatchesTitle": true,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "SoftwareApplication+Person+WebSite",
+      "imageCount": 2,
+      "imageBytes": 84190
+    },
+    {
+      "page": "projects.html",
+      "title": "Projects by Adam Ahsan - Layla AI & Qeemat",
+      "titleLength": 42,
+      "descriptionLength": 103,
+      "nameInTitle": true,
+      "nameInDescription": true,
+      "nameInOgTitle": true,
+      "ogTitleMatchesTitle": true,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "",
+      "imageCount": 4,
+      "imageBytes": 258738
+    },
+    {
+      "page": "track-my-salah-privacy-policy.html",
+      "title": "Track My Salah Privacy Policy - Adam Ahsan",
+      "titleLength": 42,
+      "descriptionLength": 42,
+      "nameInTitle": true,
+      "nameInDescription": false,
+      "nameInOgTitle": true,
+      "ogTitleMatchesTitle": true,
+      "h1Count": 1,
+      "robots": "noindex, follow",
+      "nodeTypes": "",
+      "imageCount": 0,
+      "imageBytes": 0
+    },
+    {
+      "page": "writing/how-a-tech-company-accidentally-becomes-political.html",
+      "title": "How a Tech Company Accidentally Becomes Political - Adam Ahsan",
+      "titleLength": 62,
+      "descriptionLength": 114,
+      "nameInTitle": true,
+      "nameInDescription": false,
+      "nameInOgTitle": true,
+      "ogTitleMatchesTitle": true,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "Article+Person+WebSite",
+      "imageCount": 0,
+      "imageBytes": 0
+    },
+    {
+      "page": "writing/quiet-death-saas-pricing-power.html",
+      "title": "The Quiet Death of SaaS Pricing Power - Adam Ahsan",
+      "titleLength": 50,
+      "descriptionLength": 125,
+      "nameInTitle": true,
+      "nameInDescription": false,
+      "nameInOgTitle": true,
+      "ogTitleMatchesTitle": true,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "Article+Person+WebSite",
+      "imageCount": 0,
+      "imageBytes": 0
+    },
+    {
+      "page": "writing/ugly-truth-luxury-brands-ai-content.html",
+      "title": "Ugly Truth Luxury Brands Won't Say About AI Content - Adam Ahsan",
+      "titleLength": 64,
+      "descriptionLength": 122,
+      "nameInTitle": true,
+      "nameInDescription": false,
+      "nameInOgTitle": true,
+      "ogTitleMatchesTitle": true,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "Article+Person+WebSite",
+      "imageCount": 0,
+      "imageBytes": 0
+    },
+    {
+      "page": "writing.html",
+      "title": "Commentary by Adam Ahsan - AI, Product & Luxury",
+      "titleLength": 47,
+      "descriptionLength": 93,
+      "nameInTitle": true,
+      "nameInDescription": true,
+      "nameInOgTitle": true,
+      "ogTitleMatchesTitle": true,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "",
+      "imageCount": 0,
+      "imageBytes": 0
+    }
+  ],
+  "schemaTypeCounts": {
+    "Person": 7,
+    "WebSite": 7,
+    "ProfilePage": 1,
+    "CreativeWork": 1,
+    "SoftwareApplication": 1,
+    "Article": 3
+  },
+  "homepageGraphTypes": [
+    "Person",
+    "WebSite"
+  ],
+  "nameCoverage": {
+    "pages": 11,
+    "pagesWithNameInTitle": 11,
+    "pagesWithNameInDescription": 5,
+    "pagesWithNameInOgTitle": 11,
+    "pagesWithStructuredData": 7,
+    "pagesWithAdamAhsanInStructuredData": 7
+  },
+  "titleLengthOver60": 2,
+  "fontPreloads": 4,
+  "fontPreloadBytes": 119632,
+  "jsChunks": 10,
+  "jsBytes": 590484,
+  "jsBrotli": 148282,
+  "cssChunks": 2,
+  "cssBytes": 58167,
+  "cssBrotli": 10599,
+  "markdown": {
+    "files": 11,
+    "bytes": 60126,
+    "withAuthor": 3,
+    "withDates": 4,
+    "concatBugs": 0,
+    "skipLinkNoise": 0
+  },
+  "llms": {
+    "exists": true,
+    "bytes": 3167,
+    "lines": 33,
+    "hasPersonHeading": true,
+    "hasProfiles": true,
+    "hasPages": true,
+    "markdownLinks": 11
+  },
+  "llmsFull": {
+    "exists": true,
+    "bytes": 43005,
+    "sections": 10
+  },
+  "routes": {
+    "include": 11,
+    "hasHtmlVariants": false
+  },
+  "sitemapLastmodCount": 3,
+  "sitemapUrls": 10,
+  "siteDescription": {
+    "bytes": 1503,
+    "hasPerson": true,
+    "hasWebsite": true
+  },
+  "worker": {
+    "hasAlternateLink": true,
+    "hasLlmsDescribedby": true,
+    "securityHeaders": 4,
+    "hasJsonLdDescribedby": true
+  }
+}

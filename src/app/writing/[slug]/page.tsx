@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { createPageMetadata } from '@/lib/metadata'
 import { getPostBySlug, posts } from '@/lib/posts'
-import { SITE_URL } from '@/lib/site'
+import { createArticleGraph, serializeJsonLd } from '@/lib/schema'
 import '../../studio-pages.css'
 
 interface PostPageProps {
@@ -24,9 +24,11 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 
   return createPageMetadata({
     path: `/writing/${post.slug}`,
-    title: `${post.title} - Adam's Portfolio`,
+    title: post.title,
     description: post.excerpt,
     type: 'article',
+    publishedTime: `${post.publishedAt}T00:00:00+04:00`,
+    modifiedTime: `${post.updatedAt}T00:00:00+04:00`,
   })
 }
 
@@ -50,24 +52,13 @@ export default async function PostPage({ params }: PostPageProps) {
   const relatedPosts = posts.filter((item) => item.slug !== post.slug)
   const postNumber = String(posts.findIndex((item) => item.slug === post.slug) + 1).padStart(2, '0')
   const sourceLinks = post.sourceLinks ?? [{ label: 'Medium', href: post.sourceUrl }]
-  const articleJsonLd = JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: post.title,
+  const articleJsonLd = serializeJsonLd(createArticleGraph({
+    slug: post.slug,
+    title: post.title,
     description: post.excerpt,
-    datePublished: post.publishedAt,
-    dateModified: post.updatedAt,
-    author: {
-      '@type': 'Person',
-      name: 'Adam',
-    },
-    mainEntityOfPage: `${SITE_URL}/writing/${post.slug}`,
-    publisher: {
-      '@type': 'Organization',
-      name: "Adam's Portfolio",
-      url: SITE_URL,
-    },
-  })
+    publishedAt: post.publishedAt,
+    updatedAt: post.updatedAt,
+  }))
 
   return (
     <div className="studio-page studio-article-page">
@@ -81,8 +72,8 @@ export default async function PostPage({ params }: PostPageProps) {
             <span aria-hidden="true">←</span>{' '}All commentary
           </Link>
           <div className="studio-article-ledger studio-page-label">
-            <span>Commentary / {postNumber}</span>
-            <span><time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time> / {post.readingTime}</span>
+            <p>Commentary / {postNumber}</p>
+            <p><time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time> / {post.readingTime}</p>
           </div>
           <h1>{post.title}</h1>
           <p className="studio-article-dek">{post.excerpt}</p>
@@ -90,9 +81,8 @@ export default async function PostPage({ params }: PostPageProps) {
 
         <div className="studio-article-content">
           <aside className="studio-article-rail" aria-label="Article details">
-            <span>By Adam</span>
-            <span>{post.publishedAt.slice(0, 4)}</span>
-            <span>{post.readingTime}</span>
+            <p>By <Link href="/about" className="studio-article-author">Adam Ahsan</Link></p>
+            <p>{post.publishedAt.slice(0, 4)} / {post.readingTime}</p>
           </aside>
           <div className="studio-article-body">
             {post.sections.map((section) => (

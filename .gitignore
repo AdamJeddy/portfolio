@@ -42,3 +42,5 @@ yarn-error.log*
 next-env.d.ts
 .audit/*.png
 .audit/*/*.png
+# local preview mockups (ephemeral audit artefacts)
+.audit/previews/
