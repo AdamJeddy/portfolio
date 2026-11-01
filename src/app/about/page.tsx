@@ -5,27 +5,27 @@ import '../studio-pages.css'
 
 export const metadata = createPageMetadata({
   path: '/about',
-  title: 'About Adam Ahsan — Dubai Product & AI Builder',
+  title: 'About Adam Ahsan — Engineer & Product Thinker',
   absoluteTitle: true,
   description:
-    'Meet Adam Ahsan, a Dubai-based product and AI builder shaped by technology, creativity, and faith.',
+    'Meet Adam Ahsan, a Dubai-based engineer working where emerging technology meets product.',
 })
 
 const influences = [
   {
     title: 'Innovation',
     description:
-      'I\'m interested in ideas that question how things currently work and what becomes possible when someone is willing to build an alternative.',
+      'New tools matter to me when they change what a product can do, not just how it looks. That usually starts by questioning a default and building the alternative.',
   },
   {
     title: 'Arts',
     description:
-      'Films, books, other creative work influence how and what I work on.',
+      'Film, books, and design train the eye for rhythm, framing, and restraint — details that decide whether software feels considered.',
   },
   {
     title: 'Religion',
     description:
-      'Islam is an important part of who I am and shapes how I think about purpose and the work I put into the world.',
+      'Faith is a steady part of my life. It keeps purpose and integrity close to the work instead of treating them as a final polish.',
   },
 ]
 
@@ -33,17 +33,17 @@ const approaches = [
   {
     title: 'Make ideas tangible',
     description:
-      'I enjoy taking something abstract and working through it until it becomes real and useful.',
+      'An idea earns my attention once it has to survive real constraints: a working build, a real user, a deadline that does not move.',
   },
   {
     title: 'Keep the creative instinct',
     description:
-      'Good technology involves judgment, storytelling, taste, and attention to how something feels.',
+      'Engineering is only part of a good product. The rest is judgment — what to leave out, how it should feel, whether it is worth coming back to.',
   },
   {
     title: 'Build for people',
     description:
-      'The most exciting part of technology is its reach, the possibility that something you create can genuinely serve and solve problems for people you may never meet.',
+      'Software earns its place by removing friction for someone I may never meet. That reach is the part worth chasing.',
   },
 ]
 
@@ -51,7 +51,7 @@ const answers = [
   {
     question: 'Who is Adam Ahsan?',
     answer:
-      'Adam Ahsan is a Dubai-based product and AI builder. He led the technical integration of Layla AI inside the FACES app and created Qeemat, a local-first Android price tracker.',
+      'Adam Ahsan is an engineer and product thinker based in Dubai. He works where emerging technology meets real user needs — exploring what is newly possible and turning it into software people can use.',
   },
   {
     question: 'What is bruh.ae?',
@@ -61,7 +61,7 @@ const answers = [
   {
     question: 'What does Adam work on?',
     answer:
-      'AI products, conversational commerce, and local-first mobile apps built with React Native and TypeScript.',
+      'New technology and what it makes possible: evaluating emerging AI, shaping product direction, and building the backend and features that turn an idea into something people use.',
   },
   {
     question: 'Where is Adam based?',
@@ -70,7 +70,7 @@ const answers = [
   {
     question: 'How can I contact Adam?',
     answer:
-      'Email dev.ajx@proton.me, or connect on LinkedIn and X.',
+      'Email dev.ajx@proton.me, or connect on LinkedIn.',
   },
 ]
 
@@ -107,14 +107,14 @@ export default function AboutPage() {
             <span className="studio-about-h1-role">The person behind all of it.</span>
           </h1>
           <p className="studio-about-lead">
-            I&apos;m Adam Ahsan, based in Dubai. I build AI products and local-first
-            software, but the way I think has always been shaped by creativity.
+            I like being early to new technology — exploring what it can do, then
+            shaping it into products people actually use.
           </p>
           <p>
-            What excites me about tech is its ability to carry an idea far
-            beyond the person who created it. A useful product can reach people at scale and have an impact that
-            would otherwise feel impossible. This site — bruh.ae — is where I keep the
-            work and notes that come out of that.
+            Most of the work sits where product judgment meets engineering: AI
+            features, conversational products, and local-first apps. This site is
+            the running record — shipped projects, essays, and the experiments in
+            between.
           </p>
         </div>
 
@@ -200,15 +200,15 @@ export default function AboutPage() {
         <div className="studio-about-final-content">
           <h2 id="elsewhere-title" className="sr-only">Elsewhere</h2>
           <p className="studio-about-elsewhere">
-            Away from building, I&apos;m usually moving between running, cycling, and
-            swimming; watching films for inspiration; reading; doomscrolling and falling into a
+            Away from a screen, I&apos;m usually running, cycling, or swimming;
+            watching films for a change of perspective; reading; or falling down a
             rabbit hole that occasionally manages to justify the doomscrolling.
           </p>
           <div className="studio-about-cta">
-            <h3>Let&apos;s build something useful.</h3>
+            <h3>Let&apos;s make something useful.</h3>
             <p>
-              I&apos;m always open to meaningful projects, thoughtful collaborations,
-              and conversations that lead somewhere.
+              I&apos;m open to projects, collaborations, and conversations that go
+              somewhere.
             </p>
             <div className="studio-cta-row">
               <Link href="/contact" className="studio-page-action">Get in touch</Link>
