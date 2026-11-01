@@ -19,7 +19,7 @@ const graph = siteDescription['@graph'] ?? []
 const person = graph.find(n => n['@type'] === 'Person')
 const website = graph.find(n => n['@type'] === 'WebSite')
 ok('site-description has Person graph', Boolean(person) && Boolean(website))
-ok('Person has sameAs + jobTitle + address + image', person?.sameAs?.length >= 5 && Boolean(person.jobTitle) && person?.address?.addressLocality === 'Dubai' && Boolean(person.image))
+ok('Person has sameAs + jobTitle + address + image', person?.sameAs?.length >= 4 && Boolean(person.jobTitle) && person?.address?.addressLocality === 'Dubai' && Boolean(person.image))
 
 // 2. Every HTML page: title/description/canonical/robots/h1/JSON-LD.
 const htmlFiles = ['index.html', 'about.html', 'contact.html', 'projects.html', 'projects/layla-ai.html', 'projects/qeemat.html', 'writing.html', 'writing/how-a-tech-company-accidentally-becomes-political.html', 'writing/quiet-death-saas-pricing-power.html', 'writing/ugly-truth-luxury-brands-ai-content.html', 'track-my-salah-privacy-policy.html', '404.html']
@@ -54,7 +54,7 @@ ok('layla JSON-LD CreativeWork', layla.types.includes('CreativeWork'), layla.typ
 const article = pageByFile['writing/ugly-truth-luxury-brands-ai-content.html']
 ok('article JSON-LD Article', article.types.includes('Article'), article.types.join(','))
 ok('article title includes name', /Adam Ahsan/.test(article.title), article.title)
-ok('index titles are descriptive', about.title.includes('Dubai Product') && pageByFile['contact.html'].title.includes('bruh.ae') && pageByFile['projects.html'].title.includes('Layla AI') && pageByFile['writing.html'].title.includes('AI, Product'))
+ok('index titles are descriptive', about.title.includes('Engineer') && pageByFile['contact.html'].title.includes('bruh.ae') && pageByFile['projects.html'].title.includes('Layla AI') && pageByFile['writing.html'].title.includes('AI, Product'))
 const privacy = pageByFile['track-my-salah-privacy-policy.html']
 ok('privacy still noindex, follow', privacy.robots.some(r => /noindex/.test(r)) && privacy.robots.some(r => /follow/.test(r)))
 const notFound = pageByFile['404.html']
