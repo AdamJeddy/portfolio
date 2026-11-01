@@ -15,6 +15,7 @@ export function createMarkdownWorker(pages) {
   return {
     async fetch(request, env) {
       const url = new URL(request.url)
+      const isHomepage = url.pathname === '/'
       if (!['GET', 'HEAD'].includes(request.method) || !Object.hasOwn(pages, url.pathname)) {
         return env.ASSETS.fetch(request)
       }
@@ -27,6 +28,9 @@ export function createMarkdownWorker(pages) {
       }
       const asset = await env.ASSETS.fetch(assetRequest)
       const response = new Response(asset.body, asset)
+      if (isHomepage && (response.ok || response.status === 304)) {
+        response.headers.append('Link', '</site-description.jsonld>; rel="describedby"; type="application/ld+json"')
+      }
       const vary = response.headers.get('Vary')?.split(',').map(value => value.trim()) ?? []
       if (!vary.some(value => ['accept', '*'].includes(value.toLowerCase()))) vary.push('Accept')
       response.headers.set('Vary', vary.join(', '))

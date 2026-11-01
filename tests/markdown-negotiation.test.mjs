@@ -8,6 +8,18 @@ import { generateMarkdown, htmlToMarkdown } from '../scripts/generate-markdown.m
 
 const pages = { '/about': '/_markdown/about.md', '/about/': '/_markdown/about.md' }
 
+test('advertises the site description on homepage HTML and Markdown while preserving existing links', async () => {
+  const worker = createMarkdownWorker({ '/': '/_markdown/index.md', ...pages })
+  const ASSETS = { fetch: async () => new Response('content', { headers: { Link: '</existing>; rel="preload"' } }) }
+  for (const accept of ['text/html', 'text/markdown']) {
+    const response = await worker.fetch(new Request('https://bruh.ae/', { headers: { Accept: accept } }), { ASSETS })
+    assert.match(response.headers.get('Link'), /<\/existing>; rel="preload"/)
+    assert.match(response.headers.get('Link'), /<\/site-description\.jsonld>; rel="describedby"; type="application\/ld\+json"/)
+  }
+  const other = await worker.fetch(new Request('https://bruh.ae/about'), { ASSETS })
+  assert.doesNotMatch(other.headers.get('Link'), /describedby/)
+})
+
 function assets() {
   const requests = []
   return {
@@ -113,12 +125,15 @@ test('renders linked card headings as valid inline Markdown links', () => {
 test('builds Markdown and a deployable worker for exported routes, excluding error pages', async () => {
   const output = await mkdtemp(join(tmpdir(), 'portfolio-markdown-'))
   try {
-    const html = '<html><head><title>Portfolio</title><link rel="canonical" href="https://bruh.ae/"></head><body><main><h1>Adam</h1></main></body></html>'
+    const html = '<html><head><title>Portfolio</title><link rel="canonical" href="https://bruh.ae/"></head><body><main><h1>Adam</h1><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"https://bruh.ae"}</script></main></body></html>'
     await writeFile(join(output, 'index.html'), html)
     await writeFile(join(output, 'about.html'), html.replace('https://bruh.ae/', 'https://bruh.ae/about'))
     await writeFile(join(output, '404.html'), '<h1>Not found</h1>')
     await writeFile(join(output, '_not-found.html'), '<h1>Not found</h1>')
     await generateMarkdown(output)
+    const description = JSON.parse(await readFile(join(output, 'site-description.jsonld'), 'utf8'))
+    assert.equal(description['@type'], 'WebSite')
+    assert.equal(description.url, 'https://bruh.ae')
     const routes = JSON.parse(await readFile(join(output, '_routes.json'), 'utf8'))
     assert.deepEqual(routes.include.sort(), ['/', '/index.html', '/about', '/about/', '/about.html'].sort())
     assert.match(await readFile(join(output, '_markdown/index.md'), 'utf8'), /# Adam/)

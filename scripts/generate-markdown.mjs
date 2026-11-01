@@ -53,6 +53,13 @@ export async function generateMarkdown(outputDirectory) {
     if (name === '404.html' || name.startsWith('_not-found')) continue
     const html = await readFile(join(outputDirectory, file), 'utf8')
     const document = domino.createWindow(html).document
+    if (name === 'index.html') {
+      const scripts = [...document.querySelectorAll('script[type="application/ld+json"]')]
+      const description = scripts.map(script => JSON.parse(script.textContent))
+        .find(data => data['@type'] === 'WebSite')
+      if (!description) throw new Error('Homepage is missing WebSite structured data')
+      await writeFile(join(outputDirectory, 'site-description.jsonld'), `${JSON.stringify(description, null, 2)}\n`)
+    }
     const canonical = document.querySelector('link[rel="canonical"]')?.getAttribute('href')
     if (!canonical) throw new Error(`Missing canonical URL: ${file}`)
     const assetPath = `/_markdown/${name.replace(/\.html$/, '.md')}`
