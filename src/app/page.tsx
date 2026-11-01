@@ -1,25 +1,22 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Inter_Tight } from 'next/font/google'
 import SignalMotion from '@/components/SignalMotion'
 import { createPageMetadata } from '@/lib/metadata'
+import { createSiteGraph, serializeJsonLd } from '@/lib/schema'
 import { homepageProjects } from '@/lib/homepage-projects'
 import { posts } from '@/lib/posts'
 import { getProjectBySlug } from '@/lib/projects'
-import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site'
+import { PERSON_NAME, SITE_DESCRIPTION } from '@/lib/site'
 import './signal.css'
 
-const display = Inter_Tight({ subsets: ['latin'], display: 'swap', variable: '--font-signal' })
-
 export const metadata = createPageMetadata({
-  path: '/', title: "Adam's Portfolio",
-  description: 'Projects, commentary, and experiments by Adam.',
+  path: '/',
+  title: `${PERSON_NAME} — bruh.ae`,
+  description: SITE_DESCRIPTION,
+  absoluteTitle: true,
 })
-const websiteJsonLd = JSON.stringify({
-  '@context': 'https://schema.org', '@type': 'WebSite',
-  '@id': `${SITE_URL}/#website`, url: SITE_URL,
-  name: SITE_NAME, description: SITE_DESCRIPTION, inLanguage: 'en',
-})
+
+const siteJsonLd = serializeJsonLd(createSiteGraph())
 
 function Arrow({ light = false }: { light?: boolean }) {
   return <Image className={light ? 'signal-arrow signal-arrow-light' : 'signal-arrow'} src="/icons/arrow-up-right.svg" alt="" width={24} height={24} />
@@ -27,16 +24,22 @@ function Arrow({ light = false }: { light?: boolean }) {
 
 export default function Home() {
   return (
-    <div className={`signal-page ${display.variable}`}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: websiteJsonLd }} />
+    <div className="signal-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: siteJsonLd }} />
       <SignalMotion />
       <a className="signal-skip" href="#selected-work">Skip to selected work</a>
       <section className="signal-hero" aria-labelledby="signal-title">
         <h1 id="signal-title" className="signal-hero-title"><span>A slice of my life.</span></h1>
         <div className="signal-intro">
-          <div className="signal-identity"><p>Adam Ahsan</p><span className="signal-label">Dubai, UAE</span></div>
+          <div className="signal-identity">
+            <p><Link href="/about">{PERSON_NAME}</Link></p>
+            <span className="signal-label">Dubai, UAE</span>
+          </div>
           <div className="signal-intro-copy">
             <p>Pieces of my life,<br />in public.</p>
+            <p className="signal-intro-note">
+              This is bruh.ae — the portfolio of {PERSON_NAME}: AI products, local-first apps, and commentary.
+            </p>
             <a className="signal-link" href="#selected-work">See what I am building <Arrow /></a>
           </div>
         </div>

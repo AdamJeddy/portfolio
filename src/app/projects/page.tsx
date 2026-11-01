@@ -6,15 +6,17 @@ import { homepageProjects } from '@/lib/homepage-projects'
 import { getProjectBySlug } from '@/lib/projects'
 
 export const metadata = createPageMetadata({
-  path: '/projects', title: "Projects — Adam's Portfolio",
-  description: 'Things Adam is building, exploring, and learning through.',
+  path: '/projects',
+  title: 'Projects',
+  description:
+    'Selected work by Adam Ahsan: Layla AI inside the FACES app, Qeemat, and other projects and experiments.',
 })
 
 export default function Projects() {
   return (
     <>
       <section className="studio-index-hero" aria-labelledby="projects-title">
-        <p className="studio-label">Selected work</p>
+        <p className="studio-label">Selected work by Adam Ahsan</p>
         <h1 id="projects-title">Things I&apos;m building.</h1>
         <p>Projects, experiments, and ideas I wanted to make real.</p>
       </section>

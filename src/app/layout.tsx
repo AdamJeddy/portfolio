@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter_Tight, Oswald, Space_Grotesk, Geist, Geist_Mono } from 'next/font/google'
+import { Inter_Tight, Space_Grotesk, Geist, Geist_Mono } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import GridProvider from '@/components/grid/GridProvider'
@@ -8,18 +8,12 @@ import Nav from '@/components/layout/Nav'
 import SignalSweep from '@/components/SignalSweep'
 import {
   GA_MEASUREMENT_ID,
+  PERSON_NAME,
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
   X_HANDLE,
 } from '@/lib/site'
-
-const oswald = Oswald({
-  subsets: ['latin'],
-  variable: '--next-font-oswald',
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
-})
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -47,16 +41,24 @@ const interTight = Inter_Tight({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: SITE_NAME,
+  title: {
+    default: `${PERSON_NAME} — bruh.ae`,
+    template: `%s — ${PERSON_NAME}`,
+  },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
-  creator: 'Adam',
+  authors: [{ name: PERSON_NAME, url: `${SITE_URL}/about` }],
+  creator: PERSON_NAME,
   publisher: SITE_NAME,
   twitter: {
     creator: X_HANDLE,
   },
   icons: {
-    icon: '/favicon.svg',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon-512.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: '/apple-icon.png',
   },
 }
 
@@ -64,7 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${oswald.variable} ${spaceGrotesk.variable} ${geistSans.variable} ${geistMono.variable} ${interTight.variable}`}
+      className={`${spaceGrotesk.variable} ${geistSans.variable} ${geistMono.variable} ${interTight.variable}`}
     >
       <body>
         <Script

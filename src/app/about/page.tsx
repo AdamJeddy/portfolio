@@ -1,11 +1,13 @@
 import Link from 'next/link'
 import { createPageMetadata } from '@/lib/metadata'
+import { createAboutPageGraph, serializeJsonLd } from '@/lib/schema'
 import '../studio-pages.css'
 
 export const metadata = createPageMetadata({
   path: '/about',
-  title: 'About Adam — Projects, Commentary & Experiments',
-  description: 'Meet Adam, a Dubai-based builder shaped by technology, creativity, and faith.',
+  title: 'About',
+  description:
+    'Meet Adam Ahsan, a Dubai-based product and AI builder shaped by technology, creativity, and faith.',
 })
 
 const influences = [
@@ -44,6 +46,35 @@ const approaches = [
   },
 ]
 
+const answers = [
+  {
+    question: 'Who is Adam Ahsan?',
+    answer:
+      'Adam Ahsan is a Dubai-based product and AI builder. He led the technical integration of Layla AI inside the FACES app and created Qeemat, a local-first Android price tracker.',
+  },
+  {
+    question: 'What is bruh.ae?',
+    answer:
+      'bruh.ae is Adam Ahsan\'s personal portfolio: selected work, commentary, and experiments.',
+  },
+  {
+    question: 'What does Adam work on?',
+    answer:
+      'AI products, conversational commerce, and local-first mobile apps built with React Native and TypeScript.',
+  },
+  {
+    question: 'Where is Adam based?',
+    answer: 'Dubai, UAE.',
+  },
+  {
+    question: 'How can I contact Adam?',
+    answer:
+      'Email dev.ajx@proton.me, or connect on LinkedIn and X.',
+  },
+]
+
+const aboutJsonLd = serializeJsonLd(createAboutPageGraph())
+
 function DossierRail({
   index,
   label,
@@ -65,19 +96,24 @@ function DossierRail({
 export default function AboutPage() {
   return (
     <div className="studio-page studio-about-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: aboutJsonLd }} />
       <section className="studio-about-hero" aria-labelledby="about-title">
         <DossierRail index="01" label="About" detail="Personal dossier" />
 
         <div className="studio-about-hero-copy">
-          <h1 id="about-title">The person behind all of it.</h1>
+          <h1 id="about-title">
+            Adam Ahsan{' '}
+            <span className="studio-about-h1-role">The person behind all of it.</span>
+          </h1>
           <p className="studio-about-lead">
-            I&apos;m Adam, based in Dubai. I build with technology, but the way I
-            think has always been shaped by creativity.
+            I&apos;m Adam Ahsan, based in Dubai. I build AI products and local-first
+            software, but the way I think has always been shaped by creativity.
           </p>
           <p>
             What excites me about tech is its ability to carry an idea far
             beyond the person who created it. A useful product can reach people at scale and have an impact that
-            would otherwise feel impossible.
+            would otherwise feel impossible. This site — bruh.ae — is where I keep the
+            work and notes that come out of that.
           </p>
         </div>
 
@@ -88,11 +124,29 @@ export default function AboutPage() {
           </div>
           <div>
             <dt>Focus</dt>
-            <dd>Technology × Creativity</dd>
+            <dd>AI products × software</dd>
+          </div>
+          <div>
+            <dt>Selected work</dt>
+            <dd>Layla AI at FACES, Qeemat</dd>
           </div>
           <div>
             <dt>Mindset</dt>
             <dd>Build things that matter.</dd>
+          </div>
+          <div>
+            <dt>Contact</dt>
+            <dd><a href="mailto:dev.ajx@proton.me">dev.ajx@proton.me</a></dd>
+          </div>
+          <div>
+            <dt>Profiles</dt>
+            <dd>
+              <a href="https://github.com/AdamJeddy" target="_blank" rel="noopener noreferrer me">GitHub</a>
+              {' · '}
+              <a href="https://www.linkedin.com/in/adamahsan/" target="_blank" rel="noopener noreferrer me">LinkedIn</a>
+              {' · '}
+              <a href="https://x.com/A7damn" target="_blank" rel="noopener noreferrer me">X</a>
+            </dd>
           </div>
         </dl>
       </section>
@@ -125,8 +179,23 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section className="studio-about-section studio-about-faq-section" aria-labelledby="answers-title">
+        <DossierRail index="04" label="Answers" detail="Quick facts" />
+        <div className="studio-about-faq">
+          <h2 id="answers-title" className="sr-only">Quick answers about Adam Ahsan</h2>
+          <dl>
+            {answers.map((item) => (
+              <div key={item.question}>
+                <dt>{item.question}</dt>
+                <dd>{item.answer}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
       <section className="studio-about-section studio-about-final" aria-labelledby="elsewhere-title">
-        <DossierRail index="04" label="Elsewhere" detail="What’s next" />
+        <DossierRail index="05" label="Elsewhere" detail="What’s next" />
         <div className="studio-about-final-content">
           <h2 id="elsewhere-title" className="sr-only">Elsewhere</h2>
           <p className="studio-about-elsewhere">
@@ -145,10 +214,26 @@ export default function AboutPage() {
               <a
                 href="https://github.com/AdamJeddy"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer me"
                 className="studio-page-action"
               >
                 GitHub ↗
+              </a>
+              <a
+                href="https://www.linkedin.com/in/adamahsan/"
+                target="_blank"
+                rel="noopener noreferrer me"
+                className="studio-page-action"
+              >
+                LinkedIn ↗
+              </a>
+              <a
+                href="https://x.com/A7damn"
+                target="_blank"
+                rel="noopener noreferrer me"
+                className="studio-page-action"
+              >
+                X ↗
               </a>
             </div>
           </div>

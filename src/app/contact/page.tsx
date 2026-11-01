@@ -1,11 +1,15 @@
 import { createPageMetadata } from '@/lib/metadata'
+import { PROFILE_URLS } from '@/lib/schema'
 import '../studio-pages.css'
 
 export const metadata = createPageMetadata({
   path: '/contact',
-  title: "Contact Adam",
-  description: 'Get in touch with Adam about AI, product work, or useful things to build.',
+  title: 'Contact',
+  description:
+    'Get in touch with Adam Ahsan about AI, product work, or useful things to build.',
 })
+
+const [github, linkedin, x, medium] = PROFILE_URLS
 
 export default function ContactPage() {
   return (
@@ -34,11 +38,7 @@ export default function ContactPage() {
         </div>
         <ul className="studio-contact-links">
           <li>
-            <a
-              href="https://github.com/AdamJeddy"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={github} target="_blank" rel="noopener noreferrer me">
               <span className="studio-page-label">01</span>
               <span>GitHub</span>
               <span>Code and projects</span>
@@ -46,14 +46,26 @@ export default function ContactPage() {
             </a>
           </li>
           <li>
-            <a
-              href="https://www.linkedin.com/in/adamahsan/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={linkedin} target="_blank" rel="noopener noreferrer me">
               <span className="studio-page-label">02</span>
               <span>LinkedIn</span>
               <span>Professional profile</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a href={x} target="_blank" rel="noopener noreferrer me">
+              <span className="studio-page-label">03</span>
+              <span>X</span>
+              <span>Notes and links</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a href={medium} target="_blank" rel="noopener noreferrer me">
+              <span className="studio-page-label">04</span>
+              <span>Medium</span>
+              <span>Original publications</span>
               <span aria-hidden="true">↗</span>
             </a>
           </li>

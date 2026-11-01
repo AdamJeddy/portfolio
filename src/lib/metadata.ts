@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import {
   DEFAULT_SOCIAL_IMAGE,
+  DEFAULT_SOCIAL_IMAGE_ALT,
+  PERSON_NAME,
   SITE_NAME,
   SITE_URL,
   X_HANDLE,
@@ -11,6 +13,12 @@ interface PageMetadataOptions {
   title: string
   description: string
   type?: 'website' | 'article'
+  /** Use the title verbatim instead of running it through the root title template. */
+  absoluteTitle?: boolean
+  image?: string
+  imageAlt?: string
+  publishedTime?: string
+  modifiedTime?: string
 }
 
 export function createPageMetadata({
@@ -18,19 +26,26 @@ export function createPageMetadata({
   title,
   description,
   type = 'website',
+  absoluteTitle = false,
+  image = DEFAULT_SOCIAL_IMAGE,
+  imageAlt = DEFAULT_SOCIAL_IMAGE_ALT,
+  publishedTime,
+  modifiedTime,
 }: PageMetadataOptions): Metadata {
   const url = new URL(path, SITE_URL)
-  const socialImage = new URL(DEFAULT_SOCIAL_IMAGE, SITE_URL)
-  const socialImageAlt = 'Abstract dark text-canvas texture with a warm amber accent.'
+  const socialImage = new URL(image, SITE_URL)
+  // Next only templates <title>; social cards read their own title fields, so
+  // resolve the same full title here to keep the name-bearing suffix everywhere.
+  const resolvedTitle = absoluteTitle ? title : `${title} — ${PERSON_NAME}`
 
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     alternates: { canonical: url },
     openGraph: {
       type,
       url,
-      title,
+      title: resolvedTitle,
       description,
       siteName: SITE_NAME,
       images: [
@@ -38,19 +53,26 @@ export function createPageMetadata({
           url: socialImage,
           width: 1200,
           height: 630,
-          alt: socialImageAlt,
+          alt: imageAlt,
         },
       ],
+      ...(type === 'article'
+        ? {
+            publishedTime,
+            modifiedTime,
+            authors: [SITE_NAME],
+          }
+        : {}),
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      title: resolvedTitle,
       description,
       creator: X_HANDLE,
       images: [
         {
           url: socialImage,
-          alt: socialImageAlt,
+          alt: imageAlt,
         },
       ],
     },

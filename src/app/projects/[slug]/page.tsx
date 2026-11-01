@@ -5,9 +5,11 @@ import Link from 'next/link'
 import LaylaShowcase from '@/components/projects/LaylaShowcase'
 import ProjectShowcase from '@/components/media/ProjectShowcase'
 import { createPageMetadata } from '@/lib/metadata'
+import { personReference, PERSON_ID, serializeJsonLd, WEBSITE_ID } from '@/lib/schema'
 import { homepageProjects } from '@/lib/homepage-projects'
 import { getProjectStudy } from '@/lib/project-studies'
 import { getProjectBySlug, projects } from '@/lib/projects'
+import { PERSON_NAME, SITE_URL } from '@/lib/site'
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>
@@ -23,8 +25,38 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   if (!project) return {}
   return createPageMetadata({
     path: `/projects/${project.slug}`,
-    title: project.slug === 'qeemat' ? 'Qeemat — UAE Price Tracker for Android' : `${project.title} — Adam's Portfolio`,
+    title: project.slug === 'qeemat' ? 'Qeemat: UAE Price Tracker for Android' : project.title,
     description: project.description,
+  })
+}
+
+function projectJsonLd(slug: 'qeemat' | 'layla-ai', description: string) {
+  const url = `${SITE_URL}/projects/${slug}`
+  if (slug === 'qeemat') {
+    return serializeJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      '@id': `${url}#software`,
+      name: 'Qeemat',
+      description,
+      applicationCategory: 'UtilitiesApplication',
+      operatingSystem: 'Android',
+      url,
+      author: personReference,
+      codeRepository: 'https://github.com/AdamJeddy/Qeemat',
+      isPartOf: { '@id': WEBSITE_ID },
+    })
+  }
+  return serializeJsonLd({
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    '@id': `${url}#work`,
+    name: 'Layla AI',
+    description,
+    url,
+    creator: { '@type': 'Person', '@id': PERSON_ID, name: PERSON_NAME, url: `${SITE_URL}/about` },
+    contributor: personReference,
+    isPartOf: { '@id': WEBSITE_ID },
   })
 }
 
@@ -35,13 +67,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const feature = homepageProjects.find(item => item.slug === slug)
   const study = getProjectStudy(slug)
   const otherProjects = projects.filter(item => item.slug !== slug)
+  const structuredData = projectJsonLd(project.slug as 'qeemat' | 'layla-ai', project.description)
 
   if (project.slug === 'layla-ai') {
-    return <LaylaShowcase project={project} />
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
+        <LaylaShowcase project={project} />
+      </>
+    )
   }
 
   return (
     <article className={`studio-case studio-case--${slug}`}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
       <section className="studio-case-hero" aria-labelledby="case-title">
         <Link className="studio-back studio-label" href="/projects">All projects</Link>
         <div className="studio-case-grid">
@@ -52,6 +91,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
             <h1 id="case-title">{project.title}</h1>
             <p className="studio-case-summary">{feature?.summary ?? project.description}</p>
+            <p className="studio-case-author">
+              Built by <Link href="/about">{PERSON_NAME}</Link>.
+            </p>
             {study && <dl className="studio-facts">
               <div><dt>My role</dt><dd>{study.role}</dd></div>
               <div><dt>Focus</dt><dd>{study.focus}</dd></div>
