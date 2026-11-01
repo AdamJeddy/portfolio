@@ -7,16 +7,17 @@
     "dev": "next dev",
     "build": "next build && node scripts/generate-markdown.mjs",
     "test": "node --test tests/*.test.mjs",
-    "start": "next start",
     "lint": "eslint src --max-warnings=0",
-    "preview": "npx serve -l 3000 ."
+    "preview": "npx serve out -l 3000"
+  },
+  "engines": {
+    "node": ">=22.18"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.2.1",
     "@types/node": "^25.4.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "autoprefixer": "^10.4.27",
     "next": "^16.1.6",
     "postcss": "^8.5.8",
     "react": "^19.2.4",

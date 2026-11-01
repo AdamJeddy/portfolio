@@ -5,8 +5,10 @@ import '../studio-pages.css'
 
 export const metadata = createPageMetadata({
   path: '/writing',
-  title: "Commentary — Adam's Portfolio",
-  description: 'Commentary, thoughts, and observations by Adam.',
+  title: 'Commentary by Adam Ahsan — AI, Product & Luxury',
+  absoluteTitle: true,
+  description:
+    'Essays and commentary by Adam Ahsan on AI, products, luxury, and the choices that shape them.',
 })
 
 export default function Content() {
@@ -17,7 +19,9 @@ export default function Content() {
           <p className="studio-page-label">Commentary / Field notes</p>
           <h1 id="writing-title">Yaps, and thoughts.</h1>
         </div>
-        <p className="studio-page-intro">Notes on AI, products, and the choices that shape them.</p>
+        <p className="studio-page-intro">
+          Essays and commentary by Adam Ahsan on AI, products, and the choices that shape them.
+        </p>
       </section>
 
       <section className="studio-writing-list" aria-label="Commentary">
@@ -31,8 +35,7 @@ export default function Content() {
                   <p>{post.excerpt}</p>
                 </div>
                 <span className="studio-page-meta studio-writing-row-meta">
-                  <span>{post.publishedAt.slice(0, 4)}</span>
-                  <span>{post.readingTime}</span>
+                  <span>{post.publishedAt.slice(0, 4)} / {post.readingTime}</span>
                 </span>
                 <span className="studio-writing-row-arrow" aria-hidden="true">↗</span>
               </Link>

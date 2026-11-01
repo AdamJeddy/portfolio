@@ -1,11 +1,16 @@
 import { createPageMetadata } from '@/lib/metadata'
+import { PROFILE_LINKS } from '@/lib/schema'
 import '../studio-pages.css'
 
 export const metadata = createPageMetadata({
   path: '/contact',
-  title: "Contact Adam",
-  description: 'Get in touch with Adam about AI, product work, or useful things to build.',
+  title: 'Contact Adam Ahsan — bruh.ae',
+  absoluteTitle: true,
+  description:
+    'Get in touch with Adam Ahsan about AI, product work, or useful things to build.',
 })
+
+const { github, linkedin, medium, substack } = PROFILE_LINKS
 
 export default function ContactPage() {
   return (
@@ -34,26 +39,34 @@ export default function ContactPage() {
         </div>
         <ul className="studio-contact-links">
           <li>
-            <a
-              href="https://github.com/AdamJeddy"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="studio-page-label">01</span>
+            <a href={github} target="_blank" rel="noopener noreferrer me">
+              <span className="studio-page-label" aria-hidden="true">01</span>
               <span>GitHub</span>
               <span>Code and projects</span>
               <span aria-hidden="true">↗</span>
             </a>
           </li>
           <li>
-            <a
-              href="https://www.linkedin.com/in/adamahsan/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="studio-page-label">02</span>
+            <a href={linkedin} target="_blank" rel="noopener noreferrer me">
+              <span className="studio-page-label" aria-hidden="true">02</span>
               <span>LinkedIn</span>
               <span>Professional profile</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a href={medium} target="_blank" rel="noopener noreferrer me">
+              <span className="studio-page-label" aria-hidden="true">03</span>
+              <span>Medium</span>
+              <span>Original publications</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a href={substack} target="_blank" rel="noopener noreferrer me">
+              <span className="studio-page-label" aria-hidden="true">04</span>
+              <span>Substack</span>
+              <span>Essays and notes</span>
               <span aria-hidden="true">↗</span>
             </a>
           </li>

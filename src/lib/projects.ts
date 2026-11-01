@@ -9,11 +9,7 @@ export interface ProjectItem {
   description: string
   details?: string[]
   links: ProjectLink[]
-  image?: string
-  note?: string
   year?: number
-  icon?: string
-  words: string[]
 }
 
 export const projects: ProjectItem[] = [
@@ -23,7 +19,7 @@ export const projects: ProjectItem[] = [
     description: 'The region’s first large-scale AI beauty assistant, built into the FACES app for personalized advice, product recommendations, and in-chat shopping.',
     details: [
       'Layla AI is the region’s first large-scale AI beauty assistant, built into the FACES app. Customers can chat for instant beauty advice, receive personalized product recommendations, and add products to their bag directly from the conversation. The experience spans skincare, makeup, fragrance, and haircare.',
-      'I led the technical side of the project and its integration into the FACES app, helping turn the assistant into a customer-facing beauty shopping experience.',
+      'I built Layla’s core: the backend and the AI features behind her conversational guidance. The FACES app’s screens and shop surfaces were built by the app team; my work powered the experience inside it.',
     ],
     links: [
       {
@@ -39,14 +35,7 @@ export const projects: ProjectItem[] = [
         href: 'https://www.chalhoubgroup.com/en/media/330/chalhoub-group-debuts-a-proprietary-generative-ai-engine-that-drives-25x-higher-conversions-and-reshapes-digital-beauty-retail-in-the-middle-east',
       },
     ],
-    image: '/images/layla-ai/layla-ai-experience.webp',
-    note: 'Work in progress — Layla recently received a UI facelift and a broader product update. I’ll be updating this page with the new experience soon.',
     year: 2025,
-    words: [
-      'beauty', 'assistant', 'chat', 'advice', 'recommendation', 'product', 'shopping',
-      'personalized', 'fragrance', 'skincare', 'routine', 'discovery', 'catalog', 'bag',
-      'commerce', 'customer', 'integration', 'mobile', 'FACES', 'AI',
-    ],
   },
   {
     slug: 'qeemat',
@@ -60,12 +49,6 @@ export const projects: ProjectItem[] = [
       { label: 'View code', href: 'https://github.com/AdamJeddy/Qeemat' },
     ],
     year: 2026,
-    icon: '◆',
-    words: [
-      'price', 'track', 'scan', 'check', 'notify', 'local', 'offline', 'store', 'product', 'snapshot',
-      'history', 'drop', 'alert', 'background', 'parse', 'fetch', 'currency', 'AED', 'UAE', 'noon',
-      'nike', 'ounass', 'amazon', 'favorite', 'watchlist', 'activity', 'schedule', 'permission',
-    ],
   },
 ]
 

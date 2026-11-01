@@ -12,14 +12,12 @@ export interface PostItem {
   slug: string
   title: string
   excerpt: string
-  image?: string
   publishedAt: string
   updatedAt: string
   readingTime: string
   sourceUrl: string
   sourceLinks?: PostSource[]
   sections: PostSection[]
-  words: string[]
 }
 
 export const posts: PostItem[] = [
@@ -93,10 +91,6 @@ export const posts: PostItem[] = [
         ],
       },
     ],
-    words: [
-      'facebook', 'platform', 'government', 'politics', 'power', 'governance', 'ai',
-      'product', 'policy', 'community standards', 'whatsapp', 'meta', 'public life',
-    ],
   },
   {
     slug: 'ugly-truth-luxury-brands-ai-content',
@@ -136,11 +130,6 @@ export const posts: PostItem[] = [
         ],
       },
     ],
-    words: [
-      'luxury', 'brand', 'standard', 'taste', 'output', 'control', 'feeling', 'finish',
-      'process', 'tool', 'creative', 'production', 'guardian', 'judgment', 'speed',
-      'quality', 'emotional', 'code', 'belief', 'memory', 'traditional', 'generated',
-    ],
   },
   {
     slug: 'quiet-death-saas-pricing-power',
@@ -179,11 +168,6 @@ export const posts: PostItem[] = [
           'A business that relies on inertia should assume inertia has an expiry date. A business that solves a painful, specific problem better than an internal team can should make that advantage obvious in the product, the pricing, and every customer conversation.',
         ],
       },
-    ],
-    words: [
-      'saas', 'pricing', 'renewal', 'margin', 'moat', 'automation', 'ai', 'product',
-      'software', 'founder', 'customer', 'seat', 'churn', 'retention', 'strategy',
-      'competition', 'workflow', 'value', 'internal', 'build', 'leverage',
     ],
   },
 ]
