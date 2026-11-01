@@ -1,12 +1,48 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { createMarkdownWorker } from '../cloudflare/markdown-worker.mjs'
-import { generateMarkdown, htmlToMarkdown } from '../scripts/generate-markdown.mjs'
+import { MAX_ROUTE_RULES, buildRoutes, generateMarkdown, htmlToMarkdown } from '../scripts/generate-markdown.mjs'
 
 const pages = { '/about': '/_markdown/about.md', '/about/': '/_markdown/about.md' }
+
+const homepageGraph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': 'https://bruh.ae/#person',
+      name: 'Adam Ahsan',
+      url: 'https://bruh.ae/about',
+      description: 'Adam Ahsan is a Dubai-based builder working on AI products and software.',
+      jobTitle: 'Builder',
+      address: { '@type': 'PostalAddress', addressLocality: 'Dubai', addressCountry: 'AE' },
+      sameAs: [
+        'https://github.com/AdamJeddy',
+        'https://www.linkedin.com/in/adamahsan/',
+        'https://x.com/A7damn',
+        'https://medium.com/@uhdam',
+        'https://uhwriter.substack.com/',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://bruh.ae/#website',
+      url: 'https://bruh.ae',
+      name: 'Adam Ahsan',
+      alternateName: ['bruh.ae', 'BRUH'],
+      description: "bruh.ae is Adam Ahsan's personal portfolio: selected projects, commentary, and experiments.",
+    },
+  ],
+}
+
+function pageHtml({ title, description, canonical, jsonLd, main = '<h1>Page</h1>', extraHead = '' }) {
+  const meta = description ? `<meta name="description" content="${description}">` : ''
+  const structuredData = jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>` : ''
+  return `<!doctype html><html><head><title>${title}</title>${meta}<link rel="canonical" href="${canonical}">${extraHead}</head><body>${structuredData}<main>${main}</main></body></html>`
+}
 
 test('advertises the site description on homepage HTML and Markdown while preserving existing links', async () => {
   const worker = createMarkdownWorker({ '/': '/_markdown/index.md', ...pages })
@@ -17,7 +53,41 @@ test('advertises the site description on homepage HTML and Markdown while preser
     assert.match(response.headers.get('Link'), /<\/site-description\.jsonld>; rel="describedby"; type="application\/ld\+json"/)
   }
   const other = await worker.fetch(new Request('https://bruh.ae/about'), { ASSETS })
-  assert.doesNotMatch(other.headers.get('Link'), /describedby/)
+  assert.match(other.headers.get('Link'), /<\/llms\.txt>; rel="describedby"/)
+  assert.doesNotMatch(other.headers.get('Link'), /site-description\.jsonld/)
+})
+
+test('advertises absolute Markdown alternates and the llms.txt index on every mapped page response', async () => {
+  const worker = createMarkdownWorker({ '/': '/_markdown/index.md', ...pages, '/about.html': '/_markdown/about.md' })
+  const ASSETS = { fetch: async () => new Response('content') }
+  for (const pathname of ['/about', '/about/', '/about.html']) {
+    const response = await worker.fetch(new Request(`https://bruh.ae${pathname}`), { ASSETS })
+    const link = response.headers.get('Link')
+    assert.match(link, /<https:\/\/bruh\.ae\/_markdown\/about\.md>; rel="alternate"; type="text\/markdown"/)
+    assert.match(link, /<\/llms\.txt>; rel="describedby"; type="text\/plain"/)
+    assert.doesNotMatch(link, /site-description\.jsonld/)
+  }
+  const response = await worker.fetch(new Request('https://bruh.ae/', { headers: { Accept: 'text/markdown' } }), { ASSETS })
+  const link = response.headers.get('Link')
+  assert.match(link, /<https:\/\/bruh\.ae\/_markdown\/index\.md>; rel="alternate"; type="text\/markdown"/)
+  assert.match(link, /<\/llms\.txt>; rel="describedby"; type="text\/plain"/)
+  assert.match(link, /<\/site-description\.jsonld>; rel="describedby"; type="application\/ld\+json"/)
+  assert.ok(link.indexOf('rel="alternate"') < link.indexOf('</llms.txt>'), 'alternate link comes before describedby links')
+  assert.ok(link.indexOf('</llms.txt>') < link.indexOf('</site-description.jsonld>'), 'llms.txt comes before the JSON-LD description')
+})
+
+test('adds security headers to page responses but not static assets', async () => {
+  const worker = createMarkdownWorker({ ...pages })
+  const ASSETS = { fetch: async () => new Response('content') }
+  const response = await worker.fetch(new Request('https://bruh.ae/about', { headers: { Accept: 'text/markdown' } }), { ASSETS })
+  assert.equal(response.headers.get('X-Content-Type-Options'), 'nosniff')
+  assert.equal(response.headers.get('Referrer-Policy'), 'strict-origin-when-cross-origin')
+  assert.equal(response.headers.get('Permissions-Policy'), 'camera=(), microphone=(), geolocation=()')
+  assert.equal(response.headers.get('X-Frame-Options'), 'DENY')
+  const asset = await worker.fetch(new Request('https://bruh.ae/_next/static/app.js', { headers: { Accept: 'text/markdown' } }), { ASSETS })
+  for (const header of ['X-Content-Type-Options', 'Referrer-Policy', 'Permissions-Policy', 'X-Frame-Options']) {
+    assert.equal(asset.headers.get(header), null, `${header} should not be added to static asset responses`)
+  }
 })
 
 function assets() {
@@ -95,6 +165,7 @@ test('preserves Markdown asset validators and does not label errors as Markdown'
   } })
   assert.equal(missing.status, 404)
   assert.equal(missing.headers.get('Content-Type'), 'text/plain')
+  assert.equal(missing.headers.get('Link'), null)
 })
 
 test('converts main content with metadata, headings, lists and absolute links, stripping layout and scripts', () => {
@@ -122,6 +193,194 @@ test('renders linked card headings as valid inline Markdown links', () => {
   assert.doesNotMatch(markdown, /\[\s*\n/)
 })
 
+test('lifts author and article dates from JSON-LD into Markdown frontmatter', () => {
+  const article = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'The Quiet Death of SaaS Pricing Power',
+    datePublished: '2026-07-16T09:00:00+04:00',
+    dateModified: '2026-07-20T18:30:00+04:00',
+    author: { '@type': 'Person', '@id': 'https://bruh.ae/#person', name: 'Adam Ahsan', url: 'https://bruh.ae/about' },
+  }
+  const markdown = htmlToMarkdown(pageHtml({
+    title: 'The Quiet Death of SaaS Pricing Power',
+    canonical: 'https://bruh.ae/writing/quiet-death-saas-pricing-power',
+    jsonLd: article,
+    main: '<h1>The Quiet Death of SaaS Pricing Power</h1><time datetime="2026-07-16">July 16, 2026</time>',
+  }), 'https://bruh.ae/writing/quiet-death-saas-pricing-power')
+  assert.match(markdown, /^---\n/)
+  assert.match(markdown, /author: "Adam Ahsan"/)
+  assert.match(markdown, /datePublished: "2026-07-16T09:00:00\+04:00"/)
+  assert.match(markdown, /dateModified: "2026-07-20T18:30:00\+04:00"/)
+  assert.match(markdown, /site: "bruh\.ae"/)
+})
+
+test('resolves a referenced article author and falls back to time[datetime] for the published date', () => {
+  const graph = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'Person', '@id': 'https://bruh.ae/#person', name: 'Adam Ahsan' },
+      { '@type': 'Article', headline: 'An article', author: { '@id': 'https://bruh.ae/#person' } },
+    ],
+  }
+  const markdown = htmlToMarkdown(pageHtml({
+    title: 'An article',
+    canonical: 'https://bruh.ae/writing/an-article',
+    jsonLd: graph,
+    main: '<h1>An article</h1><time datetime="2026-07-16T09:00:00+04:00">July 16, 2026</time>',
+  }), 'https://bruh.ae/writing/an-article')
+  assert.match(markdown, /author: "Adam Ahsan"/)
+  assert.match(markdown, /datePublished: "2026-07-16T09:00:00\+04:00"/)
+  assert.doesNotMatch(markdown, /dateModified:/)
+})
+
+test('lifts dateModified from a page node when there is no Article JSON-LD', () => {
+  const markdown = htmlToMarkdown(pageHtml({
+    title: 'About',
+    canonical: 'https://bruh.ae/about',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'ProfilePage',
+      url: 'https://bruh.ae/about',
+      name: 'About Adam Ahsan',
+      dateModified: '2026-11-01',
+      mainEntity: { '@id': 'https://bruh.ae/#person' },
+    },
+    main: '<h1>About Adam Ahsan</h1>',
+  }), 'https://bruh.ae/about')
+  assert.match(markdown, /dateModified: "2026-11-01"/)
+  assert.doesNotMatch(markdown, /datePublished:/)
+  assert.doesNotMatch(markdown, /^author:/m)
+})
+
+test('omits author and date frontmatter when the page has no structured data for them', () => {
+  const markdown = htmlToMarkdown(pageHtml({
+    title: 'Contact',
+    canonical: 'https://bruh.ae/contact',
+    main: '<h1>Contact</h1>',
+  }), 'https://bruh.ae/contact')
+  assert.match(markdown, /title: "Contact"/)
+  assert.match(markdown, /url: "https:\/\/bruh\.ae\/contact"/)
+  assert.match(markdown, /site: "bruh\.ae"/)
+  assert.doesNotMatch(markdown, /^author:/m)
+  assert.doesNotMatch(markdown, /^datePublished:/m)
+  assert.doesNotMatch(markdown, /^dateModified:/m)
+})
+
+test('generates llms.txt, llms-full.txt, the full homepage graph, and clean routes for a Person+WebSite graph', async () => {
+  const output = await mkdtemp(join(tmpdir(), 'portfolio-markdown-'))
+  try {
+    await mkdir(join(output, 'writing'), { recursive: true })
+    await writeFile(join(output, 'index.html'), pageHtml({
+      title: 'Adam Ahsan — Portfolio',
+      description: "bruh.ae is Adam Ahsan's personal portfolio.",
+      canonical: 'https://bruh.ae/',
+      jsonLd: homepageGraph,
+      main: '<h1>A slice of my life.</h1><p>Adam Ahsan</p>',
+    }))
+    await writeFile(join(output, 'about.html'), pageHtml({
+      title: 'About Adam Ahsan',
+      description: 'A short bio.',
+      canonical: 'https://bruh.ae/about',
+      main: '<h1>About Adam Ahsan</h1><p>A short bio.</p>',
+    }))
+    await writeFile(join(output, 'track-my-salah-privacy-policy.html'), pageHtml({
+      title: 'Track My Salah Privacy Policy',
+      description: 'How the app handles your data.',
+      canonical: 'https://bruh.ae/track-my-salah-privacy-policy',
+      main: '<h1>Privacy Policy</h1><p>Data details.</p>',
+    }))
+    await writeFile(join(output, 'writing', 'post.html'), pageHtml({
+      title: 'A Post',
+      description: 'A post description.',
+      canonical: 'https://bruh.ae/writing/post',
+      main: '<h1>A Post</h1><time datetime="2026-07-16">July 16, 2026</time>',
+    }))
+    await writeFile(join(output, '404.html'), '<h1>Not found</h1>')
+    await writeFile(join(output, '_not-found.html'), '<h1>Not found</h1>')
+
+    await generateMarkdown(output)
+
+    assert.deepEqual(JSON.parse(await readFile(join(output, 'site-description.jsonld'), 'utf8')), homepageGraph)
+
+    const llms = await readFile(join(output, 'llms.txt'), 'utf8')
+    assert.match(llms, /^# Adam Ahsan\n/)
+    assert.match(llms, /^> .*Adam Ahsan is a Dubai-based builder working on AI products and software\..*$/m)
+    assert.match(llms, /bruh\.ae is Adam Ahsan's personal portfolio/)
+    assert.match(llms, /^> .*Builder.*Dubai.*$/m)
+    assert.match(llms, /^## Profiles\n\n- \[GitHub\]\(https:\/\/github\.com\/AdamJeddy\)/m)
+    assert.match(llms, /- \[Substack\]\(https:\/\/uhwriter\.substack\.com\/\)/)
+    assert.match(llms, /^## Pages\n/m)
+    assert.match(llms, /- \[Adam Ahsan — Portfolio\]\(https:\/\/bruh\.ae\/_markdown\/index\.md\)/)
+    assert.match(llms, /- \[About Adam Ahsan\]\(https:\/\/bruh\.ae\/_markdown\/about\.md\): A short bio\./)
+    assert.match(llms, /- \[A Post\]\(https:\/\/bruh\.ae\/_markdown\/writing\/post\.md\): A post description\./)
+    assert.match(llms, /^## Optional\n\n- \[Track My Salah Privacy Policy\]\(https:\/\/bruh\.ae\/_markdown\/track-my-salah-privacy-policy\.md\): How the app handles your data\./m)
+    assert.match(llms, /^## About this file$/m)
+    assert.doesNotMatch(llms, /_markdown\/404\.md|_not-found/)
+    assert.doesNotMatch(llms.split('## Optional')[0], /track-my-salah-privacy-policy/, 'the privacy policy stays out of the primary Pages list')
+
+    const llmsFull = await readFile(join(output, 'llms-full.txt'), 'utf8')
+    assert.match(llmsFull, /^# Adam Ahsan — Portfolio\n\nhttps:\/\/bruh\.ae\/\n\n/)
+    assert.match(llmsFull, /# About Adam Ahsan\n\nhttps:\/\/bruh\.ae\/about\n\n/)
+    assert.match(llmsFull, /# A Post\n\nhttps:\/\/bruh\.ae\/writing\/post\n\n/)
+    assert.match(llmsFull, /# Track My Salah Privacy Policy\n\nhttps:\/\/bruh\.ae\/track-my-salah-privacy-policy\n\n/)
+    assert.equal(llmsFull.split('\n\n---\n\n').length, 4)
+    assert.doesNotMatch(llmsFull, /^title: "/m, 'llms-full.txt does not repeat page frontmatter')
+
+    const routes = JSON.parse(await readFile(join(output, '_routes.json'), 'utf8'))
+    assert.deepEqual(routes.include, ['/', '/about', '/track-my-salah-privacy-policy', '/writing/post'])
+    assert.deepEqual(routes.exclude, [])
+    assert.ok(routes.include.every(route => route === '/' || (!route.endsWith('/') && !route.endsWith('.html'))))
+
+    const article = await readFile(join(output, '_markdown', 'writing', 'post.md'), 'utf8')
+    assert.match(article, /datePublished: "2026-07-16"/)
+    assert.match(article, /site: "bruh\.ae"/)
+  } finally {
+    await rm(output, { recursive: true, force: true })
+  }
+})
+
+test('falls back to site metadata and warns when the homepage has no Person node', async (t) => {
+  const output = await mkdtemp(join(tmpdir(), 'portfolio-markdown-'))
+  const warning = t.mock.method(console, 'warn')
+  try {
+    const website = { '@context': 'https://schema.org', '@type': 'WebSite', url: 'https://bruh.ae', name: 'Adam’s Portfolio', description: 'Projects, commentary, and experiments.' }
+    await writeFile(join(output, 'index.html'), pageHtml({
+      title: 'Adam’s Portfolio',
+      canonical: 'https://bruh.ae/',
+      jsonLd: website,
+      main: '<h1>Hello</h1>',
+    }))
+    await writeFile(join(output, 'about.html'), pageHtml({
+      title: 'About',
+      canonical: 'https://bruh.ae/about',
+      main: '<h1>About</h1>',
+    }))
+
+    await generateMarkdown(output)
+
+    assert.ok(warning.mock.calls.some(call => String(call.arguments[0]).includes('Person')), 'warns about the missing Person node')
+    assert.deepEqual(JSON.parse(await readFile(join(output, 'site-description.jsonld'), 'utf8')), website)
+    const llms = await readFile(join(output, 'llms.txt'), 'utf8')
+    assert.match(llms, /^# Adam’s Portfolio\n/)
+    assert.match(llms, /^> Projects, commentary, and experiments\.$/m)
+    assert.match(llms, /## Pages/)
+  } finally {
+    t.mock.restoreAll()
+    await rm(output, { recursive: true, force: true })
+  }
+})
+
+test('buildRoutes keeps only clean page routes and enforces the Cloudflare rule guard', () => {
+  const routes = buildRoutes(['/', '/about', '/writing/post', '/about'])
+  assert.deepEqual(routes, { version: 1, include: ['/', '/about', '/writing/post'], exclude: [] })
+  assert.ok(routes.include.every(route => route === '/' || (!route.endsWith('/') && !route.endsWith('.html'))))
+  const atLimit = Array.from({ length: MAX_ROUTE_RULES - 1 }, (_, index) => `/page-${index}`)
+  assert.equal(buildRoutes(atLimit).include.length, MAX_ROUTE_RULES)
+  const tooMany = Array.from({ length: MAX_ROUTE_RULES }, (_, index) => `/page-${index}`)
+  assert.throws(() => buildRoutes(tooMany), /_routes\.json would contain 91 include rules/)
+})
+
 test('builds Markdown and a deployable worker for exported routes, excluding error pages', async () => {
   const output = await mkdtemp(join(tmpdir(), 'portfolio-markdown-'))
   try {
@@ -135,7 +394,9 @@ test('builds Markdown and a deployable worker for exported routes, excluding err
     assert.equal(description['@type'], 'WebSite')
     assert.equal(description.url, 'https://bruh.ae')
     const routes = JSON.parse(await readFile(join(output, '_routes.json'), 'utf8'))
-    assert.deepEqual(routes.include.sort(), ['/', '/index.html', '/about', '/about/', '/about.html'].sort())
+    assert.deepEqual(routes.include, ['/', '/about'])
+    assert.ok(routes.include.every(route => route === '/' || (!route.endsWith('/') && !route.endsWith('.html'))))
+    assert.match(await readFile(join(output, 'llms.txt'), 'utf8'), /^# Portfolio\n/)
     assert.match(await readFile(join(output, '_markdown/index.md'), 'utf8'), /# Adam/)
     const source = await readFile(join(output, '_worker.js'), 'utf8')
     const { default: worker } = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`)
@@ -143,6 +404,7 @@ test('builds Markdown and a deployable worker for exported routes, excluding err
       ASSETS: { fetch: async request => new Response(await readFile(join(output, new URL(request.url).pathname), 'utf8')) },
     })
     assert.match(response.headers.get('Content-Type'), /text\/markdown/)
+    assert.match(response.headers.get('Link'), /rel="alternate"; type="text\/markdown"/)
     assert.match(await response.text(), /# Adam/)
   } finally {
     await rm(output, { recursive: true, force: true })

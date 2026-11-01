@@ -11,6 +11,15 @@ function prefersMarkdown(accept = '') {
   return markdown > 0 && markdown >= html
 }
 
+function securityHeaders() {
+  return {
+    'X-Content-Type-Options': 'nosniff',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+    'X-Frame-Options': 'DENY',
+  }
+}
+
 export function createMarkdownWorker(pages) {
   return {
     async fetch(request, env) {
@@ -21,15 +30,25 @@ export function createMarkdownWorker(pages) {
       }
 
       const markdown = prefersMarkdown(request.headers.get('Accept') ?? '')
+      const assetPath = pages[url.pathname]
       let assetRequest = request
       if (markdown) {
-        url.pathname = pages[url.pathname]
+        url.pathname = assetPath
         assetRequest = new Request(url, request)
       }
       const asset = await env.ASSETS.fetch(assetRequest)
       const response = new Response(asset.body, asset)
-      if (isHomepage && (response.ok || response.status === 304)) {
-        response.headers.append('Link', '</site-description.jsonld>; rel="describedby"; type="application/ld+json"')
+      if (response.ok || response.status === 304) {
+        // Discovery links are appended after any Link header the asset already carries,
+        // so the alternate/describedby set is consistent on every page response.
+        response.headers.append('Link', `<${url.origin}${assetPath}>; rel="alternate"; type="text/markdown"`)
+        response.headers.append('Link', '</llms.txt>; rel="describedby"; type="text/plain"')
+        if (isHomepage) {
+          response.headers.append('Link', '</site-description.jsonld>; rel="describedby"; type="application/ld+json"')
+        }
+        // Cloudflare does not apply public/_headers to Pages Functions responses,
+        // so page responses get their security headers here.
+        for (const [name, value] of Object.entries(securityHeaders())) response.headers.set(name, value)
       }
       const vary = response.headers.get('Vary')?.split(',').map(value => value.trim()) ?? []
       if (!vary.some(value => ['accept', '*'].includes(value.toLowerCase()))) vary.push('Accept')
