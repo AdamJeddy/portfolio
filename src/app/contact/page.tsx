@@ -1,5 +1,5 @@
 import { createPageMetadata } from '@/lib/metadata'
-import { PROFILE_URLS } from '@/lib/schema'
+import { PROFILE_LINKS } from '@/lib/schema'
 import '../studio-pages.css'
 
 export const metadata = createPageMetadata({
@@ -10,7 +10,7 @@ export const metadata = createPageMetadata({
     'Get in touch with Adam Ahsan about AI, product work, or useful things to build.',
 })
 
-const [github, linkedin, x, medium] = PROFILE_URLS
+const { github, linkedin, medium, substack } = PROFILE_LINKS
 
 export default function ContactPage() {
   return (
@@ -55,18 +55,18 @@ export default function ContactPage() {
             </a>
           </li>
           <li>
-            <a href={x} target="_blank" rel="noopener noreferrer me">
+            <a href={medium} target="_blank" rel="noopener noreferrer me">
               <span className="studio-page-label" aria-hidden="true">03</span>
-              <span>X</span>
-              <span>Notes and links</span>
+              <span>Medium</span>
+              <span>Original publications</span>
               <span aria-hidden="true">↗</span>
             </a>
           </li>
           <li>
-            <a href={medium} target="_blank" rel="noopener noreferrer me">
+            <a href={substack} target="_blank" rel="noopener noreferrer me">
               <span className="studio-page-label" aria-hidden="true">04</span>
-              <span>Medium</span>
-              <span>Original publications</span>
+              <span>Substack</span>
+              <span>Essays and notes</span>
               <span aria-hidden="true">↗</span>
             </a>
           </li>

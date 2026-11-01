@@ -145,8 +145,6 @@ export default function AboutPage() {
               <a href="https://github.com/AdamJeddy" target="_blank" rel="noopener noreferrer me">GitHub</a>
               {' · '}
               <a href="https://www.linkedin.com/in/adamahsan/" target="_blank" rel="noopener noreferrer me">LinkedIn</a>
-              {' · '}
-              <a href="https://x.com/A7damn" target="_blank" rel="noopener noreferrer me">X</a>
             </dd>
           </div>
         </dl>
@@ -227,14 +225,6 @@ export default function AboutPage() {
                 className="studio-page-action"
               >
                 LinkedIn ↗
-              </a>
-              <a
-                href="https://x.com/A7damn"
-                target="_blank"
-                rel="noopener noreferrer me"
-                className="studio-page-action"
-              >
-                X ↗
               </a>
             </div>
           </div>

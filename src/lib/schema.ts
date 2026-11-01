@@ -13,9 +13,8 @@ export const WEBSITE_ID = `${SITE_URL}/#website`
 export const PROFILE_LINKS = {
   github: 'https://github.com/AdamJeddy',
   linkedin: 'https://www.linkedin.com/in/adamahsan/',
-  x: 'https://x.com/A7damn',
   medium: 'https://medium.com/@uhdam',
-  substack: 'https://uhwriter.substack.com/',
+  substack: 'https://substack.com/@uhwriter',
 }
 
 export const PROFILE_URLS = Object.values(PROFILE_LINKS)
@@ -27,7 +26,7 @@ export const personNode = {
   alternateName: ['Adam'],
   url: `${SITE_URL}/about`,
   image: `${SITE_URL}${DEFAULT_SOCIAL_IMAGE}`,
-  description: 'Adam Ahsan is a Dubai-based builder working on AI products and local-first software.',
+  description: 'Adam Ahsan works where emerging technology meets product: AI features, conversational products, and local-first apps.',
   jobTitle: PERSON_TITLE,
   address: {
     '@type': 'PostalAddress',
@@ -132,7 +131,7 @@ export type ProjectSlug = 'qeemat' | 'layla-ai'
 
 /**
  * Project entities. Layla AI is an employer product that Adam Ahsan contributed
- * to (technical integration), so it is modelled as a CreativeWork with a
+ * to (backend and AI features, not the app UI), so it is modelled as a CreativeWork with a
  * contributor, never as a work he created.
  */
 export function createProjectGraph(slug: ProjectSlug, description: string) {
