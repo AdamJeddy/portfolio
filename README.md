@@ -70,6 +70,10 @@ headings, lists, absolute links, and JSON-LD without navigation, styles, or scri
 The build uses Domino and Turndown; neither ships in the browser or worker.
 Token counts are omitted because no tokenizer is configured.
 
+The homepage also advertises `/site-description.jsonld` with a `describedby`
+Link header. The build generates that JSON-LD from the homepage's existing
+WebSite structured data, so the description stays in sync with the page.
+
 To test negotiation locally, run `npm run build`, then
 `npx wrangler pages dev out --port 8788` and use the curl command above with
 `http://localhost:8788`. The Next.js development server and plain static servers
