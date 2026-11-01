@@ -16,7 +16,7 @@ import { useEffect } from 'react'
  *   - --letter-spacing  Letter spacing for monospace text
  *   - --strip-1 through --strip-12  Column strip widths in character units
  *
- * Recalculates on window resize (desktop) or orientationchange (touch).
+ * Recalculates on resize and orientation changes, including touch browsers.
  */
 export default function GridProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -83,16 +83,15 @@ export default function GridProvider({ children }: { children: React.ReactNode }
     }
 
     compute()
-    window.scrollTo(0, 0)
-
-    const eventType = 'ontouchstart' in window ? 'orientationchange' : 'resize'
     const onResize = () => {
       cancelAnimationFrame(frame)
       frame = requestAnimationFrame(compute)
     }
-    window.addEventListener(eventType, onResize)
+    window.addEventListener('resize', onResize)
+    window.addEventListener('orientationchange', onResize)
     return () => {
-      window.removeEventListener(eventType, onResize)
+      window.removeEventListener('resize', onResize)
+      window.removeEventListener('orientationchange', onResize)
       cancelAnimationFrame(frame)
     }
   }, [])

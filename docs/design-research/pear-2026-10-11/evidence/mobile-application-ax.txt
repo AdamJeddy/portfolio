@@ -1,0 +1,19 @@
+Browser tab: 1, Title: "Pear — not an agency on the clock, a partner in the upside", URL: "https://pear.no/".
+0 AXWebArea Pear — not an agency on the clock, a partner in the upside, URL: pear.no/
+	1 container
+		16 image
+		17 container
+			18 text THE APPLICATION Tell us what you sell and where you want to grow. Every application is read, and when the model fits we answer within a week.
+		19 container
+			20 image
+			21 text field (settable)
+			22 image
+			23 text field (settable)
+			24 image
+			25 text entry area (settable)
+			26 button SEND THE APPLICATION
+		2 link Description: Pear, Value: pear.no/#top
+		3 button (collapsed) Description: Menu, Secondary Actions: Expand
+		15 text AT YOUR SERVICE
+
+The focused UI element is 0 AXWebArea Pear — not an agency on the clock, a partner in the upside, URL: pear.no/

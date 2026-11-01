@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
-import { Oswald, Space_Grotesk, Geist, Geist_Mono } from 'next/font/google'
+import { Inter_Tight, Oswald, Space_Grotesk, Geist, Geist_Mono } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import GridProvider from '@/components/grid/GridProvider'
 import Footer from '@/components/layout/Footer'
 import Nav from '@/components/layout/Nav'
+import SignalSweep from '@/components/SignalSweep'
 import {
   GA_MEASUREMENT_ID,
   SITE_DESCRIPTION,
@@ -38,6 +39,12 @@ const geistMono = Geist_Mono({
   display: 'swap',
 })
 
+const interTight = Inter_Tight({
+  subsets: ['latin'],
+  variable: '--font-studio-page',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: SITE_NAME,
@@ -57,7 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${oswald.variable} ${spaceGrotesk.variable} ${geistSans.variable} ${geistMono.variable}`}
+      className={`${oswald.variable} ${spaceGrotesk.variable} ${geistSans.variable} ${geistMono.variable} ${interTight.variable}`}
     >
       <body>
         <Script
@@ -74,6 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
         <GridProvider>
           <Nav />
+          <SignalSweep />
           <main id="app">{children}</main>
           <Footer />
         </GridProvider>

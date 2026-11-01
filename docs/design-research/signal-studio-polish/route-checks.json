@@ -1,0 +1,86 @@
+[
+  {
+    "background": "rgb(0, 0, 0)",
+    "h1": "Yaps, and Thoughts.",
+    "route": "/writing",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "background": "rgb(0, 0, 0)",
+    "h1": "Yaps, and Thoughts.",
+    "route": "/writing",
+    "scrollWidth": 1440,
+    "width": 1440
+  },
+  {
+    "background": "rgb(0, 0, 0)",
+    "h1": "Ugly Truth Luxury Brands Won't Say About AI Content",
+    "route": "/writing/ugly-truth-luxury-brands-ai-content",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "background": "rgb(0, 0, 0)",
+    "h1": "Ugly Truth Luxury Brands Won't Say About AI Content",
+    "route": "/writing/ugly-truth-luxury-brands-ai-content",
+    "scrollWidth": 1440,
+    "width": 1440
+  },
+  {
+    "background": "rgb(0, 0, 0)",
+    "h1": "The Quiet Death of SaaS Pricing Power",
+    "route": "/writing/quiet-death-saas-pricing-power",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "background": "rgb(0, 0, 0)",
+    "h1": "The Quiet Death of SaaS Pricing Power",
+    "route": "/writing/quiet-death-saas-pricing-power",
+    "scrollWidth": 1440,
+    "width": 1440
+  },
+  {
+    "background": "rgb(0, 0, 0)",
+    "h1": "The person behind all of it.",
+    "route": "/about",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "background": "rgb(0, 0, 0)",
+    "h1": "The person behind all of it.",
+    "route": "/about",
+    "scrollWidth": 1440,
+    "width": 1440
+  },
+  {
+    "background": "rgb(0, 0, 0)",
+    "h1": "Let's make something useful.",
+    "route": "/contact",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "background": "rgb(0, 0, 0)",
+    "h1": "Let's make something useful.",
+    "route": "/contact",
+    "scrollWidth": 1440,
+    "width": 1440
+  },
+  {
+    "background": "rgb(0, 0, 0)",
+    "h1": "Track My Salah Privacy Policy",
+    "route": "/track-my-salah-privacy-policy",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "background": "rgb(0, 0, 0)",
+    "h1": "Track My Salah Privacy Policy",
+    "route": "/track-my-salah-privacy-policy",
+    "scrollWidth": 1440,
+    "width": 1440
+  }
+]
