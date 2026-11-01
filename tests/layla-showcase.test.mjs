@@ -37,8 +37,9 @@ test('Layla integrates the Beauty Passport inside one hero scene', async () => {
   assert.match(heroMarkup, /laylaEditorialHero\.src/)
   assert.doesNotMatch(heroMarkup, /laylaPassportOverview\.src/)
   assert.doesNotMatch(heroMarkup, /heroProductScreen/)
-  assert.match(source, /Personal beauty advice, built into FACES\./)
-  assert.match(data, /layla-editorial-hero-v2\.png/)
+  assert.match(source, /Layla AI — personal beauty advice, built into FACES\./)
+  assert.match(data, /layla-editorial-hero-v2-1536\.webp/)
+  assert.match(data, /layla-editorial-hero-v2-900\.webp/)
 })
 
 test('Layla gives the integrated hero image a full editorial panel', async () => {
@@ -54,8 +55,8 @@ test('Layla gives Search and PDP entry points purpose-built visual surfaces', as
     readFile(showcaseStylesPath, 'utf8'),
   ])
 
-  assert.match(data, /layla-search-entry-v2\.png/)
-  assert.match(data, /layla-pdp-entry-v2\.png/)
+  assert.match(data, /layla-search-entry-v2\.webp/)
+  assert.match(data, /layla-pdp-entry-v2\.webp/)
   assert.match(styles, /\.entryPointScreenshot img\s*\{[^}]*object-fit: contain;/s)
   assert.doesNotMatch(styles, /\.entryPoint:nth-child\(-n \+ 2\) \.entryPointScreenshot img\s*\{[^}]*object-fit: cover;/s)
 })
@@ -74,9 +75,9 @@ test('Layla documents chat, Beauty Shelf, support, and reported impact with prod
     readFile(showcaseDataPath, 'utf8'),
   ])
 
-  assert.match(data, /layla-chat-entry\.jpg/)
-  assert.match(data, /product-identification\.jpg/)
-  assert.match(data, /layla-order-support-v1\.png/)
+  assert.match(data, /layla-chat-entry\.webp/)
+  assert.match(data, /product-identification\.webp/)
+  assert.match(data, /layla-order-support-v1\.webp/)
   assert.match(data, /2\.5×/)
   assert.match(experience, /iOS checkout/)
   assert.match(experience, /Illustrative support state/)

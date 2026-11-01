@@ -41,7 +41,7 @@ export default function LaylaShowcase({ project }: LaylaShowcaseProps) {
         <div className={styles.heroGrid}>
           <div className={styles.heroCopy}>
             <p className={styles.eyebrow}>FACES / Layla AI</p>
-            <h1 id="layla-title">Personal beauty advice, built into FACES.</h1>
+            <h1 id="layla-title">Layla AI — personal beauty advice, built into FACES.</h1>
             <p className={styles.lede}>
               It helps customers discover products, build routines, get product-specific guidance,
               and check out from one conversation.
@@ -62,16 +62,23 @@ export default function LaylaShowcase({ project }: LaylaShowcaseProps) {
           </div>
 
           <figure className={styles.heroVisual}>
-            <Image
-              className={styles.editorialHero}
-              src={laylaEditorialHero.src}
-              alt={laylaEditorialHero.alt}
-              width={laylaEditorialHero.width}
-              height={laylaEditorialHero.height}
-              priority
-              unoptimized
-              sizes="(max-width: 768px) 100vw, 52vw"
-            />
+            {/* LCP hero: plain <img> inside <picture> shipping two WebP widths instead of one 2 MB PNG. */}
+            <picture style={{ display: 'contents' }}>
+              <source
+                type="image/webp"
+                srcSet={laylaEditorialHero.srcSet}
+                sizes={laylaEditorialHero.sizes}
+              />
+              <img
+                className={styles.editorialHero}
+                src={laylaEditorialHero.src}
+                alt={laylaEditorialHero.alt}
+                width={laylaEditorialHero.width}
+                height={laylaEditorialHero.height}
+                loading="eager"
+                fetchPriority="high"
+              />
+            </picture>
           </figure>
         </div>
       </section>
