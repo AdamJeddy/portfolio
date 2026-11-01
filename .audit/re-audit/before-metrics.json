@@ -1,0 +1,245 @@
+{
+  "out": {
+    "files": 196,
+    "bytes": 21316065
+  },
+  "outImages": {
+    "files": 28,
+    "bytes": 18980781
+  },
+  "publicImages": {
+    "files": 28,
+    "bytes": 18980781
+  },
+  "pages": 11,
+  "pageTable": [
+    {
+      "page": "about.html",
+      "title": "About Adam — Projects, Commentary & Experiments",
+      "titleLength": 47,
+      "descriptionLength": 77,
+      "nameInTitle": false,
+      "nameInDescription": false,
+      "nameInOgTitle": false,
+      "ogTitleMatchesTitle": false,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "",
+      "imageCount": 0,
+      "imageBytes": 0
+    },
+    {
+      "page": "contact.html",
+      "title": "Contact Adam",
+      "titleLength": 12,
+      "descriptionLength": 73,
+      "nameInTitle": false,
+      "nameInDescription": false,
+      "nameInOgTitle": false,
+      "ogTitleMatchesTitle": true,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "",
+      "imageCount": 0,
+      "imageBytes": 0
+    },
+    {
+      "page": "index.html",
+      "title": "Adam's Portfolio",
+      "titleLength": 16,
+      "descriptionLength": 46,
+      "nameInTitle": false,
+      "nameInDescription": false,
+      "nameInOgTitle": false,
+      "ogTitleMatchesTitle": false,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "WebSite",
+      "imageCount": 5,
+      "imageBytes": 395913
+    },
+    {
+      "page": "projects/layla-ai.html",
+      "title": "Layla AI — Adam's Portfolio",
+      "titleLength": 27,
+      "descriptionLength": 148,
+      "nameInTitle": false,
+      "nameInDescription": false,
+      "nameInOgTitle": false,
+      "ogTitleMatchesTitle": false,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "",
+      "imageCount": 13,
+      "imageBytes": 9639849
+    },
+    {
+      "page": "projects/qeemat.html",
+      "title": "Qeemat — UAE Price Tracker for Android",
+      "titleLength": 38,
+      "descriptionLength": 105,
+      "nameInTitle": false,
+      "nameInDescription": false,
+      "nameInOgTitle": false,
+      "ogTitleMatchesTitle": true,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "",
+      "imageCount": 2,
+      "imageBytes": 114770
+    },
+    {
+      "page": "projects.html",
+      "title": "Projects — Adam's Portfolio",
+      "titleLength": 27,
+      "descriptionLength": 57,
+      "nameInTitle": false,
+      "nameInDescription": false,
+      "nameInOgTitle": false,
+      "ogTitleMatchesTitle": false,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "",
+      "imageCount": 4,
+      "imageBytes": 387788
+    },
+    {
+      "page": "track-my-salah-privacy-policy.html",
+      "title": "Track My Salah Privacy Policy",
+      "titleLength": 29,
+      "descriptionLength": 42,
+      "nameInTitle": false,
+      "nameInDescription": false,
+      "nameInOgTitle": false,
+      "ogTitleMatchesTitle": true,
+      "h1Count": 1,
+      "robots": "noindex, follow",
+      "nodeTypes": "",
+      "imageCount": 0,
+      "imageBytes": 0
+    },
+    {
+      "page": "writing/how-a-tech-company-accidentally-becomes-political.html",
+      "title": "How a Tech Company Accidentally Becomes Political - Adam's Portfolio",
+      "titleLength": 68,
+      "descriptionLength": 114,
+      "nameInTitle": false,
+      "nameInDescription": false,
+      "nameInOgTitle": false,
+      "ogTitleMatchesTitle": false,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "Article",
+      "imageCount": 0,
+      "imageBytes": 0
+    },
+    {
+      "page": "writing/quiet-death-saas-pricing-power.html",
+      "title": "The Quiet Death of SaaS Pricing Power - Adam's Portfolio",
+      "titleLength": 56,
+      "descriptionLength": 125,
+      "nameInTitle": false,
+      "nameInDescription": false,
+      "nameInOgTitle": false,
+      "ogTitleMatchesTitle": false,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "Article",
+      "imageCount": 0,
+      "imageBytes": 0
+    },
+    {
+      "page": "writing/ugly-truth-luxury-brands-ai-content.html",
+      "title": "Ugly Truth Luxury Brands Won't Say About AI Content - Adam's Portfolio",
+      "titleLength": 70,
+      "descriptionLength": 122,
+      "nameInTitle": false,
+      "nameInDescription": false,
+      "nameInOgTitle": false,
+      "ogTitleMatchesTitle": false,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "Article",
+      "imageCount": 0,
+      "imageBytes": 0
+    },
+    {
+      "page": "writing.html",
+      "title": "Commentary — Adam's Portfolio",
+      "titleLength": 29,
+      "descriptionLength": 47,
+      "nameInTitle": false,
+      "nameInDescription": false,
+      "nameInOgTitle": false,
+      "ogTitleMatchesTitle": false,
+      "h1Count": 1,
+      "robots": "",
+      "nodeTypes": "",
+      "imageCount": 0,
+      "imageBytes": 0
+    }
+  ],
+  "schemaTypeCounts": {
+    "WebSite": 1,
+    "Article": 3
+  },
+  "homepageGraphTypes": [
+    "WebSite"
+  ],
+  "nameCoverage": {
+    "pages": 11,
+    "pagesWithNameInTitle": 0,
+    "pagesWithNameInDescription": 0,
+    "pagesWithNameInOgTitle": 0,
+    "pagesWithStructuredData": 4,
+    "pagesWithAdamAhsanInStructuredData": 0
+  },
+  "titleLengthOver60": 2,
+  "fontPreloads": 5,
+  "fontPreloadBytes": 141044,
+  "jsChunks": 10,
+  "jsBytes": 590484,
+  "jsBrotli": null,
+  "cssChunks": 2,
+  "cssBytes": 65716,
+  "cssBrotli": null,
+  "markdown": {
+    "files": 11,
+    "bytes": 48418,
+    "withAuthor": 0,
+    "withDates": 0,
+    "concatBugs": 4,
+    "skipLinkNoise": 1
+  },
+  "llms": {
+    "exists": false,
+    "bytes": 0,
+    "lines": 1,
+    "hasPersonHeading": false,
+    "hasProfiles": false,
+    "hasPages": false,
+    "markdownLinks": 0
+  },
+  "llmsFull": {
+    "exists": false,
+    "bytes": 0,
+    "sections": 1
+  },
+  "routes": {
+    "include": 32,
+    "hasHtmlVariants": true
+  },
+  "sitemapLastmodCount": 0,
+  "sitemapUrls": 10,
+  "siteDescription": {
+    "bytes": 245,
+    "hasPerson": false,
+    "hasWebsite": true
+  },
+  "worker": {
+    "hasAlternateLink": false,
+    "hasLlmsDescribedby": false,
+    "securityHeaders": 0,
+    "hasJsonLdDescribedby": true
+  }
+}

@@ -39,8 +39,10 @@ http://localhost:3000
 - npm run dev : Run development server
 - npm run build : Build for production
 - npm test : Run regression tests
-- npm run start : Start production server
+- npm run preview : Serve the exported out/ directory locally
 - npm run lint : Run lint checks
+
+Node.js 22.18 or newer is required (the test suite runs TypeScript library modules directly).
 
 ## Deployment
 This repository exports static files to `out/` for Cloudflare Pages. The build
@@ -71,8 +73,9 @@ headings, lists, absolute links, and JSON-LD without navigation, styles, or scri
 The build uses Domino and Turndown; neither ships in the browser or worker.
 Frontmatter carries `title`, `description`, `url`, and — when the page's JSON-LD
 provides them — `author`, `datePublished`, `dateModified`, and `site`. Missing
-data is omitted rather than invented. Token counts are omitted because no
-tokenizer is configured.
+data is omitted rather than invented. Adjacent inline elements (for example a
+row of CTA links) are separated with a space so links cannot run together.
+Token counts are omitted because no tokenizer is configured.
 
 ### Discovery files
 
@@ -84,9 +87,9 @@ The build writes two agent indexes to the output root:
   `## Profiles` link list, curated `## Pages` links to the Markdown mirror of
   every clean route, a `## Optional` section for the privacy policy, and a short
   `## About this file` note.
-- `/llms-full.txt` — the Markdown text of every page, separated by `---`, each
-  section prefixed by the page title and its canonical URL. The build warns if
-  it grows past 200 KB.
+- `/llms-full.txt` - the Markdown text of every indexable page under one top-level
+  H1, with an `##` section per page carrying its canonical URL and body (the
+  noindex privacy page is excluded). The build warns if it grows past 200 KB.
 
 If the homepage graph has no `Person` node, the generator still emits both files
 from the `WebSite` data and logs a warning instead of failing the build.
@@ -109,13 +112,20 @@ so it stays in sync with the page.
 Security headers for page responses are set in `cloudflare/markdown-worker.mjs`
 (`X-Content-Type-Options: nosniff`, `Referrer-Policy:
 strict-origin-when-cross-origin`, `Permissions-Policy: camera=(),
-microphone=(), geolocation=()`, `X-Frame-Options: DENY`). They cannot live in
-`public/_headers`: Cloudflare does not apply custom headers to Pages Functions
-responses, and page URLs are worker-served. `public/_headers` covers static
-assets only — the `site-description.jsonld` content type, `/_markdown/*` content
-type plus `X-Robots-Tag: noindex` (the mirrors are fetch targets, not search
-results), and immutable caching for `/_next/static/*`. No CSP is configured;
-that needs a separate decision.
+microphone=(), geolocation=()`, `X-Frame-Options: DENY`) along with a
+`Content-Signal: search=yes, ai-train=no, use=reference` header that mirrors the
+current Cloudflare-managed robots policy. They cannot live in `public/_headers`:
+Cloudflare does not apply custom headers to Pages Functions responses, and page
+URLs are worker-served. `public/_headers` covers static assets only - the same
+baseline security headers under `/*`, the `site-description.jsonld` content type,
+`/_markdown/*` content type plus `X-Robots-Tag: noindex` (the mirrors are fetch
+targets, not search results), and immutable caching for `/_next/static/*`.
+
+Negotiated Markdown responses are additionally marked
+`Cache-Control: private, max-age=0, must-revalidate` and carry
+`Content-Location` pointing at the `/_markdown/*.md` asset, so a shared cache can
+never store the Markdown variant under the page URL. No CSP is configured; that
+needs a separate decision.
 
 ### Routing and route growth
 
@@ -125,6 +135,19 @@ and `.html` variants before a Function is consulted. The worker's page map still
 lists those variants for direct requests. Pages caps `_routes.json` at 100
 combined include/exclude rules, so the build throws if include rules exceed 90;
 before that happens, replace the per-page list with wildcards and excludes.
+
+### Entity and structured data
+
+`src/lib/schema.ts` is the single source of truth for the JSON-LD graph: a
+`Person` (`#person`) with `sameAs` profiles, job title, Dubai address and image;
+a `WebSite` (`#website`, alternate name `bruh.ae`); `ProfilePage` on `/about`;
+connected `Article` nodes (Person `@id` author, ISO `+04:00` dates, URL,
+`mainEntityOfPage`, `isPartOf`); and project entities - `SoftwareApplication` for
+Qeemat and `CreativeWork` for Layla AI, where Adam Ahsan is recorded as a
+contributor (technical integration), not the creator. Pages that reference
+`#person` or `#website` publish those nodes in the same graph so every `@id`
+resolves on the page. The sitemap publishes `lastModified` only for articles,
+where a real content date exists.
 
 ### Production robots.txt
 
