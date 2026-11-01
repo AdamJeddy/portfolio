@@ -1,8 +1,8 @@
-﻿# SEO and Link-Sharing Implementation Plan
+# SEO and Link-Sharing Implementation Plan
 
-Last updated: 2026-07-18
-Current phase: Phase 2 â€” structured data and content depth
-Next task: SEO-021 â€” expand the Qeemat case study and add SoftwareApplication JSON-LD
+Last updated: 2026-11-01
+Current phase: Phase 6 — entity and AI discovery (implemented, awaiting deploy verification)
+Next task: deploy `feature/entity-seo-ai-hardening`, then complete the owner actions in `AUDIT-2026-11-01.md` section 7 (Search Console, Cloudflare bot policy, profile alignment)
 
 ## Purpose
 
@@ -35,6 +35,8 @@ competition, content quality, authority, backlinks, technical quality, and time.
 
 ## Audit baseline
 
+> Historical baseline (2026-07-16). For current state see Phase 6 and `AUDIT-2026-11-01.md`.
+
 The audit was performed against the `dev` branch on 2026-07-16.
 
 ### Confirmed strengths
@@ -43,7 +45,7 @@ The audit was performed against the `dev` branch on 2026-07-16.
 - Each content page has one visible `h1`.
 - Current internal route links resolve to generated pages.
 - URLs are readable and use descriptive slugs.
-- A 390 Ã— 844 mobile check showed no horizontal overflow.
+- A 390 × 844 mobile check showed no horizontal overflow.
 - The generated 404 page is marked `noindex`.
 
 ### Confirmed gaps
@@ -76,9 +78,9 @@ The audit was performed against the `dev` branch on 2026-07-16.
 - No lab performance numbers should be treated as established until the deployed
   site is tested with PageSpeed Insights or an equivalent trace.
 
-## Phase 0 â€” Decisions and clean baseline
+## Phase 0 — Decisions and clean baseline
 
-### [x] SEO-001 â€” Confirm site identity and canonical URL
+### [x] SEO-001 — Confirm site identity and canonical URL
 
 Priority: P0
 Completed: 2026-07-16
@@ -100,7 +102,7 @@ Acceptance criteria:
 - [x] The public identity is approved for visible copy; Person/ProfilePage schema
   remains deferred until a fuller name is chosen.
 
-### [x] SEO-002 â€” Restore a green verification baseline
+### [x] SEO-002 — Restore a green verification baseline
 
 Priority: P1
 Likely files: privacy-policy page, `TextCanvas.tsx`, `useTheme.ts`, image-rendering
@@ -118,9 +120,9 @@ Acceptance criteria:
 - [x] `npm run build` passes.
 - [ ] No unrelated visual or content changes are introduced.
 
-## Phase 1 â€” Crawlability, metadata, and link previews
+## Phase 1 — Crawlability, metadata, and link previews
 
-### [x] SEO-010 â€” Add central site constants and metadata helper
+### [x] SEO-010 — Add central site constants and metadata helper
 
 Priority: P0
 Proposed files: `src/lib/site.ts`, `src/lib/metadata.ts`,
@@ -143,7 +145,7 @@ Acceptance criteria:
 - [x] Static export builds without runtime environment dependencies.
 - [x] The homepage static HTML is inspected for correctly resolved absolute metadata; nested-route coverage belongs to SEO-011.
 
-### [x] SEO-011 â€” Add unique metadata to every route
+### [x] SEO-011 — Add unique metadata to every route
 
 Priority: P0
 Proposed files: every route `page.tsx`, `src/lib/projects.ts`,
@@ -153,10 +155,10 @@ Target titles:
 
 | Route | Target title |
 | --- | --- |
-| `/` | Adam's Portfolio â€” Projects, Writing & Experiments |
-| `/about` | About Adam â€” Projects, Writing & Experiments |
-| `/projects` | Projects â€” Adam's Portfolio |
-| `/projects/qeemat` | Qeemat â€” UAE Price Tracker for Android |
+| `/` | Adam's Portfolio — Projects, Writing & Experiments |
+| `/about` | About Adam — Projects, Writing & Experiments |
+| `/projects` | Projects — Adam's Portfolio |
+| `/projects/qeemat` | Qeemat — UAE Price Tracker for Android |
 | `/writing` | Writing on AI, Luxury and Product Engineering |
 | Article detail | The Ugly Truth About AI Content for Luxury Brands |
 | `/contact` | Contact Adam |
@@ -179,17 +181,17 @@ Acceptance criteria:
 - [x] The 404 remains `noindex`.
 - [x] Metadata matches visible content and contains no unverified claims.
 
-### [~] SEO-012 â€” Create and wire social preview images
+### [~] SEO-012 — Create and wire social preview images
 
 Priority: P0
 Proposed files: `public/images/social/*`, metadata helper, project/post data.
 
 Image standard:
 
-- 1200 Ã— 630 px, sRGB, approximately 1.91:1.
+- 1200 × 630 px, sRGB, approximately 1.91:1.
 - PNG for text-led graphics; optimized JPEG for photography.
 - Target less than 1 MB per image.
-- Keep important content at least 60â€“80 px from the edges.
+- Keep important content at least 60–80 px from the edges.
 - Include concise `og:image:alt` and `twitter:image:alt` text.
 
 Required images:
@@ -206,7 +208,7 @@ Acceptance criteria:
 - [ ] Deployed images return `200` with the correct content type.
 - [ ] Facebook, LinkedIn, WhatsApp, Slack, Discord, and X previews are checked.
 
-### [x] SEO-013 â€” Generate robots and sitemap files
+### [x] SEO-013 — Generate robots and sitemap files
 
 Priority: P0
 Proposed files: `src/app/robots.ts`, `src/app/sitemap.ts`, content data.
@@ -226,7 +228,7 @@ Acceptance criteria:
 - [x] Sitemap URLs exactly match canonical tags.
 - [x] No `noindex`, 404, redirect, preview, or duplicate URL appears in the map.
 
-### [ ] SEO-014 â€” Enforce one production URL format
+### [~] SEO-014 — Enforce one production URL format
 
 Priority: P0
 Proposed files depend on the approved hosting provider.
@@ -248,9 +250,9 @@ Acceptance criteria:
 - [ ] Preview deployments are not indexable.
 - [ ] Production security and cache headers are inspected and recorded.
 
-## Phase 2 â€” Structured data and content depth
+## Phase 2 — Structured data and content depth
 
-### [x] SEO-020 â€” Add WebSite JSON-LD; defer Person/ProfilePage schema
+### [x] SEO-020 — Add WebSite JSON-LD; defer Person/ProfilePage schema
 
 Priority: P1
 Proposed files: JSON-LD component/helper, homepage, about page.
@@ -269,7 +271,7 @@ Acceptance criteria:
 - [x] No personal address or sensitive data is exposed.
 - [x] Person/ProfilePage work has a separate follow-up task once the name is set.
 
-### [ ] SEO-021 â€” Expand the Qeemat case study and add SoftwareApplication JSON-LD
+### [~] SEO-021 — Expand the Qeemat case study and add SoftwareApplication JSON-LD
 
 Priority: P1
 Proposed files: `src/lib/projects.ts`, Qeemat page, project media assets.
@@ -297,7 +299,7 @@ Acceptance criteria:
 - [ ] Schema matches visible facts and validates.
 - [ ] Internal links point to related writing and the projects index.
 
-### [ ] SEO-022 â€” Complete the article and add Article JSON-LD
+### [x] SEO-022 — Complete the article and add Article JSON-LD
 
 Priority: P0 content
 Proposed files: `src/lib/posts.ts`, writing detail page, article media.
@@ -317,7 +319,7 @@ Acceptance criteria:
 - [ ] Article schema validates with no critical errors.
 - [ ] The title and description accurately summarize the full article.
 
-### [ ] SEO-023 â€” Add visible page context and keyword-aligned copy
+### [~] SEO-023 — Add visible page context and keyword-aligned copy
 
 Priority: P1
 Proposed files: homepage, About, Projects, Writing, Contact.
@@ -346,9 +348,9 @@ Acceptance criteria:
 - [ ] Copy makes no ranking, employment, product, or performance claim that is
   not supportable.
 
-## Phase 3 â€” Mobile, accessibility, and performance
+## Phase 3 — Mobile, accessibility, and performance
 
-### [~] SEO-030 â€” Make content and navigation resilient and accessible
+### [~] SEO-030 — Make content and navigation resilient and accessible
 
 Priority: P1
 Proposed files: `globals.css`, `Reveal.tsx`, `useReveal.ts`, `Nav.tsx`.
@@ -364,7 +366,7 @@ Work:
 - Add `aria-current="page"` to the active navigation link.
 - Make repeated animated pseudo-content non-disruptive to accessible names.
 - Respect `prefers-reduced-motion` for reveal transitions as well as blinking.
-- Increase primary touch targets toward 44 Ã— 44 CSS pixels.
+- Increase primary touch targets toward 44 × 44 CSS pixels.
 
 Implementation progress (2026-07-18):
 
@@ -386,7 +388,7 @@ Acceptance criteria:
 - [ ] Reduced-motion users receive a stable interface.
 - [ ] Mobile checks pass at 320, 390, and 768 px.
 
-### [ ] SEO-031 â€” Reduce unnecessary fonts and client-side work
+### [~] SEO-031 — Reduce unnecessary fonts and client-side work
 
 Priority: P2
 Proposed files: `layout.tsx`, `globals.css`, `GridProvider.tsx`, `Footer.tsx`,
@@ -412,7 +414,7 @@ Acceptance criteria:
 - [ ] Images have intrinsic dimensions and do not cause layout shifts.
 - [ ] Production PageSpeed results are recorded before and after the change.
 
-### [ ] SEO-032 â€” Establish Core Web Vitals monitoring
+### [ ] SEO-032 — Establish Core Web Vitals monitoring
 
 Priority: P1 after deployment
 
@@ -430,9 +432,9 @@ Acceptance criteria:
 - [ ] Any failing metric has a measured cause and a separate remediation task.
 - [ ] No unmeasured optimization is labeled high priority without evidence.
 
-## Phase 4 â€” Google setup and production validation
+## Phase 4 — Google setup and production validation
 
-### [ ] SEO-040 â€” Connect Google Search Console
+### [ ] SEO-040 — Connect Google Search Console
 
 Priority: P1 after canonical deployment
 Blocked: Requires DNS access and a Google account.
@@ -453,7 +455,7 @@ Acceptance criteria:
 - [ ] URL Inspection reports the intended canonical and allows indexing.
 - [ ] Indexing, Core Web Vitals, and Enhancement reports have been reviewed.
 
-### [~] SEO-041 â€” Add Google Analytics 4
+### [~] SEO-041 — Add Google Analytics 4
 
 Priority: P2
 Blocked: Requires an approved GA4 property, measurement ID, and privacy decision.
@@ -479,7 +481,7 @@ Implementation note: The GA4 page-view tag is in place. Do not record the
 measurement ID in this plan; verify the deployment in GA4 Realtime and then
 decide which outbound clicks, if any, should become custom events.
 
-### [ ] SEO-042 â€” Complete the live release verification
+### [~] SEO-042 — Complete the live release verification
 
 Priority: P0 before declaring the project complete
 
@@ -500,9 +502,9 @@ Acceptance checklist:
 - [ ] `npm run build` passes.
 - [ ] Production performance results are recorded.
 
-## Phase 5 â€” Ongoing authority and content work
+## Phase 5 — Ongoing authority and content work
 
-### [ ] SEO-050 â€” Publish additional high-value content
+### [ ] SEO-050 — Publish additional high-value content
 
 Candidates:
 
@@ -521,7 +523,7 @@ Definition of done for each new page:
 - [ ] Claims are supported, images are optimized, and dates are maintained.
 - [ ] It is included in the sitemap and inspected after publication.
 
-### [ ] SEO-051 â€” Build legitimate authority signals
+### [~] SEO-051 — Build legitimate authority signals
 
 Work:
 
@@ -531,6 +533,33 @@ Work:
 - Earn links through useful original work, not purchased or automated backlinks.
 - Review Search Console monthly for queries with impressions but weak CTR,
   indexation problems, and emerging content opportunities.
+
+## Phase 6 — Entity and AI discovery (2026-11-01)
+
+### [x] SEO-060 — Entity, structured data and AI discovery pass
+
+Priority: P0. Implemented on branch `feature/entity-seo-ai-hardening`.
+
+Work:
+
+- Public identity is now **Adam Ahsan** everywhere: title template `%s — Adam Ahsan`, absolute homepage title, descriptions.
+- `src/lib/schema.ts` adds a Person + WebSite `@graph` (Person `#person` with sameAs, jobTitle, Dubai address; WebSite `#website` with `bruh.ae` alternateName), `ProfilePage` on `/about`, stronger `Article` nodes (author `@id`, ISO dates, url, mainEntityOfPage, isPartOf), and `SoftwareApplication` / `CreativeWork` on the project pages.
+- Homepage and About carry one visible, declarative identity sentence; About adds a five-question quick-answers block and visible profile links (GitHub, LinkedIn, X).
+- Build generates `out/llms.txt` and `out/llms-full.txt`, and every mapped page response advertises `rel="alternate"` Markdown plus `rel="describedby"` llms.txt via `Link` headers.
+- Worker emits security headers on page responses (Cloudflare does not apply `_headers` to Pages Functions responses).
+- `_routes.json` registers clean routes only plus a >90-rule build guard (Cloudflare caps include/exclude rules at 100).
+- Images: Layla raster payload 9.63 MB to 0.88 MB (-90.9%); responsive 900w/1536w WebP hero; homepage assets recompressed 33%; branded 1200x630 OG card (866 KB to 42 KB); 22 unreferenced/superseded files removed.
+- PNG favicon assets (512 and apple-touch) for Google Search eligibility; sitemap `lastmod` from real content dates.
+- Production `robots.txt` remains Cloudflare-managed; `src/app/robots.ts` and README document the dashboard decision and the live-verification requirement.
+
+Acceptance criteria:
+
+- [x] Every indexable page has a name-bearing title, description, canonical, and one h1.
+- [x] Homepage publishes Person + WebSite `@graph`; About publishes ProfilePage + Person; articles publish Article with Person `@id` and dates; projects publish SoftwareApplication/CreativeWork.
+- [x] `llms.txt` / `llms-full.txt` / alternate + describedby Link headers are generated and verified against a fresh build.
+- [x] Markdown frontmatter carries author and real dates; date/byline concatenation bugs are fixed.
+- [x] Lint, tests (44/44), build, and a 77-check built-output acceptance script pass.
+- [ ] Deploy and verify headers/redirects/robots live; decide the Cloudflare AI-bot policy (owner action, see `AUDIT-2026-11-01.md` section 7).
 
 ## Decision log
 
@@ -542,6 +571,10 @@ Work:
 | 2026-07-16 | Privacy policy is `noindex, follow` | It remains public for the app without competing in portfolio search results | Adam |
 | 2026-07-16 | Use X handle `@A7damn` | Approved attribution for Twitter/X metadata | Adam |
 | 2026-07-16 | Hosting is Cloudflare Pages | Determines deployment and redirect validation work | Adam |
+| 2026-11-01 | Public identity is **Adam Ahsan**; the site name `Adam’s Portfolio` is retired in titles/metadata/schema; Person/ProfilePage un-deferred | Owner asked for his name to surface in Google and AI answers; the homepage already displayed "Adam Ahsan" and Dubai | Adam |
+| 2026-11-01 | Dubai/UAE positioning is allowed (factual location in copy, Person `address`, schema) | Reverses the 2026-07-16 decision; supports "Adam Ahsan Dubai" queries | Adam |
+| 2026-11-01 | Site owns AI discovery surfaces (`llms.txt`, markdown alternates, Person graph); production robots.txt stays Cloudflare-managed and must be decided in the dashboard | Repo cannot override Cloudflare managed robots; `robots.ts` and README document this | Adam |
+| 2026-11-01 | GA4 remains enabled pending a privacy/consent decision (tracked in AUDIT-2026-11-01 section 3) | Tag already deployed; decision still required | Adam |
 
 ## Verification log
 
@@ -550,7 +583,7 @@ Work:
 | 2026-07-16 | Baseline | `npm run build` | Pass | Static export generated all current routes |
 | 2026-07-16 | Baseline | `npm run lint` | Fail | 10 errors and 4 warnings; tracked by SEO-002 |
 | 2026-07-16 | Baseline | Rendered metadata inspection | Fail | Duplicate generic metadata; no canonical, OG, Twitter, or JSON-LD |
-| 2026-07-16 | Baseline | 390 Ã— 844 mobile inspection | Partial pass | No overflow; touch targets and menu accessibility need work |
+| 2026-07-16 | Baseline | 390 × 844 mobile inspection | Partial pass | No overflow; touch targets and menu accessibility need work |
 | 2026-07-16 | Baseline | Internal route resolution | Pass | All discovered internal content routes resolve to generated HTML |
 | 2026-07-16 | SEO-001 | Owner decisions | Pass | Canonical URL, public identity, positioning, privacy indexing, X attribution, and host confirmed |
 | 2026-07-16 | SEO-002 | `npm run lint` | Pass | Zero errors and warnings after focused baseline cleanup |
@@ -560,7 +593,7 @@ Work:
 | 2026-07-16 | SEO-011 | `npm run lint` and `npm run build` | Pass | All static and dynamic route metadata compiles and exports successfully |
 | 2026-07-16 | SEO-011 | Static HTML metadata inspection | Pass | All eight public pages have unique titles, descriptions, self-referencing `https://bruh.ae` canonicals, Open Graph, and Twitter metadata; privacy emits `noindex, follow` |
 | 2026-07-16 | SEO-012 | `npm run lint` and `npm run build` | Pass | Default social image metadata compiles and static export succeeds |
-| 2026-07-16 | SEO-012 | Static HTML and asset inspection | Pass | Homepage emits absolute `og:image` and `summary_large_image` Twitter image tags; generated PNG is 1200 Ã— 630 px and 866 KB |
+| 2026-07-16 | SEO-012 | Static HTML and asset inspection | Pass | Homepage emits absolute `og:image` and `summary_large_image` Twitter image tags; generated PNG is 1200 × 630 px and 866 KB |
 | 2026-07-16 | SEO-013 | `npm run lint` | Pass | Metadata routes pass lint checks |
 | 2026-07-16 | SEO-013 | `npm run build` | Pass after static-route fix | Verified static export of `/robots.txt` and `/sitemap.xml`; initial build exposed the required `dynamic = 'force-static'` setting, then passed after the targeted fix |
 | 2026-07-16 | SEO-013 | Generated-file inspection | Pass | `out/robots.txt` allows crawling and points to `https://bruh.ae/sitemap.xml`; sitemap contains each indexable public page once and excludes the noindex privacy page |
@@ -570,18 +603,25 @@ Work:
 | 2026-07-16 | SEO-041 | Static HTML inspection | Pass | The generated homepage contains the configured Google tag loader URL and one `gtag('config', ...)` call |
 | 2026-07-16 | Preview validation | `https://dev.portfolio-5s4.pages.dev` | Partial pass | Homepage title, canonical, social image, Twitter large card, and WebSite JSON-LD are live; the GA4 change is still local and undeployed |
 | 2026-07-18 | SEO-030 | `npm run lint` and `npm run build` | Pass | Mobile navigation accessibility and reveal-resilience changes compile and statically export successfully; deployed manual checks remain pending |
+| 2026-11-01 | SEO-014 | Live URL-format matrix | Partial | http to https 301, `.html` to clean 308, trailing-slash to clean 308, www root to apex 301; no chains. `www.bruh.ae/about` returned a Cloudflare 522 on re-check (infra anomaly), so re-verify the full www matrix after deploy before closing |
+| 2026-11-01 | SEO-060 | `npm run lint` / `npm test` / `npm run build` | Pass | Lint clean; 44/44 tests; 15 routes + 11 Markdown pages; llms.txt, llms-full.txt, Person+WebSite graph, clean 11-rule `_routes.json` generated |
+| 2026-11-01 | SEO-060 | 77-check built-output script + built-worker end-to-end | Pass | Entity/schema/llms/alternate-Link/security-header/route/Markdown/frontmatter/broken-link checks pass against fresh `out/` |
+| 2026-11-01 | Images | Asset optimization | Pass | Layla raster 9.63 MB to 0.88 MB (-90.9%); hero 2.0 MB PNG to 81 KB/34 KB WebP; OG card 866 KB to 42 KB; 22 files removed |
 
 ## Implementation log
 
 | Date | Task | Status | Files changed | Commit or PR | Notes |
 | --- | --- | --- | --- | --- | --- |
-| 2026-07-16 | Planning | Complete | `SEO_IMPLEMENTATION_PLAN.md` | â€” | Created the durable implementation tracker |
-| 2026-07-16 | SEO-001 | Complete | `SEO_IMPLEMENTATION_PLAN.md` | â€” | Recorded the approved site identity and production decisions |
-| 2026-07-16 | SEO-002 | Complete | Lint-related source files and `SEO_IMPLEMENTATION_PLAN.md` | â€” | Restored a clean lint and build baseline |
-| 2026-07-16 | SEO-010 | Complete | `src/lib/site.ts`, `src/lib/metadata.ts`, homepage and root layout | â€” | Added production URL constants and a reusable canonical/Open Graph/Twitter metadata helper; uses `summary` until social images are added in SEO-012 |
-| 2026-07-16 | SEO-011 | Complete | All route metadata exports | â€” | Added unique route metadata and dynamic data-driven metadata for Qeemat and the writing detail page; preserved `noindex, follow` for the app privacy policy |
-| 2026-07-16 | SEO-012 | In progress | `public/images/social/portfolio-social.png`, `src/lib/site.ts`, `src/lib/metadata.ts` | â€” | Added and wired a default 1200 Ã— 630 social preview image; Qeemat-specific and completed-article-specific images remain pending |
-| 2026-07-16 | SEO-013 | Complete | `src/app/robots.ts`, `src/app/sitemap.ts` | â€” | Added build-time crawl directives and a sitemap sourced from the project and writing data; explicitly configured both metadata routes for static export |
-| 2026-07-16 | SEO-020 | Complete | `src/app/page.tsx` | â€” | Added homepage-only WebSite JSON-LD. Person and ProfilePage schema remain deferred pending the chosen public name |
+| 2026-07-16 | Planning | Complete | `SEO_IMPLEMENTATION_PLAN.md` | — | Created the durable implementation tracker |
+| 2026-07-16 | SEO-001 | Complete | `SEO_IMPLEMENTATION_PLAN.md` | — | Recorded the approved site identity and production decisions |
+| 2026-07-16 | SEO-002 | Complete | Lint-related source files and `SEO_IMPLEMENTATION_PLAN.md` | — | Restored a clean lint and build baseline |
+| 2026-07-16 | SEO-010 | Complete | `src/lib/site.ts`, `src/lib/metadata.ts`, homepage and root layout | — | Added production URL constants and a reusable canonical/Open Graph/Twitter metadata helper; uses `summary` until social images are added in SEO-012 |
+| 2026-07-16 | SEO-011 | Complete | All route metadata exports | — | Added unique route metadata and dynamic data-driven metadata for Qeemat and the writing detail page; preserved `noindex, follow` for the app privacy policy |
+| 2026-07-16 | SEO-012 | In progress | `public/images/social/portfolio-social.png`, `src/lib/site.ts`, `src/lib/metadata.ts` | — | Added and wired a default 1200 × 630 social preview image; Qeemat-specific and completed-article-specific images remain pending |
+| 2026-07-16 | SEO-013 | Complete | `src/app/robots.ts`, `src/app/sitemap.ts` | — | Added build-time crawl directives and a sitemap sourced from the project and writing data; explicitly configured both metadata routes for static export |
+| 2026-07-16 | SEO-020 | Complete | `src/app/page.tsx` | — | Added homepage-only WebSite JSON-LD. Person and ProfilePage schema remain deferred pending the chosen public name |
 | 2026-07-16 | SEO-041 | In progress | `src/app/layout.tsx`, `src/lib/site.ts` | — | Added the approved GA4 page-view tag; Realtime and duplicate-tag checks remain pending deployment |
 | 2026-07-18 | SEO-030 | In progress | `src/components/layout/Nav.tsx`, `src/hooks/useReveal.ts`, `src/app/globals.css` | `44fa46db` | Added keyboard-safe mobile navigation, background isolation, 44 px menu control, no-JavaScript reveal fallback, and reduced-motion support; preview-device and screen-reader checks remain pending |
+| 2026-11-01 | SEO-060 | Complete | `src/lib/schema.ts`, route pages, `scripts/generate-markdown.mjs`, `cloudflare/markdown-worker.mjs`, `public/_headers`, `public/images/**`, tests, README | `feature/entity-seo-ai-hardening` | Entity graph + name-bearing metadata, llms.txt/llms-full + alternate links, worker security headers, clean routes + guard, WebP images + branded OG card, PNG favicons, sitemap lastmod, README/plan updates |
+| 2026-11-01 | SEO-022 | Complete | `src/app/writing/[slug]/page.tsx`, `src/lib/schema.ts`, `scripts/generate-markdown.mjs` | `feature/entity-seo-ai-hardening` | Article JSON-LD now has Person `@id`, ISO dates, url, mainEntityOfPage, isPartOf; Markdown frontmatter carries author/dates; visible byline reads "By Adam Ahsan" |
+| 2026-11-01 | SEO-012 | In progress | `public/images/social/portfolio-social.png`, `src/lib/metadata.ts` | `feature/entity-seo-ai-hardening` | Branded name/role/site OG card replaces the abstract texture; per-project/per-article cards remain pending |
