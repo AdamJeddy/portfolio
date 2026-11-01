@@ -13,26 +13,26 @@ interface ProjectStudy {
 export const projectStudies: ProjectStudy[] = [
   {
     slug: 'layla-ai',
-    role: 'Technical integration lead',
-    focus: 'AI-assisted beauty commerce',
+    role: 'Backend & AI lead',
+    focus: 'AI assistant core & features',
     challenge: 'Bring personal beauty guidance into a shopping experience, so customers can ask a question, discover relevant products, and act on a recommendation without leaving the conversation.',
-    contribution: 'I led Layla’s technical integration into the FACES app, connecting the assistant to a customer-facing beauty shopping experience.',
+    contribution: 'I built Layla’s core: the backend, the AI features around it, and the systems that turn a shopper’s context into useful product guidance. A big part of the work was staying on the frontier — evaluating the best available AI technology and deciding what genuinely belonged in the product. The FACES app itself — its screens and shop surfaces — was built by the app team; my work powered what happened inside it.',
     decisions: [
       {
-        title: 'Meet customers inside FACES',
-        description: 'The assistant lives inside the existing FACES app, connecting beauty advice to the shopping experience customers already use.',
+        title: 'Put the intelligence in the backend',
+        description: 'Layla’s AI capabilities run behind the app, so the assistant’s reasoning, shopper context, and recommendations can evolve independently of the interface.',
       },
       {
-        title: 'Connect advice to action',
-        description: 'Product recommendations and adding items to the bag stay in the conversation, keeping discovery and shopping together.',
+        title: 'Ground advice in shopper context',
+        description: 'Beauty Passport context — skin, scent, routine — feeds the AI features, so guidance is specific to the customer instead of a generic product search.',
       },
       {
-        title: 'Support different beauty needs',
-        description: 'Guidance spans skincare, fragrance, makeup, and haircare, rather than treating every question as a product search.',
+        title: 'Work at the frontier',
+        description: 'Much of the project was spent evaluating new AI capabilities and deciding where they genuinely improved the conversation, rather than adding them because they were new.',
       },
     ],
-    outcome: 'Customers can get beauty advice, discover recommended products, and add them to their bag through Layla in the FACES app.',
-    technologies: ['AI assistant', 'Mobile integration', 'Conversational commerce'],
+    outcome: 'Layla’s AI features — conversation, personalisation, and product guidance — run on the backend I built, while the FACES app team owned the app experience.',
+    technologies: ['Backend services', 'AI features', 'Frontier AI evaluation', 'Context & prompt design', 'Conversational AI'],
   },
   {
     slug: 'qeemat',

@@ -19,7 +19,7 @@ export const projects: ProjectItem[] = [
     description: 'The region’s first large-scale AI beauty assistant, built into the FACES app for personalized advice, product recommendations, and in-chat shopping.',
     details: [
       'Layla AI is the region’s first large-scale AI beauty assistant, built into the FACES app. Customers can chat for instant beauty advice, receive personalized product recommendations, and add products to their bag directly from the conversation. The experience spans skincare, makeup, fragrance, and haircare.',
-      'I led the technical side of the project and its integration into the FACES app, helping turn the assistant into a customer-facing beauty shopping experience.',
+      'I built Layla’s core: the backend and the AI features behind her conversational guidance. The FACES app’s screens and shop surfaces were built by the app team; my work powered the experience inside it.',
     ],
     links: [
       {

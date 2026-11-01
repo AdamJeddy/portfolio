@@ -137,17 +137,19 @@ export default function LaylaShowcase({ project }: LaylaShowcaseProps) {
       <section id="my-role" className={styles.role} aria-labelledby="role-title">
         <div>
           <p className={styles.eyebrow}>My role</p>
-          <h2 id="role-title">Making Layla feel native to FACES.</h2>
+          <h2 id="role-title">Building the intelligence behind Layla.</h2>
         </div>
         <div className={styles.roleCopy}>
           <p>
-            I led Layla&apos;s technical integration into the FACES app, connecting the assistant
-            to the places where customers discover, evaluate, and buy beauty products.
+            I built Layla&apos;s core: the backend, the AI features around it, and the
+            systems that turn a shopper&apos;s context into useful product guidance. I
+            Staying on the frontier of available AI technology — evaluating what was new and deciding what genuinely belonged in the product — was a big part of the work. The FACES app itself — screens and shop surfaces — was built by the
+            app team; my work powered what happened inside it.
           </p>
           <ul>
-            <li>AI assistant integration</li>
-            <li>Search and PDP surfaces</li>
-            <li>Conversational commerce</li>
+            <li>Backend &amp; AI core</li>
+            <li>Assistant features</li>
+            <li>Frontier AI evaluation &amp; implementation</li>
           </ul>
         </div>
       </section>
