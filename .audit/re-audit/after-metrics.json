@@ -15,7 +15,7 @@
   "pageTable": [
     {
       "page": "about.html",
-      "title": "About Adam Ahsan — Dubai Product & AI Builder",
+      "title": "About Adam Ahsan - Dubai Product Builder",
       "titleLength": 45,
       "descriptionLength": 98,
       "nameInTitle": true,
@@ -30,7 +30,7 @@
     },
     {
       "page": "contact.html",
-      "title": "Contact Adam Ahsan — bruh.ae",
+      "title": "Contact Adam Ahsan - bruh.ae",
       "titleLength": 28,
       "descriptionLength": 79,
       "nameInTitle": true,
@@ -45,7 +45,7 @@
     },
     {
       "page": "index.html",
-      "title": "Adam Ahsan — bruh.ae",
+      "title": "Adam Ahsan - bruh.ae",
       "titleLength": 20,
       "descriptionLength": 89,
       "nameInTitle": true,
@@ -60,7 +60,7 @@
     },
     {
       "page": "projects/layla-ai.html",
-      "title": "Layla AI — Adam Ahsan",
+      "title": "Layla AI - Adam Ahsan",
       "titleLength": 21,
       "descriptionLength": 148,
       "nameInTitle": true,
@@ -75,7 +75,7 @@
     },
     {
       "page": "projects/qeemat.html",
-      "title": "Qeemat: UAE Price Tracker for Android — Adam Ahsan",
+      "title": "Qeemat: UAE Price Tracker for Android - Adam Ahsan",
       "titleLength": 50,
       "descriptionLength": 105,
       "nameInTitle": true,
@@ -90,7 +90,7 @@
     },
     {
       "page": "projects.html",
-      "title": "Projects by Adam Ahsan — Layla AI & Qeemat",
+      "title": "Projects by Adam Ahsan - Layla AI & Qeemat",
       "titleLength": 42,
       "descriptionLength": 103,
       "nameInTitle": true,
@@ -105,7 +105,7 @@
     },
     {
       "page": "track-my-salah-privacy-policy.html",
-      "title": "Track My Salah Privacy Policy — Adam Ahsan",
+      "title": "Track My Salah Privacy Policy - Adam Ahsan",
       "titleLength": 42,
       "descriptionLength": 42,
       "nameInTitle": true,
@@ -120,7 +120,7 @@
     },
     {
       "page": "writing/how-a-tech-company-accidentally-becomes-political.html",
-      "title": "How a Tech Company Accidentally Becomes Political — Adam Ahsan",
+      "title": "How a Tech Company Accidentally Becomes Political - Adam Ahsan",
       "titleLength": 62,
       "descriptionLength": 114,
       "nameInTitle": true,
@@ -135,7 +135,7 @@
     },
     {
       "page": "writing/quiet-death-saas-pricing-power.html",
-      "title": "The Quiet Death of SaaS Pricing Power — Adam Ahsan",
+      "title": "The Quiet Death of SaaS Pricing Power - Adam Ahsan",
       "titleLength": 50,
       "descriptionLength": 125,
       "nameInTitle": true,
@@ -150,7 +150,7 @@
     },
     {
       "page": "writing/ugly-truth-luxury-brands-ai-content.html",
-      "title": "Ugly Truth Luxury Brands Won't Say About AI Content — Adam Ahsan",
+      "title": "Ugly Truth Luxury Brands Won't Say About AI Content - Adam Ahsan",
       "titleLength": 64,
       "descriptionLength": 122,
       "nameInTitle": true,
@@ -165,7 +165,7 @@
     },
     {
       "page": "writing.html",
-      "title": "Commentary by Adam Ahsan — AI, Product & Luxury",
+      "title": "Commentary by Adam Ahsan - AI, Product & Luxury",
       "titleLength": 47,
       "descriptionLength": 93,
       "nameInTitle": true,
